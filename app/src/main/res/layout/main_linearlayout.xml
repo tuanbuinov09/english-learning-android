@@ -1,30 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/black"
-        />
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--    <TextView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:text="Từ điển"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:background="@color/black"-->
+    <!--        />-->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp">
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:background="#609BEB">
+
         <EditText
+            android:id="@+id/searchInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
-            />
+            android:hint="Nhập từ muốn tìm"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="#555"
+            android:textSize="20dp" />
+<!--        android:textColorHint=""-->
 
         <ImageButton
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:id="@+id/searchButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
             android:background="?android:attr/actionModeWebSearchDrawable"
-           />
-    </LinearLayout>
+            android:onClick="search" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btngradient_noradius"
+                android:drawableLeft="@android:drawable/ic_menu_gallery"
+                android:outlineProvider="background"
+                android:text="Từ điển việt anh"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textAlignment="textStart"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btngradient_noradius"
+                android:drawableLeft="@android:drawable/ic_menu_gallery"
+                android:outlineProvider="background"
+                android:text="Cửa sổ tra nhanh"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" android:textAlignment="textStart"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btngradient_noradius"
+                android:drawableLeft="@android:drawable/ic_menu_gallery"
+                android:outlineProvider="background"
+                android:text="Học tiếng anh"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" android:textAlignment="textStart"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btngradient_noradius"
+                android:drawableLeft="@android:drawable/ic_menu_gallery"
+                android:outlineProvider="background"
+                android:text="Từ của bạn"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" android:textAlignment="textStart"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btngradient_noradius"
+                android:drawableLeft="@android:drawable/ic_menu_gallery"
+                android:outlineProvider="background"
+                android:text="Từ đã tra"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" android:textAlignment="textStart"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btngradient_noradius"
+                android:drawableLeft="@android:drawable/ic_menu_gallery"
+                android:outlineProvider="background"
+                android:text="Từ vựng quan trọng"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" android:textAlignment="textStart"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
