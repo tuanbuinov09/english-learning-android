@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MyApp/app/src/main/res/drawable-v24/btngradient_noradius.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable/btn_radient.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable/btngradient.xml" value="0.2115" />

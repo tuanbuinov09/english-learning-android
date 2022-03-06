@@ -60,6 +60,7 @@
         android:maxLines="1"
         android:textColor="#333"
         android:textSize="20dp" />
+
     <TextView
         android:id="@+id/labelError"
         android:layout_width="match_parent"
