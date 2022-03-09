@@ -41,8 +41,6 @@ public class SignIn extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-
-
     }
 
     public boolean checkLogin(){
