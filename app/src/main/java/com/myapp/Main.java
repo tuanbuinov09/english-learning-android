@@ -2,6 +2,7 @@ package com.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,5 +20,10 @@ public class Main extends AppCompatActivity {
 
     public void search(View view){
         Toast.makeText(this,"bạn vừa tìm: " + searchInput.getText().toString().trim(),Toast.LENGTH_LONG).show();
+    }
+
+    public void handleYourWordClick (View view){
+        Intent yourWordIntent = new Intent(this, YourWord.class);
+        startActivity(yourWordIntent);
     }
 }

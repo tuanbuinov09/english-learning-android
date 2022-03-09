@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/MyApp/app/src/main/res/drawable-v24/btngradient_noradius.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2115" />
+        <entry key="..\:/MyApp/app/src/main/res/drawable/bg_white_round_corner.xml" value="0.2115" />
+        <entry key="..\:/MyApp/app/src/main/res/drawable/border_bottom.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable/btn_radient.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable/btngradient.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2115" />
@@ -19,6 +21,7 @@
         <entry key="..\:/MyApp/app/src/main/res/layout/sign_in_linearlayout.xml" value="0.22" />
         <entry key="..\:/MyApp/app/src/main/res/layout/sign_up_linearlayout.xml" value="0.20416666666666666" />
         <entry key="..\:/MyApp/app/src/main/res/layout/sing_up_linearlayout.xml" value="0.25" />
+        <entry key="..\:/MyApp/app/src/main/res/layout/your_word_linearlayout.xml" value="0.25" />
       </map>
     </option>
   </component>
