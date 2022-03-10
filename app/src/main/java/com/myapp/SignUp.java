@@ -107,6 +107,9 @@ public class SignUp extends AppCompatActivity {
         labelErrorEmail.setText("");
 
         if (validateSignUp()) {
+
+            GlobalVariables.username = editTextUsername.getText().toString().trim();
+
             Intent mainIntent = new Intent(this, Main.class);
             startActivity(mainIntent);
         }
