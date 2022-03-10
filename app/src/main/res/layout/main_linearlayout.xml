@@ -13,10 +13,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#609BEB"
         android:orientation="horizontal"
         android:paddingHorizontal="10dp"
-        android:paddingVertical="8dp"
-        android:background="#609BEB">
+        android:paddingVertical="8dp">
 
         <EditText
             android:id="@+id/searchInput"
@@ -29,7 +29,7 @@
             android:textColor="@color/white"
             android:textColorHint="#ffffff"
             android:textSize="20dp" />
-<!--        android:textColorHint=""-->
+        <!--        android:textColorHint=""-->
 
         <ImageButton
             android:id="@+id/searchButton"
@@ -40,12 +40,13 @@
             android:backgroundTint="@color/white"
             android:onClick="search" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#E3E0E1"
         android:orientation="vertical"
-        android:paddingHorizontal="10dp"
-        android:background="#E3E0E1">
+        android:paddingHorizontal="10dp">
 
 
         <LinearLayout
@@ -98,21 +99,47 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_filled_bookmark_ribbon_32px_1"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="Từ của bạn"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:onClick="handleYourWordClick"/>
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="10"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/icons8_filled_bookmark_ribbon_32px_1"
+                    android:drawablePadding="10dp"
+                    android:onClick="handleYourWordClick"
+                    android:outlineProvider="background"
+                    android:paddingLeft="10dp"
+                    android:text="Từ của bạn"
+                    android:textAlignment="textStart"
+                    android:textColor="#555"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="10"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/icons8_male_user_32px"
+                    android:drawablePadding="10dp"
+                    android:onClick="toAccount"
+                    android:outlineProvider="background"
+                    android:paddingLeft="10dp"
+                    android:text="Tài khoản"
+                    android:textAlignment="textStart"
+                    android:textColor="#555"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
 
             <Button
                 android:layout_width="match_parent"

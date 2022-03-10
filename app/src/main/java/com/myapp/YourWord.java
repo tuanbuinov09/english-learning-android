@@ -22,6 +22,15 @@ public class YourWord extends AppCompatActivity {
         Toast.makeText(this,"bạn vừa tìm: " + searchInput.getText().toString().trim() + "trong từ của bạn",Toast.LENGTH_LONG).show();
     }
 
-
-
+    public void backToMain(View view){
+        Intent mainIntent = new Intent(this, Main.class);
+        startActivity(mainIntent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+//
+//    @Override
+//    public void finish() {
+//        super.finish();
+//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//    }
 }
