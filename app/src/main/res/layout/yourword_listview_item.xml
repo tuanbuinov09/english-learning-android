@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:paddingLeft="8dp">
+
+        <CheckBox
+            android:id="@+id/checkBoxWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewWord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cabaret"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewPronunciation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/'phatam/"
+                android:textColor="#555"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textViewMeaning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nghĩaaaaaaaaa"
+                android:textColor="#555"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/buttonSpeak"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/icons8_sound_32px"
+            android:backgroundTint="#333" />
+
+        <ImageButton
+            android:id="@+id/buttonWordMenu"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/icons8_menu_vertical_32px"
+            android:backgroundTint="#333" />
+    </LinearLayout>
+
+
+</LinearLayout>
