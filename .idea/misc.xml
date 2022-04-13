@@ -3,6 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable-v24/btngradient_noradius.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/bg_white_round_corner.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/border_bottom.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/btngradient.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_wave__1_.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_wave__2_.xml" value="0.218" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_learn_english.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/fragment_achievement.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/fragment_ranking.xml" value="0.2359375" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/main_linearlayout.xml" value="0.1766304347826087" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/settings_linearlayout.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/sign_in_linearlayout.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/sign_up_linearlayout.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/your_word_linearlayout.xml" value="0.1766304347826087" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/yourword_listview_item.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/menu/tk_bottom_navigation_menu.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/xml/root_preferences.xml" value="0.25" />
         <entry key="..\:/MyApp/app/src/main/res/drawable-v24/btngradient_noradius.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2115" />
         <entry key="..\:/MyApp/app/src/main/res/drawable/bg_white_round_corner.xml" value="0.2115" />

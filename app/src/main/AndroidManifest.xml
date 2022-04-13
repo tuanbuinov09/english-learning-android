@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".learnenglish.LearnEnglishActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".Main"/>
+        <activity
             android:name=".Settings"
             android:exported="false" />
         <activity
