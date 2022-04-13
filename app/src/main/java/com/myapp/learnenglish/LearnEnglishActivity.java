@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.card.MaterialCardView;
 import com.myapp.R;
-import com.myapp.learnenglish.fragment.AchievementFragment;
-import com.myapp.learnenglish.fragment.HomeFragment;
-import com.myapp.learnenglish.fragment.ProfileFragment;
-import com.myapp.learnenglish.fragment.RankingFragment;
+import com.myapp.learnenglish.fragment.achievement.AchievementFragment;
+import com.myapp.learnenglish.fragment.home.HomeFragment;
+import com.myapp.learnenglish.fragment.profile.ProfileFragment;
+import com.myapp.learnenglish.fragment.ranking.RankingFragment;
 
 public class LearnEnglishActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigation;
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

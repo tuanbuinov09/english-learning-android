@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".learnenglish.fragment.home.ArrangeWordsActivity"
+            android:exported="false" />
+        <activity
             android:name=".learnenglish.LearnEnglishActivity"
             android:exported="false"
-            android:theme="@style/Theme.TkActionBar"
-            android:parentActivityName=".Main"/>
+            android:parentActivityName=".Main"
+            android:theme="@style/Theme.TkActionBar" />
         <activity
             android:name=".Settings"
             android:exported="false" />

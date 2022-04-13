@@ -1,4 +1,4 @@
-package com.myapp.learnenglish.fragment;
+package com.myapp.learnenglish.fragment.ranking;
 
 import android.os.Bundle;
 
