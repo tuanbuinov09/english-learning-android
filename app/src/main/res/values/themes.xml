@@ -16,5 +16,10 @@
 
     <style name="Theme.TkBottomNavigation" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">#00BCD4</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="Theme.TkActionBar" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">#00BCD4</item>
+        <item name="android:background">@color/white</item>
     </style>
 </resources>

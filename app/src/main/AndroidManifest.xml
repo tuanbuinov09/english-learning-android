@@ -14,7 +14,7 @@
         <activity
             android:name=".learnenglish.LearnEnglishActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light"
+            android:theme="@style/Theme.TkActionBar"
             android:parentActivityName=".Main"/>
         <activity
             android:name=".Settings"
