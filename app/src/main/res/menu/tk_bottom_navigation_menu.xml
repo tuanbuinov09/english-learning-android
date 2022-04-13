@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pageHome"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Học" />
+    <item
+        android:id="@+id/pageAchievement"
+        android:enabled="true"
+        android:icon="@drawable/badge_24"
+        android:title="Thành tích"/>
+    <item
+        android:id="@+id/pageRanking"
+        android:enabled="true"
+        android:icon="@drawable/ranking_24"
+        android:title="Hạng"/>
+    <item
+        android:id="@+id/pageProfile"
+        android:enabled="true"
+        android:icon="@drawable/profile_24"
+        android:title="Hồ sơ"/>
+</menu>
