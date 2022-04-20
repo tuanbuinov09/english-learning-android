@@ -25,10 +25,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/textViewUnit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Unit 1"
+                        android:text="Chủ đề"
                         android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         android:layout_gravity="center"
@@ -52,7 +51,7 @@
 
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/textViewTitle"
+                    android:id="@+id/textViewTopicTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Expressing &quot;Fuck&quot;"
@@ -122,9 +121,25 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_baseline_star_32"/>
                     <TextView
+                        android:id="@+id/textViewNumOfAchievedStars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20/20"
+                        android:text="0"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/textViewNumOfStars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:layout_gravity="center"/>

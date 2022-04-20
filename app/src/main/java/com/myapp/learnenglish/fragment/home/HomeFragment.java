@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
         cardViewArrangeWords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeFragment.this.getActivity(), ArrangeWordsUnitsActivity.class);
+                Intent intent = new Intent(HomeFragment.this.getActivity(), ArrangeWordsTopicsActivity.class);
                 startActivity(intent);
             }
         });
