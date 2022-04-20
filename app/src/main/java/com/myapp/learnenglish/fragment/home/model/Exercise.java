@@ -1,15 +1,18 @@
 package com.myapp.learnenglish.fragment.home.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Exercise {
+public class Exercise implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int id;
-    private int num;
+    private String title;
     private ArrayList<Question> questions;
 
-    public Exercise(int id, int num, ArrayList<Question> questions) {
+    public Exercise(int id, String title, ArrayList<Question> questions) {
         this.id = id;
-        this.num = num;
+        this.title = title;
         this.questions = questions;
     }
 
@@ -21,12 +24,12 @@ public class Exercise {
         this.id = id;
     }
 
-    public int getNum() {
-        return num;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public ArrayList<Question> getQuestions() {

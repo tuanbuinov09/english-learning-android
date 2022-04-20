@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.R;
 import com.myapp.learnenglish.fragment.home.ArrangeWordsExercisesActivity;
+import com.myapp.learnenglish.fragment.home.model.Topic;
 
 import java.util.ArrayList;
 
-public class UnitsRecyclerViewAdapter extends RecyclerView.Adapter<UnitsRecyclerViewAdapter.ViewHolder> {
+public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<String> data;
+    private ArrayList<Topic> data;
 
     // data is passed into the constructor
-    public UnitsRecyclerViewAdapter(Context context, ArrayList<String> data) {
+    public TopicsRecyclerViewAdapter(Context context, ArrayList<Topic> data) {
         this.context = context;
         this.data = data;
     }
@@ -29,19 +30,21 @@ public class UnitsRecyclerViewAdapter extends RecyclerView.Adapter<UnitsRecycler
     // inflates the row layout from xml when needed
     @NonNull
     @Override
-    public UnitsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.tk_arrange_words_units_item, parent, false);
+    public TopicsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tk_arrange_words_topic_item, parent, false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(@NonNull UnitsRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.textViewTitle.setText(data.get(position));
+    public void onBindViewHolder(@NonNull TopicsRecyclerViewAdapter.ViewHolder holder, int position) {
+        holder.textViewTopicTitle.setText(data.get(position).getTitle());
+        holder.textViewNumOfStars.setText(String.valueOf(getTotalStars(data.get(position))));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ArrangeWordsExercisesActivity.class);
+                intent.putExtra("exercises", data.get(holder.getAdapterPosition()).getExercises());
                 context.startActivity(intent);
             }
         });
@@ -55,14 +58,24 @@ public class UnitsRecyclerViewAdapter extends RecyclerView.Adapter<UnitsRecycler
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewUnit, textViewTitle;
+        TextView textViewTopicTitle, textViewNumOfAchievedStars, textViewNumOfStars;
         LinearLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewUnit = itemView.findViewById(R.id.textViewUnit);
-            textViewTitle = itemView.findViewById(R.id.textViewTitle);
+            textViewTopicTitle = itemView.findViewById(R.id.textViewTopicTitle);
+            textViewNumOfAchievedStars = itemView.findViewById(R.id.textViewNumOfAchievedStars);
+            textViewNumOfStars = itemView.findViewById(R.id.textViewNumOfStars);
             parentLayout = itemView.findViewById(R.id.unitsParentLayout);
         }
+    }
+
+    private int getTotalStars(Topic topic) {
+        int numOfStars = 0;
+        for (int i = 0; i < topic.getExercises().size(); i++) {
+            numOfStars += topic.getExercises().get(i).getQuestions().size();
+        }
+
+        return numOfStars;
     }
 }
