@@ -3,6 +3,7 @@
     package="com.myapp">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -50,7 +51,7 @@
             android:name=".SignIn"
             android:exported="false" />
         <activity
-            android:name=".YourWord"
+            android:name=".YourWordActivity"
             android:exported="false" />
     </application>
 

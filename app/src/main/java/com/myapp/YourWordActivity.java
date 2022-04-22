@@ -11,12 +11,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.myapp.dao.En_wordDAO;
 import com.myapp.model.En_word;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class YourWord extends AppCompatActivity {
+public class YourWordActivity extends AppCompatActivity {
     EditText searchInput = null;
     ListView listViewYourWord;
     ArrayList<En_word> enWordList;
@@ -39,6 +41,12 @@ public class YourWord extends AppCompatActivity {
     }
 
     private void setEvent() {
+        try {
+            enWordList = (ArrayList<En_word>) new En_wordDAO().getEnWordlist();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         YourWordAdapter adapter = new
                 YourWordAdapter(this, this.enWordList, R.layout.yourword_listview_item, ttobj);
         listViewYourWord.setAdapter(adapter);
@@ -47,21 +55,22 @@ public class YourWord extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Toast.makeText(YourWord.this, "Bạn chọn " +
+                Toast.makeText(YourWordActivity.this, "Bạn chọn " +
                        enWordList.get(position).getId(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setControl() {
-        enWordList = new ArrayList<>();
-        En_word en_word1 = new En_word(1, "stupid", "/'stooped/", "ngu");
-        En_word en_word2 = new En_word(1, "smart", "/'stooped/ 1", "ngu 1");
-        En_word en_word3 = new En_word(1, "strike", "/'stooped/ 2", "ngu 2");
+//        enWordList = new ArrayList<>();
+//        En_word en_word1 = new En_word(1, "stupid", "/'stooped/", "ngu");
+//        En_word en_word2 = new En_word(1, "smart", "/'stooped/ 1", "ngu 1");
+//        En_word en_word3 = new En_word(1, "strike", "/'stooped/ 2", "ngu 2");
+//
+//        enWordList.add(en_word1);
+//        enWordList.add(en_word2);
+//        enWordList.add(en_word3);
 
-        enWordList.add(en_word1);
-        enWordList.add(en_word2);
-        enWordList.add(en_word3);
         searchInput = findViewById(R.id.searchInput);
         listViewYourWord = findViewById(R.id.listViewYourWord);
     }
