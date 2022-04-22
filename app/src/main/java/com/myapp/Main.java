@@ -53,7 +53,7 @@ public class Main extends AppCompatActivity {
     }
 
     public void handleYourWordClick(View view) {
-        Intent yourWordIntent = new Intent(this, YourWord.class);
+        Intent yourWordIntent = new Intent(this, YourWordActivity.class);
         startActivity(yourWordIntent);
 
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

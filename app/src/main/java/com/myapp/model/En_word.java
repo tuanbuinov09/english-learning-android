@@ -47,4 +47,11 @@ public class En_word {
         this.pronunciation = pronunciation_;
         this.meaning = meaning_;
     }
+
+    public En_word(int id_, String word_, String pronunciation_) {
+        this.id = id_;
+        this.word = word_;
+        this.pronunciation = pronunciation_;
+        this.meaning = "chua tinh den";
+    }
 }
