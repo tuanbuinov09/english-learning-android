@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.myapp.dao.En_wordDAO;
-import com.myapp.model.En_word;
+import com.myapp.adapter.YourWordAdapter;
+import com.myapp.dao.UserDAO;
+import com.myapp.model.EnWord;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,10 +22,16 @@ import java.util.Locale;
 public class YourWordActivity extends AppCompatActivity {
     EditText searchInput = null;
     ListView listViewYourWord;
-    ArrayList<En_word> enWordList;
+    ArrayList<EnWord> enWordList;
     TextToSpeech ttobj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        if(GlobalVariables.username.equalsIgnoreCase("") || GlobalVariables.username == null){
+//            Toast.makeText(this,"Hãy đăng nhập để sử dụng tính năng này",Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this, SignIn.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.your_word_linearlayout);
         ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -42,7 +49,7 @@ public class YourWordActivity extends AppCompatActivity {
 
     private void setEvent() {
         try {
-            enWordList = (ArrayList<En_word>) new En_wordDAO().getEnWordlist();
+            enWordList = (ArrayList<EnWord>) new UserDAO().getSavedWordlist("username");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -57,6 +64,11 @@ public class YourWordActivity extends AppCompatActivity {
                                     long id) {
                 Toast.makeText(YourWordActivity.this, "Bạn chọn " +
                        enWordList.get(position).getId(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(view.getContext(), EnWordDetailActivity.class);
+                intent.putExtra("enWord", enWordList.get(position));
+                view.getContext().startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
     }

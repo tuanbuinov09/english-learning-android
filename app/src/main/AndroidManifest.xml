@@ -3,7 +3,7 @@
     package="com.myapp">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,11 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".EnWordDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".learnenglish.fragment.home.ArrangeWordsExercisesActivity"
             android:exported="false"
             android:label="Unit 1"
             android:parentActivityName=".learnenglish.fragment.home.ArrangeWordsTopicsActivity"
-            android:theme="@style/Theme.TkActionBar"/>
+            android:theme="@style/Theme.TkActionBar" />
         <activity
             android:name=".learnenglish.fragment.home.ArrangeWordsTopicsActivity"
             android:exported="false"
