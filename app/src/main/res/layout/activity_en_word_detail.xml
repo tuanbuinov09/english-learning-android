@@ -47,7 +47,7 @@
         android:background="#fff"
         android:orientation="vertical"
         android:paddingVertical="10dp"
-        android:paddingLeft="24dp"
+        android:paddingHorizontal="20dp"
         android:id="@+id/layoutWordDetail">
 
         <TextView

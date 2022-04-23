@@ -77,11 +77,11 @@ public class EnWordDetailActivity extends AppCompatActivity {
         if(savedWord.getListMeaning().size()!=0){
             String meaningContent="";
             for(Meaning meaning : savedWord.getListMeaning()){
-                meaningContent = meaningContent + "\n-" + meaning.getMeaning();
+                meaningContent = meaningContent + "\n- " + meaning.getMeaning();
                 String exampleContent = "";
                 if(meaning.getListExampleDetails().size()!=0){
                     for(ExampleDetail exampleDetail : meaning.getListExampleDetails()){
-                        exampleContent = exampleContent + "\n\t+ "+ exampleDetail.getExample()+"\n\t: "+exampleDetail.getExampleMeaning();
+                        exampleContent = exampleContent + "\n\t+ "+ exampleDetail.getExample()+" : "+exampleDetail.getExampleMeaning();
                     }
                 }
                 meaningContent= meaningContent + exampleContent;
