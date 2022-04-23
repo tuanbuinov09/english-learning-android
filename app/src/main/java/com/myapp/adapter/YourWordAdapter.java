@@ -1,29 +1,28 @@
-package com.myapp;
+package com.myapp.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.myapp.model.En_word;
+import com.myapp.R;
+import com.myapp.model.EnWord;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class YourWordAdapter extends ArrayAdapter {
     Context context;
-    ArrayList<En_word> enWordList;
+    ArrayList<EnWord> enWordList;
     int layoutID;
     TextToSpeech ttobj;
 
-    public YourWordAdapter(Context context,ArrayList<En_word> enWordList, int layoutID, TextToSpeech ttobj) {
+    public YourWordAdapter(Context context, ArrayList<EnWord> enWordList, int layoutID, TextToSpeech ttobj) {
         super(context,layoutID);
         this.context = context;
         this.enWordList = enWordList;
@@ -46,9 +45,13 @@ public class YourWordAdapter extends ArrayAdapter {
         TextView textViewMeaning = (TextView) convertView.findViewById(R.id.textViewMeaning);
         ImageButton buttonSpeak = (ImageButton) convertView.findViewById(R.id.buttonSpeak);
 
+        LinearLayout layoutClickToSeeDetail = (LinearLayout) convertView.findViewById(R.id.layoutClickToSeeDetail);
+
+
         textViewWord.setText(enWordList.get(position).getWord());
         textViewPronunciation.setText(enWordList.get(position).getPronunciation());
-        textViewMeaning.setText(enWordList.get(position).getMeaning());
+        textViewMeaning.setText(enWordList.get(position).getListMeaning().get(0).getMeaning());
+
 
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +60,16 @@ public class YourWordAdapter extends ArrayAdapter {
                 Toast.makeText(context, enWordList.get(position).getWord(),Toast.LENGTH_SHORT).show();
             }
         });
+
+//        layoutClickToSeeDetail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, EnWordDetail.class);
+//                intent.putExtra("enWord", enWordList.get(position));
+//                context.startActivity(intent);
+////                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//            }
+//        });
 
         return convertView;
     }

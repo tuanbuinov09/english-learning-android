@@ -1,7 +1,7 @@
 package com.myapp.dao;
 
 import com.myapp.jdbc.JDBCController;
-import com.myapp.model.En_word;
+import com.myapp.model.EnWord;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,22 +10,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class En_wordDAO {
+public class UserDAO {
     private JDBCController jdbcController = new JDBCController();
     private Connection connection;
 
-    public En_wordDAO() {
+    public UserDAO() {
         connection = jdbcController.ConnnectionData(); // Tạo kết nối tới database
     }
 
-    public List<En_word> getEnWordlist() throws SQLException {
-        List<En_word> list = new ArrayList<>();
+
+    public List<EnWord> getSavedWordlist(String username) throws SQLException {
+        List<EnWord> list = new ArrayList<>();
         Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-        String sql = "select top 25 * from en_word";
+        String sql = "select en_word_id from saved_word where username='"+username+"'";
         // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
         ResultSet rs = statement.executeQuery(sql);
         while (rs.next()) {
-            list.add(new En_word(rs.getInt("id"), rs.getString("word"), rs.getString("pronunciation")));// Đọc dữ liệu từ ResultSet
+            list.add(new EnWordDAO().getOneEnWord(rs.getInt("en_word_id")));
         }
         connection.close();// Đóng kết nối
         return list;

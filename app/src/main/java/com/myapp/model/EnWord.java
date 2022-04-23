@@ -1,6 +1,10 @@
 package com.myapp.model;
 
-public class En_word {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EnWord implements Serializable {
     private int id;
 
     public int getId() {
@@ -31,27 +35,23 @@ public class En_word {
         this.pronunciation = value;
     }
 
-    private String meaning;
+    private ArrayList<Meaning> listMeaning;
 
-    public String getMeaning() {
-        return meaning;
+    public ArrayList<Meaning> getListMeaning() {
+        return listMeaning;
     }
 
-    public void setMeaning(String meaning) {
-        this.meaning = meaning;
+    public void setListMeaning(ArrayList<Meaning> listMeaning) {
+        this.listMeaning = listMeaning;
     }
 
-    public En_word(int id_, String word_, String pronunciation_, String meaning_) {
+    public EnWord(int id_, String word_, String pronunciation_, ArrayList<Meaning> listMeaning_) {
         this.id = id_;
         this.word = word_;
         this.pronunciation = pronunciation_;
-        this.meaning = meaning_;
+        this.listMeaning = listMeaning_;
     }
 
-    public En_word(int id_, String word_, String pronunciation_) {
-        this.id = id_;
-        this.word = word_;
-        this.pronunciation = pronunciation_;
-        this.meaning = "chua tinh den";
+    public EnWord() {
     }
 }
