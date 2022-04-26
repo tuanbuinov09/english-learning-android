@@ -4,9 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/exercisesParentLayout">
+    android:id="@+id/EL1ParentLayout">
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewUnit"
+        android:id="@+id/englishmltest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -40,10 +40,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/textViewExerciseTitle"
+                    android:id="@+id/textViewEL1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Đề số 1"
+                    android:text="De so 1"
                     android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:layout_weight="1"/>
@@ -75,7 +75,7 @@
                         android:id="@+id/textViewNumOfStars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="50"
+                        android:text="1"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:layout_gravity="center"/>

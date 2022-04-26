@@ -28,6 +28,21 @@
             android:parentActivityName=".learnenglish.LearnEnglishActivity"
             android:theme="@style/Theme.TkActionBar" />
         <activity
+            android:name=".learnenglish.fragment.home.EnglishMultichoiceTestActivity"
+            android:exported="false"
+            android:label="Đề thi trắc nghiệm"
+            android:parentActivityName=".learnenglish.LearnEnglishActivity"
+            android:theme="@style/Theme.TkActionBar" />
+        <activity
+            android:name=".learnenglish.fragment.home.EnglishMultichoiceTestActivity1"
+            android:exported="false"
+            android:label="Đề thi "
+            android:parentActivityName=".learnenglish.LearnEnglishActivity"
+            android:theme="@style/Theme.TkActionBar" />
+        <activity
+            android:name=".learnenglish.fragment.home.EnglishMultichoiceTestActivity2"
+            android:exported="false" />
+        <activity
             android:name=".learnenglish.fragment.home.ArrangeWordsActivity"
             android:exported="false" />
         <activity

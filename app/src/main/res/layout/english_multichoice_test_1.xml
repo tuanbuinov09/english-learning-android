@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".learnenglish.fragment.home.ArrangeWordsTopicsActivity">
+    tools:context=".learnenglish.fragment.home.EnglishMultichoiceTestActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewUnits"
+        android:id="@+id/EnglishT1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

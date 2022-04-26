@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private MaterialCardView cardViewArrangeWords;
+    private MaterialCardView card3;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -80,9 +81,19 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        card3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeFragment.this.getActivity(), EnglishMultichoiceTestActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
     private void setControl(View view) {
         cardViewArrangeWords = view.findViewById(R.id.cardViewArrangeWords);
+        card3 = view.findViewById(R.id.card3);
     }
 }
