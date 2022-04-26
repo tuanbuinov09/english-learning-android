@@ -22,7 +22,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
     private ArrayList<Topic> data;
 
     // data is passed into the constructor
-    public TopicsRecyclerViewAdapter(Context context, ArrayList<Topic> data) {
+    public  TopicsRecyclerViewAdapter(Context context, ArrayList<Topic> data) {
         this.context = context;
         this.data = data;
     }
