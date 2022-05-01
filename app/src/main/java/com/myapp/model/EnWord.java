@@ -24,7 +24,7 @@ public class EnWord implements Serializable {
     public void setWord(String value) {
         this.word = value;
     }
-
+    private int views;
     private String pronunciation;
 
     public String getPronunciation() {
@@ -51,7 +51,31 @@ public class EnWord implements Serializable {
         this.pronunciation = pronunciation_;
         this.listMeaning = listMeaning_;
     }
+    public EnWord(int id_, String word_, String pronunciation_) {
+        this.id = id_;
+        this.word = word_;
+        this.pronunciation = pronunciation_;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
 
     public EnWord() {
+    }
+
+    @Override
+    public String toString() {
+        return "EnWord{" +
+                "id=" + id +
+                ", word='" + word + '\'' +
+                ", views=" + views +
+                ", pronunciation='" + pronunciation + '\'' +
+                ", listMeaning=" + listMeaning +
+                '}';
     }
 }
