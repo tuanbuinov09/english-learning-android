@@ -39,53 +39,56 @@
             android:background="@drawable/icons8_back_32px"
             android:id="@+id/imgBtnBackToSavedWord" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:background="#fff"
-        android:orientation="vertical"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="20dp"
-        android:id="@+id/layoutWordDetail">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewWord"
-            android:text="saved_word"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fff">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="10"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:id="@+id/layoutWordDetail">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewPronunciation"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
+                android:id="@+id/textViewWord"
+                android:text="saved_word"
                 android:textSize="20dp"
-                android:text="/pronunc/"/>
-            <ImageButton
-                android:id="@+id/buttonSpeak"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:background="@drawable/icons8_sound_32px"
-                android:backgroundTint="#333" />
+                android:textStyle="bold"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewPronunciation"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:text="/pronunc/"/>
+                <ImageButton
+                    android:id="@+id/buttonSpeak"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/icons8_sound_32px"
+                    android:backgroundTint="#333" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewMeaningAndExample"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                />
+
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewMeaningAndExample"
-            android:layout_marginTop="20dp"
-            android:textSize="18dp"
-            />
-
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
