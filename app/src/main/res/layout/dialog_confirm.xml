@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="215dp"
+    android:background="@drawable/bg_space_cadet_top_radius_25"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Thông báo"
+        android:textColor="@color/cultured"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/roboto_regular"
+        android:minHeight="70dp"
+        android:text="Nội dung này sẽ bị xóa vĩnh viễn, và không thể phục hồi được nữa. Các nội dung liên kết với nó cũng sẽ mất theo. Bạn có đồng ý?"
+        android:textColor="@color/azureish_white"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/lyOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnOK"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/bg_space_cadet_radius_15"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="Có"
+            android:textColor="@color/cultured"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_azureich_white_radius_15"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="Hủy"
+            android:textColor="@color/space_cadet"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
