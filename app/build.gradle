@@ -15,6 +15,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,15 +32,37 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.jitpack:android-example:1.0.1'
+
     implementation 'net.sourceforge.jtds:jtds:1.3.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.android.volley:volley:1.2.1'
+    implementation 'androidx.camera:camera-core:1.0.2'
+    implementation 'com.google.android.gms:play-services-vision-common:19.1.3'
+    implementation 'androidx.compose.material3:material3:1.0.0-alpha10'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    // CameraX core library using the camera2 implementation
+    def camerax_version = "1.1.0-beta03"
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX VideoCapture library
+    implementation "androidx.camera:camera-video:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
+    implementation 'com.github.CanHub:Android-Image-Cropper:4.2.1'
 }
