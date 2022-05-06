@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="215dp"
+    android:background="@drawable/bg_steel_blue_top_radius_25"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Thông báo"
+        android:textColor="@color/cultured"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="12dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/roboto_regular"
+        android:minHeight="70dp"
+        android:text="Thông tin nhập vào chưa chính xác!"
+        android:textColor="@color/cultured"
+        android:textSize="16sp" />
+
+
+    <Button
+        android:id="@+id/btnOK"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_azureich_white_radius_15"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:text="OK"
+        android:textColor="@color/steel_blue"
+        android:textSize="18sp" />
+
+</LinearLayout>
