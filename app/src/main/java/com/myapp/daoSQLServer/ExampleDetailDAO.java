@@ -1,8 +1,7 @@
-package com.myapp.dao;
+package com.myapp.daoSQLServer;
 
 import com.myapp.jdbc.JDBCController;
 import com.myapp.model.ExampleDetail;
-import com.myapp.model.Meaning;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

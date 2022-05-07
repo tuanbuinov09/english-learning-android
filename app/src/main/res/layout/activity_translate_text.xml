@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etText"
+            style="@style/editTextInTranslateTextActivity"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Input text to translate" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageButton
+                android:id="@+id/btnDeleteText"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/ic_baseline_close_32"
+                android:backgroundTint="@color/space_cadet" />
+
+            <ImageButton
+                android:id="@+id/btnSpeak"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_baseline_volume_up_24"
+                android:backgroundTint="@color/space_cadet" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btnMic"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/background_dark"
+                android:src="@drawable/ic_baseline_mic_24" />
+
+            <ImageButton
+                android:id="@+id/btnCamera"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/background_dark"
+                android:src="@drawable/ic_baseline_mic_24" />
+
+            <ImageButton
+                android:id="@+id/btnImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/background_dark"
+                android:src="@drawable/ic_baseline_mic_24" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/background_dark"
+                android:src="@drawable/ic_baseline_mic_24" />
+
+            <ImageButton
+                android:id="@+id/btnDownload"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/background_dark"
+                android:src="@drawable/ic_baseline_mic_24"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnTranslateEnglishToVietnamese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:paddingHorizontal="30dp"
+            android:text="Eng-Viet" />
+
+        <Button
+            android:id="@+id/btnTranslateVietnameseToEnglish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:text="Viet-Eng" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/lyTranslate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etTranslatedText"
+            style="@style/editTextInTranslateTextActivity"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageButton
+                android:id="@+id/btnCopy"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/ic_baseline_content_copy_24"
+                android:backgroundTint="@color/space_cadet" />
+
+            <ImageButton
+                android:id="@+id/btnSpeak2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_baseline_volume_up_24"
+                android:backgroundTint="@color/space_cadet" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/btnTranslationHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:drawablePadding="10dp"
+        android:background="@android:color/transparent"
+        android:drawableEnd="@drawable/ic_baseline_arrow_right_24"
+        android:textSize="14sp"
+        android:text="Transaltion History" />
+</LinearLayout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +12,15 @@ import android.widget.Toast;
 
 import com.myapp.learnenglish.LearnEnglishActivity;
 
+import java.util.Locale;
+
 public class Main extends AppCompatActivity {
     private Button buttonLearnEnglish;
+    private Button btnToAllWord;
+    private Button btnToYourWord;
+    private Button buttonTranslateText;
     EditText searchInput = null;
-
+    public static TextToSpeech ttobj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +28,15 @@ public class Main extends AppCompatActivity {
 
         setControl();
         setEvent();
+
+        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    ttobj.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
     }
 
     private void setEvent() {
@@ -31,10 +46,31 @@ public class Main extends AppCompatActivity {
                 handleClickLearnEnglish(view);
             }
         });
+        btnToAllWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleAllWordClick(view);
+            }
+        });
+        btnToYourWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleYourWordClick(view);
+            }
+        });
+        buttonTranslateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleButtonTranslateTextClick(view);
+            }
+        });
     }
 
     private void setControl() {
         buttonLearnEnglish = findViewById(R.id.buttonLearnEnglish);
+        btnToAllWord = findViewById(R.id.btnToAllWord);
+        btnToYourWord = findViewById(R.id.btnToYourWord);
+        buttonTranslateText = findViewById(R.id.buttonTranslateText);
         searchInput = findViewById(R.id.searchInput);
     }
 
@@ -58,9 +94,19 @@ public class Main extends AppCompatActivity {
 
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+    private void handleAllWordClick(View view) {
+        Intent intent = new Intent(this, DictionaryActivity.class);
+        startActivity(intent);
 
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
     private void handleClickLearnEnglish(View view) {
         Intent intent = new Intent(this, LearnEnglishActivity.class);
+        startActivity(intent);
+    }
+
+    private void handleButtonTranslateTextClick(View view) {
+        Intent intent = new Intent(this, TranslateTextActivity.class);
         startActivity(intent);
     }
 }
