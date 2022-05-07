@@ -2,26 +2,16 @@ package com.myapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.myapp.adapter.YourWordAdapter;
-import com.myapp.dao.UserDAO;
-import com.myapp.intef.VolleyCallBack;
+import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
 import com.myapp.model.ExampleDetail;
 import com.myapp.model.Meaning;
@@ -30,16 +20,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class YourWordActivity extends AppCompatActivity {
     EditText searchInput = null;
     ListView listViewYourWord;
-    ArrayList<EnWord> enWordList;
-    TextToSpeech ttobj;
+//    TextToSpeech ttobj;
 
     ArrayList<EnWord> listEnWord = new ArrayList<>();
     @Override
@@ -51,40 +37,40 @@ public class YourWordActivity extends AppCompatActivity {
 //            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 //        }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.your_word_linearlayout);
-        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    ttobj.setLanguage(Locale.ENGLISH);
-                }
-            }
-        });
+        setContentView(R.layout.activity_your_word);
+//        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                if (status == TextToSpeech.SUCCESS) {
+//                    ttobj.setLanguage(Locale.ENGLISH);
+//                }
+//            }
+//        });
 
         setControl();
         setEvent();
 
     }
 
-    private void getSavedWord(int userId, final VolleyCallBack callBack) {
-
-        String url = "http://10.0.2.2:8000/savedword/"+userId;
-        System.out.println("---------------------------------------------------"+url);
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                getData(response);
-            }
-        }, new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(YourWordActivity.this, "Fail to get the data..", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(YourWordActivity.this);
-        requestQueue.add(request);
-    }
+//    private void getSavedWord(int userId, final VolleyCallBack callBack) {
+//
+//        String url = "http://10.0.2.2:8000/savedword/"+userId;
+//        System.out.println("---------------------------------------------------"+url);
+//        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                getData(response);
+//            }
+//        }, new Response.ErrorListener(){
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(YourWordActivity.this, "Fail to get the data..", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(YourWordActivity.this);
+//        requestQueue.add(request);
+//    }
 
     private void getData(JSONArray array) {
         try{
@@ -149,7 +135,7 @@ public class YourWordActivity extends AppCompatActivity {
 
     public void setYourWordAdapter(){
         YourWordAdapter adapter = new
-                YourWordAdapter(this, this.listEnWord, R.layout.yourword_listview_item, ttobj);
+                YourWordAdapter(this, this.listEnWord, R.layout.en_word_item);
         listViewYourWord.setAdapter(adapter);
         listViewYourWord.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -160,7 +146,7 @@ public class YourWordActivity extends AppCompatActivity {
                         listEnWord.get(position).getId(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(view.getContext(), EnWordDetailActivity.class);
-                intent.putExtra("enWord", listEnWord.get(position));
+                intent.putExtra("enWordId", listEnWord.get(position).getId());
                 view.getContext().startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
@@ -172,13 +158,18 @@ public class YourWordActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
+        DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        listEnWord =  databaseAccess.getFakeSavedWord_NoPopulate();
+        databaseAccess.close();
+        setYourWordAdapter();
         System.out.println("-------------------------------------------------");
-        getSavedWord(1, new VolleyCallBack() {
-            @Override
-            public void onSuccess() {
-
-            }
-        });
+//        getSavedWord(1, new VolleyCallBack() {
+//            @Override
+//            public void onSuccess() {
+//
+//            });
+        }
 
 //enWordList: from sql, listEnWord from api
 //        try {
@@ -205,9 +196,10 @@ public class YourWordActivity extends AppCompatActivity {
 //            }
 //        });
 
-    }
+//    }
 
     private void setControl() {
+
 //        enWordList = new ArrayList<>();
 //        En_word en_word1 = new En_word(1, "stupid", "/'stooped/", "ngu");
 //        En_word en_word2 = new En_word(1, "smart", "/'stooped/ 1", "ngu 1");

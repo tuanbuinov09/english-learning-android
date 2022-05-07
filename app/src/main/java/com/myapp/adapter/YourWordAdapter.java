@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myapp.Main;
 import com.myapp.R;
 import com.myapp.model.EnWord;
 
@@ -22,12 +23,12 @@ public class YourWordAdapter extends ArrayAdapter {
     int layoutID;
     TextToSpeech ttobj;
 
-    public YourWordAdapter(Context context, ArrayList<EnWord> enWordList, int layoutID, TextToSpeech ttobj) {
+    public YourWordAdapter(Context context, ArrayList<EnWord> enWordList, int layoutID/*, TextToSpeech ttobj*/) {
         super(context,layoutID);
         this.context = context;
         this.enWordList = enWordList;
         this.layoutID = layoutID;
-        this.ttobj = ttobj;
+//        this.ttobj = ttobj;
     }
     @Override
     public int getCount() {
@@ -45,18 +46,14 @@ public class YourWordAdapter extends ArrayAdapter {
         TextView textViewMeaning = (TextView) convertView.findViewById(R.id.textViewMeaning);
         ImageButton buttonSpeak = (ImageButton) convertView.findViewById(R.id.buttonSpeak);
 
-        LinearLayout layoutClickToSeeDetail = (LinearLayout) convertView.findViewById(R.id.layoutClickToSeeDetail);
-
-
         textViewWord.setText(enWordList.get(position).getWord());
         textViewPronunciation.setText(enWordList.get(position).getPronunciation());
         textViewMeaning.setText(enWordList.get(position).getListMeaning().get(0).getMeaning());
 
-
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ttobj.speak(enWordList.get(position).getWord(), TextToSpeech.QUEUE_FLUSH, null);
+                Main.ttobj.speak(enWordList.get(position).getWord(), TextToSpeech.QUEUE_FLUSH, null);
                 Toast.makeText(context, enWordList.get(position).getWord(),Toast.LENGTH_SHORT).show();
             }
         });

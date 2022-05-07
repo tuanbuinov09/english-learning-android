@@ -19,6 +19,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:ignore="ExtraText"
+        tools:replace="android:icon,android:theme"
+>
+        <activity
+            android:name=".DictionaryActivity"
+            android:exported="false" />
         tools:replace="android:icon"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <meta-data

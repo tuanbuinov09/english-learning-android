@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
 import com.myapp.model.ExampleDetail;
 import com.myapp.model.Meaning;
@@ -17,7 +18,7 @@ import java.util.Locale;
 
 public class EnWordDetailActivity extends AppCompatActivity {
     public EnWord savedWord;
-
+public int enWordId;
     public ImageButton buttonSpeak;
     public TextView textViewTitle;
     public TextView textViewWord;
@@ -33,16 +34,20 @@ public class EnWordDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_en_word_detail);
 
-        savedWord = (EnWord) getIntent().getSerializableExtra("enWord");
+        enWordId = getIntent().getIntExtra("enWordId", -1);
+        DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        savedWord =  databaseAccess.getOneEnWord(enWordId);
+        databaseAccess.close();
 
-        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    ttobj.setLanguage(Locale.ENGLISH);
-                }
-            }
-        });
+//        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                if (status == TextToSpeech.SUCCESS) {
+//                    ttobj.setLanguage(Locale.ENGLISH);
+//                }
+//            }
+//        });
 
         setControl();
         setEvent();
@@ -52,7 +57,7 @@ public class EnWordDetailActivity extends AppCompatActivity {
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
+                Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
                 Toast.makeText(EnWordDetailActivity.this, savedWord.getWord(), Toast.LENGTH_SHORT).show();
             }
         });

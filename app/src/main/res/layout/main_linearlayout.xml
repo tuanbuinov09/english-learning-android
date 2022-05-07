@@ -54,6 +54,7 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/btnToAllWord"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -121,6 +122,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnToYourWord"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -129,7 +131,6 @@
                     android:background="@color/white"
                     android:drawableLeft="@drawable/icons8_filled_bookmark_ribbon_32px_1"
                     android:drawablePadding="10dp"
-                    android:onClick="handleYourWordClick"
                     android:outlineProvider="background"
                     android:paddingLeft="10dp"
                     android:text="Từ của bạn"

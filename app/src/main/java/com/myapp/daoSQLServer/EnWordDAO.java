@@ -1,4 +1,4 @@
-package com.myapp.dao;
+package com.myapp.daoSQLServer;
 
 import com.myapp.jdbc.JDBCController;
 import com.myapp.model.EnWord;

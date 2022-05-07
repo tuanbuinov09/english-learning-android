@@ -1,8 +1,6 @@
-package com.myapp.dao;
+package com.myapp.daoSQLServer;
 
 import com.myapp.jdbc.JDBCController;
-import com.myapp.model.EnWord;
-import com.myapp.model.ExampleDetail;
 import com.myapp.model.Meaning;
 
 import java.sql.Connection;
@@ -10,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MeaningDAO {
     private JDBCController jdbcController = new JDBCController();
