@@ -43,22 +43,7 @@ public class EnWordRecyclerAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        EnWord enWord = enWordArrayList.get(position);
-
-        holder.textViewWord.setText(enWord.getWord());
-        holder.textViewPronunciation.setText(enWord.getPronunciation());
-
-        holder.buttonSpeak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Main.ttobj.speak(enWordArrayList.get(holder.getAbsoluteAdapterPosition()).getWord(), TextToSpeech.QUEUE_FLUSH, null);
-//                Toast.makeText(context, enWordArrayList.get(holder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         EnWord enWord = enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition());
 
         viewHolder.textViewWord.setText(enWord.getWord());
