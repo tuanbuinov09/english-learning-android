@@ -48,7 +48,6 @@
         android:orientation="vertical"
         android:paddingHorizontal="10dp">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,6 +94,22 @@
                 android:outlineProvider="background"
                 android:paddingLeft="10dp"
                 android:text="Học tiếng anh"
+                android:textAlignment="textStart"
+                android:textColor="#555"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonTranslateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icons8_learning_32px_1"
+                android:drawablePadding="10dp"
+                android:outlineProvider="background"
+                android:paddingLeft="10dp"
+                android:text="Dịch văn bản"
                 android:textAlignment="textStart"
                 android:textColor="#555"
                 android:textSize="18dp"

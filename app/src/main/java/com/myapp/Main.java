@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.myapp.learnenglish.LearnEnglishActivity;
 
 public class Main extends AppCompatActivity {
-    private Button buttonLearnEnglish;
+    private Button buttonLearnEnglish, buttonTranslateText;
     EditText searchInput = null;
 
     @Override
@@ -31,10 +31,17 @@ public class Main extends AppCompatActivity {
                 handleClickLearnEnglish(view);
             }
         });
+        buttonTranslateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleButtonTranslateTextClick(view);
+            }
+        });
     }
 
     private void setControl() {
         buttonLearnEnglish = findViewById(R.id.buttonLearnEnglish);
+        buttonTranslateText = findViewById(R.id.buttonTranslateText);
         searchInput = findViewById(R.id.searchInput);
     }
 
@@ -61,6 +68,11 @@ public class Main extends AppCompatActivity {
 
     private void handleClickLearnEnglish(View view) {
         Intent intent = new Intent(this, LearnEnglishActivity.class);
+        startActivity(intent);
+    }
+
+    private void handleButtonTranslateTextClick(View view) {
+        Intent intent = new Intent(this, TranslateTextActivity.class);
         startActivity(intent);
     }
 }
