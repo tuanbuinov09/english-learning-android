@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.myapp">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+<!--    <uses-feature android:name="android.hardware.camera.any"-->
+<!--        android:required="true" />-->
     <!--  bỏ vào thẻ application   android:usesCleartextTraffic="true" cho phép lấy http request-->
 
     <application
-
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        tools:replace="android:icon"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
         <activity
             android:name=".EnWordDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".learnenglish.fragment.home.ArrangeWordsExercisesActivity"
             android:exported="false"
@@ -55,6 +63,16 @@
             android:exported="false"
             android:parentActivityName=".Main"
             android:theme="@style/Theme.TkActionBar" />
+        <activity android:name="com.canhub.cropper.CropImageActivity" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"/>
+        <activity
+            android:name=".TranslateTextActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TranslationHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HideShadowActionbar"/>
         <activity
             android:name=".SettingsActivity"
             android:exported="false" />
