@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lyTranslationItem"
+    style="@style/Theme.MyApp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+
+            />
+
+        <LinearLayout
+            android:id="@+id/layoutClickToSeeDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="cabaret"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvTranslatedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/'phatam/"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewMeaning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nghĩaaaaaaaaa"
+                android:textColor="#555"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnSpeak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_baseline_volume_up_24" />
+
+        <ImageButton
+            android:id="@+id/btnFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_round_star_outline_24" />
+
+        <ImageView
+            android:id="@+id/ivCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_check_circle_24"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>
