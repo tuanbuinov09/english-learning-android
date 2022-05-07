@@ -15,10 +15,14 @@ import com.myapp.learnenglish.LearnEnglishActivity;
 import java.util.Locale;
 
 public class Main extends AppCompatActivity {
+
     private Button buttonLearnEnglish;
     private Button btnToAllWord;
     private Button btnToYourWord;
     private Button buttonTranslateText;
+
+    private Button buttonTranslateText;
+
     EditText searchInput = null;
     public static TextToSpeech ttobj;
     @Override
@@ -46,6 +50,7 @@ public class Main extends AppCompatActivity {
                 handleClickLearnEnglish(view);
             }
         });
+
         btnToAllWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +63,7 @@ public class Main extends AppCompatActivity {
                 handleYourWordClick(view);
             }
         });
+
         buttonTranslateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,8 +74,10 @@ public class Main extends AppCompatActivity {
 
     private void setControl() {
         buttonLearnEnglish = findViewById(R.id.buttonLearnEnglish);
+
         btnToAllWord = findViewById(R.id.btnToAllWord);
         btnToYourWord = findViewById(R.id.btnToYourWord);
+
         buttonTranslateText = findViewById(R.id.buttonTranslateText);
         searchInput = findViewById(R.id.searchInput);
     }
