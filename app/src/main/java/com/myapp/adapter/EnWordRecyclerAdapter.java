@@ -73,16 +73,15 @@ public class EnWordRecyclerAdapter extends
                 Toast.makeText(context, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
             }
         });
-
-//        viewHolder.layoutClickToSeeDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), EnWordDetailActivity.class);
-//                intent.putExtra("enWordId", enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getId());
-//                view.getContext().startActivity(intent);
-////                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//            }
-//        });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), EnWordDetailActivity.class);
+                intent.putExtra("enWordId", enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getId());
+                view.getContext().startActivity(intent);
+//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
     }
 
     @Override
@@ -96,7 +95,7 @@ public class EnWordRecyclerAdapter extends
         private TextView textViewMeaning;
         private ImageButton buttonSpeak;
         private ImageButton buttonWordMenu;
-        private LinearLayout layoutClickToSeeDetail;
+//        private LinearLayout enWordItemLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -105,7 +104,7 @@ public class EnWordRecyclerAdapter extends
             textViewMeaning = (TextView) itemView.findViewById(R.id.textViewMeaning);
             buttonSpeak = (ImageButton) itemView.findViewById(R.id.buttonSpeak);
             buttonWordMenu = (ImageButton) itemView.findViewById(R.id.buttonWordMenu);
-//            layoutClickToSeeDetail = (LinearLayout) itemView.findViewById(R.id.layoutClickToSeeDetail);
+//            enWordItemLayout = (LinearLayout) itemView.findViewById(R.id.enWordItemLayout);
         }
     }
 }

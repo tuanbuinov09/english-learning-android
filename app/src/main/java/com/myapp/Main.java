@@ -21,8 +21,6 @@ public class Main extends AppCompatActivity {
     private Button btnToYourWord;
     private Button buttonTranslateText;
 
-    private Button buttonTranslateText;
-
     EditText searchInput = null;
     public static TextToSpeech ttobj;
     @Override
