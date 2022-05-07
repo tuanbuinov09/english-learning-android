@@ -1,4 +1,4 @@
-package com.myapp;
+package com.myapp.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.myapp.R;
 
 public class CustomDialog extends BottomSheetDialogFragment {
     public enum Type {
@@ -32,12 +33,6 @@ public class CustomDialog extends BottomSheetDialogFragment {
     private Type type;
     private String title, content;
     private String request;
-
-//    public CustomDialog(Type type, String title, String content) {
-//        this.title = title;
-//        this.content = content;
-//        this.type = type;
-//    }
 
     public CustomDialog(Type type, String title, String content, String request) {
         this.title = title;
