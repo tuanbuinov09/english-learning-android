@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class EnWordRecyclerAdapter extends
         RecyclerView.Adapter<EnWordRecyclerAdapter.ViewHolder> {
 
-    private Context context;
     private Context mContext;
     private ArrayList<EnWord> enWordArrayList;
     public EnWordRecyclerAdapter(Context mContext, ArrayList<EnWord> enWordArrayList){
@@ -47,15 +46,30 @@ public class EnWordRecyclerAdapter extends
         EnWord enWord = enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition());
 
         viewHolder.textViewWord.setText(enWord.getWord());
-        viewHolder.textViewPronunciation.setText(enWord.getPronunciation());
-        viewHolder.textViewMeaning.setText(enWord.getListMeaning().get(0).getMeaning());
 
+        viewHolder.textViewPronunciation.setText(enWord.getPronunciation().trim());
+        viewHolder.textViewMeaning.setText(enWord.getListMeaning().get(0).getMeaning());
 //        viewHolder.buttonWordMenu.setVisibility(View.GONE);
         viewHolder.buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
-                Toast.makeText(context, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        viewHolder.btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sau này check trong saved word
+                if(viewHolder.unsave==true){
+                    //---run unsave code
+                    viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+                    viewHolder.unsave = !viewHolder.unsave;
+                }else{
+                    //---run save code
+                    viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+                    viewHolder.unsave = !viewHolder.unsave;
+                }
             }
         });
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +94,8 @@ public class EnWordRecyclerAdapter extends
         private TextView textViewMeaning;
         private ImageButton buttonSpeak;
         private ImageButton buttonWordMenu;
+        private ImageButton btnSave_UnsaveWord;
+        private  boolean unsave;
 //        private LinearLayout enWordItemLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -89,7 +105,10 @@ public class EnWordRecyclerAdapter extends
             textViewMeaning = (TextView) itemView.findViewById(R.id.textViewMeaning);
             buttonSpeak = (ImageButton) itemView.findViewById(R.id.buttonSpeak);
             buttonWordMenu = (ImageButton) itemView.findViewById(R.id.buttonWordMenu);
+            btnSave_UnsaveWord = (ImageButton) itemView.findViewById(R.id.btnSave_UnsaveWord);
 //            enWordItemLayout = (LinearLayout) itemView.findViewById(R.id.enWordItemLayout);
+            //lấy dữ liệu thật sau
+            unsave = true;
         }
     }
 }

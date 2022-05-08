@@ -17,13 +17,13 @@ import com.myapp.model.EnWord;
 
 import java.util.ArrayList;
 
-public class YourWordAdapter extends ArrayAdapter {
+public class YourWordListViewAdapter extends ArrayAdapter {
     Context context;
     ArrayList<EnWord> enWordList;
     int layoutID;
     TextToSpeech ttobj;
 
-    public YourWordAdapter(Context context, ArrayList<EnWord> enWordList, int layoutID/*, TextToSpeech ttobj*/) {
+    public YourWordListViewAdapter(Context context, ArrayList<EnWord> enWordList, int layoutID/*, TextToSpeech ttobj*/) {
         super(context,layoutID);
         this.context = context;
         this.enWordList = enWordList;

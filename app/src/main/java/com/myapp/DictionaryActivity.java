@@ -42,17 +42,22 @@ public class DictionaryActivity extends AppCompatActivity {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 //        list =  databaseAccess.getAllEnWord_NoPopulate();
-//
         GlobalVariables.listAllWords = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
         databaseAccess.close();
         System.out.println("-------------" + GlobalVariables.listAllWords.size());
+
         enWordRecyclerAdapter = new EnWordRecyclerAdapter(this, GlobalVariables.listAllWords);
         recyclerView.setAdapter(enWordRecyclerAdapter);
         manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
+//        enWordRecyclerAdapter = new EnWordRecyclerAdapter(this, GlobalVariables.listAllWords);
+//        recyclerView.setAdapter(enWordRecyclerAdapter);
+//        manager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(manager);
     }
 
     private void setEvent() {
+        setEnWordAdapter();
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -75,7 +80,10 @@ public class DictionaryActivity extends AppCompatActivity {
             }
         });
     }
+    public void setEnWordAdapter() {
 
+
+    }
     private void fetchData() {
         progressBar.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {

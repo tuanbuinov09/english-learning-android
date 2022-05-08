@@ -70,10 +70,10 @@ public ArrayList<EnWord> getAllEnWord_NoPopulateWithOffsetLimit(int offset, int 
         cursor.close();
         return list;
     }
-    public ArrayList<EnWord> getFakeSavedWord_NoPopulate(){
+    public ArrayList<EnWord> getFakeSavedWord_NoPopulateWithOffsetLimit(int offset, int limit){
         ArrayList<EnWord> list = new ArrayList<>();
         Cursor cursor;
-        cursor= db.rawQuery("select id, word, pronunciation from en_word limit 10",null);
+        cursor= db.rawQuery("select id, word, pronunciation from en_word limit "+limit+" offset +"+offset,null);
         while (cursor.moveToNext()) {
             list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2),getOneMeaningOfEnWord(cursor.getInt(0))));
         }
