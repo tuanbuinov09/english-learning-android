@@ -45,10 +45,10 @@ public class EnWordRecyclerAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         EnWord enWord = enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition());
 
-        viewHolder.textViewWord.setText(enWord.getWord());
+        viewHolder.textViewWord.setText(enWord.getWord().trim());
 
         viewHolder.textViewPronunciation.setText(enWord.getPronunciation().trim());
-        viewHolder.textViewMeaning.setText(enWord.getListMeaning().get(0).getMeaning());
+        viewHolder.textViewMeaning.setText(enWord.getListMeaning().get(0).getMeaning().trim());
 //        viewHolder.buttonWordMenu.setVisibility(View.GONE);
         viewHolder.buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override

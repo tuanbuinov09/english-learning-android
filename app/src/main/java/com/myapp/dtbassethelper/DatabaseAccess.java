@@ -40,42 +40,45 @@ public class DatabaseAccess {
         }
     }
 
-    public ArrayList<EnWord> getAllEnWord(){
+    public ArrayList<EnWord> getAllEnWord() {
         ArrayList<EnWord> list = new ArrayList<>();
-Cursor cursor;
-        cursor= db.rawQuery("select id, word, pronunciation from en_word",null);
+        Cursor cursor;
+        cursor = db.rawQuery("select id, word, pronunciation from en_word", null);
         while (cursor.moveToNext()) {
             list.add(getOneEnWord(cursor.getInt(0)));
         }
         cursor.close();
         return list;
     }
-    public ArrayList<EnWord> getAllEnWord_NoPopulate(){
+
+    public ArrayList<EnWord> getAllEnWord_NoPopulate() {
         ArrayList<EnWord> list = new ArrayList<>();
         Cursor cursor;
-        cursor= db.rawQuery("select id, word, pronunciation from en_word",null);
+        cursor = db.rawQuery("select id, word, pronunciation from en_word", null);
         while (cursor.moveToNext()) {
             list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2), getOneMeaningOfEnWord(cursor.getInt(0))));
         }
         cursor.close();
         return list;
     }
-public ArrayList<EnWord> getAllEnWord_NoPopulateWithOffsetLimit(int offset, int limit){
+
+    public ArrayList<EnWord> getAllEnWord_NoPopulateWithOffsetLimit(int offset, int limit) {
         ArrayList<EnWord> list = new ArrayList<>();
         Cursor cursor;
-        cursor= db.rawQuery("select id, word, pronunciation from en_word limit "+limit+" offset +"+offset,null);
+        cursor = db.rawQuery("select id, word, pronunciation from en_word limit " + limit + " offset +" + offset, null);
         while (cursor.moveToNext()) {
             list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2), getOneMeaningOfEnWord(cursor.getInt(0))));
         }
         cursor.close();
         return list;
     }
-    public ArrayList<EnWord> getFakeSavedWord_NoPopulateWithOffsetLimit(int offset, int limit){
+
+    public ArrayList<EnWord> getFakeSavedWord_NoPopulateWithOffsetLimit(int offset, int limit) {
         ArrayList<EnWord> list = new ArrayList<>();
         Cursor cursor;
-        cursor= db.rawQuery("select id, word, pronunciation from en_word limit "+limit+" offset +"+offset,null);
+        cursor = db.rawQuery("select id, word, pronunciation from en_word limit " + limit + " offset +" + offset, null);
         while (cursor.moveToNext()) {
-            list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2),getOneMeaningOfEnWord(cursor.getInt(0))));
+            list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2), getOneMeaningOfEnWord(cursor.getInt(0))));
         }
         cursor.close();
         return list;
@@ -99,7 +102,7 @@ public ArrayList<EnWord> getAllEnWord_NoPopulateWithOffsetLimit(int offset, int 
     public ArrayList<Meaning> getOneMeaningOfEnWord(int enWordId) {
         ArrayList<Meaning> listMeaning = new ArrayList<Meaning>();
         Cursor cursor;
-        cursor = db.rawQuery("select meaning from meaning where en_word_id = " + enWordId+" limit 1", new String[]{});
+        cursor = db.rawQuery("select meaning from meaning where en_word_id = " + enWordId + " limit 1", new String[]{});
         while (cursor.moveToNext()) {
             Meaning meaning = new Meaning();
 //            meaning.setId(cursor.getInt(0));
@@ -132,7 +135,8 @@ public ArrayList<EnWord> getAllEnWord_NoPopulateWithOffsetLimit(int offset, int 
         cursor.close();
         return listMeaning;
     }
-    public ArrayList<ExampleDetail> getAllExampleDetailOfMeaning(int meaning_id){
+
+    public ArrayList<ExampleDetail> getAllExampleDetailOfMeaning(int meaning_id) {
         ArrayList<ExampleDetail> listExampleDetail = new ArrayList<ExampleDetail>();
         Cursor cursor;
 //        c = db.rawQuery("select example_detail.id, example, example_meaning from meaning inner join example_detail on meaning.id = example_detail.meaning_id where meaning_id = " + meaning_id, new String[]{});
@@ -150,13 +154,14 @@ public ArrayList<EnWord> getAllEnWord_NoPopulateWithOffsetLimit(int offset, int 
         cursor.close();
         return listExampleDetail;
     }
+
     public List<String> getWord() {
         List<String> list = new ArrayList<>();
         c = db.rawQuery("select * from en_word", new String[]{});
         while (c.moveToNext()) {
-           String id = c.getColumnName(1);
-           String word = c.getString(1);
-            System.out.println("------------"+word);
+            String id = c.getColumnName(1);
+            String word = c.getString(1);
+            System.out.println("------------" + word);
             list.add(word);
         }
         return list;

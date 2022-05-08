@@ -133,7 +133,7 @@ public class YourWordActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
 
             }
-        }, 5000);
+        }, 3000);
     }
 //        try {
 //            enWordList = (ArrayList<EnWord>) new UserDAO().getSavedWordlist("username");
@@ -163,13 +163,12 @@ public class YourWordActivity extends AppCompatActivity {
 
     private void setControl() {
         searchInput = findViewById(R.id.searchInput);
-//        listViewYourWord = findViewById(R.id.listViewYourWord);
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progress_bar);
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 //        list =  databaseAccess.getAllEnWord_NoPopulate();
-        GlobalVariables.listAllSavedWords = databaseAccess.getFakeSavedWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
+        GlobalVariables.listAllSavedWords = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
         databaseAccess.close();
         System.out.println("-------------" + GlobalVariables.listAllSavedWords.size());
 

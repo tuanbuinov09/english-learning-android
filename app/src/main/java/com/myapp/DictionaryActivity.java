@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.myapp.R;
@@ -19,7 +20,7 @@ import com.myapp.model.EnWord;
 import java.util.ArrayList;
 
 public class DictionaryActivity extends AppCompatActivity {
-
+    EditText searchInput = null;
     private RecyclerView recyclerView;
     private EnWordRecyclerAdapter enWordRecyclerAdapter;
     private ArrayList<EnWord> list;
@@ -37,6 +38,7 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
     private void setControl() {
+        searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progress_bar);
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
@@ -57,7 +59,6 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
-        setEnWordAdapter();
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -104,6 +105,6 @@ public class DictionaryActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
 
             }
-        },5000);
+        },3000);
     }
 }
