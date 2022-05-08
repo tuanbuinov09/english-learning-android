@@ -44,165 +44,96 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E3E0E1"
+        android:background="@color/azureish_white"
         android:orientation="vertical"
         android:paddingHorizontal="10dp">
+
+        <Button
+            android:id="@+id/btnToAllWord"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_wordbook_32px"
+            android:drawableLeft="@drawable/icons8_wordbook_32px"
+            android:text="Từ điển Việt Anh" />
+
+        <Button
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_rounded_rectangle_stroked_32px"
+            android:drawableLeft="@drawable/icons8_rounded_rectangle_stroked_32px"
+            android:text="Cửa sổ tra nhanh" />
+
+        <Button
+            android:id="@+id/buttonLearnEnglish"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_learning_32px_1"
+            android:drawableLeft="@drawable/icons8_learning_32px_1"
+            android:text="Học tiếng anh" />
+
+        <Button
+            android:id="@+id/buttonTranslateText"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_learning_32px_1"
+            android:drawableLeft="@drawable/icons8_learning_32px_1"
+            android:text="Dịch văn bản" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnToAllWord"
+                android:id="@+id/buttonToYourWord"
+                style="@style/mainButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_wordbook_32px"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="Từ điển việt anh"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/icons8_filled_bookmark_ribbon_32px_1"
+                android:drawableLeft="@drawable/icons8_filled_bookmark_ribbon_32px_1"
+                android:text="Từ của bạn" />
 
             <Button
+                android:id="@+id/buttonAccount"
+                style="@style/mainButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_rounded_rectangle_stroked_32px"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="Cửa sổ tra nhanh"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/buttonLearnEnglish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_learning_32px_1"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="Học tiếng anh"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/buttonTranslateText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_learning_32px_1"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="Dịch văn bản"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnToYourWord"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="10"
-                    android:background="@color/white"
-                    android:drawableLeft="@drawable/icons8_filled_bookmark_ribbon_32px_1"
-                    android:drawablePadding="10dp"
-                    android:outlineProvider="background"
-                    android:paddingLeft="10dp"
-                    android:text="Từ của bạn"
-                    android:textAlignment="textStart"
-                    android:textColor="#555"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="10"
-                    android:background="@color/white"
-                    android:drawableLeft="@drawable/icons8_male_user_32px"
-                    android:drawablePadding="10dp"
-                    android:onClick="toAccount"
-                    android:outlineProvider="background"
-                    android:paddingLeft="10dp"
-                    android:text="Tài khoản"
-                    android:textAlignment="textStart"
-                    android:textColor="#555"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_time_machine_32px"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="Từ đã tra"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_view_details_32px"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="Từ vựng quan trọng"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icons8_settings_32px"
-                android:drawablePadding="10dp"
-                android:outlineProvider="background"
-                android:paddingLeft="10dp"
-                android:text="CÀI ĐẶT"
-                android:textAlignment="textStart"
-                android:textColor="#555"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
+                android:layout_weight="1"
+                android:drawableStart="@drawable/icons8_male_user_32px"
+                android:drawableLeft="@drawable/icons8_male_user_32px"
+                android:text="Tài khoản" />
         </LinearLayout>
+
+
+        <Button
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_time_machine_32px"
+            android:drawableLeft="@drawable/icons8_time_machine_32px"
+            android:text="Từ đã tra" />
+
+        <Button
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_view_details_32px"
+            android:drawableLeft="@drawable/icons8_view_details_32px"
+            android:text="Từ vựng quan trọng" />
+
+        <Button
+            android:id="@+id/buttonSettings"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_settings_32px"
+            android:drawableLeft="@drawable/icons8_settings_32px"
+            android:text="Cài đặt" />
     </LinearLayout>
 </LinearLayout>

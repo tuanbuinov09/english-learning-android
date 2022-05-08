@@ -54,7 +54,7 @@ public class EnWordRecyclerAdapter extends
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
-//                Toast.makeText(mContext, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +70,7 @@ public class EnWordRecyclerAdapter extends
                     viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
                     viewHolder.unsave = !viewHolder.unsave;
                 }
+
             }
         });
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

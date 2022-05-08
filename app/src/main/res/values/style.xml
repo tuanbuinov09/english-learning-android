@@ -40,4 +40,35 @@
         <item name="android:scrollbars">vertical</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="radioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/radio_button_color</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/space_cadet</item>
+    </style>
+
+    <style name="Widget.Button.Toggle" parent="android:Widget">
+        <item name="android:background">@drawable/toggle_bg</item>
+    </style>
+
+    <style name="toggleButton" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
+        <item name="android:textColor">@drawable/toggle_text_color</item>
+    </style>
+
+    <style name="mainButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:outlineProvider">background</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:background">@drawable/bg_round_corner_10</item>
+        <item name="android:backgroundTint">@color/cultured</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
 </resources>

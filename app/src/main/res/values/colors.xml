@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primaryColor">#112d4e</color>
+    <color name="primaryLightColor">#40567a</color>
+    <color name="primaryDarkColor">#000126</color>
+    <color name="secondaryColor">#dbe2ef</color>
+    <color name="secondaryLightColor">#ffffff</color>
+    <color name="secondaryDarkColor">#a9b0bd</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -14,4 +23,9 @@
     <color name="azureish_white">#DBE2EF</color>
     <color name="steel_blue">#3F72AF</color>
     <color name="space_cadet">#112D4E</color>
+
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="dark_grey">#3b3b3b</color>
 </resources>
