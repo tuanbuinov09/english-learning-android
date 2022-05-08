@@ -1,7 +1,5 @@
 package com.myapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -10,19 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.myapp.learnenglish.LearnEnglishActivity;
 
 import java.util.Locale;
 
 public class Main extends AppCompatActivity {
 
-    private Button buttonLearnEnglish;
-    private Button btnToAllWord;
-    private Button btnToYourWord;
-    private Button buttonTranslateText;
+    private Button buttonLearnEnglish, btnToAllWord, btnToYourWord, buttonTranslateText, buttonSettings, buttonAccount;
 
     EditText searchInput = null;
     public static TextToSpeech ttobj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,15 +66,30 @@ public class Main extends AppCompatActivity {
                 handleButtonTranslateTextClick(view);
             }
         });
+
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleButtonSettingsClick(view);
+            }
+        });
+        buttonAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toAccount(view);
+            }
+        });
     }
 
     private void setControl() {
         buttonLearnEnglish = findViewById(R.id.buttonLearnEnglish);
 
         btnToAllWord = findViewById(R.id.btnToAllWord);
-        btnToYourWord = findViewById(R.id.btnToYourWord);
+        btnToYourWord = findViewById(R.id.buttonToYourWord);
 
         buttonTranslateText = findViewById(R.id.buttonTranslateText);
+        buttonSettings = findViewById(R.id.buttonSettings);
+        buttonAccount = findViewById(R.id.buttonAccount);
         searchInput = findViewById(R.id.searchInput);
     }
 
@@ -89,7 +102,7 @@ public class Main extends AppCompatActivity {
             // go to sign in
             Intent signInIntent = new Intent(this, SignIn.class);
             startActivity(signInIntent);
-        }else{
+        } else {
             Toast.makeText(this, "đăng nhập thành công", Toast.LENGTH_LONG).show();
         }
     }
@@ -100,12 +113,14 @@ public class Main extends AppCompatActivity {
 
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
     private void handleAllWordClick(View view) {
         Intent intent = new Intent(this, DictionaryActivity.class);
         startActivity(intent);
 
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
     private void handleClickLearnEnglish(View view) {
         Intent intent = new Intent(this, LearnEnglishActivity.class);
         startActivity(intent);
@@ -113,6 +128,11 @@ public class Main extends AppCompatActivity {
 
     private void handleButtonTranslateTextClick(View view) {
         Intent intent = new Intent(this, TranslateTextActivity.class);
+        startActivity(intent);
+    }
+
+    private void handleButtonSettingsClick(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }
