@@ -55,7 +55,7 @@ public class EnWordRecyclerAdapter extends
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
-                Toast.makeText(context, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
+ //               Toast.makeText(context, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
