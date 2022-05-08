@@ -81,14 +81,14 @@
                     android:backgroundTint="#333" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textViewMeaningAndExample"
-                android:layout_marginTop="20dp"
-                android:textSize="18dp"
-                />
-
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/textViewMeaningAndExample"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:textSize="18dp"-->
+<!--                />-->
+            <include layout="@layout/recyclerview"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

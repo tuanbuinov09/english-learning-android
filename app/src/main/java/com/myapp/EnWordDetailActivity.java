@@ -1,6 +1,8 @@
 package com.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -9,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myapp.adapter.ExampleDetailRecyclerAdapter;
+import com.myapp.adapter.MeaningRecyclerAdapter;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
 import com.myapp.model.ExampleDetail;
@@ -18,13 +22,15 @@ import java.util.Locale;
 
 public class EnWordDetailActivity extends AppCompatActivity {
     public EnWord savedWord;
-public int enWordId;
+    public int enWordId;
     public ImageButton buttonSpeak;
     public TextView textViewTitle;
     public TextView textViewWord;
     public TextView textViewMeaningAndExample;
     public ImageButton btnSave_UnsaveWord;
     public TextView textViewPronunciation;
+    LinearLayoutManager manager;
+    public RecyclerView meaningRecyclerView;
     TextToSpeech ttobj;
 
     public boolean unsave = true;
@@ -40,6 +46,7 @@ public int enWordId;
         savedWord =  databaseAccess.getOneEnWord(enWordId);
         databaseAccess.close();
 
+
 //        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
 //            @Override
 //            public void onInit(int status) {
@@ -54,6 +61,11 @@ public int enWordId;
     }
 
     private void setEvent() {
+
+        MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(this, savedWord.getListMeaning());
+        meaningRecyclerView.setAdapter(meaningRecyclerAdapter);
+        manager = new LinearLayoutManager(this);
+        meaningRecyclerView.setLayoutManager(manager);
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,21 +91,21 @@ public int enWordId;
         textViewWord.setText(savedWord.getWord());
         textViewPronunciation.setText(savedWord.getPronunciation());
 
-        if(savedWord.getListMeaning().size()!=0){
-            String meaningContent="";
-            for(Meaning meaning : savedWord.getListMeaning()){
-                meaningContent = meaningContent + "\n- " + meaning.getMeaning();
-                String exampleContent = "";
-                if(meaning.getListExampleDetails().size()!=0){
-                    for(ExampleDetail exampleDetail : meaning.getListExampleDetails()){
-                        exampleContent = exampleContent + "\n\t+ "+ exampleDetail.getExample()+" : "+exampleDetail.getExampleMeaning();
-                    }
-                }
-                meaningContent= meaningContent + exampleContent;
-            }
-
-            textViewMeaningAndExample.setText(meaningContent);
-        }
+//        if(savedWord.getListMeaning().size()!=0){
+//            String meaningContent="";
+//            for(Meaning meaning : savedWord.getListMeaning()){
+//                meaningContent = meaningContent + "\n- " + meaning.getMeaning();
+//                String exampleContent = "";
+//                if(meaning.getListExampleDetails().size()!=0){
+//                    for(ExampleDetail exampleDetail : meaning.getListExampleDetails()){
+//                        exampleContent = exampleContent + "\n\t+ "+ exampleDetail.getExample()+" : "+exampleDetail.getExampleMeaning();
+//                    }
+//                }
+//                meaningContent= meaningContent + exampleContent;
+//            }
+//
+//            textViewMeaningAndExample.setText(meaningContent);
+//        }
 
     }
 
@@ -101,9 +113,10 @@ public int enWordId;
         buttonSpeak = findViewById(R.id.buttonSpeak);
         textViewTitle = findViewById(R.id.textViewTitle);
         textViewWord = findViewById(R.id.textViewWord);
-        textViewMeaningAndExample = findViewById(R.id.textViewMeaningAndExample);
+//        textViewMeaningAndExample = findViewById(R.id.textViewMeaningAndExample);
         btnSave_UnsaveWord = findViewById(R.id.btnSave_UnsaveWord);
         textViewPronunciation = findViewById(R.id.textViewPronunciation);
+        meaningRecyclerView = findViewById(R.id.recyclerView);
     }
 
 }

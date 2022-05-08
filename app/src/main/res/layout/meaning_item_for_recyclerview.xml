@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/enWordItemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
+    android:layout_marginBottom="1dp"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:paddingLeft="8dp">
+
+        <LinearLayout
+            android:id="@+id/layoutClickToSeeDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewPartOfSpeech"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cabaret"
+                android:textSize="18dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/design_default_color_primary"
+                android:background="@drawable/border_bottom"
+                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icons8_arrow_32px"/>
+                <TextView
+                    android:id="@+id/textViewMeaning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="nghĩaaaaaaaaa"
+                    android:textColor="#555"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+        <include layout="@layout/recyclerview"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

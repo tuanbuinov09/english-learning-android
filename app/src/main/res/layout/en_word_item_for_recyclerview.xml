@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/enWordItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
-    android:id="@+id/enWordItemLayout"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginBottom="1dp"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,8 +29,8 @@
             android:id="@+id/layoutClickToSeeDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewWord"
@@ -36,7 +38,9 @@
                 android:layout_height="wrap_content"
                 android:text="cabaret"
                 android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="@drawable/border_bottom"
+                />
 
             <TextView
                 android:id="@+id/textViewPronunciation"
@@ -63,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="4dp">
 
         <ImageButton
             android:id="@+id/buttonSpeak"
@@ -75,14 +79,15 @@
 
             />
 
+
+        <!--        //nếu đã lưu dùng cái này-->
+        <!--            android:background="@drawable/icons8_filled_bookmark_ribbon_32px_1"-->
+
         <ImageButton
-            android:id="@+id/buttonWordMenu"
+            android:id="@+id/btnSave_UnsaveWord"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/icons8_menu_vertical_32px"
-            android:backgroundTint="#333"
-
-            />
+            android:background="@drawable/icons8_bookmark_outline_32px" />
     </LinearLayout>
 
 

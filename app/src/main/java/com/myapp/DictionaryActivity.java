@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.myapp.R;
@@ -19,7 +20,7 @@ import com.myapp.model.EnWord;
 import java.util.ArrayList;
 
 public class DictionaryActivity extends AppCompatActivity {
-
+    EditText searchInput = null;
     private RecyclerView recyclerView;
     private EnWordRecyclerAdapter enWordRecyclerAdapter;
     private ArrayList<EnWord> list;
@@ -37,19 +38,24 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
     private void setControl() {
+        searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progress_bar);
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 //        list =  databaseAccess.getAllEnWord_NoPopulate();
-//
         GlobalVariables.listAllWords = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
         databaseAccess.close();
         System.out.println("-------------" + GlobalVariables.listAllWords.size());
+
         enWordRecyclerAdapter = new EnWordRecyclerAdapter(this, GlobalVariables.listAllWords);
         recyclerView.setAdapter(enWordRecyclerAdapter);
         manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
+//        enWordRecyclerAdapter = new EnWordRecyclerAdapter(this, GlobalVariables.listAllWords);
+//        recyclerView.setAdapter(enWordRecyclerAdapter);
+//        manager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(manager);
     }
 
     private void setEvent() {
@@ -75,7 +81,10 @@ public class DictionaryActivity extends AppCompatActivity {
             }
         });
     }
+    public void setEnWordAdapter() {
 
+
+    }
     private void fetchData() {
         progressBar.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
@@ -96,6 +105,6 @@ public class DictionaryActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
 
             }
-        },5000);
+        },3000);
     }
 }
