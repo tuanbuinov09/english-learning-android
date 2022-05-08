@@ -63,14 +63,14 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:background="@android:color/background_dark"
-                android:src="@drawable/ic_baseline_mic_24" />
+                android:src="@drawable/ic_baseline_camera_alt_24" />
 
             <ImageButton
                 android:id="@+id/btnImage"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:background="@android:color/background_dark"
-                android:src="@drawable/ic_baseline_mic_24" />
+                android:src="@drawable/ic_baseline_image_24" />
         </LinearLayout>
 
         <Space
@@ -178,5 +178,5 @@
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/ic_baseline_arrow_right_24"
         android:textSize="14sp"
-        android:text="Transaltion History" />
+        android:text="Translation History" />
 </LinearLayout>
