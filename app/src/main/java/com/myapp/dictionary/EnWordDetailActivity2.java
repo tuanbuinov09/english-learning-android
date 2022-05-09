@@ -17,6 +17,7 @@ import com.myapp.model.EnWord;
 
 public class EnWordDetailActivity2 extends AppCompatActivity {
     public int enWordId;
+    EnWord savedWord;
     BottomNavigationView topNavigation;
     FragmentManager fragmentManager;
 
@@ -45,14 +46,12 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                     Fragment selectedFragment = null;
                     switch (item.getItemId()) {
                         case R.id.pageEnWordDetail:
-                            selectedFragment = new EnWordDetailFragment(this);
+
                             Bundle bundle = new Bundle();
                             bundle.putInt("enWordId", enWordId);
-                            DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
-                            databaseAccess.open();
-                            EnWord savedWord = databaseAccess.getOneEnWord(enWordId);
-                            databaseAccess.close();
+
                             bundle.putSerializable("enWord", savedWord);
+                            selectedFragment = new EnWordDetailFragment(this, savedWord);
                             selectedFragment.setArguments(bundle);
                             break;
                         case R.id.pageYourNote:
@@ -70,5 +69,9 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
         topNavigation = findViewById(R.id.topNavigation);
         fragmentManager = getSupportFragmentManager();
         enWordId = getIntent().getIntExtra("enWordId",-1);
+        DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        savedWord = databaseAccess.getOneEnWord(enWordId);
+        databaseAccess.close();
     }
 }

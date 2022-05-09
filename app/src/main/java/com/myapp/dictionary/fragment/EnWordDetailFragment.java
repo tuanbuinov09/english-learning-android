@@ -52,9 +52,10 @@ public class EnWordDetailFragment extends Fragment {
     public EnWordDetailFragment() {
         // Required empty public constructor
     }
-    public EnWordDetailFragment(Context mContext) {
+    public EnWordDetailFragment(Context mContext, EnWord enWord) {
         // Required empty public constructor
         this.mContext = mContext;
+        this.savedWord = enWord;
     }
     /**
      * Use this factory method to create a new instance of
@@ -82,8 +83,8 @@ public class EnWordDetailFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        enWordId = getArguments().getInt("enWordId");
-        savedWord = (EnWord) getArguments().getSerializable("enWord");
+//        enWordId = getArguments().getInt("enWordId");
+//        savedWord = (EnWord) getArguments().getSerializable("enWord");
 
         MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(mContext, savedWord.getListMeaning());
         meaningRecyclerView.setAdapter(meaningRecyclerAdapter);
