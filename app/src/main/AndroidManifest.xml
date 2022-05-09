@@ -4,7 +4,9 @@
     package="com.myapp">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -33,6 +35,9 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />
 
+        <activity
+            android:name=".dictionary.EnWordDetailTabView"
+            android:exported="false" />
         <activity
             android:name=".dictionary.EnWordDetailActivity"
             android:exported="false" />
@@ -82,7 +87,8 @@
             android:theme="@style/Theme.HideShadowActionbar" />
         <activity
             android:name=".SettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.SettingsActivity" />
         <activity
             android:name=".SignUp"
             android:exported="false" />

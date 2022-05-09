@@ -13,28 +13,22 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.myapp.R;
+import com.myapp.model.TranslationHistory;
+
+import java.time.LocalDate;
 
 public class TranslationEditorDialog extends BottomSheetDialogFragment {
-    public enum Type {
-        NOTIFICATION, CONFIRM
-    }
-
-    public enum Result {
-        OK, CANCEL
-    }
-
     public interface Listener {
         //        void sendDialogResult(CustomDialog.Result result, String request);
-        void sendDialogResult(String originalText, String translatedText);
+        void sendDialogResult(TranslationHistory updatedTranslationHistory);
     }
 
     View convertView = null;
     private TranslationEditorDialog.Listener listener;
-    private String originalText, translatedText;
+    private TranslationHistory translationHistory;
 
-    public TranslationEditorDialog(String originalText, String translatedText) {
-        this.originalText = originalText;
-        this.translatedText = translatedText;
+    public TranslationEditorDialog(TranslationHistory translationHistory) {
+        this.translationHistory = translationHistory;
     }
 
     @Override
@@ -57,15 +51,17 @@ public class TranslationEditorDialog extends BottomSheetDialogFragment {
         Button btnOK = convertView.findViewById(R.id.btnOK);
         Button btnCancel = convertView.findViewById(R.id.btnCancel);
 
-        tvOriginalText.setText(originalText);
-        tvTranslatedText.setText(translatedText);
+        tvOriginalText.setText(translationHistory.getOriginalText());
+        tvTranslatedText.setText(translationHistory.getTranslatedText());
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String newOriginalText = tvOriginalText.getText().toString();
                 String newTranslatedText = tvTranslatedText.getText().toString();
-                listener.sendDialogResult(newOriginalText, newTranslatedText);
+
+                TranslationHistory updatedTranslationHistory = new TranslationHistory(translationHistory.getId(), newOriginalText, newTranslatedText, LocalDate.now());
+                listener.sendDialogResult(updatedTranslationHistory);
                 dismiss();
             }
         });

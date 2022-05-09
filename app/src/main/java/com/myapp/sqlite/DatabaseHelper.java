@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_TRANSLATION_HISTORY_ID = "id";
     public static final String TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT = "original_text";
     public static final String TABLE_TRANSLATION_HISTORY_TRANSLATED_TEXT = "translated_text";
-    public static final String TABLE_TRANSLATION_HISTORY_DATE = "translated_text";
+    public static final String TABLE_TRANSLATION_HISTORY_DATE = "date";
 
     public static final String TABLE_USER_ID_User = "ID_User";
     public static final String TABLE_USER_HoTen = "HoTen";
@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_USER_SDT = "SDT";
 
     private static final String CREATE_TABLE_TRANSLATION_HISTORY_QUERY = "CREATE TABLE " + TABLE_TRANSLATION_HISTORY + " (" +
-            TABLE_TRANSLATION_HISTORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            TABLE_TRANSLATION_HISTORY_ID + " INTEGER PRIMARY KEY, " +
             TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT + " TEXT, " +
             TABLE_TRANSLATION_HISTORY_TRANSLATED_TEXT + " TEXT, " +
             TABLE_TRANSLATION_HISTORY_DATE + " DATE );";

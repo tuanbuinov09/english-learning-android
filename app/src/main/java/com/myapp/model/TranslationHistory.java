@@ -8,9 +8,10 @@ public class TranslationHistory {
     private String translatedText;
     private LocalDate date;
 
-    public TranslationHistory(String text, String translatedText) {
+    public TranslationHistory(String text, String translatedText, LocalDate date) {
         this.originalText = text;
         this.translatedText = translatedText;
+        this.date = date;
     }
 
     public TranslationHistory(int id, String text, String translatedText, LocalDate date) {

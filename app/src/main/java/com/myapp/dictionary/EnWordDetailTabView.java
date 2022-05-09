@@ -22,22 +22,22 @@ import com.myapp.model.EnWord;
 public class EnWordDetailTabView extends AppCompatActivity {
     public EnWord savedWord;
     public int enWordId;
-    public ImageButton buttonSpeak;
-    public TextView textViewTitle;
-    public TextView textViewWord;
-    public TextView textViewMeaningAndExample;
-    public ImageButton btnSave_UnsaveWord;
-    public TextView textViewPronunciation;
-    LinearLayoutManager manager;
-    public RecyclerView meaningRecyclerView;
-    TextToSpeech ttobj;
-
-    public boolean unsave = true;
+//    public ImageButton buttonSpeak;
+//    public TextView textViewTitle;
+//    public TextView textViewWord;
+//    public TextView textViewMeaningAndExample;
+//    public ImageButton btnSave_UnsaveWord;
+//    public TextView textViewPronunciation;
+//    LinearLayoutManager manager;
+//    public RecyclerView meaningRecyclerView;
+//    TextToSpeech ttobj;
+//
+//    public boolean unsave = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_en_word_detail);
+        setContentView(R.layout.activity_en_word_detail_fortabhost);
 
         enWordId = getIntent().getIntExtra("enWordId", -1);
         DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
@@ -62,34 +62,34 @@ public class EnWordDetailTabView extends AppCompatActivity {
 
     private void setEvent() {
 
-        MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(this, savedWord.getListMeaning());
-        meaningRecyclerView.setAdapter(meaningRecyclerAdapter);
-        manager = new LinearLayoutManager(this);
-        meaningRecyclerView.setLayoutManager(manager);
-        buttonSpeak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
-                Toast.makeText(EnWordDetailTabView.this, savedWord.getWord(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(unsave==true){
-                    //---run unsave code
-                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
-                    unsave = !unsave;
-                }else{
-                    //---run save code
-                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
-                    unsave = !unsave;
-                }
-            }
-        });
-        textViewTitle.setText(savedWord.getWord());
-        textViewWord.setText(savedWord.getWord());
-        textViewPronunciation.setText(savedWord.getPronunciation());
+//        MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(this, savedWord.getListMeaning());
+//        meaningRecyclerView.setAdapter(meaningRecyclerAdapter);
+//        manager = new LinearLayoutManager(this);
+//        meaningRecyclerView.setLayoutManager(manager);
+//        buttonSpeak.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
+//                Toast.makeText(EnWordDetailTabView.this, savedWord.getWord(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(unsave==true){
+//                    //---run unsave code
+//                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+//                    unsave = !unsave;
+//                }else{
+//                    //---run save code
+//                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+//                    unsave = !unsave;
+//                }
+//            }
+//        });
+//        textViewTitle.setText(savedWord.getWord());
+//        textViewWord.setText(savedWord.getWord());
+//        textViewPronunciation.setText(savedWord.getPronunciation());
 
 //        if(savedWord.getListMeaning().size()!=0){
 //            String meaningContent="";
@@ -110,33 +110,28 @@ public class EnWordDetailTabView extends AppCompatActivity {
     }
 
     private void setControl() {
-        buttonSpeak = findViewById(R.id.buttonSpeak);
-        textViewTitle = findViewById(R.id.textViewTitle);
-        textViewWord = findViewById(R.id.textViewWord);
-//        textViewMeaningAndExample = findViewById(R.id.textViewMeaningAndExample);
-        btnSave_UnsaveWord = findViewById(R.id.btnSave_UnsaveWord);
-        textViewPronunciation = findViewById(R.id.textViewPronunciation);
-        meaningRecyclerView = findViewById(R.id.recyclerView);
+//        buttonSpeak = findViewById(R.id.buttonSpeak);
+//        textViewTitle = findViewById(R.id.textViewTitle);
+//        textViewWord = findViewById(R.id.textViewWord);
+////        textViewMeaningAndExample = findViewById(R.id.textViewMeaningAndExample);
+//        btnSave_UnsaveWord = findViewById(R.id.btnSave_UnsaveWord);
+//        textViewPronunciation = findViewById(R.id.textViewPronunciation);
+//        meaningRecyclerView = findViewById(R.id.recyclerView);
 
-        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        TabHost tabHost = (TabHost) findViewById(R.id.tabhost);
         TabHost.TabSpec spec;
         Intent intent;
 
         spec = tabHost.newTabSpec("Chi tiết từ");
         spec.setIndicator("worddetail");
         intent = new Intent(this, EnWordDetailActivity.class);
+        intent.putExtra("enWordId",enWordId);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         spec = tabHost.newTabSpec("Contact");
         spec.setIndicator("CONTACT");
         intent = new Intent(this, YourNoteActivity.class);
-        spec.setContent(intent);
-        tabHost.addTab(spec);
-
-        spec = tabHost.newTabSpec("About");
-        spec.setIndicator("ABOUT");
-        intent = new Intent(this, EnWordDetailActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 

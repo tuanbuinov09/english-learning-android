@@ -14,4 +14,5 @@ public class GlobalVariables {
     public static Locale VOICE_LANGUAGE = Locale.US;
     public static float VOICE_SPEED = 1; // NORMAL
 
+    public static String FILE_CONFIG_NAME = "config.dat";
 }
