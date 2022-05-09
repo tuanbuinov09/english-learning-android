@@ -89,7 +89,7 @@ public class EnWordDetailActivity extends AppCompatActivity {
                 }
             }
         });
-        textViewTitle.setText(savedWord.getWord());
+//        textViewTitle.setText(savedWord.getWord());
         textViewWord.setText(savedWord.getWord());
         textViewPronunciation.setText(savedWord.getPronunciation());
 
