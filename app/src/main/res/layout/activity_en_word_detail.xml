@@ -6,39 +6,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".dictionary.EnWordDetailActivity">
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#609BEB"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:paddingHorizontal="20dp"-->
-<!--        android:paddingVertical="12dp">-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#609BEB"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp">
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_marginLeft="60dp"-->
-<!--            android:text="saved_word"-->
-<!--            android:id="@+id/textViewTitle"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="24dp"-->
-<!--            android:textStyle="bold" />-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="60dp"
+            android:text="saved_word"
+            android:id="@+id/textViewTitle"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
-<!--        <ImageButton-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:id="@+id/btnSave_UnsaveWord"-->
-<!--            android:background="@drawable/icons8_filled_bookmark_ribbon_32px_1" />-->
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/btnSave_UnsaveWord"
+            android:background="@drawable/icons8_filled_bookmark_ribbon_32px_1" />
 
-<!--        <ImageButton-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:background="@drawable/icons8_back_32px"-->
-<!--            android:id="@+id/imgBtnBackToSavedWord" />-->
-<!--    </RelativeLayout>-->
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/icons8_back_32px"
+            android:id="@+id/imgBtnBackToSavedWord" />
+    </RelativeLayout>
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
