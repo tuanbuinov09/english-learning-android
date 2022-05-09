@@ -100,7 +100,8 @@ public class Main extends AppCompatActivity {
     public void toAccount(View view) {
         if (GlobalVariables.username == null) {
             // go to sign in
-            Intent signInIntent = new Intent(this, SignIn.class);
+//            Intent signInIntent = new Intent(this, SignIn.class);
+            Intent signInIntent = new Intent(this, SignInActivity.class);
             startActivity(signInIntent);
         } else {
             Toast.makeText(this, "đăng nhập thành công", Toast.LENGTH_LONG).show();

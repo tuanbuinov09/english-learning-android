@@ -82,6 +82,14 @@
             android:name=".SignUp"
             android:exported="false" />
         <activity
+            android:name=".SignInActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".Main"
             android:exported="true">
             <intent-filter>

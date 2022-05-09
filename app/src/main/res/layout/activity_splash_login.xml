@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.MyApp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cultured"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/linearlayout_inputs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:alpha="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView_logoRays"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/ic_android_icon"
+            android:rotation="0"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Ứng dụng quản lý Kho"
+            android:textColor="@color/space_cadet"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Đăng nhập để tiếp tục"
+            android:textColor="@color/textDescription"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_azureich_white_radius_15"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="16dp"
+            android:drawableTint="@color/space_cadet"
+            android:hint="Email"
+            android:inputType="text"
+            android:text="2@gmail.com"
+            android:padding="16dp"
+            android:textColor="@color/space_cadet"
+            android:textColorHint="@color/steel_blue"
+            android:textCursorDrawable="@drawable/custom_cursor"
+            android:textSize="14sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextColor="@color/space_cadet"
+            app:passwordToggleEnabled="true"
+            tools:ignore="MissingContraints">
+
+            <EditText
+                android:id="@+id/editTextPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_azureich_white_radius_15"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawableEnd="@drawable/ic_visibility"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/space_cadet"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/space_cadet"
+                android:textColorHint="@color/steel_blue"
+                android:textCursorDrawable="@drawable/custom_cursor"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonDangnhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_space_cadet_radius_15"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Đăng nhập"
+            android:textColor="@color/cultured"
+            app:backgroundTint="@color/space_cadet" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:alpha="1"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Bạn quên mật khẩu?"
+        android:textColor="@color/steel_blue"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/textView_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/login_register_button"
+        android:textColor="@color/space_cadet"
+        android:textSize="14sp" />
+
+</LinearLayout>

@@ -27,4 +27,8 @@
     <string name="roboto_medium">sans-serif-medium</string>
 
     <string name="number_picker_formatter">%02d</string>
+
+    <string name="login_register_button">Chưa có tài khoản? <b>Đăng ký ngay</b></string>
+    <string name="signup_register_button">Bạn có tài khoản rồi? <b>Đăng nhập ngay</b></string>
+    <string name="signup_forgot_button">Bạn đã cập nhật lại mật khẩu? <b>Đăng nhập ngay</b></string>
 </resources>
