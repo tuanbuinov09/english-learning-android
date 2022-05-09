@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.myapp.dictionary.DictionaryActivity;
 import com.myapp.dictionary.YourWordActivity;
 import com.myapp.learnenglish.LearnEnglishActivity;
@@ -19,6 +21,7 @@ import java.util.Locale;
 public class Main extends AppCompatActivity {
 
     private Button buttonLearnEnglish, btnToAllWord, btnToYourWord, buttonTranslateText, buttonSettings, buttonAccount;
+    FloatingActionButton fab;
 
     EditText searchInput = null;
     public static TextToSpeech ttobj;
@@ -81,6 +84,14 @@ public class Main extends AppCompatActivity {
                 toAccount(view);
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     private void setControl() {
@@ -93,6 +104,7 @@ public class Main extends AppCompatActivity {
         buttonSettings = findViewById(R.id.buttonSettings);
         buttonAccount = findViewById(R.id.buttonAccount);
         searchInput = findViewById(R.id.searchInput);
+        fab = findViewById(R.id.fab);
     }
 
     public void search(View view) {

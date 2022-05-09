@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Theme.MyApp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bright_gray"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,35 +44,43 @@
         class="com.myapp.SettingsRemindWordsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         tools:layout="@layout/settings_remind_words" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_round_image_button"
+            android:padding="10dp"
             android:src="@drawable/ic_baseline_volume_up_24" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sound speed" />
+                android:text="Sound speed"
+                android:layout_marginVertical="5dp"/>
 
             <RadioGroup
                 android:id="@+id/rgSoundSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
                 <RadioButton
                     android:id="@+id/rbSlower"
@@ -100,7 +108,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sound default" />
+                android:text="Sound default"
+                android:layout_marginBottom="5dp"/>
 
             <RadioGroup
                 android:id="@+id/rgSoundDefault"
@@ -130,11 +139,13 @@
         android:id="@+id/btnDarkTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingVertical="5dp"
-        android:paddingStart="10dp">
+        android:paddingStart="5dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -163,20 +174,27 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lyMail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_round_image_button"
+            android:padding="10dp"
             android:src="@drawable/ic_baseline_volume_up_24" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="Report bugs or sugestions" />
     </LinearLayout>
 
