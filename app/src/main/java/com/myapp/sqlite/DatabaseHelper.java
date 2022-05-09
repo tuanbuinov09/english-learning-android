@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 //        db.execSQL(CREATE_TABLE_PRODUCT_QUERY);
-//        db.execSQL(CREATE_TABLE_WAREHOUSE_QUERY);
+//        db.execSQL(CREATE_TABLE_OUSE_QUERY);
 //        db.execSQL(CREATE_TABLE_RECEIPT_QUERY);
 //        db.execSQL(CREATE_TABLE_RECEIPT_DETAIL_QUERY);
 //        db.execSQL(CREATE_TABLE_User);
@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //public static final String DB_NAME = "app.db";
-    public static final String DB_NAME = "app.db";
+    public static final String DB_NAME = "tudien.db";
     public static final String TABLE_USER = "User";
     public static final String TABLE_TRANSLATION_HISTORY = "translation_history";
 

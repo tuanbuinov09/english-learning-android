@@ -150,6 +150,15 @@
                 android:text="Cập nhật"
                 android:textColor="@color/cultured"
                 app:backgroundTint="@color/space_cadet" />
+            <Button
+                android:id="@+id/buttonLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_space_cadet_radius_15"
+                android:text="Đăng xuất"
+                android:textColor="@color/cultured"
+                app:backgroundTint="@color/space_cadet" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -44,7 +44,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     SQLiteDatabase database;
     EditText tvHoten,tvEmail,tvSdt,tvUID;
     TextView tvtaikhoan, tvTen;
-    Button btnCapNhat;
+    Button btnCapNhat,btnLogout;
     String iduser;
     User user;
     private Main mMainActivity ;
@@ -100,6 +100,16 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
                // onClickUpdateProfile();
             }
         });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ThongTinTaikhoanActivity.this, Main.class);
+                startActivity(intent);
+                finish();
+                // onClickUpdateProfile();
+            }
+        });
 
     }
     private void onClickRequestPermission() {
@@ -131,7 +141,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         tvTen = findViewById(R.id.textViewTen);
 //        tvPoint = findViewById(R.id.textviewPoint);
         btnCapNhat = findViewById(R.id.buttonCapNhat);
-
+        btnLogout = findViewById(R.id.buttonLogout);
         tvUID.setEnabled(false);
         tvEmail.setEnabled(false);
         imageView = findViewById(R.id.img_avatar);
@@ -202,18 +212,32 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     {
         database = Database.initDatabase(ThongTinTaikhoanActivity.this, DATABASE_NAME);
         Cursor cursor = database.rawQuery("SELECT * FROM User WHERE ID_User = ?",new String[]{String.valueOf(DB.iduser)});
-        cursor.moveToNext();
-        String Iduser = cursor.getString(0);
-        String HoTen = cursor.getString(1);
-        int Point = cursor.getInt(2);
-        String Email = cursor.getString(3);
-        String SDT = cursor.getString(4);
-        user = new User(Iduser,HoTen,Point,Email,SDT);
-        setUserInformation();
+        if( cursor != null && cursor.moveToNext() ){
+            //cursor.moveToNext();
+            String Iduser = cursor.getString(0);
+            String HoTen = cursor.getString(1);
+            int Point = cursor.getInt(2);
+            String Email = cursor.getString(3);
+            String SDT = cursor.getString(4);
+            user = new User(Iduser,HoTen,Point,Email,SDT);
+            setUserInformation();
 //        ThongTinTaikhoanActivity.context = getApplicationContext();
 
-        //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
-        TruyenThongTin();
+            //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
+            TruyenThongTin();
+        }
+//        cursor.moveToNext();
+//        String Iduser = cursor.getString(0);
+//        String HoTen = cursor.getString(1);
+//        int Point = cursor.getInt(2);
+//        String Email = cursor.getString(3);
+//        String SDT = cursor.getString(4);
+//        user = new User(Iduser,HoTen,Point,Email,SDT);
+//        setUserInformation();
+////        ThongTinTaikhoanActivity.context = getApplicationContext();
+//
+//        //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
+//        TruyenThongTin();
 
     }
     private void setUserInformation() {

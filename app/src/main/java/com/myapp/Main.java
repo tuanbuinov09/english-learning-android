@@ -129,7 +129,7 @@ public class Main extends AppCompatActivity {
             public void run() {
                 nextActivity();
             }
-        },5000);
+        },1000);
 //        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 //        if(user==null){
 //            //Chưa login
@@ -150,7 +150,7 @@ public class Main extends AppCompatActivity {
             Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
             startActivity(intent);
         }
-        //finish();
+        finish();
     }
     public void handleYourWordClick(View view) {
         Intent yourWordIntent = new Intent(this, YourWordActivity.class);
