@@ -2,6 +2,7 @@ package com.myapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
@@ -114,25 +115,43 @@ public class Main extends AppCompatActivity {
     }
 
     public void toAccount(View view) {
-        if (GlobalVariables.username == null) {
-            // go to sign in
-//            Intent signInIntent = new Intent(this, SignIn.class);
-//            Intent signInIntent = new Intent(this, SignInActivity.class);
-//            startActivity(signInIntent);
-            FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-            if(user==null){
-                //Chưa login
-                Intent intent = new Intent(this,SignInActivity.class);
-                startActivity(intent);
-            }else{
-                Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
-                startActivity(intent);
+//        if (GlobalVariables.username == null) {
+//            // go to sign in
+////            Intent signInIntent = new Intent(this, SignIn.class);
+////            Intent signInIntent = new Intent(this, SignInActivity.class);
+////            startActivity(signInIntent);
+//        } else {
+//            Toast.makeText(this, "đăng nhập thành công", Toast.LENGTH_LONG).show();
+//        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nextActivity();
             }
-        } else {
-            Toast.makeText(this, "đăng nhập thành công", Toast.LENGTH_LONG).show();
-        }
+        },5000);
+//        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+//        if(user==null){
+//            //Chưa login
+//            Intent intent = new Intent(this,SignInActivity.class);
+//            startActivity(intent);
+//        }else{
+//            Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
+//            startActivity(intent);
+//        }
     }
-
+    private void nextActivity() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null){
+            //Chưa login
+            Intent intent = new Intent(this,SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
+            startActivity(intent);
+        }
+        //finish();
+    }
     public void handleYourWordClick(View view) {
         Intent yourWordIntent = new Intent(this, YourWordActivity.class);
         startActivity(yourWordIntent);

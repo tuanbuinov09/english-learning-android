@@ -28,6 +28,9 @@
             android:name=".NotificationActivity"
             android:exported="false" />
         <activity
+            android:name=".ThongTinTaikhoanActivity"
+            android:exported="false" />
+        <activity
             android:name=".dictionary.DictionaryActivity"
             android:exported="false" />
 
