@@ -87,7 +87,7 @@ public class EnWordDetailTabView extends AppCompatActivity {
                 }
             }
         });
-//        textViewTitle.setText(savedWord.getWord());
+        textViewTitle.setText(savedWord.getWord());
         textViewWord.setText(savedWord.getWord());
         textViewPronunciation.setText(savedWord.getPronunciation());
 
@@ -111,7 +111,7 @@ public class EnWordDetailTabView extends AppCompatActivity {
 
     private void setControl() {
         buttonSpeak = findViewById(R.id.buttonSpeak);
-//        textViewTitle = findViewById(R.id.textViewTitle);
+        textViewTitle = findViewById(R.id.textViewTitle);
         textViewWord = findViewById(R.id.textViewWord);
 //        textViewMeaningAndExample = findViewById(R.id.textViewMeaningAndExample);
         btnSave_UnsaveWord = findViewById(R.id.btnSave_UnsaveWord);
