@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.myapp.model.TranslationHistory;
 import com.myapp.sqlite.DatabaseHelper;
@@ -34,9 +35,9 @@ public class TranslationHistoryDao implements Dao<TranslationHistory> {
         db.beginTransaction();
         try {
             ContentValues cv = new ContentValues();
+            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT, translationHistory.getOriginalText());
+            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_TRANSLATED_TEXT, translationHistory.getTranslatedText());
             cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_DATE, translationHistory.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT, translationHistory.getOriginalText());
-            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT, translationHistory.getOriginalText());
 
             db.insert(DatabaseHelper.TABLE_TRANSLATION_HISTORY, null, cv);
 
@@ -44,6 +45,7 @@ public class TranslationHistoryDao implements Dao<TranslationHistory> {
         } catch (Exception ex) {
             result = false;
             ex.printStackTrace();
+            Log.e("inser error", ex.getMessage());
         } finally {
             db.endTransaction();
         }
@@ -60,9 +62,9 @@ public class TranslationHistoryDao implements Dao<TranslationHistory> {
         db.beginTransaction();
         try {
             ContentValues cv = new ContentValues();
+            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT, translationHistory.getOriginalText());
+            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_TRANSLATED_TEXT, translationHistory.getTranslatedText());
             cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_DATE, translationHistory.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT, translationHistory.getOriginalText());
-            cv.put(DatabaseHelper.TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT, translationHistory.getOriginalText());
 
             db.update(DatabaseHelper.TABLE_TRANSLATION_HISTORY, cv, DatabaseHelper.TABLE_TRANSLATION_HISTORY_ID + " = ?", new String[]{String.valueOf(translationHistory.getId())});
             db.setTransactionSuccessful();
@@ -110,7 +112,7 @@ public class TranslationHistoryDao implements Dao<TranslationHistory> {
                 int id = cursor.getInt(0);
                 String originalText = cursor.getString(1);
                 String translatedText = cursor.getString(2);
-                String date = cursor.getString(4);
+                String date = cursor.getString(3);
 
                 LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
@@ -135,7 +137,7 @@ public class TranslationHistoryDao implements Dao<TranslationHistory> {
             int translationHistoryId = cursor.getInt(0);
             String originalText = cursor.getString(1);
             String translatedText = cursor.getString(2);
-            String date = cursor.getString(4);
+            String date = cursor.getString(3);
 
             LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
 

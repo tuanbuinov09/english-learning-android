@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -39,12 +38,16 @@ import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 import com.myapp.dialog.CustomDialog;
+import com.myapp.model.TranslationHistory;
+import com.myapp.sqlite.DatabaseHelper;
+import com.myapp.sqlite.dao.TranslationHistoryDao;
 import com.myapp.utils.SoftKeyboard;
+import com.myapp.utils.TTS;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
+import java.time.LocalDate;
 
 public class TranslateTextActivity extends AppCompatActivity implements CustomDialog.Listener {
     ImageButton btnMic, btnCamera, btnImage, btnDelete, btnDownload, btnDeleteText, btnSpeak, btnSpeak2, btnCopy;
@@ -71,7 +74,10 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
     final Translator vietnameseEnglishTranslator =
             Translation.getClient(vietnameseEnglishTranslatorOptions);
 
-    TextToSpeech textToSpeech;
+    TTS tts;
+
+    DatabaseHelper databaseHelper;
+    TranslationHistoryDao translationHistoryDao;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,16 +88,9 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
 
         downloadModelTranslator();
 
-        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    //Voice voice = new Voice(textToSpeech.getDefaultEngine(), Locale.US, Voice.QUALITY_VERY_HIGH, Voice.LATENCY_NORMAL, true, null);
-                    //textToSpeech.setVoice(voice);
-                    textToSpeech.setLanguage(Locale.US);
-                }
-            }
-        });
+        tts = new TTS(this);
+        databaseHelper = DatabaseHelper.getInstance(this);
+        translationHistoryDao = new TranslationHistoryDao(databaseHelper);
     }
 
     @Override
@@ -280,6 +279,9 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
                     @Override
                     public void onSuccess(@NonNull String translatedText) {
                         etTranslatedText.setText(translatedText);
+
+                        TranslationHistory history = new TranslationHistory(text, translatedText, LocalDate.now());
+                        boolean result = translationHistoryDao.insertOne(history);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -371,14 +373,14 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
             @Override
             public void onClick(View view) {
                 String text = etText.getText().toString().trim();
-                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                tts.speak(text);
             }
         });
         btnSpeak2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String text = etTranslatedText.getText().toString().trim();
-                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                tts.speak(text);
             }
         });
         btnCopy.setOnClickListener(new View.OnClickListener() {
