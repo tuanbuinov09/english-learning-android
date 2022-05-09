@@ -44,7 +44,7 @@ public class EnWordDetailActivity extends AppCompatActivity {
         enWordId = getIntent().getIntExtra("enWordId", -1);
         DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
-        savedWord =  databaseAccess.getOneEnWord(enWordId);
+        savedWord = databaseAccess.getOneEnWord(enWordId);
         databaseAccess.close();
 
 

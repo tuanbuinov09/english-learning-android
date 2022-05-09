@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.myapp.dictionary.EnWordDetailActivity;
 import com.myapp.Main;
 import com.myapp.R;
+import com.myapp.dictionary.EnWordDetailTabView;
 import com.myapp.model.EnWord;
 
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class EnWordRecyclerAdapter extends
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), EnWordDetailActivity.class);
+//                Intent intent = new Intent(view.getContext(), EnWordDetailTabView.class);
                 intent.putExtra("enWordId", enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getId());
                 view.getContext().startActivity(intent);
 //                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

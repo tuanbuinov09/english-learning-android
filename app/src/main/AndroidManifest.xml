@@ -34,6 +34,9 @@
             android:value="ocr" />
 
         <activity
+            android:name=".dictionary.EnWordDetailTabView"
+            android:exported="false" />
+        <activity
             android:name=".dictionary.EnWordDetailActivity"
             android:exported="false" />
         <activity
