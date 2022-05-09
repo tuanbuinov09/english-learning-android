@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.myapp.dictionary.DictionaryActivity;
+import com.myapp.dictionary.YourWordActivity;
 import com.myapp.learnenglish.LearnEnglishActivity;
 
 import java.util.Locale;

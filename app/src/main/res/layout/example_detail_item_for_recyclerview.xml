@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--android:layout_marginBottom="1dp"-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/enWordItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="1dp"
+
     android:background="#FFFFFF"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
@@ -28,11 +29,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/icons8_square_full_32px" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/icons8_square_full_32px" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textViewExample"

@@ -1,4 +1,4 @@
-package com.myapp;
+package com.myapp.dictionary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.myapp.GlobalVariables;
+import com.myapp.Main;
+import com.myapp.R;
 import com.myapp.adapter.EnWordRecyclerAdapter;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;

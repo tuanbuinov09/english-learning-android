@@ -1,26 +1,25 @@
-package com.myapp;
+package com.myapp.dictionary;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.myapp.adapter.ExampleDetailRecyclerAdapter;
+import com.myapp.Main;
+import com.myapp.R;
 import com.myapp.adapter.MeaningRecyclerAdapter;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
-import com.myapp.model.ExampleDetail;
-import com.myapp.model.Meaning;
 
-import java.util.Locale;
-
-public class EnWordDetailActivity extends AppCompatActivity {
+public class EnWordDetailTabView extends AppCompatActivity {
     public EnWord savedWord;
     public int enWordId;
     public ImageButton buttonSpeak;
@@ -56,6 +55,7 @@ public class EnWordDetailActivity extends AppCompatActivity {
 //            }
 //        });
 
+
         setControl();
         setEvent();
     }
@@ -70,7 +70,7 @@ public class EnWordDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
-                Toast.makeText(EnWordDetailActivity.this, savedWord.getWord(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EnWordDetailTabView.this, savedWord.getWord(), Toast.LENGTH_SHORT).show();
             }
         });
         btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +117,37 @@ public class EnWordDetailActivity extends AppCompatActivity {
         btnSave_UnsaveWord = findViewById(R.id.btnSave_UnsaveWord);
         textViewPronunciation = findViewById(R.id.textViewPronunciation);
         meaningRecyclerView = findViewById(R.id.recyclerView);
+
+        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        TabHost.TabSpec spec;
+        Intent intent;
+
+        spec = tabHost.newTabSpec("Chi tiết từ");
+        spec.setIndicator("worddetail");
+        intent = new Intent(this, EnWordDetailActivity.class);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+        spec = tabHost.newTabSpec("Contact");
+        spec.setIndicator("CONTACT");
+        intent = new Intent(this, YourNoteActivity.class);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+        spec = tabHost.newTabSpec("About");
+        spec.setIndicator("ABOUT");
+        intent = new Intent(this, EnWordDetailActivity.class);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+        tabHost.setCurrentTab(1);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                Toast.makeText(getApplicationContext(), tabId,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
