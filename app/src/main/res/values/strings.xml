@@ -27,4 +27,7 @@
     <string name="roboto_medium">sans-serif-medium</string>
 
     <string name="number_picker_formatter">%02d</string>
+    <string name="title_activity_en_word_detail2">EnWordDetailActivity2</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
