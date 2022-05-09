@@ -36,4 +36,17 @@
     <style name="Theme.SettingsActivity" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:textColor">@color/space_cadet</item>
     </style>
+
+    <style name="EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/bg_azureich_white_radius_15</item>
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textColorHint">@color/steel_blue</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+        <item name="android:paddingHorizontal">20dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
 </resources>

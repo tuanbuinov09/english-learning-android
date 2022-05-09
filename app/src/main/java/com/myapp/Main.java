@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.myapp.dictionary.DictionaryActivity;
 import com.myapp.dictionary.YourWordActivity;
 import com.myapp.learnenglish.LearnEnglishActivity;
@@ -115,8 +117,17 @@ public class Main extends AppCompatActivity {
         if (GlobalVariables.username == null) {
             // go to sign in
 //            Intent signInIntent = new Intent(this, SignIn.class);
-            Intent signInIntent = new Intent(this, SignInActivity.class);
-            startActivity(signInIntent);
+//            Intent signInIntent = new Intent(this, SignInActivity.class);
+//            startActivity(signInIntent);
+            FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+            if(user==null){
+                //Chưa login
+                Intent intent = new Intent(this,SignInActivity.class);
+                startActivity(intent);
+            }else{
+                Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
+                startActivity(intent);
+            }
         } else {
             Toast.makeText(this, "đăng nhập thành công", Toast.LENGTH_LONG).show();
         }
