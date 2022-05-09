@@ -24,6 +24,8 @@ import com.myapp.MainViewModel;
 import com.myapp.R;
 import com.myapp.dialog.TranslationEditorDialog;
 import com.myapp.model.TranslationHistory;
+import com.myapp.sqlite.DatabaseHelper;
+import com.myapp.sqlite.dao.TranslationHistoryDao;
 import com.myapp.utils.TTS;
 
 import java.util.ArrayList;
@@ -38,6 +40,8 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
     boolean isSelectedAll = false;
     List<TranslationHistory> selectedList = new ArrayList<>();
     TextView tvEmpty;
+    DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+    TranslationHistoryDao translationHistoryDao = new TranslationHistoryDao(databaseHelper);
 
     public TranslationHistoryAdapter(List<TranslationHistory> list, Context context, TextView tvEmpty) {
         this.list = list;
@@ -122,6 +126,7 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
                                 case R.id.btnDelete:
                                     for (TranslationHistory history : selectedList) {
                                         list.remove(history);
+                                        translationHistoryDao.deleteOne(history);
                                     }
                                     if (list.size() == 0) {
                                         tvEmpty.setVisibility(View.VISIBLE);
@@ -172,7 +177,8 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
                     //Toast.makeText(context, "Item clicked", Toast.LENGTH_SHORT).show();
                     String originalText = holder.tvText.getText().toString();
                     String translatedText = holder.tvTranslatedText.getText().toString();
-                    TranslationEditorDialog translationEditorDialog = new TranslationEditorDialog(originalText, translatedText);
+                    TranslationHistory history = list.get(holder.getAbsoluteAdapterPosition());
+                    TranslationEditorDialog translationEditorDialog = new TranslationEditorDialog(history);
                     translationEditorDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "");
                 }
             }
