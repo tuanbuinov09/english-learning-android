@@ -44,8 +44,17 @@ public class MeaningRecyclerAdapter extends
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Meaning meaning = meaningArrayList.get(viewHolder.getAbsoluteAdapterPosition());
-        viewHolder.textViewPartOfSpeech.setText(meaning.getPartOfSpeechName());
-        viewHolder.textViewMeaning.setText(meaning.getMeaning());
+        viewHolder.textViewPartOfSpeech.setText(meaning.getPartOfSpeechName().trim());
+        Meaning prevMeaning=null;
+        // nếu meaning này có partofspeech trùng với meaning trước thì khỏi show partofspeech
+        if(position>=1){
+            prevMeaning = meaningArrayList.get(viewHolder.getAbsoluteAdapterPosition()-1);
+            if(prevMeaning.getPartOfSpeechName().equalsIgnoreCase(meaning.getPartOfSpeechName().trim())){
+                viewHolder.textViewPartOfSpeech.setVisibility(View.GONE);
+            }
+        }
+
+        viewHolder.textViewMeaning.setText(meaning.getMeaning().trim());
 
         ExampleDetailRecyclerAdapter exampleDetailRecyclerAdapter = new ExampleDetailRecyclerAdapter(mContext, meaning.getListExampleDetails());
         viewHolder.exampleRecyclerView.setAdapter(exampleDetailRecyclerAdapter);
