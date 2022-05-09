@@ -1,4 +1,4 @@
-package com.myapp;
+package com.myapp.dictionary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.myapp.GlobalVariables;
 import com.myapp.R;
 import com.myapp.adapter.EnWordRecyclerAdapter;
 import com.myapp.dtbassethelper.DatabaseAccess;

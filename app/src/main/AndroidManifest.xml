@@ -20,16 +20,21 @@
         tools:ignore="ExtraText"
         tools:replace="android:icon,android:theme">
         <activity
+            android:name=".dictionary.YourNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".DictionaryActivity"
+            android:name=".dictionary.DictionaryActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />
+
         <activity
-            android:name=".EnWordDetailActivity"
+            android:name=".dictionary.EnWordDetailActivity"
             android:exported="false" />
         <activity
             android:name=".learnenglish.fragment.home.ArrangeWordsExercisesActivity"
@@ -94,7 +99,7 @@
             android:name=".SignIn"
             android:exported="false" />
         <activity
-            android:name=".YourWordActivity"
+            android:name=".dictionary.YourWordActivity"
             android:exported="false" />
     </application>
 
