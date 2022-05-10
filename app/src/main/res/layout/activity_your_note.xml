@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".dictionary.YourNoteActivity"
-    android:paddingHorizontal="10dp"
+    android:paddingHorizontal="20dp"
     android:orientation="vertical"
     android:paddingVertical="20dp">
     <TextView

@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#609BEB"
+        android:background="@color/steel_blue"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
         android:paddingVertical="12dp">
@@ -89,7 +89,7 @@
             <!--                android:dividerHeight="1dp"-->
             <!--                android:footerDividersEnabled="false"/>-->
             <include
-                layout="@layout/recyclerview"
+                layout="@layout/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />

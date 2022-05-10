@@ -28,7 +28,7 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
         setControl();
         setEvent();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EnWordDetailFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EnWordDetailFragment(savedWord)).commit();
 
     }
 
@@ -51,7 +51,7 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                             bundle.putInt("enWordId", enWordId);
 
                             bundle.putSerializable("enWord", savedWord);
-                            selectedFragment = new EnWordDetailFragment(this, savedWord);
+                            selectedFragment = new EnWordDetailFragment(savedWord);
                             selectedFragment.setArguments(bundle);
                             break;
                         case R.id.pageYourNote:

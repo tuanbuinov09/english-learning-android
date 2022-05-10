@@ -18,7 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/white"
+        android:layout_marginTop="-16dp"
+        android:background="@color/steel_blue"
+        android:paddingBottom="4dp"
         android:theme="@style/Theme.EnWordDetailTopNav"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/en_word_detail_menu" />
