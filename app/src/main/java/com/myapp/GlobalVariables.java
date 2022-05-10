@@ -1,12 +1,16 @@
 package com.myapp;
 
+import com.myapp.model.EnWord;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class GlobalVariables {
     public static String username = null;
-    public static ArrayList listAllWords = null;
-    public static ArrayList listAllSavedWords = null;
+    public static ArrayList<EnWord> listAllWords = null;
+    public static ArrayList<EnWord>  listAllSavedWords = null;
+
+    public static ArrayList<EnWord>  listFilteredWords = new ArrayList();
     public static int limit = 15;
     public static int offset = 0;
 

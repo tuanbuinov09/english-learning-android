@@ -66,9 +66,14 @@
         <entry key="..\:/MyApp/app/src/main/res/layout/your_word_linearlayout.xml" value="0.25" />
         <entry key="..\:/android_project/Nhom11_HocTiengAnh/app/src/main/res/layout/your_word_linearlayout.xml" value="0.25" />
         <entry key="..\:/android_project/Nhom11_HocTiengAnh/app/src/main/res/layout/yourword_listview_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/drawable/border_bottom.xml" value="0.1" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/drawable/border_bottom_thick.xml" value="0.1" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/drawable/border_bottom_thick_FFF.xml" value="0.1" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/drawable/border_bottom_thick_fff.xml" value="0.1" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/drawable/border_horizontal.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_dictionary.xml" value="0.16032608695652173" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_en_word_detail.xml" value="0.1" />
-        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_en_word_detail2.xml" value="0.16" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_en_word_detail2.xml" value="0.27992633517495397" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_en_word_detail_fortabhost.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_learn_english.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_your_note.xml" value="0.20153985507246377" />
@@ -91,6 +96,7 @@
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/your_word_linearlayout.xml" value="0.16032608695652173" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/yourword_listview_item.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/menu/en_word_detail_menu.xml" value="0.1" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/menu/en_word_menu.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/menu/tk_bottom_navigation_menu.xml" value="0.1" />
       </map>
     </option>

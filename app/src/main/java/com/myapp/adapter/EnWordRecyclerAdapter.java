@@ -7,6 +7,8 @@ import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +24,11 @@ import com.myapp.model.EnWord;
 import java.util.ArrayList;
 
 public class EnWordRecyclerAdapter extends
-        RecyclerView.Adapter<EnWordRecyclerAdapter.ViewHolder> {
+        RecyclerView.Adapter<EnWordRecyclerAdapter.ViewHolder>{
 
     private Context mContext;
     private ArrayList<EnWord> enWordArrayList;
+    private ArrayList<EnWord> filteredEnWordArrayList;
     public EnWordRecyclerAdapter(Context mContext, ArrayList<EnWord> enWordArrayList){
             this.mContext = mContext;
             this.enWordArrayList = enWordArrayList;
@@ -83,12 +86,18 @@ public class EnWordRecyclerAdapter extends
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return enWordArrayList.size();
     }
-
+    public void filterList(ArrayList<EnWord> filterllist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        enWordArrayList = filterllist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewWord;
         private TextView textViewPronunciation;
