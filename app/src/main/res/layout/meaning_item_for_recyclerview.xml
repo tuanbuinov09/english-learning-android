@@ -59,7 +59,7 @@
                     android:textSize="18dp" />
             </LinearLayout>
 
-        <include layout="@layout/recyclerview"/>
+        <include layout="@layout/recycler_view"/>
         </LinearLayout>
 
     </LinearLayout>

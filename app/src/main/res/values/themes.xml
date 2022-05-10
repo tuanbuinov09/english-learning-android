@@ -16,6 +16,11 @@
         <item name="colorSurface">@color/azureish_white</item>
     </style>
 
+    <style name="Theme.EnWordDetailTopNav" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:background">@null</item>
+    </style>
+
     <style name="Theme.TkBottomNavigation" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">#00BCD4</item>
         <item name="android:background">@null</item>
@@ -37,6 +42,7 @@
         <item name="android:textColor">@color/space_cadet</item>
     </style>
 
+
     <style name="EditTextStyle" parent="@android:style/Widget.EditText">
         <item name="android:background">@drawable/bg_azureich_white_radius_15</item>
         <item name="android:textColor">@color/space_cadet</item>
@@ -49,4 +55,14 @@
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
+
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

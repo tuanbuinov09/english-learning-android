@@ -22,6 +22,11 @@
         tools:ignore="ExtraText"
         tools:replace="android:icon,android:theme">
         <activity
+            android:name=".dictionary.EnWordDetailActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_en_word_detail2"
+            android:theme="@style/NoActionBar" />
+        <activity
             android:name=".dictionary.YourNoteActivity"
             android:exported="false" />
         <activity
@@ -38,9 +43,6 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity
-            android:name=".dictionary.EnWordDetailTabView"
-            android:exported="false" />
         <activity
             android:name=".dictionary.EnWordDetailActivity"
             android:exported="false" />
