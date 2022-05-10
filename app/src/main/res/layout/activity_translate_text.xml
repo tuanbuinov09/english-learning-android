@@ -2,20 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bright_gray"
+    android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/etText"
             style="@style/editTextInTranslateTextActivity"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:hint="Input text to translate" />
 
         <LinearLayout
@@ -53,23 +57,25 @@
 
             <ImageButton
                 android:id="@+id/btnMic"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@android:color/background_dark"
+                style="@style/imageButtonInTranslateTextActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_baseline_mic_24" />
 
             <ImageButton
                 android:id="@+id/btnCamera"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@android:color/background_dark"
+                style="@style/imageButtonInTranslateTextActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_baseline_camera_alt_24" />
 
             <ImageButton
                 android:id="@+id/btnImage"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@android:color/background_dark"
+                style="@style/imageButtonInTranslateTextActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_image_24" />
         </LinearLayout>
 
@@ -87,7 +93,8 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:background="@android:color/background_dark"
-                android:src="@drawable/ic_baseline_mic_24" />
+                android:src="@drawable/ic_baseline_mic_24"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/btnDownload"
@@ -107,6 +114,7 @@
 
         <Button
             android:id="@+id/btnTranslateEnglishToVietnamese"
+            style="@style/buttonInTranslateTextActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -115,6 +123,7 @@
 
         <Button
             android:id="@+id/btnTranslateVietnameseToEnglish"
+            style="@style/buttonInTranslateTextActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="30dp"
@@ -132,17 +141,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/cultured"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/etTranslatedText"
             style="@style/editTextInTranslateTextActivity"
             android:layout_width="match_parent"
-            android:layout_height="100dp" />
+            android:layout_height="200dp"
+            android:focusable="false" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@color/cultured"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -163,20 +176,21 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+    <!--    <Space-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_weight="1" />-->
 
     <Button
         android:id="@+id/btnTranslationHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textEnd"
-        android:textAllCaps="false"
-        android:drawablePadding="10dp"
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/ic_baseline_arrow_right_24"
-        android:textSize="14sp"
-        android:text="Translation History" />
+        android:drawablePadding="10dp"
+        android:text="Translation History"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="@color/space_cadet"
+        android:textSize="14sp" />
 </LinearLayout>
