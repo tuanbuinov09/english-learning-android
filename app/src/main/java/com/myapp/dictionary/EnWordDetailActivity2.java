@@ -1,6 +1,10 @@
 package com.myapp.dictionary;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -20,7 +24,11 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
     EnWord savedWord;
     BottomNavigationView topNavigation;
     FragmentManager fragmentManager;
+    public ImageButton btnSave_UnsaveWord;
+    public ImageButton btnBackToSavedWord;
 
+    TextView textViewTitle;
+    boolean unsave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +41,30 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
     }
 
     private void setEvent() {
+        textViewTitle.setText(savedWord.getWord().trim());
+        btnBackToSavedWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),YourWordActivity.class);
+                startActivity(intent);
+
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+        btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (unsave == true) {
+                    //---run unsave code
+                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+                    unsave = !unsave;
+                } else {
+                    //---run save code
+                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+                    unsave = !unsave;
+                }
+            }
+        });
 //        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
 //              @Override
 //              public void onBackStackChanged() {
@@ -73,5 +105,10 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
         databaseAccess.open();
         savedWord = databaseAccess.getOneEnWord(enWordId);
         databaseAccess.close();
+
+        textViewTitle = findViewById(R.id.textViewTitle);
+        btnSave_UnsaveWord = findViewById(R.id.btnSave_UnsaveWord);
+        btnBackToSavedWord = findViewById(R.id.imgBtnBackToSavedWord);
+        unsave = true;
     }
 }

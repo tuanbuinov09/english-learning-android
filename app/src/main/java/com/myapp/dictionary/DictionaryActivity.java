@@ -1,11 +1,18 @@
 package com.myapp.dictionary;
 
+import android.app.SearchableInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +28,15 @@ import com.myapp.model.EnWord;
 import java.util.ArrayList;
 
 public class DictionaryActivity extends AppCompatActivity {
-    EditText searchInput = null;
+    androidx.appcompat.widget.SearchView searchInput = null;
     private RecyclerView recyclerView;
     private EnWordRecyclerAdapter enWordRecyclerAdapter;
     boolean isScrolling = false;
     LinearLayoutManager manager;
     int currentItems, totalItems, scrollOutItems;
     ProgressBar progressBar;
+
+    ArrayList<EnWord> filteredlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,53 @@ public class DictionaryActivity extends AppCompatActivity {
         setEvent();
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.en_word_menu, menu);
+//
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                filter(s);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                filter(s);
+//                return false;
+//            }
+//        });
+//        return true;
+//    }
+    private void filter(String text) {
+
+        // running a for loop to compare elements.
+        if(text.isEmpty()){
+            enWordRecyclerAdapter.filterList(GlobalVariables.listAllWords);
+            return;
+        }
+        for (EnWord item : GlobalVariables.listAllWords) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getWord().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            enWordRecyclerAdapter.filterList(filteredlist);
+        }
+    }
     private void setControl() {
         searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
@@ -61,6 +117,19 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
+        searchInput.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
