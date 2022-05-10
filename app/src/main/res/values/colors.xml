@@ -30,4 +30,8 @@
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#FF4081</color>
     <color name="dark_grey">#3b3b3b</color>
+
+    <color name="textHeadline">#434343</color>
+    <color name="textDescription">#686868</color>
+    <color name="lightGrey">#EAEAEA</color>
 </resources>

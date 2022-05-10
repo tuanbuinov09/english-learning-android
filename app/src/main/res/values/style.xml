@@ -30,7 +30,9 @@
     </style>
 
     <style name="editTextInTranslateTextActivity" parent="Widget.AppCompat.EditText">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColorHint">@color/steel_blue</item>
+        <item name="android:background">@color/cultured</item>
+        <item name="android:textColor">@color/space_cadet</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">top|start</item>
         <item name="android:lines">8</item>
@@ -79,10 +81,24 @@
         <item name="android:textAlignment">textStart</item>
         <item name="android:background">@drawable/bg_round_corner_5</item>
         <item name="android:backgroundTint">@color/cultured</item>
-<!--        <item name="android:background">@color/cultured</item>-->
+        <!--        <item name="android:background">@color/cultured</item>-->
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/space_cadet</item>
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="imageButtonInTranslateTextActivity" parent="Widget.AppCompat.ImageButton">
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/bg_round_corner_5</item>
+        <item name="android:backgroundTint">@color/azureish_white</item>
+    </style>
+
+    <style name="buttonInTranslateTextActivity" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/cultured</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/bg_round_corner_5</item>
+        <item name="android:backgroundTint">@color/space_cadet</item>
     </style>
 </resources>
