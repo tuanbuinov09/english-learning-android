@@ -91,6 +91,11 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
         tts = new TTS(this);
         databaseHelper = DatabaseHelper.getInstance(this);
         translationHistoryDao = new TranslationHistoryDao(databaseHelper);
+
+        setTitle("Translate Text");
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setElevation(0);
     }
 
     @Override
@@ -394,6 +399,10 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
             @Override
             public void onClick(View view) {
                 String text = etText.getText().toString();
+                if (text.isEmpty()) {
+                    Toast.makeText(TranslateTextActivity.this, "Please input text to translate", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 translateVietnameseToEnglish(text);
             }
         });
@@ -401,6 +410,10 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
             @Override
             public void onClick(View view) {
                 String text = etText.getText().toString();
+                if (text.isEmpty()) {
+                    Toast.makeText(TranslateTextActivity.this, "Please input text to translate", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 translateEnglishToVietnamese(text);
             }
         });
@@ -445,6 +458,12 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
         englishVietnameseTranslator.close();
         getLifecycle().addObserver(vietnameseEnglishTranslator);
         vietnameseEnglishTranslator.close();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
 
