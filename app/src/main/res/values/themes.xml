@@ -17,7 +17,7 @@
     </style>
 
     <style name="Theme.EnWordDetailTopNav" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#151671</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="android:background">@null</item>
     </style>
 

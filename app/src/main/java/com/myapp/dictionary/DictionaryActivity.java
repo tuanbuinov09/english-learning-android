@@ -24,7 +24,6 @@ public class DictionaryActivity extends AppCompatActivity {
     EditText searchInput = null;
     private RecyclerView recyclerView;
     private EnWordRecyclerAdapter enWordRecyclerAdapter;
-    private ArrayList<EnWord> list;
     boolean isScrolling = false;
     LinearLayoutManager manager;
     int currentItems, totalItems, scrollOutItems;
@@ -99,8 +98,7 @@ public class DictionaryActivity extends AppCompatActivity {
                 databaseAccess.open();
                 GlobalVariables.offset = GlobalVariables.offset + GlobalVariables.limit;
 
-                ArrayList<EnWord> justFetched = new ArrayList<>();
-                justFetched = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
+                ArrayList<EnWord> justFetched = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
 
                 databaseAccess.close();
 

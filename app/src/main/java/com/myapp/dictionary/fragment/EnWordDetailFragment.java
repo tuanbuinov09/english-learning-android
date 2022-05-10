@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,9 +19,7 @@ import android.widget.Toast;
 import com.myapp.Main;
 import com.myapp.R;
 import com.myapp.adapter.MeaningRecyclerAdapter;
-import com.myapp.dictionary.EnWordDetailActivity;
-import com.myapp.dictionary.EnWordDetailActivity2;
-import com.myapp.dtbassethelper.DatabaseAccess;
+
 import com.myapp.model.EnWord;
 
 /**
@@ -49,14 +48,16 @@ public class EnWordDetailFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     Context mContext;
+
     public EnWordDetailFragment() {
         // Required empty public constructor
     }
-    public EnWordDetailFragment(Context mContext, EnWord enWord) {
+
+    public EnWordDetailFragment(EnWord enWord) {
         // Required empty public constructor
-        this.mContext = mContext;
         this.savedWord = enWord;
     }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -86,9 +87,32 @@ public class EnWordDetailFragment extends Fragment {
 //        enWordId = getArguments().getInt("enWordId");
 //        savedWord = (EnWord) getArguments().getSerializable("enWord");
 
-        MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(mContext, savedWord.getListMeaning());
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+
+        final View view = inflater.inflate(R.layout.fragment_word_detail, container, false);
+        final FragmentActivity c = getActivity();
+        meaningRecyclerView = view.findViewById(R.id.recyclerView);
+
+        buttonSpeak = view.findViewById(R.id.buttonSpeak);
+        textViewTitle = view.findViewById(R.id.textViewTitle);
+//        textViewWord = view.findViewById(R.id.textViewWord);
+        btnSave_UnsaveWord = view.findViewById(R.id.btnSave_UnsaveWord);
+        textViewPronunciation = view.findViewById(R.id.textViewPronunciation);
+
+        textViewTitle.setText(savedWord.getWord().trim());
+//        textViewWord.setText(savedWord.getWord().trim());
+        textViewPronunciation.setText(savedWord.getPronunciation().trim());
+
+        MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(c, savedWord.getListMeaning());
         meaningRecyclerView.setAdapter(meaningRecyclerAdapter);
-        manager = new LinearLayoutManager(mContext);
+        manager = new LinearLayoutManager(c);
         meaningRecyclerView.setLayoutManager(manager);
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,42 +124,20 @@ public class EnWordDetailFragment extends Fragment {
         btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(unsave==true){
+                if (unsave == true) {
                     //---run unsave code
                     btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
                     unsave = !unsave;
-                }else{
+                } else {
                     //---run save code
                     btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
                     unsave = !unsave;
                 }
             }
         });
-        textViewTitle.setText(savedWord.getWord());
-        textViewWord.setText(savedWord.getWord());
-        textViewPronunciation.setText(savedWord.getPronunciation());
-    }
-
-    private void setEvent() {
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
 
-        View inf = inflater.inflate(R.layout.fragment_word_detail, container, false);
-        buttonSpeak =(ImageButton) inf.findViewById(R.id.buttonSpeak);
-        textViewTitle =(TextView) inf.findViewById(R.id.textViewTitle);
-        textViewWord =(TextView) inf.findViewById(R.id.textViewWord);
-//        textViewMeaningAndExample = findViewById(R.id.textViewMeaningAndExample);
-        btnSave_UnsaveWord = (ImageButton)inf.findViewById(R.id.btnSave_UnsaveWord);
-        textViewPronunciation =(TextView) inf.findViewById(R.id.textViewPronunciation);
-        meaningRecyclerView =(RecyclerView) inf.findViewById(R.id.recyclerView);
-
-        return inf;
+        return view;
 //        return inflater.inflate(R.layout.fragment_word_detail, container, false);
     }
 }
