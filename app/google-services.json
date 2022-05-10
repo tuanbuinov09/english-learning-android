@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "564098385138",
+    "project_id": "hoc-tieng-anh-android",
+    "storage_bucket": "hoc-tieng-anh-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564098385138:android:c45f01fbdb273809f27c6b",
+        "android_client_info": {
+          "package_name": "com.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564098385138-0vic3ojro0049fn2ulvabqrmsrgrjtpf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myapp",
+            "certificate_hash": "bfede16e734dec80094a8f559f77a83134a8de23"
+          }
+        },
+        {
+          "client_id": "564098385138-kkgqb362qr1p8nardlalt71dqc9704at.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7iX6zQftL6fF3l0_qMouxoKlXqSOsfQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564098385138-kkgqb362qr1p8nardlalt71dqc9704at.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

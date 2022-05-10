@@ -24,11 +24,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 //        db.execSQL(CREATE_TABLE_PRODUCT_QUERY);
-//        db.execSQL(CREATE_TABLE_WAREHOUSE_QUERY);
+//        db.execSQL(CREATE_TABLE_OUSE_QUERY);
 //        db.execSQL(CREATE_TABLE_RECEIPT_QUERY);
 //        db.execSQL(CREATE_TABLE_RECEIPT_DETAIL_QUERY);
 //        db.execSQL(CREATE_TABLE_User);
         db.execSQL(CREATE_TABLE_TRANSLATION_HISTORY_QUERY);
+        db.execSQL(CREATE_TABLE_User);
     }
 
     @Override
@@ -40,8 +41,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public static final String DB_NAME = "app.db";
-
+    //public static final String DB_NAME = "app.db";
+    public static final String DB_NAME = "tudien.db";
+    public static final String TABLE_USER = "User";
     public static final String TABLE_TRANSLATION_HISTORY = "translation_history";
 
     public static final String TABLE_TRANSLATION_HISTORY_ID = "id";
@@ -49,9 +51,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_TRANSLATION_HISTORY_TRANSLATED_TEXT = "translated_text";
     public static final String TABLE_TRANSLATION_HISTORY_DATE = "date";
 
+    public static final String TABLE_USER_ID_User = "ID_User";
+    public static final String TABLE_USER_HoTen = "HoTen";
+    public static final String TABLE_USER_Point = "Point";
+    public static final String TABLE_USER_Email = "Email";
+    public static final String TABLE_USER_SDT = "SDT";
+
     private static final String CREATE_TABLE_TRANSLATION_HISTORY_QUERY = "CREATE TABLE " + TABLE_TRANSLATION_HISTORY + " (" +
             TABLE_TRANSLATION_HISTORY_ID + " INTEGER PRIMARY KEY, " +
             TABLE_TRANSLATION_HISTORY_ORIGINAL_TEXT + " TEXT, " +
             TABLE_TRANSLATION_HISTORY_TRANSLATED_TEXT + " TEXT, " +
             TABLE_TRANSLATION_HISTORY_DATE + " DATE );";
+    private static final String CREATE_TABLE_User = "CREATE TABLE " + TABLE_USER + " (" +
+            TABLE_USER_ID_User + " varchar (10) PRIMARY KEY, " +
+            TABLE_USER_HoTen + " varchar(50), " +
+            TABLE_USER_Point + " varchar(50), " +
+            TABLE_USER_Email + " varchar(50), " +
+            TABLE_USER_SDT + " varchar(50));";
 }

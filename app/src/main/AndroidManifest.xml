@@ -33,6 +33,9 @@
             android:name=".NotificationActivity"
             android:exported="false" />
         <activity
+            android:name=".ThongTinTaikhoanActivity"
+            android:exported="false" />
+        <activity
             android:name=".dictionary.DictionaryActivity"
             android:exported="false" />
 
@@ -93,6 +96,14 @@
             android:theme="@style/Theme.SettingsActivity" />
         <activity
             android:name=".SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".SignInActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".Main"
