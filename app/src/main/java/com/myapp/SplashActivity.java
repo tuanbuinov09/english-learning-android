@@ -29,13 +29,14 @@ public class SplashActivity extends AppCompatActivity {
 
     private void nextActivity() {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        DB.iduser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         if(user==null){
             //Chưa login
-            Intent intent = new Intent(this,SignInActivity.class);
+            Intent intent = new Intent(this,Main.class);
             startActivity(intent);
 
         }else{
+            DB.iduser = FirebaseAuth.getInstance().getCurrentUser().getUid();
             Intent intent = new Intent(this,Main.class);
             startActivity(intent);
             Toast.makeText(getApplicationContext(),
