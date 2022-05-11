@@ -28,7 +28,7 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginTop="80dp"
-            android:background="@drawable/ic_android_icon"
+            android:background="@drawable/icon_english1"
             android:rotation="0"
             android:scaleType="centerInside" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_bold"
-            android:text="Ứng dụng quản lý Kho"
+            android:text="Ứng dụng học Tiếng Anh"
             android:textColor="@color/space_cadet"
             android:textSize="20sp" />
 
