@@ -108,7 +108,7 @@ public class SignUp extends AppCompatActivity {
 
         if (validateSignUp()) {
 
-            GlobalVariables.username = editTextUsername.getText().toString().trim();
+//            GlobalVariables.username = editTextUsername.getText().toString().trim();
 
             Intent mainIntent = new Intent(this, Main.class);
             startActivity(mainIntent);

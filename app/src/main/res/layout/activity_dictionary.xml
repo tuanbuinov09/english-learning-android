@@ -60,12 +60,13 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:inputType="text"
+            android:layoutDirection="rtl"
             android:maxLines="1"
             android:textColor="#333"
             android:textSize="20dp"
-            android:layoutDirection="rtl"
-            app:defaultQueryHint="Nhập từ khóa muốn tìm.."
-            app:queryHint="Nhập từ khóa muốn tìm" />
+            app:defaultQueryHint="@string/query_hint"
+            app:queryHint="@string/query_hint"
+            />
         <!--        android:textColorHint=""-->
 
 <!--        <ImageButton-->

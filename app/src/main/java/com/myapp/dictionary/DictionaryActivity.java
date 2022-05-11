@@ -71,6 +71,7 @@ public class DictionaryActivity extends AppCompatActivity {
 //        return true;
 //    }
 
+    //duwngf scroll truoc khi nhap tu khoa de tranh loi
     private void filter(String text) {
 
         // if query is empty: return all

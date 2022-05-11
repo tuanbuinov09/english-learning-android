@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.myapp.GlobalVariables;
 import com.myapp.Main;
 import com.myapp.R;
@@ -165,6 +167,8 @@ public class YourWordActivity extends AppCompatActivity {
 //    }
 
     private void setControl() {
+
+
         searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progress_bar);
