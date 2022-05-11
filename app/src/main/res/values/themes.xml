@@ -42,6 +42,49 @@
         <item name="android:textColor">@color/space_cadet</item>
     </style>
 
+    <style name="Theme.TranslateTextActivity" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/cultured</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+    </style>
+
+    <style name="Theme.CropActivity" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/cultured</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+    </style>
+
+    <style name="Theme.TranslationHistoryActivity" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/space_cadet</item>
+        <item name="colorPrimary">@color/bright_gray</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+    </style>
+
+    <style name="MyTheme.ActionBarWidget" parent="android:Theme.Holo.Light">
+        <item name="android:popupMenuStyle">@android:style/Widget.Holo.Light.PopupMenu</item>
+        <item name="android:dropDownListViewStyle">
+            @android:style/Widget.Holo.Light.ListView.DropDown
+        </item>
+    </style>
+
 
     <style name="EditTextStyle" parent="@android:style/Widget.EditText">
         <item name="android:background">@drawable/bg_azureich_white_radius_15</item>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/lyTranslationItem"
-    style="@style/Theme.MyApp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="@color/cultured"
+    android:backgroundTint="@color/cultured"
     android:orientation="horizontal"
     android:padding="10dp">
 
@@ -36,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:text="cabaret"
+                android:textColor="@color/space_cadet"
                 android:textSize="16sp" />
 
             <TextView
@@ -43,6 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/'phatam/"
+                android:textColor="@color/space_cadet"
                 android:textSize="14sp" />
 
             <TextView

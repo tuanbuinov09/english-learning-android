@@ -83,14 +83,18 @@
             android:theme="@style/Theme.TkActionBar" />
         <activity android:name="com.canhub.cropper.CropImageActivity" />
         <activity android:name="com.yalantis.ucrop.UCropActivity" />
-        <activity android:name=".CropActivity" />
+        <activity
+            android:name=".CropActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CropActivity" />
         <activity
             android:name=".TranslateTextActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.TranslateTextActivity" />
         <activity
             android:name=".TranslationHistoryActivity"
             android:exported="false"
-            android:theme="@style/Theme.HideShadowActionbar" />
+            android:theme="@style/Theme.TranslationHistoryActivity" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
