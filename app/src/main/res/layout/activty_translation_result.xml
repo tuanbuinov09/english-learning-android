@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bright_gray"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/comments_sheet_close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@drawable/bg_round_corner_5"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_close_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/cultured"
+            android:orientation="horizontal">
+
+            <TextView
+                android:padding="5dp"
+                android:id="@+id/tvOriginalText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/btnCopy1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_corner_5"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_content_copy_24" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/cultured"
+            android:orientation="horizontal">
+
+            <TextView
+                android:padding="5dp"
+                android:id="@+id/tvTranslatedText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/btnCopy2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_corner_5"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_content_copy_24" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

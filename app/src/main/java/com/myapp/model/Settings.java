@@ -1,5 +1,11 @@
 package com.myapp.model;
 
+import android.content.Context;
+
+import com.myapp.GlobalVariables;
+import com.myapp.utils.FileIO;
+
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -7,6 +13,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class Settings implements Serializable {
+    private static Settings instance = null;
+
     private Locale voiceLanguage;
     private float voiceSpeed;
 
@@ -24,6 +32,18 @@ public class Settings implements Serializable {
         startTime = LocalTime.of(9, 00);
         endTime = LocalTime.of(17, 00);
         remindDay = new ArrayList<>();
+    }
+
+    public synchronized static Settings getInstance(Context context) {
+        File path = context.getApplicationContext().getFilesDir();
+        File file = new File(path, GlobalVariables.FILE_CONFIG_NAME);
+
+        if (!file.exists()) {
+            FileIO.writeToFile(new Settings(), context);
+        }
+
+        instance = FileIO.readFromFile(context);
+        return instance;
     }
 
     public boolean isDarkTheme() {
