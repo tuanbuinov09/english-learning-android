@@ -55,7 +55,7 @@ public class SignIn extends AppCompatActivity {
 
     public void handleSignInClick(View view) {
         if(checkLogin()){
-            GlobalVariables.username = editUsername.getText().toString().trim();
+//            GlobalVariables.username = editUsername.getText().toString().trim();
             Intent mainIntent = new Intent(this, Main.class);
             startActivity(mainIntent);
         }else{

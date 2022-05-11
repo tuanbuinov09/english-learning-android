@@ -1,15 +1,17 @@
 package com.myapp;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.myapp.model.EnWord;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class GlobalVariables {
-    public static String username = null;
+    public static String userId = "AzAfcdOWunPZJY6PTSlmJNn2m5W2";
     public static ArrayList<EnWord> listAllWords = null;
     public static ArrayList<EnWord>  listAllSavedWords = null;
-
+    public static FirebaseFirestore db;
+    public static ArrayList<Integer>  listSavedWordId = new ArrayList();
     public static ArrayList<EnWord>  listFilteredWords = new ArrayList();
     public static int limit = 15;
     public static int offset = 0;
