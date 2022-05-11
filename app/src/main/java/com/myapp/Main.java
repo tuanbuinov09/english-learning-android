@@ -18,12 +18,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.myapp.dictionary.DictionaryActivity;
 import com.myapp.dictionary.YourWordActivity;
 import com.myapp.learnenglish.LearnEnglishActivity;
+import com.myapp.model.Settings;
+import com.myapp.utils.FileIO;
 
+import java.io.File;
 import java.util.Locale;
 
 public class Main extends AppCompatActivity {
 
-    private Button buttonLearnEnglish, btnToAllWord, btnToYourWord, buttonTranslateText, buttonSettings, buttonAccount;
+    private Button buttonLearnEnglish, btnToAllWord, btnToYourWord, buttonTranslateText, buttonSettings, buttonAccount,
+            buttonTranslateCamera, buttonTranslateImage;
     FloatingActionButton fab;
 
     EditText searchInput = null;
@@ -45,6 +49,14 @@ public class Main extends AppCompatActivity {
                 }
             }
         });
+
+        File path = getApplicationContext().getFilesDir();
+        File file = new File(path, GlobalVariables.FILE_CONFIG_NAME);
+
+        //CREATE SETTINGS FILE
+        if (!file.exists()) {
+            FileIO.writeToFile(new Settings(), this);
+        }
     }
 
     private void setEvent() {
@@ -87,6 +99,22 @@ public class Main extends AppCompatActivity {
                 toAccount(view);
             }
         });
+        buttonTranslateCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main.this, CropActivity.class);
+                intent.putExtra("request", CropActivity.OPEN_CAMERA_CODE);
+                startActivity(intent);
+            }
+        });
+        buttonTranslateImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main.this, CropActivity.class);
+                intent.putExtra("request", CropActivity.OPEN_GALLERY_CODE);
+                startActivity(intent);
+            }
+        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +133,8 @@ public class Main extends AppCompatActivity {
 
         buttonTranslateText = findViewById(R.id.buttonTranslateText);
         buttonSettings = findViewById(R.id.buttonSettings);
+        buttonTranslateCamera = findViewById(R.id.buttonTranslateCamera);
+        buttonTranslateImage = findViewById(R.id.buttonTranslateImage);
         buttonAccount = findViewById(R.id.buttonAccount);
         searchInput = findViewById(R.id.searchInput);
         fab = findViewById(R.id.fab);
@@ -129,7 +159,7 @@ public class Main extends AppCompatActivity {
             public void run() {
                 nextActivity();
             }
-        },1000);
+        }, 1000);
 //        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 //        if(user==null){
 //            //Chưa login
@@ -140,18 +170,20 @@ public class Main extends AppCompatActivity {
 //            startActivity(intent);
 //        }
     }
+
     private void nextActivity() {
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        if(user==null){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
             //Chưa login
-            Intent intent = new Intent(this,SignInActivity.class);
+            Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);
-        }else{
-            Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
+        } else {
+            Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
             startActivity(intent);
         }
         finish();
     }
+
     public void handleYourWordClick(View view) {
         Intent yourWordIntent = new Intent(this, YourWordActivity.class);
         startActivity(yourWordIntent);

@@ -15,7 +15,6 @@ import com.myapp.model.Settings;
 import com.myapp.model.VoiceSpeed;
 import com.myapp.utils.FileIO;
 
-import java.io.File;
 import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -34,13 +33,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         setControl();
         setEvent();
-
-        File path = getApplicationContext().getFilesDir();
-        File file = new File(path, GlobalVariables.FILE_CONFIG_NAME);
-
-        if (!file.exists()) {
-            FileIO.writeToFile(new Settings(), this);
-        }
 
         settings = FileIO.readFromFile(this);
 
