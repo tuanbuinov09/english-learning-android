@@ -4,17 +4,19 @@
     <item
         android:id="@+id/menuCamera"
         android:icon="@drawable/ic_baseline_camera_alt_24"
+        app:iconTint="@color/cultured"
         android:title="Delete"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
     <item
         android:id="@+id/menuPicture"
         android:icon="@drawable/ic_baseline_image_24"
-
+        app:iconTint="@color/cultured"
         android:title="Select All"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
     <item
         android:id="@+id/menuRotate"
         android:icon="@drawable/ic_baseline_rotate_right_24"
+        app:iconTint="@color/cultured"
         android:title="Select All"
         app:showAsAction="always" />
 </menu>
