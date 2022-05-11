@@ -95,19 +95,18 @@ public class EnWordDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-
         final View view = inflater.inflate(R.layout.fragment_word_detail, container, false);
         final FragmentActivity c = getActivity();
         meaningRecyclerView = view.findViewById(R.id.recyclerView);
 
         buttonSpeak = view.findViewById(R.id.buttonSpeak);
-        textViewTitle = view.findViewById(R.id.textViewTitle);
-//        textViewWord = view.findViewById(R.id.textViewWord);
+//        textViewTitle = view.findViewById(R.id.textViewTitle);
+        textViewWord = view.findViewById(R.id.textViewWord);
 //        btnSave_UnsaveWord = view.findViewById(R.id.btnSave_UnsaveWord);
         textViewPronunciation = view.findViewById(R.id.textViewPronunciation);
 
-        textViewTitle.setText(savedWord.getWord().trim());
-//        textViewWord.setText(savedWord.getWord().trim());
+//        textViewTitle.setText(savedWord.getWord().trim());
+        textViewWord.setText(savedWord.getWord().trim());
         textViewPronunciation.setText(savedWord.getPronunciation().trim());
 
         MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(c, savedWord.getListMeaning());
