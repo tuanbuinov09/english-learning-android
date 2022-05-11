@@ -8,10 +8,11 @@
 
     <Button
         android:id="@+id/btnOK"
+        style="@style/borderlessButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_space_cadet_radius_15"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/roboto_regular"
         android:text="OK"
         android:textAllCaps="false"
         android:textColor="@color/cultured"
@@ -20,10 +21,11 @@
     <Space
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btnCancel"
+        style="@style/borderlessButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_azureich_white_radius_15"

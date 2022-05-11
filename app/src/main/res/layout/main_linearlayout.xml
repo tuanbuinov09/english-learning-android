@@ -42,28 +42,23 @@
         android:layout_height="wrap_content"
         android:background="@color/space_cadet"
         android:orientation="vertical"
-        android:paddingHorizontal="5dp"
-        android:paddingBottom="50dp">
+        android:paddingHorizontal="5dp">
 
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/roboto_bold"
-                android:text="T11 Dictionary"
-                android:textColor="@color/azureish_white"
-                android:textSize="16sp" />
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="T11 Dictionary"
+            android:textColor="@color/azureish_white"
+            android:textSize="16sp" />
 
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
             android:background="@color/cultured"
             android:iconifiedByDefault="false"
             android:queryHint="Tìm kiếm"
@@ -73,59 +68,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <Button
-                style="@style/mainButtonStyle"
+                android:id="@+id/buttonTranslateCamera"
+                style="@style/buttonWithTopIconInMainActivity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawableTop="@drawable/ic_baseline_volume_up_24"
-                android:drawablePadding="0dp"
-                android:drawableTint="@color/cultured"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="0dp"
-                android:text="hello"
-                android:textAlignment="center"
-                android:textColor="@color/cultured"
-                android:textSize="12sp" />
+                android:drawableTop="@drawable/ic_baseline_camera_alt_24"
+                android:text="Translate camera" />
 
             <Button
-                style="@style/mainButtonStyle"
+                android:id="@+id/buttonTranslateImage"
+                style="@style/buttonWithTopIconInMainActivity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawableTop="@drawable/ic_baseline_volume_up_24"
-                android:drawablePadding="0dp"
-                android:drawableTint="@color/cultured"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="0dp"
-                android:text="hello"
-                android:textAlignment="center"
-                android:textColor="@color/cultured"
-                android:textSize="12sp" />
-
-            <Button
-                style="@style/mainButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawableTop="@drawable/ic_baseline_volume_up_24"
-                android:drawablePadding="0dp"
-                android:drawableTint="@color/cultured"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="0dp"
-                android:text="hello"
-                android:textAlignment="center"
-                android:textColor="@color/cultured"
-                android:textSize="12sp" />
+                android:drawableTop="@drawable/ic_baseline_image_24"
+                android:text="Translate image" />
 
         </LinearLayout>
     </LinearLayout>
@@ -234,7 +197,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:contentDescription="TODO"
                 android:elevation="0dp"
                 android:src="@drawable/icons8_settings_32px"
