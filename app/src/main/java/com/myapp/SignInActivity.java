@@ -150,6 +150,10 @@ public class SignInActivity extends AppCompatActivity {
         edtmatkhau = (EditText) findViewById(R.id.editTextPass);
 
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
 //public class SignInActivity extends AppCompatActivity {
 //    private LinearLayout layoutSignUp;

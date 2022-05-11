@@ -131,15 +131,6 @@ public class Main extends AppCompatActivity {
                 nextActivity();
             }
         },1000);
-//        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-//        if(user==null){
-//            //Chưa login
-//            Intent intent = new Intent(this,SignInActivity.class);
-//            startActivity(intent);
-//        }else{
-//            Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
-//            startActivity(intent);
-//        }
     }
     private void nextActivity() {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
@@ -151,7 +142,17 @@ public class Main extends AppCompatActivity {
             Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
             startActivity(intent);
         }
-        finish();
+    }
+    private void nextActivityLearnEnglish() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null){
+            //Chưa login
+            Intent intent = new Intent(this,SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this,LearnEnglishActivity.class);
+            startActivity(intent);
+        }
     }
     public void handleYourWordClick(View view) {
         Intent yourWordIntent = new Intent(this, YourWordActivity.class);
@@ -168,8 +169,15 @@ public class Main extends AppCompatActivity {
     }
 
     private void handleClickLearnEnglish(View view) {
-        Intent intent = new Intent(this, LearnEnglishActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, LearnEnglishActivity.class);
+//        startActivity(intent);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nextActivityLearnEnglish();
+            }
+        },1000);
     }
 
     private void handleButtonTranslateTextClick(View view) {
@@ -184,6 +192,6 @@ public class Main extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        super.onBackPressed();
     }
 }
