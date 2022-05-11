@@ -141,8 +141,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.textIntEdtEmail);
         tvSdt = findViewById(R.id.textIntEdtSdt);
         tvUID = findViewById(R.id.textIntEdtUID);
-        tvtaikhoan = findViewById(R.id.tVusername);
-        tvTen = findViewById(R.id.textViewTen);
+//        tvtaikhoan = findViewById(R.id.tVusername);
+//        tvTen = findViewById(R.id.textViewTen);
 //        tvPoint = findViewById(R.id.textviewPoint);
         btnCapNhat = findViewById(R.id.buttonCapNhat);
         btnLogout = findViewById(R.id.buttonLogout);
@@ -203,8 +203,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     private void TruyenThongTin(){
         //Truyền thông tin
         tvHoten.setText(user.getHoTen());
-        tvTen.setText(user.getHoTen());
-        tvtaikhoan.setText(user.getEmail());
+//        tvTen.setText(user.getHoTen());
+//        tvtaikhoan.setText(user.getEmail());
 //        tvPoint.setText(String.valueOf(user.getPoint()));
         tvEmail.setText(user.getEmail());
         tvSdt.setText(user.getSDT());
@@ -227,7 +227,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
             String SDT = cursor.getString(4);
             user = new User(Iduser,HoTen,Point,Email,SDT);
             Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
-//            setUserInformation();&& cursor.moveToFirst()
+            setUserInformation();
 //        ThongTinTaikhoanActivity.context = getApplicationContext();
 
             //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
@@ -253,20 +253,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user == null){
             return;
-        }else{
-
-//            tvHoten.setText(user.getDisplayName());
-//            tvTen.setText(user.getEmail());
-//            tvtaikhoan.setText(user.getEmail());
-////        tvPoint.setText(String.valueOf(user.getPoint()));
-//            tvEmail.setText(user.getEmail());
-//            tvSdt.setText(user.getSDT());
-//            tvUID.setText(user.getIduser());
-//            imageView = findViewById(R.id.img_avatar);
         }
-//        if(user.getDisplayName().equals("")){
-//            edtFullName.setText("No name");
-//        }
         Glide.with(this).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
 
     }
