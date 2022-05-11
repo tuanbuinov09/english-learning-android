@@ -70,28 +70,24 @@ public class DictionaryActivity extends AppCompatActivity {
 //        });
 //        return true;
 //    }
+
     private void filter(String text) {
 
-        // running a for loop to compare elements.
+        // if query is empty: return all
         if(text.isEmpty()){
             enWordRecyclerAdapter.filterList(GlobalVariables.listAllWords);
             return;
         }
-        for (EnWord item : GlobalVariables.listAllWords) {
-            // checking if the entered string matched with any item of our recycler view.
-            if (item.getWord().toLowerCase().contains(text.toLowerCase())) {
-                // if the item is matched we are
-                filteredlist.add(item);
-            }
-        }
-        if (filteredlist.isEmpty()) {
-            // if no item is added in filtered list we are
-            // displaying a toast message as no data found.
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        GlobalVariables.listFilteredWords.removeAll(GlobalVariables.listFilteredWords);
+        GlobalVariables.listFilteredWords = databaseAccess.searchEnWord_NoPopulateWithOffsetLimit(text, GlobalVariables.offset, GlobalVariables.limit);
+        databaseAccess.close();
+
+        if (GlobalVariables.listFilteredWords.isEmpty()) {
             Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
         } else {
-            // at last we are passing that filtered
-            // list to our adapter class.
-            enWordRecyclerAdapter.filterList(filteredlist);
+            enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
         }
     }
     private void setControl() {
@@ -120,7 +116,7 @@ public class DictionaryActivity extends AppCompatActivity {
         searchInput.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                filter(query);
+//                filter(query);
                 return false;
             }
 
@@ -163,6 +159,21 @@ public class DictionaryActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(!searchInput.getQuery().toString().trim().equalsIgnoreCase("")){
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                    databaseAccess.open();
+                    GlobalVariables.offset = GlobalVariables.offset + GlobalVariables.limit;
+
+                    ArrayList<EnWord> justFetched = databaseAccess.searchEnWord_NoPopulateWithOffsetLimit(searchInput.getQuery().toString().trim() ,GlobalVariables.offset, GlobalVariables.limit);
+
+                    databaseAccess.close();
+
+                    GlobalVariables.listFilteredWords.addAll(justFetched);
+                    enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
+
+                    progressBar.setVisibility(View.GONE);
+                    return;
+                }
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
                 databaseAccess.open();
                 GlobalVariables.offset = GlobalVariables.offset + GlobalVariables.limit;

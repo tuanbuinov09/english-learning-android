@@ -48,9 +48,9 @@ public class EnWordRecyclerAdapter extends
         EnWord enWord = enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition());
 
         viewHolder.textViewWord.setText(enWord.getWord().trim());
-
         viewHolder.textViewPronunciation.setText(enWord.getPronunciation().trim());
         viewHolder.textViewMeaning.setText(enWord.getListMeaning().get(0).getMeaning().trim());
+
 //        viewHolder.buttonWordMenu.setVisibility(View.GONE);
         viewHolder.buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +91,7 @@ public class EnWordRecyclerAdapter extends
         return enWordArrayList.size();
     }
     public void filterList(ArrayList<EnWord> filterllist) {
-        // below line is to add our filtered
-        // list in our course array list.
         enWordArrayList = filterllist;
-        // below line is to notify our adapter
-        // as change in recycler view data.
         notifyDataSetChanged();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -24,7 +24,7 @@
         <activity
             android:name=".dictionary.EnWordDetailActivity2"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
            />
         <activity
             android:name=".dictionary.YourNoteActivity"
