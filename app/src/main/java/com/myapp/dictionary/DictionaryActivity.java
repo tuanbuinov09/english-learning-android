@@ -1,11 +1,18 @@
 package com.myapp.dictionary;
 
+import android.app.SearchableInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +28,15 @@ import com.myapp.model.EnWord;
 import java.util.ArrayList;
 
 public class DictionaryActivity extends AppCompatActivity {
-    EditText searchInput = null;
+    androidx.appcompat.widget.SearchView searchInput = null;
     private RecyclerView recyclerView;
     private EnWordRecyclerAdapter enWordRecyclerAdapter;
     boolean isScrolling = false;
     LinearLayoutManager manager;
     int currentItems, totalItems, scrollOutItems;
     ProgressBar progressBar;
+
+    ArrayList<EnWord> filteredlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,49 @@ public class DictionaryActivity extends AppCompatActivity {
         setEvent();
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.en_word_menu, menu);
+//
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                filter(s);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                filter(s);
+//                return false;
+//            }
+//        });
+//        return true;
+//    }
+
+    private void filter(String text) {
+
+        // if query is empty: return all
+        if(text.isEmpty()){
+            enWordRecyclerAdapter.filterList(GlobalVariables.listAllWords);
+            return;
+        }
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        GlobalVariables.listFilteredWords.removeAll(GlobalVariables.listFilteredWords);
+        GlobalVariables.listFilteredWords = databaseAccess.searchEnWord_NoPopulateWithOffsetLimit(text, GlobalVariables.offset, GlobalVariables.limit);
+        databaseAccess.close();
+
+        if (GlobalVariables.listFilteredWords.isEmpty()) {
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
+        }
+    }
     private void setControl() {
         searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
@@ -61,6 +113,19 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
+        searchInput.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -94,6 +159,21 @@ public class DictionaryActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(!searchInput.getQuery().toString().trim().equalsIgnoreCase("")){
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                    databaseAccess.open();
+                    GlobalVariables.offset = GlobalVariables.offset + GlobalVariables.limit;
+
+                    ArrayList<EnWord> justFetched = databaseAccess.searchEnWord_NoPopulateWithOffsetLimit(searchInput.getQuery().toString().trim() ,GlobalVariables.offset, GlobalVariables.limit);
+
+                    databaseAccess.close();
+
+                    GlobalVariables.listFilteredWords.addAll(justFetched);
+                    enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
+
+                    progressBar.setVisibility(View.GONE);
+                    return;
+                }
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
                 databaseAccess.open();
                 GlobalVariables.offset = GlobalVariables.offset + GlobalVariables.limit;

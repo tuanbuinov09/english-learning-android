@@ -24,8 +24,8 @@
         <activity
             android:name=".dictionary.EnWordDetailActivity2"
             android:exported="false"
-            android:label="@string/title_activity_en_word_detail2"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+           />
         <activity
             android:name=".dictionary.YourNoteActivity"
             android:exported="false" />
@@ -83,6 +83,7 @@
             android:theme="@style/Theme.TkActionBar" />
         <activity android:name="com.canhub.cropper.CropImageActivity" />
         <activity android:name="com.yalantis.ucrop.UCropActivity" />
+        <activity android:name=".CropActivity" />
         <activity
             android:name=".TranslateTextActivity"
             android:exported="false" />

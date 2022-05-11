@@ -33,7 +33,7 @@ public class EnWordDetailFragment extends Fragment {
     public ImageButton buttonSpeak;
     public TextView textViewTitle;
     public TextView textViewWord;
-    public ImageButton btnSave_UnsaveWord;
+//    public ImageButton btnSave_UnsaveWord;
     public TextView textViewPronunciation;
     LinearLayoutManager manager;
     public RecyclerView meaningRecyclerView;
@@ -95,19 +95,18 @@ public class EnWordDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-
         final View view = inflater.inflate(R.layout.fragment_word_detail, container, false);
         final FragmentActivity c = getActivity();
         meaningRecyclerView = view.findViewById(R.id.recyclerView);
 
         buttonSpeak = view.findViewById(R.id.buttonSpeak);
-        textViewTitle = view.findViewById(R.id.textViewTitle);
-//        textViewWord = view.findViewById(R.id.textViewWord);
-        btnSave_UnsaveWord = view.findViewById(R.id.btnSave_UnsaveWord);
+//        textViewTitle = view.findViewById(R.id.textViewTitle);
+        textViewWord = view.findViewById(R.id.textViewWord);
+//        btnSave_UnsaveWord = view.findViewById(R.id.btnSave_UnsaveWord);
         textViewPronunciation = view.findViewById(R.id.textViewPronunciation);
 
-        textViewTitle.setText(savedWord.getWord().trim());
-//        textViewWord.setText(savedWord.getWord().trim());
+//        textViewTitle.setText(savedWord.getWord().trim());
+        textViewWord.setText(savedWord.getWord().trim());
         textViewPronunciation.setText(savedWord.getPronunciation().trim());
 
         MeaningRecyclerAdapter meaningRecyclerAdapter = new MeaningRecyclerAdapter(c, savedWord.getListMeaning());
@@ -121,20 +120,20 @@ public class EnWordDetailFragment extends Fragment {
                 Toast.makeText(mContext, savedWord.getWord(), Toast.LENGTH_SHORT).show();
             }
         });
-        btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (unsave == true) {
-                    //---run unsave code
-                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
-                    unsave = !unsave;
-                } else {
-                    //---run save code
-                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
-                    unsave = !unsave;
-                }
-            }
-        });
+//        btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (unsave == true) {
+//                    //---run unsave code
+//                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+//                    unsave = !unsave;
+//                } else {
+//                    //---run save code
+//                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+//                    unsave = !unsave;
+//                }
+//            }
+//        });
 
 
         return view;

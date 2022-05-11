@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".dictionary.DictionaryActivity">
 
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#609BEB"
+    android:background="@color/steel_blue"
     android:orientation="horizontal"
     android:paddingHorizontal="20dp"
     android:paddingVertical="12dp">
@@ -53,26 +54,28 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="8dp">
 
-        <EditText
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/searchInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập từ muốn tìm"
             android:backgroundTint="@color/white"
             android:inputType="text"
             android:maxLines="1"
             android:textColor="#333"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layoutDirection="rtl"
+            app:defaultQueryHint="Nhập từ khóa muốn tìm.."
+            app:queryHint="Nhập từ khóa muốn tìm" />
         <!--        android:textColorHint=""-->
 
-        <ImageButton
-            android:id="@+id/searchButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:background="?android:attr/actionModeWebSearchDrawable"
-             />
+<!--        <ImageButton-->
+<!--            android:id="@+id/searchButton"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:background="?android:attr/actionModeWebSearchDrawable"-->
+<!--             />-->
     </RelativeLayout>
 
     <LinearLayout
