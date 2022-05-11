@@ -2,9 +2,8 @@ package com.myapp.utils;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.Voice;
 
-import java.util.Locale;
+import com.myapp.model.Settings;
 
 public class TTS {
     Context context;
@@ -18,7 +17,8 @@ public class TTS {
                 if (status != TextToSpeech.ERROR) {
                     //Voice voice = new Voice(textToSpeech.getDefaultEngine(), Locale.US, Voice.QUALITY_VERY_HIGH, Voice.LATENCY_NORMAL, true, null);
                     //textToSpeech.setVoice(voice);
-                    textToSpeech.setLanguage(Locale.US);
+                    textToSpeech.setLanguage(Settings.getInstance(context).getVoiceLanguage());
+                    textToSpeech.setSpeechRate(Settings.getInstance(context).getVoiceSpeed());
                 }
             }
         });
