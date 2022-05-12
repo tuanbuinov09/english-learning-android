@@ -15,6 +15,7 @@ import com.myapp.model.Settings;
 import com.myapp.model.VoiceSpeed;
 import com.myapp.utils.FileIO;
 
+import java.io.File;
 import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -31,10 +32,23 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_linearlayout);
 
+        setTitle("Cài đặt");
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setElevation(0);
+
         setControl();
         setEvent();
 
-        settings = FileIO.readFromFile(this);
+        File path = getApplicationContext().getFilesDir();
+        File file = new File(path, GlobalVariables.FILE_CONFIG_NAME);
+
+        //CREATE SETTINGS FILE
+        if (!file.exists()) {
+            FileIO.writeToFile(new Settings(), getApplicationContext());
+        }
+
+        settings = FileIO.readFromFile(getApplicationContext());
 
         initRadioGroupButtons();
     }
@@ -147,8 +161,9 @@ public class SettingsActivity extends AppCompatActivity {
         return settings;
     }
 
-//    public void backToMain(View view){
-//        Intent mainIntent = new Intent(this, Main.class);
-//        startActivity(mainIntent);
-//    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }
