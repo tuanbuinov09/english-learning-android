@@ -1,201 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bright_gray"
-    android:orientation="vertical"
-    android:padding="5dp">
+    android:fillViewport="true">
 
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#609BEB"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="12dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="CÀI ĐẶT"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/icons8_menu_32px_1" />
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/icons8_back_32px"
-            android:onClick="backToMain" />
-    </RelativeLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment"
-        class="com.myapp.SettingsRemindWordsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        tools:layout="@layout/settings_remind_words" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/bg_round_corner_5"
-        android:backgroundTint="@color/cultured"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:background="@color/bright_gray"
+        android:orientation="vertical"
         android:padding="5dp">
 
-        <ImageButton
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_image_button"
-            android:padding="10dp"
-            android:src="@drawable/ic_baseline_volume_up_24" />
+            android:background="#609BEB"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="CÀI ĐẶT"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icons8_menu_32px_1" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/icons8_back_32px"
+                android:onClick="backToMain" />
+        </RelativeLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment"
+            class="com.myapp.SettingsRemindWordsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            tools:layout="@layout/settings_remind_words" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/cultured"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-            <TextView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sound speed"
-                android:layout_marginVertical="5dp"/>
+                android:background="@drawable/bg_round_image_button"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_volume_up_24" />
 
-            <RadioGroup
-                android:id="@+id/rgSoundSpeed"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/rbSlower"
-                    style="@style/radioButtonStyle"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Slower" />
+                    android:layout_marginVertical="5dp"
+                    android:text="Sound speed" />
 
-                <RadioButton
-                    android:id="@+id/rbSlow"
-                    style="@style/radioButtonStyle"
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:id="@+id/rgSoundSpeed"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Slow" />
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rbNormal"
-                    style="@style/radioButtonStyle"
-                    android:layout_width="match_parent"
+                    <RadioButton
+                        android:id="@+id/rbSlower"
+                        style="@style/radioButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Slower" />
+
+                    <RadioButton
+                        android:id="@+id/rbSlow"
+                        style="@style/radioButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Slow" />
+
+                    <RadioButton
+                        android:id="@+id/rbNormal"
+                        style="@style/radioButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Normal" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Normal" />
-            </RadioGroup>
+                    android:layout_marginBottom="5dp"
+                    android:text="Sound default" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sound default"
-                android:layout_marginBottom="5dp"/>
-
-            <RadioGroup
-                android:id="@+id/rgSoundDefault"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rbUK"
-                    style="@style/radioButtonStyle"
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:id="@+id/rgSoundDefault"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="UK" />
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rbUS"
-                    style="@style/radioButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="US" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/rbUK"
+                        style="@style/radioButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UK" />
+
+                    <RadioButton
+                        android:id="@+id/rbUS"
+                        style="@style/radioButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="US" />
+                </RadioGroup>
+            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnDarkTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/cultured"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="5dp"
+            android:paddingStart="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_image_button"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_volume_up_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Dark Theme" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <CheckBox
+                android:id="@+id/cbxDarkTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:padding="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/cultured"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_image_button"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_volume_up_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Report bugs or sugestions" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linear_layout_border_bottom"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_image_button"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_volume_up_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Share to friends" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/cultured"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_image_button"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_volume_up_24" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Information" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Version 1.0.0"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Developed by T11"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnDarkTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/bg_round_corner_5"
-        android:backgroundTint="@color/cultured"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingVertical="5dp"
-        android:paddingStart="5dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_image_button"
-            android:padding="10dp"
-            android:src="@drawable/ic_baseline_volume_up_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Dark Theme" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <CheckBox
-            android:id="@+id/cbxDarkTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:padding="0dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lyMail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_round_corner_5"
-        android:backgroundTint="@color/cultured"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_image_button"
-            android:padding="10dp"
-            android:src="@drawable/ic_baseline_volume_up_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Report bugs or sugestions" />
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
