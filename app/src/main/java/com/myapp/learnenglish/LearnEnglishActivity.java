@@ -3,15 +3,14 @@ package com.myapp.learnenglish;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.card.MaterialCardView;
 import com.myapp.R;
+import com.myapp.ThongTinTaikhoanActivity;
 import com.myapp.learnenglish.fragment.achievement.AchievementFragment;
 import com.myapp.learnenglish.fragment.home.HomeFragment;
-import com.myapp.learnenglish.fragment.profile.ProfileFragment;
 import com.myapp.learnenglish.fragment.ranking.RankingFragment;
 
 public class LearnEnglishActivity extends AppCompatActivity {
@@ -43,12 +42,14 @@ public class LearnEnglishActivity extends AppCompatActivity {
                     selectedFragment = new RankingFragment();
                     break;
                 case R.id.pageProfile:
-                    selectedFragment = new ProfileFragment();
+//                    selectedFragment = new ProfileFragment();
+                    Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
+                    startActivity(intent);
                     break;
             }
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
-                    selectedFragment).commit();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+//                    selectedFragment).commit();
             return true;
         });
     }
