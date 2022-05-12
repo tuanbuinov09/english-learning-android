@@ -73,6 +73,19 @@ public class DatabaseAccess {
         return list;
     }
 
+    public ArrayList<EnWord> getSavedWord_NoPopulateFromIdList(ArrayList<Integer> listId) {
+        ArrayList<EnWord> list = new ArrayList<>();
+        for(int id : listId){
+            Cursor cursor;
+            cursor = db.rawQuery("select id, word, pronunciation from en_word where id = "+id, null);
+            while (cursor.moveToNext()) {
+                list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2), getOneMeaningOfEnWord(cursor.getInt(0))));
+            }
+            cursor.close();
+        }
+        return list;
+    }
+
     public ArrayList<EnWord> getAllEnWord_NoPopulateWithOffsetLimit(int offset, int limit) {
         ArrayList<EnWord> list = new ArrayList<>();
         Cursor cursor;
