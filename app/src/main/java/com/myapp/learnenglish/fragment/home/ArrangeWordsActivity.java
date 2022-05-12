@@ -1,13 +1,17 @@
 package com.myapp.learnenglish.fragment.home;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -23,9 +27,12 @@ public class ArrangeWordsActivity extends AppCompatActivity {
     private ImageButton imageButtonClose;
     private Button btnCheck;
     private TextView tvContent;
+    private ProgressBar progressBar;
     private ArrayList<Question> questions;
     private int currentIndex = 0;
-    private ArrayList<Button> yourAnswer;
+    private int obtainedStars = 0;
+    private ObservableArrayList<Button> yourAnswer;
+    private int percentPerQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +42,37 @@ public class ArrangeWordsActivity extends AppCompatActivity {
         setControl();
         setEvent();
 
-        yourAnswer = new ArrayList<>();
+        yourAnswer = new ObservableArrayList<>();
+        // add a listener to yourAnswer to check if there is any element in it
+        // disable the check button if there isn't any, otherwise, enable it
+        yourAnswer.addOnListChangedCallback(new ObservableList.OnListChangedCallback() {
+            @Override
+            public void onChanged(ObservableList sender) {
+            }
+
+            @Override
+            public void onItemRangeChanged(ObservableList sender, int positionStart, int itemCount) {
+            }
+
+            @Override
+            public void onItemRangeInserted(ObservableList sender, int positionStart, int itemCount) {
+                btnCheck.setEnabled(yourAnswer.size() != 0);
+            }
+
+            @Override
+            public void onItemRangeMoved(ObservableList sender, int fromPosition, int toPosition, int itemCount) {
+            }
+
+            @Override
+            public void onItemRangeRemoved(ObservableList sender, int positionStart, int itemCount) {
+                btnCheck.setEnabled(yourAnswer.size() != 0);
+            }
+        });
+
         questions = (ArrayList<Question>) getIntent().getSerializableExtra("questions");
+        percentPerQuestion = 100 / questions.size();
+        progressBar.setProgress(0);
+
         loadNextQuestion(questions.get(currentIndex));
     }
 
@@ -65,8 +101,11 @@ public class ArrangeWordsActivity extends AppCompatActivity {
         View view;
         if (correct) {
             view = getLayoutInflater().inflate(R.layout.tk_bottom_sheet_dialog_arrange_words_1, null);
+            obtainedStars++;
         } else {
             view = getLayoutInflater().inflate(R.layout.tk_bottom_sheet_dialog_arrange_words_2, null);
+            TextView tvCorrectAnswer = view.findViewById(R.id.tvCorrectAnswer);
+            tvCorrectAnswer.setText(questions.get(currentIndex).getAnswer());
         }
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
@@ -78,6 +117,17 @@ public class ArrangeWordsActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setProgress(progressBar.getProgress() + percentPerQuestion);
+                if (currentIndex < questions.size() - 1) {
+                    loadNextQuestion(questions.get(++currentIndex));
+                } else {
+                    Intent intent = new Intent(ArrangeWordsActivity.this, TestResultActivity.class);
+                    intent.putExtra("total", questions.size());
+                    intent.putExtra("obtainedStars", obtainedStars);
+                    startActivity(intent);
+                    finish();
+                }
+
                 bottomSheetDialog.dismiss();
             }
         });
@@ -89,9 +139,15 @@ public class ArrangeWordsActivity extends AppCompatActivity {
         imageButtonClose = findViewById(R.id.imageButtonClose);
         btnCheck = findViewById(R.id.btnCheck);
         tvContent = findViewById(R.id.tvContent);
+        progressBar = findViewById(R.id.progressBar);
     }
 
     private void loadNextQuestion(Question question) {
+        // reset
+        yourAnswer.clear();
+        flexboxLayoutYourAnswerSection.removeAllViews();
+        flexboxLayoutGivenWordsSection.removeAllViews();
+
         tvContent.setText(question.getContent());
         ArrayList<String> words = new ArrayList<>(Arrays.asList(question.getAnswer().split(" ")));
         Collections.shuffle(words);

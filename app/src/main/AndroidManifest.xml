@@ -22,6 +22,9 @@
         tools:ignore="ExtraText"
         tools:replace="android:icon,android:theme">
         <activity
+            android:name=".learnenglish.fragment.home.TestResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".dictionary.EnWordDetailActivity2"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
