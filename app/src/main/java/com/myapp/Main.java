@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import com.bumptech.glide.load.model.Model;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -186,7 +187,8 @@ public class Main extends AppCompatActivity {
             public void run() {
                 nextActivity();
             }
-        }, 1000);
+        },1000);
+
 //        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 //        if(user==null){
 //            //Chưa login
@@ -196,6 +198,7 @@ public class Main extends AppCompatActivity {
 //            Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
 //            startActivity(intent);
 //        }
+
     }
 
     private void nextActivity() {
@@ -208,7 +211,17 @@ public class Main extends AppCompatActivity {
             Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
             startActivity(intent);
         }
-        finish();
+    }
+    private void nextActivityLearnEnglish() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null){
+            //Chưa login
+            Intent intent = new Intent(this,SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this,LearnEnglishActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void handleYourWordClick(View view) {
@@ -226,8 +239,15 @@ public class Main extends AppCompatActivity {
     }
 
     private void handleClickLearnEnglish(View view) {
-        Intent intent = new Intent(this, LearnEnglishActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, LearnEnglishActivity.class);
+//        startActivity(intent);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nextActivityLearnEnglish();
+            }
+        },1000);
     }
 
     private void handleButtonTranslateTextClick(View view) {
@@ -240,6 +260,11 @@ public class Main extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+  
     public void getSavedWordOfUser(){
 
         GlobalVariables.db.collection("saved_word").whereEqualTo("user_id",GlobalVariables.userId).get()
@@ -262,5 +287,6 @@ public class Main extends AppCompatActivity {
                 Toast.makeText(Main.this, "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }
