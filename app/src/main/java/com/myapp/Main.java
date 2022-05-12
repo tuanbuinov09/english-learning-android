@@ -240,7 +240,7 @@ public class Main extends AppCompatActivity {
                         for (DocumentSnapshot snapshot : task.getResult()){
 //                            String wordIdstr = snapshot.getString("word_id");
                             long wordId1= snapshot.getLong("word_id");
-                            System.out.println("/////////////"+wordId1);
+//                            System.out.println("/////////////"+wordId1);
                             int wordId = (int) wordId1;
 //                            Model model = new Model(snapshot.getString("id")); /*, snapshot.getString("title") , snapshot.getString("desc")*/
                             GlobalVariables.listSavedWordId.add(wordId);

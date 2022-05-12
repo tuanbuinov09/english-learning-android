@@ -49,6 +49,7 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 
     }
 
+
     private void setEvent() {
         textViewTitle.setText(savedWord.getWord().trim());
         btnBackToSavedWord.setOnClickListener(new View.OnClickListener() {

@@ -149,6 +149,13 @@ public class EnWordRecyclerAdapter extends
     }
 
     public void filterList(ArrayList<EnWord> filterllist) {
+        if(filterllist.isEmpty()){
+            System.out.println("ket qua tim kiem = 0");
+            return;
+        }
+        if(enWordArrayList.isEmpty()){
+            return;
+        }
         enWordArrayList = filterllist;
         notifyDataSetChanged();
     }
