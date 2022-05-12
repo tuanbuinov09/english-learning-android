@@ -29,8 +29,8 @@ import java.util.ArrayList;
 
 public class DictionaryActivity extends AppCompatActivity {
     androidx.appcompat.widget.SearchView searchInput = null;
-    private RecyclerView recyclerView;
-    private EnWordRecyclerAdapter enWordRecyclerAdapter;
+    public RecyclerView recyclerView;
+    public EnWordRecyclerAdapter enWordRecyclerAdapter;
     boolean isScrolling = false;
     LinearLayoutManager manager;
     int currentItems, totalItems, scrollOutItems;
@@ -71,6 +71,7 @@ public class DictionaryActivity extends AppCompatActivity {
 //        return true;
 //    }
 
+    //duwngf scroll truoc khi nhap tu khoa de tranh loi
     private void filter(String text) {
 
         // if query is empty: return all
@@ -86,6 +87,7 @@ public class DictionaryActivity extends AppCompatActivity {
 
         if (GlobalVariables.listFilteredWords.isEmpty()) {
             Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+            return;
         } else {
             enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
         }
@@ -152,6 +154,13 @@ public class DictionaryActivity extends AppCompatActivity {
     public void setEnWordAdapter() {
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //để khi lưu hay bỏ lưu ở word detail thì cái nàfy đc cậpj nhật
+        enWordRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void fetchData() {

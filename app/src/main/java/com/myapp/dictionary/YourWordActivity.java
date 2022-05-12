@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.myapp.GlobalVariables;
 import com.myapp.Main;
 import com.myapp.R;
@@ -61,11 +63,14 @@ public class YourWordActivity extends AppCompatActivity {
         setEvent();
 
     }
-
+    
+    protected void onResume() {
+        super.onResume();
+        //để khi lưu hay bỏ lưu ở word detail thì cái nàfy đc cậpj nhật
+        enWordRecyclerAdapter.notifyDataSetChanged();
+    }
 
     public void setYourWordAdapter() {
-
-
 
         //---------------
 //        YourWordAdapter adapter = new
@@ -165,6 +170,8 @@ public class YourWordActivity extends AppCompatActivity {
 //    }
 
     private void setControl() {
+
+
         searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progress_bar);
