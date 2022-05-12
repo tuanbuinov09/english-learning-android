@@ -5,19 +5,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.firebase.firestore.SetOptions;
+import com.myapp.GlobalVariables;
 import com.myapp.R;
 import com.myapp.dictionary.fragment.EnWordDetailFragment;
 import com.myapp.dictionary.fragment.YourNoteFragment;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.learnenglish.fragment.home.HomeFragment;
 import com.myapp.model.EnWord;
+
+import java.util.HashMap;
 
 public class EnWordDetailActivity2 extends AppCompatActivity {
     public int enWordId;
@@ -29,6 +37,7 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 
     TextView textViewTitle;
     boolean unsave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,26 +49,74 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 
     }
 
+
     private void setEvent() {
         textViewTitle.setText(savedWord.getWord().trim());
         btnBackToSavedWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),YourWordActivity.class);
+                Intent intent = new Intent(getApplicationContext(), YourWordActivity.class);
                 startActivity(intent);
 
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
+        // neu trong danh sach da luu thi to mau vang
+        if (GlobalVariables.listSavedWordId.contains(savedWord.getId())) {
+            unsave = true;
+            btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+        } else {
+            unsave = false;
+            btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+        }
+
+        // luu tu xoa tu
         btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (unsave == true) {
                     //---run unsave code
+                    GlobalVariables.db.collection("saved_word").document(GlobalVariables.userId + savedWord.getId() + "")
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(EnWordDetailActivity2.this, "Xoa từ khoi danh sach thanh cong", Toast.LENGTH_LONG).show();
+                                    GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(savedWord.getId()));
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(EnWordDetailActivity2.this, "Xoa từ khoi danh sach that bai", Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+
                     btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
                     unsave = !unsave;
                 } else {
                     //---run save code
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("user_id", GlobalVariables.userId);
+                    map.put("word_id", savedWord.getId());
+                    GlobalVariables.db.collection("saved_word")
+                            .document(GlobalVariables.userId + savedWord.getId() + "").set(map, SetOptions.merge())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(EnWordDetailActivity2.this, "Lưu từ thành công", Toast.LENGTH_LONG).show();
+                                    //them ca vao trong nay cho de dung
+                                    GlobalVariables.listSavedWordId.add((savedWord.getId()));
+                                }
+
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(EnWordDetailActivity2.this, "Lưu từ khong thành công", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
                     btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
                     unsave = !unsave;
                 }
@@ -74,34 +131,34 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 //                  }
 //              }
 //          });
-                topNavigation.setOnItemSelectedListener(item -> {
-                    Fragment selectedFragment = null;
-                    switch (item.getItemId()) {
-                        case R.id.pageEnWordDetail:
+        topNavigation.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            switch (item.getItemId()) {
+                case R.id.pageEnWordDetail:
 
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("enWordId", enWordId);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("enWordId", enWordId);
 
-                            bundle.putSerializable("enWord", savedWord);
-                            selectedFragment = new EnWordDetailFragment(savedWord);
-                            selectedFragment.setArguments(bundle);
-                            break;
-                        case R.id.pageYourNote:
-                            selectedFragment = new YourNoteFragment();
-                            break;
-                    }
+                    bundle.putSerializable("enWord", savedWord);
+                    selectedFragment = new EnWordDetailFragment(savedWord);
+                    selectedFragment.setArguments(bundle);
+                    break;
+                case R.id.pageYourNote:
+                    selectedFragment = new YourNoteFragment();
+                    break;
+            }
 
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContainer,
-                            selectedFragment, null).addToBackStack(null).commit();
-                    return true;
-                });
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,
+                    selectedFragment, null).addToBackStack(null).commit();
+            return true;
+        });
     }
 
     private void setControl() {
         topNavigation = findViewById(R.id.topNavigation);
         fragmentManager = getSupportFragmentManager();
-        enWordId = getIntent().getIntExtra("enWordId",-1);
-        DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
+        enWordId = getIntent().getIntExtra("enWordId", -1);
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
         savedWord = databaseAccess.getOneEnWord(enWordId);
         databaseAccess.close();

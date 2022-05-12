@@ -9,13 +9,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
+import com.bumptech.glide.load.model.Model;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.myapp.dictionary.DictionaryActivity;
 import com.myapp.dictionary.YourWordActivity;
 import com.myapp.learnenglish.LearnEnglishActivity;
@@ -127,11 +137,18 @@ public class Main extends AppCompatActivity {
     }
 
     private void setControl() {
-        buttonLearnEnglish = findViewById(R.id.buttonLearnEnglish);
+        GlobalVariables.db = FirebaseFirestore.getInstance();
+//        // Create a reference to the cities collection
+//        CollectionReference savedWordRef = GlobalVariables.db.collection("saved_word");
+//
+//        // Create a query against the collection.
+//        Query query = savedWordRef.whereEqualTo("user_id", GlobalVariables.userId);
 
+        getSavedWordOfUser();
+
+        buttonLearnEnglish = findViewById(R.id.buttonLearnEnglish);
         btnToAllWord = findViewById(R.id.btnToAllWord);
         btnToYourWord = findViewById(R.id.buttonToYourWord);
-
         buttonTranslateText = findViewById(R.id.buttonTranslateText);
         buttonSettings = findViewById(R.id.buttonSettings);
         buttonTranslateCamera = findViewById(R.id.buttonTranslateCamera);
@@ -236,5 +253,30 @@ public class Main extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+  
+    public void getSavedWordOfUser(){
+
+        GlobalVariables.db.collection("saved_word").whereEqualTo("user_id",GlobalVariables.userId).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        GlobalVariables.listSavedWordId.clear();
+                        for (DocumentSnapshot snapshot : task.getResult()){
+//                            String wordIdstr = snapshot.getString("word_id");
+                            long wordId1= snapshot.getLong("word_id");
+//                            System.out.println("/////////////"+wordId1);
+                            int wordId = (int) wordId1;
+//                            Model model = new Model(snapshot.getString("id")); /*, snapshot.getString("title") , snapshot.getString("desc")*/
+                            GlobalVariables.listSavedWordId.add(wordId);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Main.this, "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

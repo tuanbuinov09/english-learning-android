@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +17,29 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.SetOptions;
+import com.myapp.GlobalVariables;
 import com.myapp.Main;
 import com.myapp.R;
 import com.myapp.dictionary.EnWordDetailActivity2;
 import com.myapp.model.EnWord;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EnWordRecyclerAdapter extends
-        RecyclerView.Adapter<EnWordRecyclerAdapter.ViewHolder>{
-
+        RecyclerView.Adapter<EnWordRecyclerAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<EnWord> enWordArrayList;
     private ArrayList<EnWord> filteredEnWordArrayList;
-    public EnWordRecyclerAdapter(Context mContext, ArrayList<EnWord> enWordArrayList){
-            this.mContext = mContext;
-            this.enWordArrayList = enWordArrayList;
+
+    public EnWordRecyclerAdapter(Context mContext, ArrayList<EnWord> enWordArrayList) {
+        this.mContext = mContext;
+        this.enWordArrayList = enWordArrayList;
     }
 
     @NonNull
@@ -56,65 +64,124 @@ public class EnWordRecyclerAdapter extends
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
-                Toast.makeText(mContext, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), Toast.LENGTH_SHORT).show();
             }
         });
+        // neu trong danh sach da luu thi to mau vang
+        if(GlobalVariables.listSavedWordId.contains(enWord.getId())){
+            viewHolder.unsave = true;
+            viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+        }else{
+            viewHolder.unsave = false;
+            viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+        }
+
         viewHolder.btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //sau này check trong saved word
-                if(viewHolder.unsave==true){
+                if (viewHolder.unsave == true) {
                     //---run unsave code
+                    GlobalVariables.db.collection("saved_word").document(GlobalVariables.userId + enWord.getId() + "")
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(mContext, "Xoa từ khoi danh sach thanh cong", Toast.LENGTH_LONG).show();
+                                    GlobalVariables.listSavedWordId.remove( GlobalVariables.listSavedWordId.indexOf(enWord.getId()));
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(mContext, "Xoa từ khoi danh sach that bai", Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+
                     viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
                     viewHolder.unsave = !viewHolder.unsave;
-                }else{
+                } else {
                     //---run save code
-                    viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
-                    viewHolder.unsave = !viewHolder.unsave;
-                }
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("user_id", GlobalVariables.userId);
+                    map.put("word_id", enWord.getId());
+                    GlobalVariables.db.collection("saved_word")
+                            .document(GlobalVariables.userId + enWord.getId() + "").set(map, SetOptions.merge())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(mContext, "Lưu từ thành công", Toast.LENGTH_LONG).show();
+                                    //them ca vao trong nay cho de dung
+                                    GlobalVariables.listSavedWordId.add((enWord.getId()));
+                                }
 
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mContext, "Lưu từ khong thành công", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+                viewHolder.unsave = !viewHolder.unsave;
             }
-        });
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        }
+    });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener()
+
+    {
+        @Override
+        public void onClick (View view){
 //                Intent intent = new Intent(view.getContext(), EnWordDetailActivity.class);
-                Intent intent = new Intent(view.getContext(), EnWordDetailActivity2.class);
-                intent.putExtra("enWordId", enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getId());
-                view.getContext().startActivity(intent);
+        Intent intent = new Intent(view.getContext(), EnWordDetailActivity2.class);
+        intent.putExtra("enWordId", enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getId());
+        view.getContext().startActivity(intent);
 //                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            }
-        });
     }
+    });
+}
+
     @Override
     public int getItemCount() {
         return enWordArrayList.size();
     }
+
     public void filterList(ArrayList<EnWord> filterllist) {
+        if(filterllist.isEmpty()){
+            System.out.println("ket qua tim kiem = 0");
+            return;
+        }
+        if(enWordArrayList.isEmpty()){
+            return;
+        }
         enWordArrayList = filterllist;
         notifyDataSetChanged();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewWord;
-        private TextView textViewPronunciation;
-        private TextView textViewMeaning;
-        private ImageButton buttonSpeak;
-        private ImageButton buttonWordMenu;
-        private ImageButton btnSave_UnsaveWord;
-        private  boolean unsave;
+
+public class ViewHolder extends RecyclerView.ViewHolder {
+    private TextView textViewWord;
+    private TextView textViewPronunciation;
+    private TextView textViewMeaning;
+    private ImageButton buttonSpeak;
+    private ImageButton buttonWordMenu;
+    private ImageButton btnSave_UnsaveWord;
+    private boolean unsave;
 //        private LinearLayout enWordItemLayout;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewWord = (TextView) itemView.findViewById(R.id.textViewWord);
-            textViewPronunciation = (TextView) itemView.findViewById(R.id.textViewPronunciation);
-            textViewMeaning = (TextView) itemView.findViewById(R.id.textViewMeaning);
-            buttonSpeak = (ImageButton) itemView.findViewById(R.id.buttonSpeak);
-            buttonWordMenu = (ImageButton) itemView.findViewById(R.id.buttonWordMenu);
-            btnSave_UnsaveWord = (ImageButton) itemView.findViewById(R.id.btnSave_UnsaveWord);
+    public ViewHolder(@NonNull View itemView) {
+        super(itemView);
+        textViewWord = (TextView) itemView.findViewById(R.id.textViewWord);
+        textViewPronunciation = (TextView) itemView.findViewById(R.id.textViewPronunciation);
+        textViewMeaning = (TextView) itemView.findViewById(R.id.textViewMeaning);
+        buttonSpeak = (ImageButton) itemView.findViewById(R.id.buttonSpeak);
+        buttonWordMenu = (ImageButton) itemView.findViewById(R.id.buttonWordMenu);
+        btnSave_UnsaveWord = (ImageButton) itemView.findViewById(R.id.btnSave_UnsaveWord);
 //            enWordItemLayout = (LinearLayout) itemView.findViewById(R.id.enWordItemLayout);
-            //lấy dữ liệu thật sau
-            unsave = true;
-        }
+        //lấy dữ liệu thật sau
+
+        unsave = true;
     }
+}
 }
