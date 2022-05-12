@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="180dp"
             android:background="@color/space_cadet"
             android:gravity="center_vertical"
             android:orientation="vertical"
@@ -24,38 +24,38 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_avatar_default">
 
             </de.hdodenhof.circleimageview.CircleImageView>
 
-            <TextView
-                android:id="@+id/textViewTen"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:includeFontPadding="false"
-                android:text="TruongCoder"
-                android:textColor="@color/cultured"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/textViewTen"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:includeFontPadding="false"-->
+<!--                android:text="TruongCoder"-->
+<!--                android:textColor="@color/cultured"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/tVusername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:ellipsize="end"
-                android:includeFontPadding="false"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
-                android:text="nguyenquangtruonghktcute@gmail.com"
-                android:textColor="@color/cultured"
-                android:textSize="20sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/tVusername"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:ellipsize="end"-->
+<!--                android:includeFontPadding="false"-->
+<!--                android:maxLines="1"-->
+<!--                android:scrollHorizontally="true"-->
+<!--                android:text="nguyenquangtruonghktcute@gmail.com"-->
+<!--                android:textColor="@color/cultured"-->
+<!--                android:textSize="20sp" />-->
         </LinearLayout>
 
 
@@ -151,10 +151,19 @@
                 android:textColor="@color/cultured"
                 app:backgroundTint="@color/space_cadet" />
             <Button
+                android:id="@+id/buttonChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_space_cadet_radius_15"
+                android:text="Đổi mật khẩu"
+                android:textColor="@color/cultured"
+                app:backgroundTint="@color/space_cadet" />
+            <Button
                 android:id="@+id/buttonLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_space_cadet_radius_15"
                 android:text="Đăng xuất"
                 android:textColor="@color/cultured"

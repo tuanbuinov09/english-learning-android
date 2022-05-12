@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import com.bumptech.glide.load.model.Model;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myapp.dictionary.DictionaryActivity;
 import com.myapp.dictionary.YourWordActivity;
+import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.learnenglish.LearnEnglishActivity;
 import com.myapp.model.Settings;
 import com.myapp.utils.FileIO;
@@ -42,7 +44,8 @@ public class Main extends AppCompatActivity {
 
     EditText searchInput = null;
     public static TextToSpeech ttobj;
-
+    DatabaseAccess DB;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,6 +158,14 @@ public class Main extends AppCompatActivity {
         buttonAccount = findViewById(R.id.buttonAccount);
         searchInput = findViewById(R.id.searchInput);
         fab = findViewById(R.id.fab);
+        try{
+            DB = DatabaseAccess.getInstance(getApplicationContext());
+            mAuth = FirebaseAuth.getInstance();
+            GlobalVariables.userId = mAuth.getCurrentUser().getUid();
+        }catch (Exception ex){
+
+        }
+
     }
 
     public void search(View view) {
@@ -176,7 +187,8 @@ public class Main extends AppCompatActivity {
             public void run() {
                 nextActivity();
             }
-        }, 1000);
+        },1000);
+
 //        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 //        if(user==null){
 //            //Chưa login
@@ -186,6 +198,7 @@ public class Main extends AppCompatActivity {
 //            Intent intent = new Intent(this,ThongTinTaikhoanActivity.class);
 //            startActivity(intent);
 //        }
+
     }
 
     private void nextActivity() {
@@ -198,7 +211,17 @@ public class Main extends AppCompatActivity {
             Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
             startActivity(intent);
         }
-        finish();
+    }
+    private void nextActivityLearnEnglish() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null){
+            //Chưa login
+            Intent intent = new Intent(this,SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this,LearnEnglishActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void handleYourWordClick(View view) {
@@ -216,8 +239,15 @@ public class Main extends AppCompatActivity {
     }
 
     private void handleClickLearnEnglish(View view) {
-        Intent intent = new Intent(this, LearnEnglishActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, LearnEnglishActivity.class);
+//        startActivity(intent);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nextActivityLearnEnglish();
+            }
+        },1000);
     }
 
     private void handleButtonTranslateTextClick(View view) {
@@ -230,6 +260,11 @@ public class Main extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+  
     public void getSavedWordOfUser(){
 
         GlobalVariables.db.collection("saved_word").whereEqualTo("user_id",GlobalVariables.userId).get()
@@ -252,5 +287,6 @@ public class Main extends AppCompatActivity {
                 Toast.makeText(Main.this, "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }
