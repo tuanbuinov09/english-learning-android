@@ -65,6 +65,7 @@
     </com.google.android.flexbox.FlexboxLayout>
 
     <Button
+        android:enabled="false"
         android:id="@+id/btnCheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
