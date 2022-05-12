@@ -13,7 +13,7 @@
             <stroke
                 android:width="1px"
                 android:color="@color/space_cadet" />
-            <solid android:color="@android:color/transparent" />
+            <solid android:color="@color/cultured" />
         </shape>
     </item>
 
