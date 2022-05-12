@@ -3,22 +3,22 @@ package com.myapp.learnenglish.fragment.home.model;
 import java.io.Serializable;
 
 public class Question implements Serializable {
-    private int id;
+    private String key;
     private String content;
     private String answer;
 
-    public Question(int id, String content, String answer) {
-        this.id = id;
+    public Question(String key, String content, String answer) {
+        this.key = key;
         this.content = content;
         this.answer = answer;
     }
 
-    public int getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getContent() {

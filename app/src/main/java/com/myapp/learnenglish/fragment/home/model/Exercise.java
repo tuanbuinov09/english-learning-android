@@ -1,35 +1,28 @@
 package com.myapp.learnenglish.fragment.home.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Exercise implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int id;
-    private String title;
+    @Exclude
+    private String key;
     private ArrayList<Question> questions;
 
-    public Exercise(int id, String title, ArrayList<Question> questions) {
-        this.id = id;
-        this.title = title;
+    public Exercise(String key, ArrayList<Question> questions) {
+        this.key = key;
         this.questions = questions;
     }
 
-    public int getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public ArrayList<Question> getQuestions() {

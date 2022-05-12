@@ -1,11 +1,11 @@
 package com.myapp.learnenglish.fragment.home.dao;
 
+import com.google.firebase.database.Query;
+
 import java.util.List;
 
 public interface Dao<T> {
-    T get(long id);
-
-    List<T> getAll();
+    Query get();
 
     void save(T t);
 

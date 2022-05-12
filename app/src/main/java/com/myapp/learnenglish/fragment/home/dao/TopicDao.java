@@ -2,25 +2,23 @@ package com.myapp.learnenglish.fragment.home.dao;
 
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.myapp.learnenglish.fragment.home.model.Topic;
 
 import java.util.List;
 
 public class TopicDao implements Dao<Topic> {
-    private SQLiteOpenHelper sqLiteOpenHelper;
+    private DatabaseReference databaseReference;
 
-    public TopicDao(SQLiteOpenHelper sqLiteOpenHelper) {
-        this.sqLiteOpenHelper = sqLiteOpenHelper;
+    public TopicDao() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Topics");
     }
 
     @Override
-    public Topic get(long id) {
-        return null;
-    }
-
-    @Override
-    public List<Topic> getAll() {
-        return null;
+    public Query get() {
+        return databaseReference.orderByKey();
     }
 
     @Override

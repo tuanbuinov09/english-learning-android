@@ -39,12 +39,15 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
     @Override
     public void onBindViewHolder(@NonNull TopicsRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.textViewTopicTitle.setText(data.get(position).getTitle());
+        holder.tvTopic.setText(data.get(position).getKey());
         holder.textViewNumOfStars.setText(String.valueOf(getTotalStars(data.get(position))));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int pos = holder.getBindingAdapterPosition();
                 Intent intent = new Intent(context, ArrangeWordsExercisesActivity.class);
-                intent.putExtra("exercises", data.get(holder.getAdapterPosition()).getExercises());
+                intent.putExtra("title", data.get(pos).getKey() + ": " + data.get(pos).getTitle());
+                intent.putExtra("exercises", data.get(pos).getExercises());
                 context.startActivity(intent);
             }
         });
@@ -58,7 +61,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewTopicTitle, textViewNumOfAchievedStars, textViewNumOfStars;
+        TextView textViewTopicTitle, textViewNumOfAchievedStars, textViewNumOfStars, tvTopic;
         LinearLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -66,6 +69,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
             textViewTopicTitle = itemView.findViewById(R.id.textViewTopicTitle);
             textViewNumOfAchievedStars = itemView.findViewById(R.id.textViewNumOfAchievedStars);
             textViewNumOfStars = itemView.findViewById(R.id.textViewNumOfStars);
+            tvTopic = itemView.findViewById(R.id.tvTopic);
             parentLayout = itemView.findViewById(R.id.unitsParentLayout);
         }
     }

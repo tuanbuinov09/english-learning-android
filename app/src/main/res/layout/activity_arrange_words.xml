@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/owl_64"/>
         <TextView
+            android:id="@+id/tvContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mày làm tao hết cả hồn, thằng chó."
@@ -64,6 +65,7 @@
     </com.google.android.flexbox.FlexboxLayout>
 
     <Button
+        android:id="@+id/btnCheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

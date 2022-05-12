@@ -9,6 +9,8 @@
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/border_bottom.xml" value="0.218" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/btngradient.xml" value="0.218" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_baseline_close_32.xml" value="0.121" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.18" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_baseline_star_32.xml" value="0.18" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.218" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_wave__1_.xml" value="0.218" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/ic_wave__2_.xml" value="0.218" />
@@ -33,9 +35,11 @@
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_app_bar.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_exercise_item.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_exercises_item.xml" value="0.25" />
-        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_topic_item.xml" value="0.10989583333333333" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_topic_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_unit_item.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_units_item.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_bottom_sheet_dialog_arrange_words_1.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_bottom_sheet_dialog_arrange_words_2.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/your_word_linearlayout.xml" value="0.1766304347826087" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/yourword_listview_item.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/menu/tk_bottom_navigation_menu.xml" value="0.25" />

@@ -35,12 +35,13 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
 
     @Override
     public void onBindViewHolder(@NonNull ExercisesRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.textViewExerciseTitle.setText(data.get(position).getTitle());
+        holder.textViewExerciseTitle.setText(data.get(position).getKey());
         holder.textViewNumOfStars.setText(String.valueOf(data.get(position).getQuestions().size()));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ArrangeWordsActivity.class);
+                intent.putExtra("questions", data.get(holder.getBindingAdapterPosition()).getQuestions());
                 context.startActivity(intent);
             }
         });
