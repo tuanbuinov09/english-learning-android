@@ -63,11 +63,14 @@ public class YourWordActivity extends AppCompatActivity {
         setEvent();
 
     }
-
+    
+    protected void onResume() {
+        super.onResume();
+        //để khi lưu hay bỏ lưu ở word detail thì cái nàfy đc cậpj nhật
+        enWordRecyclerAdapter.notifyDataSetChanged();
+    }
 
     public void setYourWordAdapter() {
-
-
 
         //---------------
 //        YourWordAdapter adapter = new

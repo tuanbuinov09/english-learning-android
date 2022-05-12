@@ -4,10 +4,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+import com.myapp.GlobalVariables;
+import com.myapp.Main;
 import com.myapp.R;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +37,9 @@ public class YourNoteFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private EditText etYourNote;
+    private Button btnSaveNote;
+    private Button btnClearNote;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -60,6 +79,71 @@ public class YourNoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_your_note, container, false);
+        final View view = inflater.inflate(R.layout.fragment_your_note, container, false);
+        final FragmentActivity c = getActivity();
+        etYourNote = view.findViewById(R.id.etYourNote);
+        btnSaveNote = view.findViewById(R.id.btnSaveNote);
+        btnClearNote = view.findViewById(R.id.btnClearNote);
+        getUserNote();
+        etYourNote.setText(GlobalVariables.userNote);
+        btnSaveNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveUserNote(etYourNote.getText().toString().trim());
+            }
+        });
+        btnClearNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveUserNote("");
+                etYourNote.setText("");
+            }
+        });
+//        return inflater.inflate(R.layout.fragment_your_note, container, false);
+        return view;
+    }
+
+    public void getUserNote() {
+        GlobalVariables.db.collection("user_note").whereEqualTo("user_id", GlobalVariables.userId).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot snapshot : task.getResult()) {
+                            GlobalVariables.userNote = snapshot.getString("note");
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
+            }}
+        );
+    }
+    public void saveUserNote(String content) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("user_id", GlobalVariables.userId);
+        map.put("note", content);
+
+        GlobalVariables.db.collection("user_note").document(GlobalVariables.userId).set(map, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        if(content.equalsIgnoreCase("")){
+                            Toast.makeText(getActivity(), "Clear ghi chú thành công", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        Toast.makeText(getActivity(), "Lưu ghi chú thành công", Toast.LENGTH_LONG).show();
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(content.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(), "Clear ghi chú thất bại", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Toast.makeText(getActivity(), "Clear ghi chú thành công", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
