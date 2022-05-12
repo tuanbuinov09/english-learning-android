@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="#4DFB5B5B">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Không Chính xác"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#FA1010" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Câu trả lời:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FA1010" />
+    <TextView
+        android:id="@+id/tvCorrectAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coffee or water?"
+        android:textSize="20sp"
+        android:textColor="#FA1010"
+        android:layout_marginBottom="20dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đã hiểu"
+        android:backgroundTint="#C3FF0000"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/tk_circle_button"
+        android:id="@+id/btnUnderstood"/>
+</LinearLayout>

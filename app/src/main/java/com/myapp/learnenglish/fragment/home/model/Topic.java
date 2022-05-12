@@ -1,24 +1,27 @@
 package com.myapp.learnenglish.fragment.home.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
 
 public class Topic {
-    private int id;
+    @Exclude
+    private String key;
     private String title;
     private ArrayList<Exercise> exercises;
 
-    public Topic(int id, String title, ArrayList<Exercise> exercises) {
-        this.id = id;
+    public Topic(String key, String title, ArrayList<Exercise> exercises) {
+        this.key = key;
         this.title = title;
         this.exercises = exercises;
     }
 
-    public int getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getTitle() {

@@ -20,8 +20,8 @@ public class ArrangeWordsExercisesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.myapp.R.layout.activity_arrange_words_exercises);
+        setTitle(getIntent().getExtras().get("title").toString());
 
-        System.out.println(getIntent().getSerializableExtra("exercises"));
         ArrayList<Exercise> exercises = (ArrayList<Exercise>) getIntent().getSerializableExtra("exercises");
         initRecyclerView(exercises);
     }

@@ -1,5 +1,6 @@
 package com.myapp.learnenglish.fragment.home.dao;
 
+import com.google.firebase.database.Query;
 import com.myapp.learnenglish.fragment.home.model.Question;
 
 import java.util.List;
@@ -7,12 +8,7 @@ import java.util.List;
 public class QuestionDao implements Dao<Question> {
 
     @Override
-    public Question get(long id) {
-        return null;
-    }
-
-    @Override
-    public List<Question> getAll() {
+    public Query get() {
         return null;
     }
 

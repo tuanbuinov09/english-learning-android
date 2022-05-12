@@ -1,17 +1,14 @@
 package com.myapp.learnenglish.fragment.home.dao;
 
+import com.google.firebase.database.Query;
 import com.myapp.learnenglish.fragment.home.model.Exercise;
 
 import java.util.List;
 
 public class ExerciseDao implements Dao<Exercise> {
-    @Override
-    public Exercise get(long id) {
-        return null;
-    }
 
     @Override
-    public List<Exercise> getAll() {
+    public Query get() {
         return null;
     }
 
