@@ -108,8 +108,9 @@ public class SettingsRemindWordsFragment extends Fragment implements NumberPicke
         lyNumberOfRemindADay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NumberPickerDialog numberPickerDialog = new NumberPickerDialog("hello");
-                numberPickerDialog.show(getParentFragmentManager(), "tag");
+//                NumberPickerDialog numberPickerDialog = new NumberPickerDialog("hello");
+//                numberPickerDialog.show(getParentFragmentManager(), "tag");
+                initNotification("Xin chào");
             }
         });
         lyStartTime.setOnClickListener(new View.OnClickListener() {
@@ -309,8 +310,25 @@ public class SettingsRemindWordsFragment extends Fragment implements NumberPicke
         lyMain = view.findViewById(R.id.lyMain);
     }
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Channel 1";
+            String description = "Đây là channel 1";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CHANNEL ID 1", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     private void initNotification(String textTile) {
-        String id = "hello";
+        //createNotificationChannel();
+        String id = "my_channel_id_01";
         NotificationManager manager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = manager.getNotificationChannel(id);
@@ -320,7 +338,7 @@ public class SettingsRemindWordsFragment extends Fragment implements NumberPicke
                 channel.enableVibration(true);
                 channel.setVibrationPattern(new long[]{100, 1000, 200, 340});
                 channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-
+                manager.createNotificationChannel(channel);
             }
         }
 
@@ -328,12 +346,12 @@ public class SettingsRemindWordsFragment extends Fragment implements NumberPicke
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent contentIntent = PendingIntent.getActivity(getContext(), 0, notificationIntent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), id)
-                .setStyle(new NotificationCompat.BigPictureStyle())
-                .setLargeIcon(null)
+                .setStyle(new NotificationCompat.BigTextStyle())
                 .setContentTitle("Hello")
                 .setContentText("Hi there!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100, 1000, 200, 340})
+                .setSmallIcon(R.drawable.ic_baseline_arrow_right_24)
                 .setAutoCancel(false)
                 .setTicker("Notification");
 
