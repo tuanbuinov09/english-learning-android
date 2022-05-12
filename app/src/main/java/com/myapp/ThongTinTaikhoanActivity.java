@@ -83,8 +83,12 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         DB = DatabaseAccess.getInstance(getApplicationContext());
         AnhXa();
 
-        iduser = DB.iduser;
+//        iduser = DB.iduser;
        // mMainActivity = new MainActivity() ;
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if(user == null){
+//            return;
+//        }
         LayUser();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,19 +216,24 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     {
         database = Database.initDatabase(ThongTinTaikhoanActivity.this, DATABASE_NAME);
         Cursor cursor = database.rawQuery("SELECT * FROM User WHERE ID_User = ?",new String[]{String.valueOf(DB.iduser)});
-        if( cursor != null && cursor.moveToNext() ){
-            //cursor.moveToNext();
+//        Cursor cursor = database.rawQuery("SELECT * FROM User WHERE ID_User = ?",new String[]{String.valueOf("UaceqeYAkxY2sGqZfWsUGeSxcRA2")});
+
+        if( cursor != null && cursor.moveToNext()  ){
+//            cursor.moveToNext();
             String Iduser = cursor.getString(0);
             String HoTen = cursor.getString(1);
             int Point = cursor.getInt(2);
             String Email = cursor.getString(3);
             String SDT = cursor.getString(4);
             user = new User(Iduser,HoTen,Point,Email,SDT);
-            setUserInformation();
+            Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
+//            setUserInformation();&& cursor.moveToFirst()
 //        ThongTinTaikhoanActivity.context = getApplicationContext();
 
             //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
             TruyenThongTin();
+        }else{
+            Toast.makeText(this, "FAILLLL ", Toast.LENGTH_LONG).show();
         }
 //        cursor.moveToNext();
 //        String Iduser = cursor.getString(0);
@@ -244,6 +253,16 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user == null){
             return;
+        }else{
+
+//            tvHoten.setText(user.getDisplayName());
+//            tvTen.setText(user.getEmail());
+//            tvtaikhoan.setText(user.getEmail());
+////        tvPoint.setText(String.valueOf(user.getPoint()));
+//            tvEmail.setText(user.getEmail());
+//            tvSdt.setText(user.getSDT());
+//            tvUID.setText(user.getIduser());
+//            imageView = findViewById(R.id.img_avatar);
         }
 //        if(user.getDisplayName().equals("")){
 //            edtFullName.setText("No name");
@@ -257,7 +276,12 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         mActivityResultLauncher.launch(Intent.createChooser(intent,"select picture"));
     }
-
+    @Override
+    public void onBackPressed() {
+        // your code.
+        Intent intent = new Intent(ThongTinTaikhoanActivity.this, Main.class);
+        startActivity(intent);
+    }
 
 
 }
