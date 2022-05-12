@@ -27,6 +27,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myapp.dictionary.DictionaryActivity;
 import com.myapp.dictionary.YourWordActivity;
+import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.learnenglish.LearnEnglishActivity;
 import com.myapp.model.Settings;
 import com.myapp.utils.FileIO;
@@ -42,7 +43,8 @@ public class Main extends AppCompatActivity {
 
     EditText searchInput = null;
     public static TextToSpeech ttobj;
-
+    DatabaseAccess DB;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,6 +157,14 @@ public class Main extends AppCompatActivity {
         buttonAccount = findViewById(R.id.buttonAccount);
         searchInput = findViewById(R.id.searchInput);
         fab = findViewById(R.id.fab);
+        try{
+            DB = DatabaseAccess.getInstance(getApplicationContext());
+            mAuth = FirebaseAuth.getInstance();
+            GlobalVariables.userId = mAuth.getCurrentUser().getUid();
+        }catch (Exception ex){
+
+        }
+
     }
 
     public void search(View view) {

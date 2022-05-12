@@ -27,9 +27,9 @@ import com.myapp.model.EnWord;
 import java.util.ArrayList;
 
 public class YourWordActivity extends AppCompatActivity {
-    EditText searchInput = null;
     ListView listViewYourWord;
     //    TextToSpeech ttobj;
+    androidx.appcompat.widget.SearchView searchInput = null;
     ArrayList<EnWord> listEnWord = new ArrayList<>();
 
     private RecyclerView recyclerView;
@@ -63,7 +63,7 @@ public class YourWordActivity extends AppCompatActivity {
         setEvent();
 
     }
-    
+
     protected void onResume() {
         super.onResume();
         //để khi lưu hay bỏ lưu ở word detail thì cái nàfy đc cậpj nhật
@@ -96,8 +96,42 @@ public class YourWordActivity extends AppCompatActivity {
 //        }
     }
 
+    private void filter(String text) {
+
+        // if query is empty: return all
+        if (text.isEmpty()) {
+            enWordRecyclerAdapter.filterList(GlobalVariables.listAllSavedWords);
+            return;
+        }
+        GlobalVariables.listFilteredWords.clear();
+        for (EnWord en : GlobalVariables.listAllSavedWords) {
+            if (en.getWord().startsWith(text)) {
+                GlobalVariables.listFilteredWords.add(en);
+            }
+        }
+
+        if (GlobalVariables.listFilteredWords.isEmpty()) {
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
+        }
+    }
+
     private void setEvent() {
-        setYourWordAdapter();
+        searchInput.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -115,12 +149,13 @@ public class YourWordActivity extends AppCompatActivity {
                 scrollOutItems = manager.findFirstVisibleItemPosition();
                 if (isScrolling && currentItems + scrollOutItems == totalItems) {
                     // lấy thêm data
-                    fetchData();
+//                    fetchData();
                 }
             }
         });
     }
 
+    // k dùng trong yourword nữa
     private void fetchData() {
         progressBar.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
@@ -170,15 +205,16 @@ public class YourWordActivity extends AppCompatActivity {
 //    }
 
     private void setControl() {
-
-
         searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progress_bar);
+
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 //        list =  databaseAccess.getAllEnWord_NoPopulate();
-        GlobalVariables.listAllSavedWords = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
+//        GlobalVariables.listAllSavedWords = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
+        GlobalVariables.listAllSavedWords = databaseAccess.getSavedWord_NoPopulateFromIdList(GlobalVariables.listSavedWordId);
+
         databaseAccess.close();
         System.out.println("-------------" + GlobalVariables.listAllSavedWords.size());
 
@@ -189,7 +225,6 @@ public class YourWordActivity extends AppCompatActivity {
     }
 
     public void search(View view) {
-        Toast.makeText(this, "bạn vừa tìm: " + searchInput.getText().toString().trim() + "trong từ của bạn", Toast.LENGTH_LONG).show();
     }
 
     public void backToMain(View view) {
