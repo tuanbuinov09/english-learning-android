@@ -15,7 +15,11 @@ import androidx.databinding.ObservableList;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.myapp.R;
+import com.myapp.learnenglish.fragment.home.model.Exercise;
 import com.myapp.learnenglish.fragment.home.model.Question;
 
 import java.util.ArrayList;
@@ -26,13 +30,15 @@ public class ArrangeWordsActivity extends AppCompatActivity {
     private FlexboxLayout flexboxLayoutYourAnswerSection, flexboxLayoutGivenWordsSection;
     private ImageButton imageButtonClose;
     private Button btnCheck;
-    private TextView tvContent;
+    private TextView tvContent, tvCurrentObtainedStars;
     private ProgressBar progressBar;
     private ArrayList<Question> questions;
     private int currentIndex = 0;
     private int obtainedStars = 0;
     private ObservableArrayList<Button> yourAnswer;
     private int percentPerQuestion;
+    private String path;
+    private int exerciseIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,11 @@ public class ArrangeWordsActivity extends AppCompatActivity {
             }
         });
 
+        // get current path
+        path = getIntent().getExtras().get("path").toString();
+        System.out.println(path);
+
+        exerciseIndex = Integer.parseInt(getIntent().getExtras().get("exerciseIndex").toString());
         questions = (ArrayList<Question>) getIntent().getSerializableExtra("questions");
         percentPerQuestion = 100 / questions.size();
         progressBar.setProgress(0);
@@ -102,6 +113,7 @@ public class ArrangeWordsActivity extends AppCompatActivity {
         if (correct) {
             view = getLayoutInflater().inflate(R.layout.tk_bottom_sheet_dialog_arrange_words_1, null);
             obtainedStars++;
+            tvCurrentObtainedStars.setText(String.valueOf(obtainedStars));
         } else {
             view = getLayoutInflater().inflate(R.layout.tk_bottom_sheet_dialog_arrange_words_2, null);
             TextView tvCorrectAnswer = view.findViewById(R.id.tvCorrectAnswer);
@@ -121,6 +133,14 @@ public class ArrangeWordsActivity extends AppCompatActivity {
                 if (currentIndex < questions.size() - 1) {
                     loadNextQuestion(questions.get(++currentIndex));
                 } else {
+                    // after having done all questions, save the result
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Topics" + "/" + path);
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    databaseReference.child("Scores").child(mAuth.getUid()).setValue(obtainedStars);
+                    ArrangeWordsExercisesActivity.exercises.get(exerciseIndex).setScore(obtainedStars);
+                    ArrangeWordsExercisesActivity.exercisesRecyclerViewAdapter.notifyDataSetChanged();
+
+                    // display result view
                     Intent intent = new Intent(ArrangeWordsActivity.this, TestResultActivity.class);
                     intent.putExtra("total", questions.size());
                     intent.putExtra("obtainedStars", obtainedStars);
@@ -140,6 +160,7 @@ public class ArrangeWordsActivity extends AppCompatActivity {
         btnCheck = findViewById(R.id.btnCheck);
         tvContent = findViewById(R.id.tvContent);
         progressBar = findViewById(R.id.progressBar);
+        tvCurrentObtainedStars = findViewById(R.id.tvCurrentObtainedStars);
     }
 
     private void loadNextQuestion(Question question) {

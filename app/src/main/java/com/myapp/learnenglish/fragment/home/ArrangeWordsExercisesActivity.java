@@ -10,19 +10,23 @@ import android.view.Menu;
 import com.myapp.R;
 import com.myapp.learnenglish.fragment.home.adapter.ExercisesRecyclerViewAdapter;
 import com.myapp.learnenglish.fragment.home.model.Exercise;
-import com.myapp.learnenglish.fragment.home.model.Question;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ArrangeWordsExercisesActivity extends AppCompatActivity {
+    private String path;
+    public static ExercisesRecyclerViewAdapter exercisesRecyclerViewAdapter;
+    public static ArrayList<Exercise> exercises;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.myapp.R.layout.activity_arrange_words_exercises);
+
+        path = getIntent().getExtras().get("path").toString();
         setTitle(getIntent().getExtras().get("title").toString());
 
-        ArrayList<Exercise> exercises = (ArrayList<Exercise>) getIntent().getSerializableExtra("exercises");
+        exercises = (ArrayList<Exercise>) getIntent().getSerializableExtra("exercises");
         initRecyclerView(exercises);
     }
 
@@ -34,8 +38,8 @@ public class ArrangeWordsExercisesActivity extends AppCompatActivity {
 
     private void initRecyclerView(ArrayList<Exercise> exercises) {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewExercises);
-        ExercisesRecyclerViewAdapter adapter = new ExercisesRecyclerViewAdapter(this, exercises);
-        recyclerView.setAdapter(adapter);
+        exercisesRecyclerViewAdapter = new ExercisesRecyclerViewAdapter(this, exercises, path);
+        recyclerView.setAdapter(exercisesRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

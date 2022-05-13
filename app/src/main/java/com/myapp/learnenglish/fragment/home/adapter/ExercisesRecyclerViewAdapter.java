@@ -20,10 +20,12 @@ import java.util.ArrayList;
 public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<ExercisesRecyclerViewAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Exercise> data;
+    private String path;
 
-    public ExercisesRecyclerViewAdapter(Context context, ArrayList<Exercise> data) {
+    public ExercisesRecyclerViewAdapter(Context context, ArrayList<Exercise> data, String path) {
         this.context = context;
         this.data = data;
+        this.path = path;
     }
 
     @NonNull
@@ -36,12 +38,17 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
     @Override
     public void onBindViewHolder(@NonNull ExercisesRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.textViewExerciseTitle.setText(data.get(position).getKey());
+        holder.textViewNumOfAchievedStars.setText(String.valueOf(data.get(position).getScore()));
         holder.textViewNumOfStars.setText(String.valueOf(data.get(position).getQuestions().size()));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int pos = holder.getBindingAdapterPosition();
+
                 Intent intent = new Intent(context, ArrangeWordsActivity.class);
-                intent.putExtra("questions", data.get(holder.getBindingAdapterPosition()).getQuestions());
+                intent.putExtra("questions", data.get(pos).getQuestions());
+                intent.putExtra("path", path + "/Exercises/" + data.get(pos).getKey());
+                intent.putExtra("exerciseIndex", pos);
                 context.startActivity(intent);
             }
         });

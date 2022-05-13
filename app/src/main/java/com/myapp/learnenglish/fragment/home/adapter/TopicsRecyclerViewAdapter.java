@@ -2,9 +2,11 @@ package com.myapp.learnenglish.fragment.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.R;
 import com.myapp.learnenglish.fragment.home.ArrangeWordsExercisesActivity;
+import com.myapp.learnenglish.fragment.home.model.Exercise;
 import com.myapp.learnenglish.fragment.home.model.Topic;
 
 import java.util.ArrayList;
@@ -38,9 +41,11 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(@NonNull TopicsRecyclerViewAdapter.ViewHolder holder, int position) {
+        addButtonsToLLButtonGroup(data.get(position).getExercises(), holder.llButtonGroup);
         holder.textViewTopicTitle.setText(data.get(position).getTitle());
         holder.tvTopic.setText(data.get(position).getKey());
         holder.textViewNumOfStars.setText(String.valueOf(getTotalStars(data.get(position))));
+        holder.textViewNumOfAchievedStars.setText(String.valueOf(getNumOfAchievedStars(data.get(position))));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +53,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
                 Intent intent = new Intent(context, ArrangeWordsExercisesActivity.class);
                 intent.putExtra("title", data.get(pos).getKey() + ": " + data.get(pos).getTitle());
                 intent.putExtra("exercises", data.get(pos).getExercises());
+                intent.putExtra("path", data.get(pos).getKey());
                 context.startActivity(intent);
             }
         });
@@ -62,7 +68,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTopicTitle, textViewNumOfAchievedStars, textViewNumOfStars, tvTopic;
-        LinearLayout parentLayout;
+        LinearLayout parentLayout, llButtonGroup;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +77,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
             textViewNumOfStars = itemView.findViewById(R.id.textViewNumOfStars);
             tvTopic = itemView.findViewById(R.id.tvTopic);
             parentLayout = itemView.findViewById(R.id.unitsParentLayout);
+            llButtonGroup = itemView.findViewById(R.id.llButtonGroup);
         }
     }
 
@@ -81,5 +88,31 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
         }
 
         return numOfStars;
+    }
+
+    private int getNumOfAchievedStars(Topic topic) {
+        int res = 0;
+        for (Exercise exercise : topic.getExercises()) {
+            res += exercise.getScore();
+        }
+        return res;
+    }
+
+    private void addButtonsToLLButtonGroup(ArrayList<Exercise> exercises, LinearLayout llButtonGroup) {
+        for (int i = 0; i < exercises.size(); i++) {
+            Button button = new Button(context);
+            button.setText(String.valueOf(i + 1));
+            setButtonAttributes(button);
+            llButtonGroup.addView(button);
+        }
+    }
+
+    private void setButtonAttributes(Button button) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
+        layoutParams.setMarginEnd(5);
+        button.setLayoutParams(layoutParams);
+        button.setBackgroundResource(R.drawable.tk_circle_button);
+        button.setTextColor(context.getResources().getColor(R.color.teal_200, null));
+//        button.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.teal_200, null)));
     }
 }
