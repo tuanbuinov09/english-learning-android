@@ -1,13 +1,14 @@
 package com.myapp.learnenglish.fragment.home;
 
+import android.os.Bundle;
+import android.view.Menu;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.Menu;
-
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -18,7 +19,6 @@ import com.myapp.learnenglish.fragment.home.model.Exercise;
 import com.myapp.learnenglish.fragment.home.model.Question;
 import com.myapp.learnenglish.fragment.home.model.Topic;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ArrangeWordsTopicsActivity extends AppCompatActivity {
@@ -50,6 +50,7 @@ public class ArrangeWordsTopicsActivity extends AppCompatActivity {
         topicDao.get().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // structure: each topic has a list of exercises, each exercise has a list of questions
                 ArrayList<Topic> topics = new ArrayList<>();
                 for (DataSnapshot topicsNode : snapshot.getChildren()) {
                     ArrayList<Exercise> exercises = new ArrayList<>();
@@ -61,7 +62,17 @@ public class ArrangeWordsTopicsActivity extends AppCompatActivity {
                                     questionsNode.child("answer").getValue().toString());
                             questions.add(question);
                         }
-                        Exercise exercise = new Exercise(exercisesNode.getKey(), questions);
+
+                        // get the score of the current user
+                        int score = 0;
+                        String currentUserId = FirebaseAuth.getInstance().getUid();
+                        if (exercisesNode.hasChild("Scores")) {
+                            if (exercisesNode.child("Scores").hasChild(currentUserId)) {
+                                score = Integer.parseInt(exercisesNode.child("Scores").child(currentUserId).getValue().toString());
+                            }
+                        }
+
+                        Exercise exercise = new Exercise(exercisesNode.getKey(), score, questions);
                         exercises.add(exercise);
                     }
                     Topic topic = new Topic(topicsNode.getKey(), topicsNode.child("title").getValue().toString(), exercises);

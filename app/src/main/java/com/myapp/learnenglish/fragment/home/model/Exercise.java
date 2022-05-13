@@ -10,10 +10,12 @@ public class Exercise implements Serializable {
 
     @Exclude
     private String key;
+    private int score;
     private ArrayList<Question> questions;
 
-    public Exercise(String key, ArrayList<Question> questions) {
+    public Exercise(String key, int score, ArrayList<Question> questions) {
         this.key = key;
+        this.score = score;
         this.questions = questions;
     }
 
@@ -31,5 +33,13 @@ public class Exercise implements Serializable {
 
     public void setQuestions(ArrayList<Question> questions) {
         this.questions = questions;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

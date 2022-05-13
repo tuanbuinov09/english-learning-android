@@ -44,52 +44,53 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp">
                 <LinearLayout
+                    android:id="@+id/llButtonGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_weight="1"
                     android:clipToPadding="false"
                     android:paddingVertical="5dp">
-                    <Button
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/tk_circle_button"
-                        app:backgroundTint="@null"
-                        android:text="1"
-                        android:textColor="@color/teal_200"/>
-                    <Button
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/tk_circle_button"
-                        app:backgroundTint="@null"
-                        android:text="2"
-                        android:textColor="@color/teal_200"/>
-                    <Button
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/tk_circle_button"
-                        app:backgroundTint="@null"
-                        android:text="3"
-                        android:textColor="@color/teal_200"/>
-                    <Button
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/tk_circle_button"
-                        app:backgroundTint="@null"
-                        android:text="4"
-                        android:textColor="@color/teal_200"/>
-                    <Button
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/tk_circle_button"
-                        app:backgroundTint="@null"
-                        android:text="5"
-                        android:textColor="@color/teal_200"/>
+<!--                    <Button-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        android:background="@drawable/tk_circle_button"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        android:text="1"-->
+<!--                        android:textColor="@color/teal_200"/>-->
+<!--                    <Button-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        android:background="@drawable/tk_circle_button"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        android:text="2"-->
+<!--                        android:textColor="@color/teal_200"/>-->
+<!--                    <Button-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        android:background="@drawable/tk_circle_button"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        android:text="3"-->
+<!--                        android:textColor="@color/teal_200"/>-->
+<!--                    <Button-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        android:background="@drawable/tk_circle_button"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        android:text="4"-->
+<!--                        android:textColor="@color/teal_200"/>-->
+<!--                    <Button-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        android:background="@drawable/tk_circle_button"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        android:text="5"-->
+<!--                        android:textColor="@color/teal_200" />-->
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
