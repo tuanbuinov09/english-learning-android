@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Main">
 
     <LinearLayout
         android:id="@+id/header"
@@ -24,20 +24,35 @@
             android:textColor="@color/azureish_white"
             android:textSize="16sp" />
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchInput"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:maxLines="1"
-            android:background="@color/cultured"
-            android:queryHint="Tìm kiếm.."
-            android:textAlignment="textStart"
-            app:queryBackground="@null"
-            app:defaultQueryHint="@string/query_hint"
-            app:iconifiedByDefault="false"
-            android:layout_marginLeft="-12px"
-            app:queryHint="@string/query_hint" />
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-10dp"
+                android:layout_weight="1"
+                android:background="@color/cultured"
+                android:maxLines="1"
+                android:queryHint="Tìm kiếm.."
+                android:textAlignment="textStart"
+                app:defaultQueryHint="@string/query_hint"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@null"
+                app:queryHint="@string/query_hint" />
+
+            <ImageButton
+                android:id="@+id/btnMic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/cultured"
+                android:paddingHorizontal="10dp"
+                android:src="@drawable/ic_baseline_mic_24" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,9 +86,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/header"
         android:background="@color/bright_gray"
         android:orientation="vertical"
-        android:layout_below="@+id/header"
         android:paddingHorizontal="5dp">
 
         <Button
@@ -183,17 +198,26 @@
 
         </FrameLayout>
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/floatingLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="160dp"
         android:background="@color/white"
-        android:id="@+id/floatingLinearLayout"
-        android:visibility="gone"
-        >
-        <include layout="@layout/recycler_view"/>
-        <include layout="@layout/progress_bar"
-            />
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <include
+            layout="@layout/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>
 
