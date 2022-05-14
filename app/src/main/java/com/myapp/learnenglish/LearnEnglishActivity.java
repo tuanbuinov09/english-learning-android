@@ -11,6 +11,7 @@ import com.myapp.R;
 import com.myapp.ThongTinTaikhoanActivity;
 import com.myapp.learnenglish.fragment.achievement.AchievementFragment;
 import com.myapp.learnenglish.fragment.home.HomeFragment;
+import com.myapp.learnenglish.fragment.profile.ProfileFragment;
 import com.myapp.learnenglish.fragment.ranking.RankingFragment;
 
 public class LearnEnglishActivity extends AppCompatActivity {
@@ -42,14 +43,14 @@ public class LearnEnglishActivity extends AppCompatActivity {
                     selectedFragment = new RankingFragment();
                     break;
                 case R.id.pageProfile:
-//                    selectedFragment = new ProfileFragment();
-                    Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
-                    startActivity(intent);
+                    selectedFragment = new ProfileFragment();
+//                    Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
+//                    startActivity(intent);
                     break;
             }
 
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
-//                    selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                    selectedFragment).commit();
             return true;
         });
     }

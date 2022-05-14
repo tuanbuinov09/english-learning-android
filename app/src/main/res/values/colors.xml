@@ -34,4 +34,6 @@
     <color name="textHeadline">#434343</color>
     <color name="textDescription">#686868</color>
     <color name="lightGrey">#EAEAEA</color>
+
+    <color name="tk_cardView">#8EFC86</color>
 </resources>
