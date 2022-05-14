@@ -86,7 +86,7 @@ public class Main extends AppCompatActivity {
 
         //CREATE SETTINGS FILE
         if (!file.exists()) {
-            FileIO.writeToFile(new Settings(), this);
+            FileIO.writeToFile(new Settings(), getApplicationContext());
         }
     }
 

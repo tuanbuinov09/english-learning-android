@@ -1,17 +1,10 @@
 package com.myapp.dictionary;
 
-import android.app.SearchableInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +38,11 @@ public class DictionaryActivity extends AppCompatActivity {
 
         setControl();
         setEvent();
+
+        setTitle("Từ điển Anh-Việt");
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setElevation(0);
     }
 
 //    @Override
@@ -75,7 +73,7 @@ public class DictionaryActivity extends AppCompatActivity {
     private void filter(String text) {
 
         // if query is empty: return all
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             enWordRecyclerAdapter.filterList(GlobalVariables.listAllWords);
             return;
         }
@@ -92,6 +90,7 @@ public class DictionaryActivity extends AppCompatActivity {
             enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
         }
     }
+
     private void setControl() {
         searchInput = findViewById(R.id.searchInput);
         recyclerView = findViewById(R.id.recyclerView);
@@ -168,12 +167,12 @@ public class DictionaryActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(!searchInput.getQuery().toString().trim().equalsIgnoreCase("")){
+                if (!searchInput.getQuery().toString().trim().equalsIgnoreCase("")) {
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
                     databaseAccess.open();
                     GlobalVariables.offset = GlobalVariables.offset + GlobalVariables.limit;
 
-                    ArrayList<EnWord> justFetched = databaseAccess.searchEnWord_NoPopulateWithOffsetLimit(searchInput.getQuery().toString().trim() ,GlobalVariables.offset, GlobalVariables.limit);
+                    ArrayList<EnWord> justFetched = databaseAccess.searchEnWord_NoPopulateWithOffsetLimit(searchInput.getQuery().toString().trim(), GlobalVariables.offset, GlobalVariables.limit);
 
                     databaseAccess.close();
 
@@ -198,5 +197,11 @@ public class DictionaryActivity extends AppCompatActivity {
 
             }
         }, 3000);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
