@@ -22,6 +22,7 @@ import com.google.firebase.firestore.SetOptions;
 import com.myapp.GlobalVariables;
 import com.myapp.R;
 import com.myapp.dictionary.fragment.EnWordDetailFragment;
+import com.myapp.dictionary.fragment.ImageFragment;
 import com.myapp.dictionary.fragment.YourNoteFragment;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
@@ -51,7 +52,8 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setElevation(0);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EnWordDetailFragment(savedWord)).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new EnWordDetailFragment(savedWord)).commit();
     }
 
 
@@ -147,6 +149,16 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                     bundle.putSerializable("enWord", savedWord);
                     selectedFragment = new EnWordDetailFragment(savedWord);
                     selectedFragment.setArguments(bundle);
+                    break;
+
+                case R.id.menuImage:
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putInt("enWordId", enWordId);
+
+                    bundle1.putSerializable("enWord", savedWord);
+
+                    selectedFragment = new ImageFragment();
+                    selectedFragment.setArguments(bundle1);
                     break;
                 case R.id.pageYourNote:
                     Bundle bundleYourNote = new Bundle();
