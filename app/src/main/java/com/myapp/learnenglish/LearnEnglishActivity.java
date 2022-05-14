@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.myapp.ProfileActivity;
 import com.myapp.R;
 import com.myapp.ThongTinTaikhoanActivity;
 import com.myapp.learnenglish.fragment.achievement.AchievementFragment;
 import com.myapp.learnenglish.fragment.home.HomeFragment;
+import com.myapp.learnenglish.fragment.ranking.RankingActivity;
 import com.myapp.learnenglish.fragment.ranking.RankingFragment;
 
 public class LearnEnglishActivity extends AppCompatActivity {
@@ -39,11 +41,13 @@ public class LearnEnglishActivity extends AppCompatActivity {
                     selectedFragment = new AchievementFragment();
                     break;
                 case R.id.pageRanking:
-                    selectedFragment = new RankingFragment();
+                    //selectedFragment = new RankingFragment();
+                    Intent intentpageRanking = new Intent(this, RankingActivity.class);
+                    startActivity(intentpageRanking);
                     break;
                 case R.id.pageProfile:
 //                    selectedFragment = new ProfileFragment();
-                    Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
+                    Intent intent = new Intent(this, ProfileActivity.class);
                     startActivity(intent);
                     break;
             }
