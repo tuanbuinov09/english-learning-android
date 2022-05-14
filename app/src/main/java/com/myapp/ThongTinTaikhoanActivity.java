@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,15 +30,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.myapp.dialog.CustomDialog;
 import com.myapp.dtbassethelper.DatabaseAccess;
 
 import java.io.IOException;
 
 
-public class ThongTinTaikhoanActivity extends AppCompatActivity {
+public class ThongTinTaikhoanActivity extends AppCompatActivity implements CustomDialog.Listener {
 
     private static final int MY_REQUEST_CODE = 0;
     final  String DATABASE_NAME = "tudien.db";
@@ -44,7 +48,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     SQLiteDatabase database;
     EditText tvHoten,tvEmail,tvSdt,tvUID;
     TextView tvtaikhoan, tvTen;
-    Button btnCapNhat,btnLogout;
+    Button btnCapNhat,btnLogout, btnSynchFromFirebase, btnSynchToFirebase;
     String iduser;
     User user;
     private Main mMainActivity ;
@@ -115,6 +119,50 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
             }
         });
 
+        btnSynchFromFirebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean connected = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
+                }
+                else{
+                    connected = false;
+                }
+
+                if(connected==false){
+                    Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG);
+                    return;
+                }
+                openDialog("download");
+            }
+        });
+        btnSynchToFirebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean connected = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
+                }
+                else{
+                    connected = false;
+                }
+
+                if(connected==false){
+                    Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG);
+                    return;
+                }
+
+                openDialog("upload");
+            }
+        });
+
     }
     private void onClickRequestPermission() {
 //        MainActivity mainActivity = (MainActivity) ChangePassword.this;
@@ -137,6 +185,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
 
     private void AnhXa()
     {
+        btnSynchFromFirebase = findViewById(R.id.btnSynchFromFirebase);
+        btnSynchToFirebase = findViewById(R.id.btnSynchToFirebase);
         tvHoten = findViewById(R.id.textIntEdtHoten);
         tvEmail = findViewById(R.id.textIntEdtEmail);
         tvSdt = findViewById(R.id.textIntEdtSdt);
@@ -271,4 +321,33 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void sendDialogResult(CustomDialog.Result result, String request) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        if (request.equalsIgnoreCase("download")&&result == CustomDialog.Result.OK) {
+            databaseAccess.synchSavedWordToSQLite(GlobalVariables.userId, GlobalVariables.listSavedWordId);
+
+            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+        }
+        if (request.equalsIgnoreCase("upload")&&result == CustomDialog.Result.OK) {
+            databaseAccess.synchSavedWordToFirebase(GlobalVariables.userId);
+
+            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+        }
+        databaseAccess.close();
+
+    }
+
+    public void openDialog(String confirmFor) {
+        String content = "";
+        if (confirmFor.equalsIgnoreCase("upload")) {
+            content = "Bạn có chắc muốn tải lên từ đã lưu?";
+        }
+        if (confirmFor.equalsIgnoreCase("download")) {
+            content = "Bạn có chắc muốn tải xuống từ đã lưu?";
+        }
+        CustomDialog upload_downloadConfirmCustomDialog = new CustomDialog(CustomDialog.Type.CONFIRM, "Xác nhận", content, confirmFor);
+        upload_downloadConfirmCustomDialog.show(getSupportFragmentManager(), "upload_downloadConfirmCustomDialog");
+    }
 }

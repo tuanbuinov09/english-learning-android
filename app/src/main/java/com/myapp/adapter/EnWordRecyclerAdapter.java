@@ -78,7 +78,11 @@ public class EnWordRecyclerAdapter extends
             viewHolder.unsave = false;
             viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
         }
-
+        if(GlobalVariables.userId.equalsIgnoreCase("")||GlobalVariables.userId==null){
+            viewHolder.btnSave_UnsaveWord.setVisibility(View.GONE);
+        }else{
+            viewHolder.btnSave_UnsaveWord.setVisibility(View.VISIBLE);
+        }
         viewHolder.btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

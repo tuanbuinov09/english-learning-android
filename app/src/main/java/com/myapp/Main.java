@@ -94,6 +94,13 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        try{
+            DB = DatabaseAccess.getInstance(getApplicationContext());
+            mAuth = FirebaseAuth.getInstance();
+            GlobalVariables.userId = mAuth.getCurrentUser().getUid();
+        }catch (Exception ex){
+
+        }
         //để khi lưu hay bỏ lưu ở word detail thì cái nàfy đc cậpj nhật
         enWordRecyclerAdapter.notifyDataSetChanged();
     }
