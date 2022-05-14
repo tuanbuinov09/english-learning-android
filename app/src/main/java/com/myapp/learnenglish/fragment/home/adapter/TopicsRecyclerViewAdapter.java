@@ -2,7 +2,7 @@ package com.myapp.learnenglish.fragment.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +108,9 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
     }
 
     private void setButtonAttributes(Button button) {
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, context.getResources().getDisplayMetrics());
+        int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, context.getResources().getDisplayMetrics());
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
         layoutParams.setMarginEnd(5);
         button.setLayoutParams(layoutParams);
         button.setBackgroundResource(R.drawable.tk_circle_button);

@@ -45,9 +45,8 @@
                 android:onClick="backToMain" />
         </RelativeLayout>
 
-        <androidx.fragment.app.FragmentContainerView
+        <FrameLayout
             android:id="@+id/fragment"
-            class="com.myapp.SettingsRemindWordsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"

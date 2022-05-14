@@ -30,10 +30,7 @@
         <activity
             android:name=".dictionary.EnWordDetailActivity2"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".dictionary.YourNoteActivity"
-            android:exported="false" />
+            android:theme="@style/Theme.EnWordDetailActivity2" />
         <activity
             android:name=".NotificationActivity"
             android:exported="false" />
@@ -42,7 +39,8 @@
             android:exported="false" />
         <activity
             android:name=".dictionary.DictionaryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.EnWordDetailActivity2" />
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
@@ -142,6 +140,11 @@
         <activity
             android:name=".dictionary.YourWordActivity"
             android:exported="false" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>
