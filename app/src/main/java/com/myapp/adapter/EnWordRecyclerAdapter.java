@@ -68,7 +68,6 @@ public class EnWordRecyclerAdapter extends
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
-                Toast.makeText(mContext, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), Toast.LENGTH_SHORT).show();
             }
         });
         // neu trong danh sach da luu thi to mau vang

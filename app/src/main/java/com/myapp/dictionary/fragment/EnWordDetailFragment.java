@@ -117,7 +117,6 @@ public class EnWordDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
-                Toast.makeText(mContext, savedWord.getWord(), Toast.LENGTH_SHORT).show();
             }
         });
 //        btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
