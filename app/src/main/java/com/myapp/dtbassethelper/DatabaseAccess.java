@@ -412,7 +412,6 @@ public class DatabaseAccess {
     
     public boolean synchSavedWordToFirebase(String userId) {
         db = openHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("delete from saved_word where user_id = ?", new String[]{userId});
         ArrayList<Integer> listSavedWordId = getListSavedWordIdFromSQLite(userId);
 
         for (int wordId : listSavedWordId) {
@@ -452,5 +451,59 @@ public class DatabaseAccess {
             });
         }
         return true;
+    }
+
+    public boolean saveOneWord(String userId, int wordId) {
+        db = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("user_id", userId);
+        contentValues.put("en_word_id", wordId);
+        long result = db.insert("User", null, contentValues);
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean unSaveOneWord(String userId, int wordId) {
+        db = openHelper.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("user_id", userId);
+//        contentValues.put("en_word_id", wordId);
+        long result = db.delete("saved_word","where en_word_id = "+wordId+" and user_id='"+userId+"'", null);
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public String getCurrentUserId__OFFLINE() {
+        db = openHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("select user_id from current_user", new String[]{});
+        if (c.moveToNext()) {
+            return c.getString(0);
+        }
+        c.close();
+        return "failed";
+    }
+
+    public boolean setCurrentUserId__OFFLINE(String userId) {
+        db = openHelper.getWritableDatabase();
+        long result = db.delete("current_user","", null);
+        if (result == -1) {
+
+        } else {
+
+        }
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("user_id", userId);
+        result = db.insert("current_user", null, contentValues);
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
