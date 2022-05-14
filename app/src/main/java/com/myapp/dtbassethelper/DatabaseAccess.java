@@ -98,7 +98,7 @@ public class DatabaseAccess {
     }
 
     public ArrayList<EnWord> searchEnWord_NoPopulateWithOffsetLimit(String query, int offset, int limit) {
-        System.out.println("====="+query);
+//        System.out.println("====="+query);
         ArrayList<EnWord> list = new ArrayList<>();
         Cursor cursor;
         cursor = db.rawQuery("select id, word, pronunciation from en_word where word like '"+query+"%' limit " + limit + " offset " + offset, null);

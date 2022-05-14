@@ -33,10 +33,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="top"
+                    android:paddingTop="4dp"
                     >
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginRight="2dp"
                         android:src="@drawable/icons8_square_full_32px" />
                 </LinearLayout>
 
@@ -44,8 +46,9 @@
                     android:id="@+id/textViewExample"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/textDescription"
                     android:text="cabaret"
-                    android:textSize="18dp"
+                    android:textSize="15sp"
                     />
             </LinearLayout>
 
@@ -55,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:text="nghĩaaaaaaaaa"
                 android:textColor="#555"
-                android:textSize="18dp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

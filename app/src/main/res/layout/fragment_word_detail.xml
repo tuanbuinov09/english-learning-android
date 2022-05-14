@@ -25,7 +25,7 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/border_bottom"
                 android:text="saved_word"
-                android:textSize="20dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
 <!--            <ImageButton-->
@@ -53,7 +53,7 @@
                 android:id="@+id/textViewPronunciation"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:textSize="20dp"
+                android:textSize="17sp"
                 android:text="/pronunc/"/>
             <ImageButton
                 android:id="@+id/buttonSpeak"

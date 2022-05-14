@@ -3,10 +3,10 @@
     android:id="@+id/enWordItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="horizontal"
     android:layout_marginBottom="1dp"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -16,6 +16,11 @@
         android:paddingVertical="8dp"
         android:paddingLeft="8dp">
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp" />
+        <!--        tạm thời k dùng, để gone-->
         <CheckBox
             android:id="@+id/checkBoxWord"
             android:layout_width="wrap_content"
@@ -23,7 +28,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
 
-            />
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/layoutClickToSeeDetail"
@@ -36,12 +41,11 @@
                 android:id="@+id/textViewWord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom"
                 android:text="cabaret"
                 android:textColor="#333"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:background="@drawable/border_bottom"
-                />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewPronunciation"
@@ -49,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="/'phatam/"
                 android:textColor="#555"
-                android:textSize="18dp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/textViewMeaning"
@@ -57,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="nghĩaaaaaaaaa"
                 android:textColor="#555"
-                android:textSize="18dp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

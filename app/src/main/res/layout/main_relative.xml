@@ -1,49 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#609BEB"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:paddingHorizontal="10dp"-->
-<!--        android:paddingVertical="8dp"-->
-<!--        android:visibility="gone">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/searchInput"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:hint="Nhập từ muốn tìm"-->
-<!--            android:inputType="text"-->
-<!--            android:maxLines="1"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textColorHint="#ffffff"-->
-<!--            android:textSize="20dp" />-->
-<!--        &lt;!&ndash;        android:textColorHint=""&ndash;&gt;-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/searchButton"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:background="?android:attr/actionModeWebSearchDrawable"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:onClick="search" />-->
-<!--    </RelativeLayout>-->
+    android:orientation="vertical"
+    tools:context=".Main">
 
     <LinearLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/space_cadet"
         android:orientation="vertical"
         android:paddingHorizontal="5dp">
-
 
         <TextView
             android:layout_width="match_parent"
@@ -54,16 +24,35 @@
             android:textColor="@color/azureish_white"
             android:textSize="16sp" />
 
-        <SearchView
-            android:id="@+id/searchView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:background="@color/cultured"
-            android:iconifiedByDefault="false"
-            android:queryHint="Tìm kiếm"
-            android:textAlignment="textStart"
-            app:queryBackground="@null" />
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-10dp"
+                android:layout_weight="1"
+                android:background="@color/cultured"
+                android:maxLines="1"
+                android:queryHint="Tìm kiếm.."
+                android:textAlignment="textStart"
+                app:defaultQueryHint="@string/query_hint"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@null"
+                app:queryHint="@string/query_hint" />
+
+            <ImageButton
+                android:id="@+id/btnMic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/cultured"
+                android:paddingHorizontal="10dp"
+                android:src="@drawable/ic_baseline_mic_24" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,9 +82,11 @@
         </LinearLayout>
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/header"
         android:background="@color/bright_gray"
         android:orientation="vertical"
         android:paddingHorizontal="5dp">
@@ -207,4 +198,26 @@
 
         </FrameLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/floatingLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="160dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <include
+            layout="@layout/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
+
