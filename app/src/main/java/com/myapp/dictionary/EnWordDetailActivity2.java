@@ -144,7 +144,10 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                     selectedFragment.setArguments(bundle);
                     break;
                 case R.id.pageYourNote:
+                    Bundle bundleYourNote = new Bundle();
+                    bundleYourNote.putInt("enWordId", enWordId);
                     selectedFragment = new YourNoteFragment();
+                    selectedFragment.setArguments(bundleYourNote);
                     break;
             }
 
