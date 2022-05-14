@@ -44,7 +44,7 @@
                 android:background="@drawable/border_bottom"
                 android:text="cabaret"
                 android:textColor="#333"
-                android:textSize="18dp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="/'phatam/"
                 android:textColor="#555"
-                android:textSize="18dp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/textViewMeaning"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="nghĩaaaaaaaaa"
                 android:textColor="#555"
-                android:textSize="18dp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

@@ -40,6 +40,7 @@ import com.myapp.learnenglish.LearnEnglishActivity;
 import com.myapp.model.EnWord;
 import com.myapp.model.Settings;
 import com.myapp.utils.FileIO;
+import com.myapp.utils.SoftKeyboard;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -169,6 +170,7 @@ public class Main extends AppCompatActivity {
             public boolean onClose() {
                 enWordRecyclerAdapter.filterList(new ArrayList<EnWord>());
                 floatingLinearLayout.setVisibility(View.GONE);
+                SoftKeyboard.hideSoftKeyboard(searchInput, getApplicationContext());
                 return false;
             }
         });
