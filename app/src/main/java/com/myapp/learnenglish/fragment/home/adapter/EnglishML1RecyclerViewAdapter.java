@@ -17,16 +17,20 @@ import com.myapp.learnenglish.fragment.home.EnglishMultichoiceTestActivity;
 import com.myapp.learnenglish.fragment.home.EnglishMultichoiceTestActivity1;
 import com.myapp.learnenglish.fragment.home.EnglishMultichoiceTestActivity2;
 import com.myapp.learnenglish.fragment.home.model.Topic;
+import com.myapp.learnenglish.fragment.home.model.multichoice.ExerciseML;
+import com.myapp.learnenglish.fragment.home.adapter.EnglishMLRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
 public class EnglishML1RecyclerViewAdapter extends RecyclerView.Adapter<EnglishML1RecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<String> data;
+    private ArrayList<ExerciseML> data;
+    private String path;
 
-    public EnglishML1RecyclerViewAdapter(Context context, ArrayList<String> data) {
+    public EnglishML1RecyclerViewAdapter(Context context, ArrayList<ExerciseML> data, String path) {
         this.context = context;
         this.data = data;
+        this.path = path;
     }
 
     @NonNull
@@ -38,11 +42,17 @@ public class EnglishML1RecyclerViewAdapter extends RecyclerView.Adapter<EnglishM
 
     @Override
     public void onBindViewHolder(@NonNull EnglishML1RecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.EL1textview.setText(data.get(position));
+        holder.EL1textview.setText(data.get(position).getKey());
+        holder.textViewNumOfAchievedStarsML.setText(String.valueOf(data.get(position).getScore()));
+        holder.textViewNumOfStarsML.setText(String.valueOf(data.get(position).getQuestions().size()));
         holder.El1parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int pos = holder.getBindingAdapterPosition();
                 Intent intent = new Intent(context, EnglishMultichoiceTestActivity2.class);
+                intent.putExtra("questions", data.get(pos).getQuestions());
+                intent.putExtra("path", path + "/Exercises/" + data.get(pos).getKey());
+                intent.putExtra("exerciseIndex", pos);
                 context.startActivity(intent);
             }
         });
@@ -55,12 +65,14 @@ public class EnglishML1RecyclerViewAdapter extends RecyclerView.Adapter<EnglishM
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout El1parent;
-        TextView EL1textview;
+        TextView EL1textview,textViewNumOfAchievedStarsML, textViewNumOfStarsML ;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             El1parent = itemView.findViewById(R.id.EL1ParentLayout);
             EL1textview = itemView.findViewById(R.id.textViewEL1);
+            textViewNumOfAchievedStarsML = itemView.findViewById(R.id.textViewNumOfAchievedStarsML);
+            textViewNumOfStarsML = itemView.findViewById(R.id.textViewNumOfStarsML);
         }
     }
 }
