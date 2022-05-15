@@ -213,6 +213,9 @@ public class YourWordActivity extends AppCompatActivity {
         databaseAccess.open();
 //        list =  databaseAccess.getAllEnWord_NoPopulate();
 //        GlobalVariables.listAllSavedWords = databaseAccess.getAllEnWord_NoPopulateWithOffsetLimit(GlobalVariables.offset, GlobalVariables.limit);
+
+        GlobalVariables.listSavedWordId = databaseAccess.getListSavedWordIdFromSQLite(GlobalVariables.userId);
+
         GlobalVariables.listAllSavedWords = databaseAccess.getSavedWord_NoPopulateFromIdList(GlobalVariables.listSavedWordId);
 
         databaseAccess.close();

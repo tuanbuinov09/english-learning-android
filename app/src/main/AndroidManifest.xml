@@ -22,6 +22,9 @@
         tools:ignore="ExtraText"
         tools:replace="android:icon,android:theme">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".learnenglish.fragment.home.TestResultActivity"
             android:exported="false" />
         <activity
@@ -106,6 +109,9 @@
             android:exported="false" />
         <activity
             android:name=".SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".learnenglish.fragment.ranking.RankingActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"

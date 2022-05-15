@@ -1,12 +1,15 @@
 package com.myapp;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,16 +30,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.myapp.dialog.CustomDialog;
 import com.myapp.dtbassethelper.DatabaseAccess;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
-public class ThongTinTaikhoanActivity extends AppCompatActivity {
+public class ThongTinTaikhoanActivity extends AppCompatActivity implements CustomDialog.Listener {
 
     private static final int MY_REQUEST_CODE = 0;
     final  String DATABASE_NAME = "tudien.db";
@@ -44,9 +59,11 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     SQLiteDatabase database;
     EditText tvHoten,tvEmail,tvSdt,tvUID;
     TextView tvtaikhoan, tvTen;
-    Button btnCapNhat,btnLogout;
+    Button btnCapNhat,btnLogout, btnSynchFromFirebase, btnSynchToFirebase;
     String iduser;
     User user;
+    ProgressDialog progressDialog;
+    StorageReference storageReference;
     private Main mMainActivity ;
     private  Uri mUri;
     private boolean changeimage=false;
@@ -72,7 +89,13 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
+//                        if (requestCode == 100 && data != null && data.getData() != null){
+//
+//                            imageUri = data.getData();
+//                            binding.firebaseimage.setImageURI(imageUri);
+//
+//
+//                        }
                     }
                 }
             });
@@ -81,6 +104,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_tin_taikhoan);
         DB = DatabaseAccess.getInstance(getApplicationContext());
+        //binding = ActivityMainBinding.inflate(getLayoutInflater());
+        //setContentView(binding.getRoot());
         AnhXa();
 
 //        iduser = DB.iduser;
@@ -112,6 +137,58 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 // onClickUpdateProfile();
+
+                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                databaseAccess.open();
+                databaseAccess.removeCurrentUserId__OFFLINE();
+                databaseAccess.close();
+
+                GlobalVariables.listSavedWordId.clear();
+                GlobalVariables.listAllSavedWords.clear();
+            }
+        });
+
+        btnSynchFromFirebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean connected = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
+                }
+                else{
+                    connected = false;
+                }
+
+                if(connected==false){
+                    Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG);
+                    return;
+                }
+                openDialog("download");
+            }
+        });
+        btnSynchToFirebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean connected = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
+                }
+                else{
+                    connected = false;
+                }
+
+                if(connected==false){
+                    Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG);
+                    return;
+                }
+
+                openDialog("upload");
             }
         });
 
@@ -137,6 +214,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
 
     private void AnhXa()
     {
+        btnSynchFromFirebase = findViewById(R.id.btnSynchFromFirebase);
+        btnSynchToFirebase = findViewById(R.id.btnSynchToFirebase);
         tvHoten = findViewById(R.id.textIntEdtHoten);
         tvEmail = findViewById(R.id.textIntEdtEmail);
         tvSdt = findViewById(R.id.textIntEdtSdt);
@@ -195,8 +274,46 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
                         }
                     }
                 });
+        uploadImage();
     }
+    private void uploadImage() {
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading File....");
+        progressDialog.show();
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
+        Date now = new Date();
+        String fileName = formatter.format(now);
+        storageReference = FirebaseStorage.getInstance().getReference("userimage/"+fileName);
+
+
+        storageReference.putFile(mUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        //binding.firebaseimage.setImageURI(null);
+                        Toast.makeText(ThongTinTaikhoanActivity.this,"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+                        if (progressDialog.isShowing())
+                            progressDialog.dismiss();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+                Toast.makeText(ThongTinTaikhoanActivity.this,"Failed to Upload",Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
     public void setBitmapImageView(Bitmap bitmapImageView){
         imageView.setImageBitmap(bitmapImageView);
     }
@@ -271,4 +388,54 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void sendDialogResult(CustomDialog.Result result, String request) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+
+        GlobalVariables.db = FirebaseFirestore.getInstance();
+        if (request.equalsIgnoreCase("download")&&result == CustomDialog.Result.OK) {
+            GlobalVariables.db.collection("saved_word").whereEqualTo("user_id", GlobalVariables.userId).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            GlobalVariables.listSavedWordId.clear();
+                            for (DocumentSnapshot snapshot : task.getResult()) {
+                                long wordId1 = snapshot.getLong("word_id");
+                                int wordId = (int) wordId1;
+                                GlobalVariables.listSavedWordId.add(wordId);
+                            }
+
+                            databaseAccess.synchSavedWordToSQLite(GlobalVariables.userId, GlobalVariables.listSavedWordId);
+                            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ThongTinTaikhoanActivity.this, "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        }
+        if (request.equalsIgnoreCase("upload")&&result == CustomDialog.Result.OK) {
+            databaseAccess.synchSavedWordToFirebase(GlobalVariables.userId);
+
+            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+        }
+        databaseAccess.close();
+
+    }
+
+    public void openDialog(String confirmFor) {
+        String content = "";
+        if (confirmFor.equalsIgnoreCase("upload")) {
+            content = "Bạn có chắc muốn tải lên từ đã lưu?";
+        }
+        if (confirmFor.equalsIgnoreCase("download")) {
+            content = "Bạn có chắc muốn tải xuống từ đã lưu?";
+        }
+        CustomDialog upload_downloadConfirmCustomDialog = new CustomDialog(CustomDialog.Type.CONFIRM, "Xác nhận", content, confirmFor);
+        upload_downloadConfirmCustomDialog.show(getSupportFragmentManager(), "upload_downloadConfirmCustomDialog");
+    }
 }

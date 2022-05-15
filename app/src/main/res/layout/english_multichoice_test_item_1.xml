@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_baseline_star_32"/>
                     <TextView
-                        android:id="@id/textViewNumOfAchievedStars"
+                        android:id="@id/textViewNumOfAchievedStarsML"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -72,7 +72,7 @@
                         android:textStyle="bold"
                         android:layout_gravity="center"/>
                     <TextView
-                        android:id="@+id/textViewNumOfStars"
+                        android:id="@+id/textViewNumOfStarsML"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1"
