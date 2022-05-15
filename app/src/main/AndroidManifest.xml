@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.myapp">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +24,19 @@
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText"
         tools:replace="android:icon,android:theme">
+        <activity
+            android:name=".learnenglish.fragment.home.activity.listening.ListeningExerciseActivity"
+            android:exported="false"
+            android:parentActivityName=".learnenglish.fragment.home.activity.listening.ListeningTopicActivity"
+            android:theme="@style/Theme.TkActionBar" />
+        <activity
+            android:name=".learnenglish.fragment.home.activity.listening.ListeningTopicActivity"
+            android:exported="false"
+            android:parentActivityName=".learnenglish.LearnEnglishActivity"
+            android:theme="@style/Theme.TkActionBar" />
+        <activity
+            android:name=".learnenglish.fragment.home.activity.listening.ListeningActivity"
+            android:exported="false" />
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
@@ -50,17 +66,13 @@
             android:name=".dictionary.EnWordDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".HistoryActivity"
-            android:exported="false"
-            android:theme="@style/Theme.TranslationHistoryActivity" />
-        <activity
-            android:name=".learnenglish.fragment.home.ArrangeWordsExercisesActivity"
+            android:name=".learnenglish.fragment.home.activity.arrangewords.ArrangeWordsExercisesActivity"
             android:exported="false"
             android:label="Unit 1"
-            android:parentActivityName=".learnenglish.fragment.home.ArrangeWordsTopicsActivity"
+            android:parentActivityName=".learnenglish.fragment.home.activity.arrangewords.ArrangeWordsTopicsActivity"
             android:theme="@style/Theme.TkActionBar" />
         <activity
-            android:name=".learnenglish.fragment.home.ArrangeWordsTopicsActivity"
+            android:name=".learnenglish.fragment.home.activity.arrangewords.ArrangeWordsTopicsActivity"
             android:exported="false"
             android:label="Sắp xếp các từ thành câu"
             android:parentActivityName=".learnenglish.LearnEnglishActivity"
@@ -81,7 +93,7 @@
             android:name=".learnenglish.fragment.home.EnglishMultichoiceTestActivity2"
             android:exported="false" />
         <activity
-            android:name=".learnenglish.fragment.home.ArrangeWordsActivity"
+            android:name=".learnenglish.fragment.home.activity.arrangewords.ArrangeWordsActivity"
             android:exported="false" />
         <activity
             android:name=".learnenglish.LearnEnglishActivity"

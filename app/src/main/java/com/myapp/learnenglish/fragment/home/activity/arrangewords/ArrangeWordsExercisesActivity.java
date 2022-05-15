@@ -1,4 +1,4 @@
-package com.myapp.learnenglish.fragment.home;
+package com.myapp.learnenglish.fragment.home.activity.arrangewords;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.myapp.R;
-import com.myapp.learnenglish.fragment.home.adapter.ExercisesRecyclerViewAdapter;
-import com.myapp.learnenglish.fragment.home.model.Exercise;
+import com.myapp.learnenglish.fragment.home.adapter.arrangewords.ExercisesRecyclerViewAdapter;
+import com.myapp.learnenglish.fragment.home.model.arrangewords.Exercise;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.myapp.learnenglish.fragment.home;
+package com.myapp.learnenglish.fragment.home.activity.arrangewords;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,25 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myapp.R;
-import com.myapp.learnenglish.fragment.home.adapter.TopicsRecyclerViewAdapter;
-import com.myapp.learnenglish.fragment.home.dao.TopicDao;
-import com.myapp.learnenglish.fragment.home.model.Exercise;
-import com.myapp.learnenglish.fragment.home.model.Question;
-import com.myapp.learnenglish.fragment.home.model.Topic;
+import com.myapp.learnenglish.fragment.home.adapter.arrangewords.TopicsRecyclerViewAdapter;
+import com.myapp.learnenglish.fragment.home.model.arrangewords.Exercise;
+import com.myapp.learnenglish.fragment.home.model.arrangewords.Question;
+import com.myapp.learnenglish.fragment.home.model.arrangewords.Topic;
 
 import java.util.ArrayList;
 
 public class ArrangeWordsTopicsActivity extends AppCompatActivity {
-    private TopicDao topicDao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.myapp.R.layout.activity_arrange_words_topics);
 
-        topicDao = new TopicDao();
         loadData();
     }
 
@@ -47,10 +44,11 @@ public class ArrangeWordsTopicsActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        topicDao.get().addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("Topics").orderByKey().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // structure: each topic has a list of exercises, each exercise has a list of questions
+                String currentUserId = FirebaseAuth.getInstance().getUid();
                 ArrayList<Topic> topics = new ArrayList<>();
                 for (DataSnapshot topicsNode : snapshot.getChildren()) {
                     ArrayList<Exercise> exercises = new ArrayList<>();
@@ -65,7 +63,6 @@ public class ArrangeWordsTopicsActivity extends AppCompatActivity {
 
                         // get the score of the current user
                         int score = 0;
-                        String currentUserId = FirebaseAuth.getInstance().getUid();
                         if (exercisesNode.hasChild("Scores")) {
                             if (exercisesNode.child("Scores").hasChild(currentUserId)) {
                                 score = Integer.parseInt(exercisesNode.child("Scores").child(currentUserId).getValue().toString());

@@ -2,11 +2,9 @@ package com.myapp.learnenglish.fragment.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.R;
-import com.myapp.learnenglish.fragment.home.ArrangeWordsExercisesActivity;
 import com.myapp.learnenglish.fragment.home.EnglishMultichoiceTestActivity1;
 import com.myapp.learnenglish.fragment.home.model.multichoice.TopicML;
 import com.myapp.learnenglish.fragment.home.model.multichoice.ExerciseML;

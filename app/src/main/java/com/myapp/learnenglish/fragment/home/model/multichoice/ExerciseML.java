@@ -1,7 +1,6 @@
 package com.myapp.learnenglish.fragment.home.model.multichoice;
 
 import com.google.firebase.database.Exclude;
-import com.myapp.learnenglish.fragment.home.model.Question;
 
 import java.io.Serializable;
 import java.util.ArrayList;

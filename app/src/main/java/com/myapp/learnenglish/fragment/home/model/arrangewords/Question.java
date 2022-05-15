@@ -1,4 +1,4 @@
-package com.myapp.learnenglish.fragment.home.model;
+package com.myapp.learnenglish.fragment.home.model.arrangewords;
 
 import java.io.Serializable;
 

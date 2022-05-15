@@ -9,12 +9,8 @@ import android.view.Menu;
 
 import com.myapp.R;
 import com.myapp.learnenglish.fragment.home.adapter.EnglishML1RecyclerViewAdapter;
-import com.myapp.learnenglish.fragment.home.adapter.ExercisesRecyclerViewAdapter;
-import com.myapp.learnenglish.fragment.home.model.Exercise;
-import com.myapp.learnenglish.fragment.home.model.Question;
 import com.myapp.learnenglish.fragment.home.model.multichoice.ExerciseML;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EnglishMultichoiceTestActivity1 extends AppCompatActivity {

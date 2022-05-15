@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:clipToPadding="false"
-    tools:context=".learnenglish.fragment.home.ArrangeWordsActivity">
+    tools:context=".learnenglish.fragment.home.activity.arrangewords.ArrangeWordsActivity">
     <include layout="@layout/tk_arrange_words_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

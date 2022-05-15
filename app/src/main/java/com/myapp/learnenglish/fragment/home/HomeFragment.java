@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.google.android.material.card.MaterialCardView;
 import com.myapp.R;
+import com.myapp.learnenglish.fragment.home.activity.arrangewords.ArrangeWordsTopicsActivity;
+import com.myapp.learnenglish.fragment.home.activity.listening.ListeningTopicActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +30,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private MaterialCardView cardViewArrangeWords;
+    private MaterialCardView cardViewArrangeWords, cardViewPracticeListening;
     private MaterialCardView card3;
 
     public HomeFragment() {
@@ -88,12 +90,21 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        cardViewPracticeListening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeFragment.this.getActivity(), ListeningTopicActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
 
     private void setControl(View view) {
         cardViewArrangeWords = view.findViewById(R.id.cardViewArrangeWords);
+        cardViewPracticeListening = view.findViewById(R.id.cardViewPracticeListening);
         card3 = view.findViewById(R.id.card3);
     }
 }

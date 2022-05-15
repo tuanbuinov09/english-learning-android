@@ -20,9 +20,13 @@
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/drawable/tk_textview.xml" value="0.218" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_arrange_words.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_arrange_words_exercises.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_arrange_words_topics.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_arrange_words_unit.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_arrange_words_units.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_learn_english.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_listening.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_listening_exercise.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/activity_listening_topic.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/fragment_achievement.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
