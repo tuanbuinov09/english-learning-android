@@ -76,8 +76,7 @@
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/point"
-                        />
+                        android:src="@drawable/point" />
 
                 </RelativeLayout>
             </LinearLayout>

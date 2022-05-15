@@ -48,7 +48,7 @@ public class LearnEnglishActivity extends AppCompatActivity {
                     break;
                 case R.id.pageProfile:
                     //selectedFragment = new ProfileFragment();
-                    Intent intent = new Intent(this, ThongTinTaikhoanActivity.class);
+                    Intent intent = new Intent(this, ProfileActivity.class);
                     startActivity(intent);
                     break;
             }

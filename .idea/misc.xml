@@ -29,7 +29,6 @@
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/settings_linearlayout.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/sign_in_linearlayout.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/sign_up_linearlayout.xml" value="0.25" />
-        <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_achievement_item.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_app_bar.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_app_bar.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_exercise_item.xml" value="0.25" />
@@ -83,7 +82,7 @@
         <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/drawable/btngradient_noradius.xml" value="0.1" />
         <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/drawable/ic_back.xml" value="0.1" />
         <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/drawable/my_custom_background.xml" value="0.1" />
-        <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/layout/activity_profile.xml" value="0.15" />
+        <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/layout/activity_ranking.xml" value="0.25" />
         <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/layout/activity_thong_tin_taikhoan1.xml" value="0.21" />
         <entry key="..\:/Users/nguye/Downloads/Android/hoc-tieng-anh-android6/hoc-tieng-anh-android/app/src/main/res/layout/activity_tin_taikhoan.xml" value="0.1" />
@@ -98,8 +97,8 @@
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_your_note.xml" value="0.20153985507246377" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_your_word.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/en_word_item.xml" value="0.16032608695652173" />
-        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/en_word_item_for_recyclerview.xml" value="0.33" />
-        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/example_detail_item_for_recyclerview.xml" value="0.33" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/en_word_item_for_recyclerview.xml" value="0.25" />
+        <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/example_detail_item_for_recyclerview.xml" value="0.25" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/fragment_achievement.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/fragment_en_word_detail_activity2.xml" value="0.1" />
         <entry key="..\:/android_project/hoc-tieng-anh/hoc-tieng-anh-android/app/src/main/res/layout/fragment_home.xml" value="0.1" />
