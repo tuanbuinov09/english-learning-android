@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,8 @@ public class DictionaryActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setElevation(0);
+
+        changeSearchView();
     }
 
 //    @Override
@@ -152,6 +155,14 @@ public class DictionaryActivity extends AppCompatActivity {
 
     public void setEnWordAdapter() {
 
+
+    }
+
+    private void changeSearchView() {
+
+        TextView textView = (TextView) searchInput.findViewById(androidx.appcompat.R.id.search_src_text);
+        textView.setTextColor(getColor(R.color.space_cadet));
+        textView.setHintTextColor(getColor(R.color.azureish_white));
 
     }
 
