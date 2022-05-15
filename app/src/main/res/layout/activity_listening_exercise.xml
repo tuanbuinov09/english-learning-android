@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".learnenglish.fragment.home.activity.arrangewords.ArrangeWordsExercisesActivity">
+    tools:context=".learnenglish.fragment.home.activity.listening.ListeningExerciseActivity">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewExercises"
         android:layout_width="match_parent"

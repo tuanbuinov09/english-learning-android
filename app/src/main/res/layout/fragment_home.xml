@@ -40,7 +40,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card2"
+            android:id="@+id/cardViewPracticeListening"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -52,7 +52,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/listening_128" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fuck you bitch"
+                        android:text="Luyện nghe"
                         android:textAppearance="?attr/textAppearanceHeadline6" />
                 </LinearLayout>
             </LinearLayout>

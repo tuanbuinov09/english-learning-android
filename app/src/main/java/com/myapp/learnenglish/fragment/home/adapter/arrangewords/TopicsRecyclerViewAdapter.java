@@ -1,4 +1,4 @@
-package com.myapp.learnenglish.fragment.home.adapter;
+package com.myapp.learnenglish.fragment.home.adapter.arrangewords;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.R;
-import com.myapp.learnenglish.fragment.home.ArrangeWordsExercisesActivity;
-import com.myapp.learnenglish.fragment.home.model.Exercise;
-import com.myapp.learnenglish.fragment.home.model.Topic;
+import com.myapp.learnenglish.fragment.home.activity.arrangewords.ArrangeWordsExercisesActivity;
+import com.myapp.learnenglish.fragment.home.model.arrangewords.Exercise;
+import com.myapp.learnenglish.fragment.home.model.arrangewords.Topic;
 
 import java.util.ArrayList;
 
