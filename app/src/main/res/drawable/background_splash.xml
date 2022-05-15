@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/space_cadet" />
+    <item
+        android:width="300dp"
+        android:height="300dp"
+        android:drawable="@drawable/ic_launcher_foreground"
+        android:gravity="center" />
+    <!--    <item-->
+    <!--        android:width="500dp"-->
+    <!--        android:height="500dp"-->
+    <!--        android:gravity="center">-->
+    <!--        <bitmap-->
+    <!--            android:gravity="fill"-->
+    <!--            android:src="@mipmap/ic_launcher"-->
+    <!--            android:mipMap="true"/>-->
+    <!--    </item>-->
+</layer-list>

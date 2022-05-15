@@ -72,14 +72,14 @@
             android:id="@+id/btnSpeak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:background="@drawable/ic_baseline_volume_up_24" />
 
         <ImageButton
             android:id="@+id/btnFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_round_star_outline_24" />
+            android:background="@drawable/ic_round_star_outline_24"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/ivCheckBox"

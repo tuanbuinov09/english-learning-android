@@ -150,7 +150,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingVertical="5dp"
-            android:paddingStart="5dp">
+            android:paddingStart="5dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -194,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_round_image_button"
                 android:padding="10dp"
-                android:src="@drawable/ic_baseline_volume_up_24" />
+                android:src="@drawable/ic_baseline_report_problem_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -210,7 +211,8 @@
             android:background="@drawable/linear_layout_border_bottom"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -242,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_round_image_button"
                 android:padding="10dp"
-                android:src="@drawable/ic_baseline_volume_up_24" />
+                android:src="@drawable/ic_baseline_info_24" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -261,6 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Version 1.0.0"
+                    android:textColor="@color/steel_blue"
                     android:textSize="10sp" />
 
                 <TextView
@@ -268,6 +271,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Developed by T11"
+                    android:textColor="@color/steel_blue"
                     android:textSize="10sp" />
             </LinearLayout>
 

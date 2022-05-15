@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.myapp.GlobalVariables;
-import com.myapp.model.Settings;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -17,31 +16,31 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-public class FileIO {
-    public static void writeToFile(Settings settings, Context context) {
+public class FileIO2 {
+    public static void writeToFile(List<Integer> wordList, Context context) {
         File path = context.getApplicationContext().getFilesDir();
-        File file = new File(path, GlobalVariables.FILE_CONFIG_NAME);
+        File file = new File(path, GlobalVariables.FILE_HISTORY_NAME);
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(file);
             ObjectOutputStream outputStream = new ObjectOutputStream(new BufferedOutputStream(fos));
-            outputStream.writeObject(settings);
+            outputStream.writeObject(wordList);
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static Settings readFromFile(Context context) {
+    public static List<Integer> readFromFile(Context context) {
         File path = context.getApplicationContext().getFilesDir();
-        File file = new File(path, GlobalVariables.FILE_CONFIG_NAME);
+        File file = new File(path, GlobalVariables.FILE_HISTORY_NAME);
 
-        Settings settings = null;
+        List<Integer> wordList = null;
         FileInputStream fis;
         try {
             fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(fis));
-            settings = (Settings) ois.readObject();
+            wordList = (List<Integer>) ois.readObject();
             ois.close();
         } catch (FileNotFoundException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -49,6 +48,6 @@ public class FileIO {
             Log.e("read error", e.getLocalizedMessage() == null ? "" : e.getLocalizedMessage());
             e.printStackTrace();
         }
-        return settings;
+        return wordList;
     }
 }

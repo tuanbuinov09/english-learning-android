@@ -23,6 +23,7 @@ public class GlobalVariables {
     public static float VOICE_SPEED = 1; // NORMAL
 
     public static String FILE_CONFIG_NAME = "config.dat";
+    public static String FILE_HISTORY_NAME = "history.dat";
     public static String userNote="";
 //    public static Settings SETTINGS;
 }
