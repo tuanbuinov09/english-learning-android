@@ -332,6 +332,7 @@ public class DatabaseAccess {
             return false;
         }
     }
+
     public void capnhatdiem0(String iduser, int Point, int PointPlus) {
 
         //Cập Nhật User lên FireBase
@@ -418,6 +419,7 @@ public class DatabaseAccess {
 //            return false;
 //        }
     }
+
     public Boolean capnhatdiem(String iduser, int Point, int PointPlus) {
 
         //Cập Nhật User lên FireBase
@@ -473,21 +475,23 @@ public class DatabaseAccess {
             ContentValues contentValues = new ContentValues();
             contentValues.put("en_word_id", wordId);
             contentValues.put("user_id", userId);
-            cursor = db.rawQuery("select * from saved_word where user_id = ?", new String[]{userId});
+            cursor = db.rawQuery("select * from saved_word where user_id = ? and en_word_id = " + wordId, new String[]{userId});
             if (cursor.getCount() > 0) {
-                long result = db.insert("saved_word", null, contentValues);
-                cursor.close();
+
             } else {
-                return false;
+                long result = db.insert("saved_word", null, contentValues);
             }
+            cursor.close();
         }
+        ArrayList<Integer> list = getListSavedWordIdFromSQLite(userId);
+
         return true;
     }
 
     public ArrayList<Integer> getListSavedWordIdFromSQLite(String userId) {
         ArrayList<Integer> list = new ArrayList<>();
         Cursor cursor;
-        cursor = db.rawQuery("select id from saved_word where user_id = '" + userId + "'", null);
+        cursor = db.rawQuery("select en_word_id from saved_word where user_id = '" + userId + "'", null);
         while (cursor.moveToNext()) {
             list.add(cursor.getInt(0));
         }
@@ -495,7 +499,7 @@ public class DatabaseAccess {
         return list;
     }
 
-    
+
     public boolean synchSavedWordToFirebase(String userId) {
         db = openHelper.getWritableDatabase();
         ArrayList<Integer> listSavedWordId = getListSavedWordIdFromSQLite(userId);
@@ -544,7 +548,7 @@ public class DatabaseAccess {
         ContentValues contentValues = new ContentValues();
         contentValues.put("user_id", userId);
         contentValues.put("en_word_id", wordId);
-        long result = db.insert("User", null, contentValues);
+        long result = db.insert("saved_word", null, contentValues);
         if (result == -1) {
             return false;
         } else {
@@ -552,44 +556,64 @@ public class DatabaseAccess {
         }
     }
 
-    public boolean unSaveOneWord(String userId, int wordId) {
+    public void unSaveOneWord(String userId, int wordId) {
+//        db = openHelper.getWritableDatabase();
+////        ContentValues contentValues = new ContentValues();
+////        contentValues.put("user_id", userId);
+////        contentValues.put("en_word_id", wordId);
+//        Cursor result = db.rawQuery("delete from saved_word where en_word_id = "+wordId+" and user_id = '"+userId+"'", null);
         db = openHelper.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("user_id", userId);
-//        contentValues.put("en_word_id", wordId);
-        long result = db.delete("saved_word","where en_word_id = "+wordId+" and user_id='"+userId+"'", null);
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
+        db.beginTransaction();
+        try {
+            Log.d(TAG, "We Are Trying to Delete Item From DataBase!!");
+            Log.d(TAG, "this is an item: " + userId + ", " + wordId);
+            Log.d(TAG, "this is an item: " + "delete from saved_word where user_id = '" + userId + "' and en_word_id = " + wordId);
+            db.execSQL("DELETE FROM saved_word WHERE user_id ='" + userId + "' and en_word_id = "+wordId);
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to delete user from database" + e.toString());
         }
+
+        ArrayList<Integer> list = getListSavedWordIdFromSQLite(userId);
     }
 
     public String getCurrentUserId__OFFLINE() {
-        db = openHelper.getWritableDatabase();
+        db = openHelper.getReadableDatabase();
         Cursor c = db.rawQuery("select user_id from current_user", new String[]{});
-        if (c.moveToNext()) {
-            return c.getString(0);
+        String userid = "";
+        while (c.moveToNext()) {
+            userid = c.getString(0);
         }
         c.close();
-        return "failed";
+        return userid;
     }
 
     public boolean setCurrentUserId__OFFLINE(String userId) {
         db = openHelper.getWritableDatabase();
-        long result = db.delete("current_user","", null);
-        if (result == -1) {
-
-        } else {
-
-        }
+        db.execSQL("DELETE FROM current_user");
         ContentValues contentValues = new ContentValues();
         contentValues.put("user_id", userId);
-        result = db.insert("current_user", null, contentValues);
+        long result = db.insert("current_user", null, contentValues);
         if (result == -1) {
             return false;
         } else {
             return true;
         }
+    }
+
+    public void removeCurrentUserId__OFFLINE() {
+        db = openHelper.getWritableDatabase();
+        db = openHelper.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            Log.d(TAG, "We Are Trying to Delete Item From DataBase!!");
+            db.execSQL("DELETE FROM current_user");
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to delete user from database" + e.toString());
+        }
+
     }
 }

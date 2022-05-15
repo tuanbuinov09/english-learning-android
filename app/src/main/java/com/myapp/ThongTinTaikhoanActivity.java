@@ -36,6 +36,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -134,6 +137,14 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                 startActivity(intent);
                 finish();
                 // onClickUpdateProfile();
+
+                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                databaseAccess.open();
+                databaseAccess.removeCurrentUserId__OFFLINE();
+                databaseAccess.close();
+
+                GlobalVariables.listSavedWordId.clear();
+                GlobalVariables.listAllSavedWords.clear();
             }
         });
 
@@ -381,10 +392,31 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
     public void sendDialogResult(CustomDialog.Result result, String request) {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
-        if (request.equalsIgnoreCase("download")&&result == CustomDialog.Result.OK) {
-            databaseAccess.synchSavedWordToSQLite(GlobalVariables.userId, GlobalVariables.listSavedWordId);
 
-            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+        GlobalVariables.db = FirebaseFirestore.getInstance();
+        if (request.equalsIgnoreCase("download")&&result == CustomDialog.Result.OK) {
+            GlobalVariables.db.collection("saved_word").whereEqualTo("user_id", GlobalVariables.userId).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            GlobalVariables.listSavedWordId.clear();
+                            for (DocumentSnapshot snapshot : task.getResult()) {
+                                long wordId1 = snapshot.getLong("word_id");
+                                int wordId = (int) wordId1;
+                                GlobalVariables.listSavedWordId.add(wordId);
+                            }
+
+                            databaseAccess.synchSavedWordToSQLite(GlobalVariables.userId, GlobalVariables.listSavedWordId);
+                            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ThongTinTaikhoanActivity.this, "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
         }
         if (request.equalsIgnoreCase("upload")&&result == CustomDialog.Result.OK) {
             databaseAccess.synchSavedWordToFirebase(GlobalVariables.userId);
