@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_round_image_button"
             android:padding="10dp"
-            android:src="@drawable/ic_baseline_volume_up_24" />
+            android:src="@drawable/ic_baseline_alarm_24" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +38,8 @@
         <CheckBox
             android:id="@+id/cbxRemindWords"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/space_cadet" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +56,8 @@
             android:background="@drawable/linear_layout_border_bottom"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingVertical="15dp">
+            android:paddingVertical="15dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -172,7 +174,7 @@
                 layout="@layout/day_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp" />
         </LinearLayout>
 
 
