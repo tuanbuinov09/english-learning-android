@@ -13,10 +13,11 @@ import com.myapp.dtbassethelper.DatabaseAccess;
 
 public class SplashActivity extends AppCompatActivity {
     DatabaseAccess DB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+
         DB = DatabaseAccess.getInstance(getApplicationContext());
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -24,20 +25,20 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 nextActivity();
             }
-        },2000);
+        }, 2000);
     }
 
     private void nextActivity() {
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user==null){
+        if (user == null) {
             //Chưa login
-            Intent intent = new Intent(this,Main.class);
+            Intent intent = new Intent(this, Main.class);
             startActivity(intent);
 
-        }else{
+        } else {
             DB.iduser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            Intent intent = new Intent(this,Main.class);
+            Intent intent = new Intent(this, Main.class);
             startActivity(intent);
             Toast.makeText(getApplicationContext(),
                     DB.iduser,
