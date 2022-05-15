@@ -8,19 +8,25 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.myapp.User;
+import com.google.firebase.firestore.SetOptions;
+import com.myapp.GlobalVariables;
 import com.myapp.model.EnWord;
 import com.myapp.model.ExampleDetail;
 import com.myapp.model.Meaning;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,9 +86,9 @@ public class DatabaseAccess {
 
     public ArrayList<EnWord> getSavedWord_NoPopulateFromIdList(ArrayList<Integer> listId) {
         ArrayList<EnWord> list = new ArrayList<>();
-        for(int id : listId){
+        for (int id : listId) {
             Cursor cursor;
-            cursor = db.rawQuery("select id, word, pronunciation from en_word where id = "+id, null);
+            cursor = db.rawQuery("select id, word, pronunciation from en_word where id = " + id, null);
             while (cursor.moveToNext()) {
                 list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2), getOneMeaningOfEnWord(cursor.getInt(0))));
             }
@@ -106,7 +112,7 @@ public class DatabaseAccess {
 //        System.out.println("====="+query);
         ArrayList<EnWord> list = new ArrayList<>();
         Cursor cursor;
-        cursor = db.rawQuery("select id, word, pronunciation from en_word where word like '"+query+"%' limit " + limit + " offset " + offset, null);
+        cursor = db.rawQuery("select id, word, pronunciation from en_word where word like '" + query + "%' limit " + limit + " offset " + offset, null);
         while (cursor.moveToNext()) {
             list.add(new EnWord(cursor.getInt(0), cursor.getString(1), cursor.getString(2), getOneMeaningOfEnWord(cursor.getInt(0))));
         }
@@ -207,7 +213,6 @@ public class DatabaseAccess {
         }
         return list;
     }
-
 
 
     public Boolean insertData(String iduser, String hoten, String email, String sdt, int diem) {
@@ -434,6 +439,157 @@ public class DatabaseAccess {
             }
         } else {
             return false;
+        }
+    }
+
+//    public boolean synchSavedWordToSQLite(String userId, ArrayList<Integer> listSavedWordId) {
+//        db = openHelper.getWritableDatabase();
+//        for(int wordId:listSavedWordId){
+//            ContentValues contentValues = new ContentValues();
+//            contentValues.put("en_word_id", wordId);
+//            contentValues.put("user_id", userId);
+//            Cursor cursor = db.rawQuery("Select * from saved_word where user_id = ?", new String[]{userId});
+//            if (cursor.getCount() > 0) {
+//                long result = db.update("saved_word", contentValues, "ID_User = ?", new String[]{userId});
+//                if (result == -1) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            } else {
+//
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
+
+
+    public boolean synchSavedWordToSQLite(String userId, ArrayList<Integer> listSavedWordId) {
+        db = openHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("delete from saved_word where user_id = ?", new String[]{userId});
+        for (int wordId : listSavedWordId) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("en_word_id", wordId);
+            contentValues.put("user_id", userId);
+            cursor = db.rawQuery("select * from saved_word where user_id = ?", new String[]{userId});
+            if (cursor.getCount() > 0) {
+                long result = db.insert("saved_word", null, contentValues);
+                cursor.close();
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ArrayList<Integer> getListSavedWordIdFromSQLite(String userId) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Cursor cursor;
+        cursor = db.rawQuery("select id from saved_word where user_id = '" + userId + "'", null);
+        while (cursor.moveToNext()) {
+            list.add(cursor.getInt(0));
+        }
+        cursor.close();
+        return list;
+    }
+
+    
+    public boolean synchSavedWordToFirebase(String userId) {
+        db = openHelper.getWritableDatabase();
+        ArrayList<Integer> listSavedWordId = getListSavedWordIdFromSQLite(userId);
+
+        for (int wordId : listSavedWordId) {
+            // xóa trước
+            GlobalVariables.db.collection("saved_word").document(userId + wordId + "")
+                    .delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(wordId));
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+// xóa xong thêm
+
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("user_id", userId);
+            map.put("word_id", wordId);
+            GlobalVariables.db.collection("saved_word")
+                    .document(userId + wordId + "").set(map, SetOptions.merge())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            //them ca vao trong nay cho de dung
+                            GlobalVariables.listSavedWordId.add(wordId);
+                        }
+
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                }
+            });
+        }
+        return true;
+    }
+
+    public boolean saveOneWord(String userId, int wordId) {
+        db = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("user_id", userId);
+        contentValues.put("en_word_id", wordId);
+        long result = db.insert("User", null, contentValues);
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean unSaveOneWord(String userId, int wordId) {
+        db = openHelper.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("user_id", userId);
+//        contentValues.put("en_word_id", wordId);
+        long result = db.delete("saved_word","where en_word_id = "+wordId+" and user_id='"+userId+"'", null);
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public String getCurrentUserId__OFFLINE() {
+        db = openHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("select user_id from current_user", new String[]{});
+        if (c.moveToNext()) {
+            return c.getString(0);
+        }
+        c.close();
+        return "failed";
+    }
+
+    public boolean setCurrentUserId__OFFLINE(String userId) {
+        db = openHelper.getWritableDatabase();
+        long result = db.delete("current_user","", null);
+        if (result == -1) {
+
+        } else {
+
+        }
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("user_id", userId);
+        result = db.insert("current_user", null, contentValues);
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

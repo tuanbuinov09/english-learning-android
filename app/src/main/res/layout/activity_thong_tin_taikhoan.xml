@@ -63,12 +63,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="21dp">
+            android:padding="12dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:hint="Họ Tên"
                 app:hintTextColor="@color/space_cadet">
 
@@ -86,7 +85,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:hint="Email"
                 app:hintTextColor="@color/space_cadet">
 
@@ -105,7 +103,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:hint="Số điện thoại"
                 app:hintTextColor="@color/space_cadet">
 
@@ -146,6 +143,7 @@
                 android:id="@+id/buttonCapNhat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-16dp"
                 android:background="@drawable/bg_space_cadet_radius_15"
                 android:text="Cập nhật"
                 android:textColor="@color/cultured"
@@ -159,6 +157,36 @@
                 android:text="Đổi mật khẩu"
                 android:textColor="@color/cultured"
                 app:backgroundTint="@color/space_cadet" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="50dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textAllCaps="true"
+                    android:background="@color/steel_blue"
+                    android:id="@+id/btnSynchFromFirebase"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:text="Download"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="50dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textAllCaps="true"
+                    android:background="#48AE4C"
+                    android:id="@+id/btnSynchToFirebase"
+                    android:layout_weight="1"
+                    android:text="Upload"/>
+            </LinearLayout>
             <Button
                 android:id="@+id/buttonLogout"
                 android:layout_width="match_parent"
