@@ -105,13 +105,13 @@ public class Main extends AppCompatActivity {
         GlobalVariables.userId = databaseAccess.getCurrentUserId__OFFLINE();
         databaseAccess.close();
 
-        try{
-            DB = DatabaseAccess.getInstance(getApplicationContext());
-            mAuth = FirebaseAuth.getInstance();
-            GlobalVariables.userId = mAuth.getCurrentUser().getUid();
-        }catch (Exception ex){
-
-        }
+//        try{
+//            DB = DatabaseAccess.getInstance(getApplicationContext());
+//            mAuth = FirebaseAuth.getInstance();
+//            GlobalVariables.userId = mAuth.getCurrentUser().getUid();
+//        }catch (Exception ex){
+//
+//        }
 
         //để khi lưu hay bỏ lưu ở word detail thì cái nàfy đc cậpj nhật
         enWordRecyclerAdapter.notifyDataSetChanged();
@@ -341,14 +341,18 @@ public class Main extends AppCompatActivity {
         fab = findViewById(R.id.fab);
 
         //lấy user id
-        try {
-            DB = DatabaseAccess.getInstance(getApplicationContext());
-            mAuth = FirebaseAuth.getInstance();
-            GlobalVariables.userId = mAuth.getCurrentUser().getUid();
-        } catch (Exception ex) {
+//        try {
+//            DB = DatabaseAccess.getInstance(getApplicationContext());
+//            mAuth = FirebaseAuth.getInstance();
+//            GlobalVariables.userId = mAuth.getCurrentUser().getUid();
+//        } catch (Exception ex) {
+//
+//        }
 
-        }
-
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        GlobalVariables.userId = databaseAccess.getCurrentUserId__OFFLINE();
+        databaseAccess.close();
     }
 
     public void search(View view) {

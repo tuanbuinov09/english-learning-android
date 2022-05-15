@@ -78,6 +78,8 @@ public class SignInActivity extends AppCompatActivity {
 
                                             DB.iduser = mAuth.getCurrentUser().getUid();
                                             DB.CapNhatUser(mAuth.getCurrentUser().getUid());
+
+                                            DB.setCurrentUserId__OFFLINE(mAuth.getCurrentUser().getUid());
                                             // hide the progress bar
                                             // if sign-in is successful
                                             // intent to home activity

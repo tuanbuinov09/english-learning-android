@@ -473,21 +473,23 @@ public class DatabaseAccess {
             ContentValues contentValues = new ContentValues();
             contentValues.put("en_word_id", wordId);
             contentValues.put("user_id", userId);
-            cursor = db.rawQuery("select * from saved_word where user_id = ?", new String[]{userId});
+            cursor = db.rawQuery("select * from saved_word where user_id = ? and en_word_id = "+ wordId, new String[]{userId});
             if (cursor.getCount() > 0) {
-                long result = db.insert("saved_word", null, contentValues);
-                cursor.close();
+
             } else {
-                return false;
+                long result = db.insert("saved_word", null, contentValues);
             }
+            cursor.close();
         }
+        ArrayList<Integer> list = getListSavedWordIdFromSQLite(userId);
+
         return true;
     }
 
     public ArrayList<Integer> getListSavedWordIdFromSQLite(String userId) {
         ArrayList<Integer> list = new ArrayList<>();
         Cursor cursor;
-        cursor = db.rawQuery("select id from saved_word where user_id = '" + userId + "'", null);
+        cursor = db.rawQuery("select en_word_id from saved_word where user_id = '" + userId + "'", null);
         while (cursor.moveToNext()) {
             list.add(cursor.getInt(0));
         }
@@ -544,7 +546,7 @@ public class DatabaseAccess {
         ContentValues contentValues = new ContentValues();
         contentValues.put("user_id", userId);
         contentValues.put("en_word_id", wordId);
-        long result = db.insert("User", null, contentValues);
+        long result = db.insert("saved_word", null, contentValues);
         if (result == -1) {
             return false;
         } else {
@@ -552,27 +554,25 @@ public class DatabaseAccess {
         }
     }
 
-    public boolean unSaveOneWord(String userId, int wordId) {
+    public void unSaveOneWord(String userId, int wordId) {
         db = openHelper.getWritableDatabase();
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put("user_id", userId);
 //        contentValues.put("en_word_id", wordId);
-        long result = db.delete("saved_word","where en_word_id = "+wordId+" and user_id='"+userId+"'", null);
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        Cursor result = db.rawQuery("delete from saved_word where en_word_id = "+wordId+" and user_id = '"+userId+"'", null);
+ArrayList<Integer> list = getListSavedWordIdFromSQLite(userId);
+    result.close();
     }
 
     public String getCurrentUserId__OFFLINE() {
-        db = openHelper.getWritableDatabase();
+        db = openHelper.getReadableDatabase();
         Cursor c = db.rawQuery("select user_id from current_user", new String[]{});
-        if (c.moveToNext()) {
-            return c.getString(0);
+        String userid="";
+        while (c.moveToNext()) {
+            userid = c.getString(0);
         }
         c.close();
-        return "failed";
+        return userid;
     }
 
     public boolean setCurrentUserId__OFFLINE(String userId) {
@@ -586,6 +586,16 @@ public class DatabaseAccess {
         ContentValues contentValues = new ContentValues();
         contentValues.put("user_id", userId);
         result = db.insert("current_user", null, contentValues);
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean removeCurrentUserId__OFFLINE() {
+        db = openHelper.getWritableDatabase();
+        long result = db.delete("current_user","", null);
         if (result == -1) {
             return false;
         } else {

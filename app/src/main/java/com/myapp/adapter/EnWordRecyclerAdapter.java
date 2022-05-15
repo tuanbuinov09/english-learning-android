@@ -90,22 +90,22 @@ public class EnWordRecyclerAdapter extends
                 //sau này check trong saved word
                 if (viewHolder.unsave == true) {
                     //---run unsave code
-                    GlobalVariables.db.collection("saved_word").document(GlobalVariables.userId + enWord.getId() + "")
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(mContext, "Xoa từ khoi danh sach thanh cong", Toast.LENGTH_LONG).show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(mContext, "Xoa từ khoi danh sach that bai", Toast.LENGTH_LONG).show();
-
-                                }
-                            });
-                    GlobalVariables.listSavedWordId.remove( GlobalVariables.listSavedWordId.indexOf(enWord.getId()));
+//                    GlobalVariables.db.collection("saved_word").document(GlobalVariables.userId + enWord.getId() + "")
+//                            .delete()
+//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//                                    Toast.makeText(mContext, "Xoa từ khoi danh sach thanh cong", Toast.LENGTH_LONG).show();
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    Toast.makeText(mContext, "Xoa từ khoi danh sach that bai", Toast.LENGTH_LONG).show();
+//
+//                                }
+//                            });
+                    GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(enWord.getId()));
 
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(mContext);
                     databaseAccess.open();
@@ -116,23 +116,23 @@ public class EnWordRecyclerAdapter extends
                     viewHolder.unsave = !viewHolder.unsave;
                 } else {
                     //---run save code
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("user_id", GlobalVariables.userId);
-                    map.put("word_id", enWord.getId());
-                    GlobalVariables.db.collection("saved_word")
-                            .document(GlobalVariables.userId + enWord.getId() + "").set(map, SetOptions.merge())
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(mContext, "Lưu từ thành công", Toast.LENGTH_LONG).show();
-                                }
-
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(mContext, "Lưu từ khong thành công", Toast.LENGTH_LONG).show();
-                    }
-                });
+//                    HashMap<String, Object> map = new HashMap<>();
+//                    map.put("user_id", GlobalVariables.userId);
+//                    map.put("word_id", enWord.getId());
+//                    GlobalVariables.db.collection("saved_word")
+//                            .document(GlobalVariables.userId + enWord.getId() + "").set(map, SetOptions.merge())
+//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void unused) {
+//                                    Toast.makeText(mContext, "Lưu từ thành công", Toast.LENGTH_LONG).show();
+//                                }
+//
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(mContext, "Lưu từ khong thành công", Toast.LENGTH_LONG).show();
+//                    }
+//                });
 
                     //them ca vao trong nay cho de dung
                     GlobalVariables.listSavedWordId.add((enWord.getId()));
