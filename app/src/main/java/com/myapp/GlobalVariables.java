@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class GlobalVariables {
-    public static String userId = "AzAfcdOWunPZJY6PTSlmJNn2m5W2";
+//    public static String userId = "AzAfcdOWunPZJY6PTSlmJNn2m5W2";
+    public static String userId = "";
+
     public static ArrayList<EnWord> listAllWords = null;
     public static ArrayList<EnWord>  listAllSavedWords = null;
     public static FirebaseFirestore db;

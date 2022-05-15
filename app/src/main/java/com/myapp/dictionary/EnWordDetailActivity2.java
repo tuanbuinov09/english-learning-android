@@ -89,7 +89,6 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(EnWordDetailActivity2.this, "Xoa từ khoi danh sach thanh cong", Toast.LENGTH_LONG).show();
-                                    GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(savedWord.getId()));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -99,6 +98,12 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 
                                 }
                             });
+                    GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(savedWord.getId()));
+
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                    databaseAccess.open();
+                    databaseAccess.unSaveOneWord(GlobalVariables.userId, savedWord.getId());
+                    databaseAccess.close();
 
                     btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
                     unsave = !unsave;
@@ -114,7 +119,6 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(EnWordDetailActivity2.this, "Lưu từ thành công", Toast.LENGTH_LONG).show();
                                     //them ca vao trong nay cho de dung
-                                    GlobalVariables.listSavedWordId.add((savedWord.getId()));
                                 }
 
                             }).addOnFailureListener(new OnFailureListener() {
@@ -123,6 +127,12 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                             Toast.makeText(EnWordDetailActivity2.this, "Lưu từ khong thành công", Toast.LENGTH_LONG).show();
                         }
                     });
+                    GlobalVariables.listSavedWordId.add((savedWord.getId()));
+
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                    databaseAccess.open();
+                    databaseAccess.saveOneWord(GlobalVariables.userId, savedWord.getId());
+                    databaseAccess.close();
 
                     btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
                     unsave = !unsave;
