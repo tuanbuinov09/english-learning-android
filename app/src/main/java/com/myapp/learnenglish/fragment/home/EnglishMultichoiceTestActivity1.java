@@ -12,30 +12,38 @@ import com.myapp.learnenglish.fragment.home.adapter.EnglishML1RecyclerViewAdapte
 import com.myapp.learnenglish.fragment.home.adapter.ExercisesRecyclerViewAdapter;
 import com.myapp.learnenglish.fragment.home.model.Exercise;
 import com.myapp.learnenglish.fragment.home.model.Question;
+import com.myapp.learnenglish.fragment.home.model.multichoice.ExerciseML;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EnglishMultichoiceTestActivity1 extends AppCompatActivity {
-    private ArrayList<String> tempData;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.english_multichoice_test_1);
+        private String path;
+        public static EnglishML1RecyclerViewAdapter englishML1RecyclerViewAdapter;
+        public static ArrayList<ExerciseML> exercises;
 
-        tempData = new ArrayList<>();
-        tempData.add("Topic 1");
-        tempData.add("Topic 4");
-        tempData.add("Topic 5");
-        tempData.add("Topic 6");
-        initRecyclerView(tempData);
-    }
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.english_multichoice_test_1);
 
+            path = getIntent().getExtras().get("path").toString();
+            setTitle(getIntent().getExtras().get("title").toString());
 
-    private void initRecyclerView(ArrayList<String> exercises) {
-        RecyclerView recyclerView = findViewById(R.id.EnglishT1);
-        EnglishML1RecyclerViewAdapter adapter = new EnglishML1RecyclerViewAdapter(this, exercises);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
+            exercises = (ArrayList<ExerciseML>) getIntent().getSerializableExtra("exercises");
+            initRecyclerView(exercises);
+        }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.tk_exercise_menu, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+
+        private void initRecyclerView(ArrayList<ExerciseML> exercises) {
+            RecyclerView recyclerView = findViewById(R.id.EnglishT1);
+            englishML1RecyclerViewAdapter = new EnglishML1RecyclerViewAdapter(this, exercises, path);
+            recyclerView.setAdapter(englishML1RecyclerViewAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
 }

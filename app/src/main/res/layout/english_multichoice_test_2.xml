@@ -12,32 +12,27 @@
         android:padding="8dp"
         android:layout_marginBottom="40dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Score"
-            android:textSize="20sp"
-            android:layout_alignParentLeft="true"
-            android:id="@+id/score_text"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+
+        <include layout="@layout/english_multichocie_test_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/score"
-            android:layout_alignParentRight="true"
-            android:text="0"
-            android:textSize="20sp"/>
+            android:id="@+id/toolbarML"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginRight="-10dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/questionML"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="Which thing is alive?"
-        android:textSize="20sp"
-        android:padding="8dp"
         android:layout_marginBottom="40dp"
-        android:id="@+id/question"/>
+        android:padding="8dp"
+        android:text="Which thing is alive?"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +42,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="bird"
+            android:text="A. bird"
             android:background="#0091EA"
             android:textColor="#fff"
             android:padding="8dp"
@@ -57,7 +52,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="door"
+            android:text="B. door"
             android:background="#0091EA"
             android:textColor="#fff"
             android:padding="8dp"
@@ -67,22 +62,31 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="rock"
+            android:text="C. rock"
             android:background="#0091EA"
             android:textColor="#fff"
             android:padding="8dp"
             android:layout_marginBottom="24dp"
             android:id="@+id/choice3"/>
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="quit"
-            android:background="#B71C1C"
+            android:text="D. rick"
+            android:background="#0091EA"
             android:textColor="#fff"
             android:padding="8dp"
             android:layout_marginBottom="24dp"
-            android:id="@+id/quit"/>
+            android:id="@+id/choice4"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="next"
+            android:background="#0091EA"
+            android:textColor="#fff"
+            android:padding="8dp"
+            android:layout_marginBottom="24dp"
+            android:id="@+id/nextML"/>
+
     </LinearLayout>
 
 
