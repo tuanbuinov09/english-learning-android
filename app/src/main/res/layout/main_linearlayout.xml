@@ -5,37 +5,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#609BEB"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:paddingHorizontal="10dp"-->
-<!--        android:paddingVertical="8dp"-->
-<!--        android:visibility="gone">-->
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="#609BEB"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:paddingHorizontal="10dp"-->
+    <!--        android:paddingVertical="8dp"-->
+    <!--        android:visibility="gone">-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/searchInput"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:hint="Nhập từ muốn tìm"-->
-<!--            android:inputType="text"-->
-<!--            android:maxLines="1"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textColorHint="#ffffff"-->
-<!--            android:textSize="20dp" />-->
-<!--        &lt;!&ndash;        android:textColorHint=""&ndash;&gt;-->
+    <!--        <EditText-->
+    <!--            android:id="@+id/searchInput"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:backgroundTint="@color/white"-->
+    <!--            android:hint="Nhập từ muốn tìm"-->
+    <!--            android:inputType="text"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textColorHint="#ffffff"-->
+    <!--            android:textSize="20dp" />-->
+    <!--        &lt;!&ndash;        android:textColorHint=""&ndash;&gt;-->
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/searchButton"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:background="?android:attr/actionModeWebSearchDrawable"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:onClick="search" />-->
-<!--    </RelativeLayout>-->
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/searchButton"-->
+    <!--            android:layout_width="40dp"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:layout_alignParentRight="true"-->
+    <!--            android:background="?android:attr/actionModeWebSearchDrawable"-->
+    <!--            android:backgroundTint="@color/white"-->
+    <!--            android:onClick="search" />-->
+    <!--    </RelativeLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
-            android:background="@color/cultured"
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/cultured"
             android:iconifiedByDefault="false"
             android:queryHint="Tìm kiếm"
             android:textAlignment="textStart"
