@@ -47,7 +47,7 @@ import java.util.Locale;
 public class Main extends AppCompatActivity {
 
     private Button buttonLearnEnglish, btnToAllWord, btnToYourWord, buttonTranslateText, buttonSettings, buttonAccount,
-            buttonTranslateCamera, buttonTranslateImage;
+            buttonTranslateCamera, buttonTranslateImage, buttonHistory;
     ImageButton btnMic;
 
     FloatingActionButton fab;
@@ -229,6 +229,13 @@ public class Main extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_MIC_CODE);
             }
         });
+        buttonHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main.this, HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void fetchData() {
@@ -317,6 +324,7 @@ public class Main extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progress_bar);
         btnMic = findViewById(R.id.btnMic);
+        buttonHistory = findViewById(R.id.buttonHistory);
 
         //default, k có từ nào trong adapter
 
