@@ -26,7 +26,7 @@
         <item name="android:background">@null</item>
     </style>
 
-    <style name="Theme.TkActionBar" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.TkActionBar" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#00BCD4</item>
         <item name="android:background">@color/white</item>
     </style>
@@ -36,6 +36,28 @@
         <item name="android:elevation">0dp</item>
         <item name="elevation">0dp</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Theme.SplashActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/cultured</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
+
+        <item name="android:textColorPrimary">@color/cultured</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
+    </style>
+
+    <style name="Theme.Main" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/cultured</item>
+        <item name="colorPrimary">@color/space_cadet</item>
+        <item name="colorPrimaryDark">@color/space_cadet</item>
     </style>
 
     <style name="Theme.EnWordDetailActivity2" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -94,7 +116,7 @@
         <item name="android:windowContentOverlay">@null</item>
 
         <item name="android:textColorPrimary">@color/space_cadet</item>
-        <item name="colorPrimary">@color/bright_gray</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/space_cadet</item>
     </style>
 
