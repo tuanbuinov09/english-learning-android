@@ -26,6 +26,7 @@ import com.myapp.GlobalVariables;
 import com.myapp.Main;
 import com.myapp.R;
 import com.myapp.dictionary.EnWordDetailActivity2;
+import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
 
 import java.util.ArrayList;
@@ -95,7 +96,6 @@ public class EnWordRecyclerAdapter extends
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(mContext, "Xoa từ khoi danh sach thanh cong", Toast.LENGTH_LONG).show();
-                                    GlobalVariables.listSavedWordId.remove( GlobalVariables.listSavedWordId.indexOf(enWord.getId()));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -105,6 +105,12 @@ public class EnWordRecyclerAdapter extends
 
                                 }
                             });
+                    GlobalVariables.listSavedWordId.remove( GlobalVariables.listSavedWordId.indexOf(enWord.getId()));
+
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(mContext);
+                    databaseAccess.open();
+                    databaseAccess.unSaveOneWord(GlobalVariables.userId, enWord.getId());
+                    databaseAccess.close();
 
                     viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
                     viewHolder.unsave = !viewHolder.unsave;
@@ -119,8 +125,6 @@ public class EnWordRecyclerAdapter extends
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(mContext, "Lưu từ thành công", Toast.LENGTH_LONG).show();
-                                    //them ca vao trong nay cho de dung
-                                    GlobalVariables.listSavedWordId.add((enWord.getId()));
                                 }
 
                 }).addOnFailureListener(new OnFailureListener() {
@@ -129,6 +133,14 @@ public class EnWordRecyclerAdapter extends
                         Toast.makeText(mContext, "Lưu từ khong thành công", Toast.LENGTH_LONG).show();
                     }
                 });
+
+                    //them ca vao trong nay cho de dung
+                    GlobalVariables.listSavedWordId.add((enWord.getId()));
+
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(mContext);
+                    databaseAccess.open();
+                    databaseAccess.saveOneWord(GlobalVariables.userId, enWord.getId());
+                    databaseAccess.close();
 
                 viewHolder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
                 viewHolder.unsave = !viewHolder.unsave;

@@ -99,6 +99,12 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        GlobalVariables.userId = databaseAccess.getCurrentUserId__OFFLINE();
+        databaseAccess.close();
+
         try{
             DB = DatabaseAccess.getInstance(getApplicationContext());
             mAuth = FirebaseAuth.getInstance();
@@ -106,6 +112,7 @@ public class Main extends AppCompatActivity {
         }catch (Exception ex){
 
         }
+
         //để khi lưu hay bỏ lưu ở word detail thì cái nàfy đc cậpj nhật
         enWordRecyclerAdapter.notifyDataSetChanged();
     }
@@ -442,6 +449,8 @@ public class Main extends AppCompatActivity {
         super.onBackPressed();
     }
 
+
+
     public void getSavedWordOfUser() {
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -454,24 +463,21 @@ public class Main extends AppCompatActivity {
             connected = false;
         }
 
-        if(connected==false){
+        if(true){//if(connected==false)
             DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
             databaseAccess.open();
             GlobalVariables.listSavedWordId.clear();
             GlobalVariables.listSavedWordId = databaseAccess.getListSavedWordIdFromSQLite(GlobalVariables.userId);
             databaseAccess.close();
-        }else{
+        }/*else{
             GlobalVariables.db.collection("saved_word").whereEqualTo("user_id", GlobalVariables.userId).get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             GlobalVariables.listSavedWordId.clear();
                             for (DocumentSnapshot snapshot : task.getResult()) {
-//                            String wordIdstr = snapshot.getString("word_id");
                                 long wordId1 = snapshot.getLong("word_id");
-//                            System.out.println("/////////////"+wordId1);
                                 int wordId = (int) wordId1;
-//                            Model model = new Model(snapshot.getString("id")); /*, snapshot.getString("title") , snapshot.getString("desc")*/
                                 GlobalVariables.listSavedWordId.add(wordId);
                             }
                         }
@@ -481,6 +487,6 @@ public class Main extends AppCompatActivity {
                     Toast.makeText(Main.this, "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
+        }*/
     }
 }
