@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +21,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.SetOptions;
 import com.myapp.GlobalVariables;
 import com.myapp.MainViewModel;
 import com.myapp.R;
@@ -35,7 +31,6 @@ import com.myapp.utils.FileIO2;
 import com.myapp.utils.TTS;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class EnWordHistoryAdapter extends
@@ -93,13 +88,14 @@ public class EnWordHistoryAdapter extends
                 tts.speak(enWord.getWord());
             }
         });
+
         // neu trong danh sach da luu thi to mau vang
         if (GlobalVariables.listSavedWordId.contains(enWord.getId())) {
             holder.unsave = true;
-            holder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+            //.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
         } else {
             holder.unsave = false;
-            holder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+            //holder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
         }
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -181,47 +177,23 @@ public class EnWordHistoryAdapter extends
             public void onClick(View view) {
                 //sau này check trong saved word
                 if (holder.unsave == true) {
-                    //---run unsave code
-                    GlobalVariables.db.collection("saved_word").document(GlobalVariables.userId + enWord.getId() + "")
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(context, "Xoa từ khoi danh sach thanh cong", Toast.LENGTH_LONG).show();
-                                    GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(enWord.getId()));
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(context, "Xoa từ khoi danh sach that bai", Toast.LENGTH_LONG).show();
+                    GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(enWord.getId()));
 
-                                }
-                            });
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+                    databaseAccess.unSaveOneWord(GlobalVariables.userId, enWord.getId());
+                    databaseAccess.close();
 
                     holder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
                     holder.unsave = !holder.unsave;
                 } else {
-                    //---run save code
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("user_id", GlobalVariables.userId);
-                    map.put("word_id", enWord.getId());
-                    GlobalVariables.db.collection("saved_word")
-                            .document(GlobalVariables.userId + enWord.getId() + "").set(map, SetOptions.merge())
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(context, "Lưu từ thành công", Toast.LENGTH_LONG).show();
-                                    //them ca vao trong nay cho de dung
-                                    GlobalVariables.listSavedWordId.add((enWord.getId()));
-                                }
+                    //them ca vao trong nay cho de dung
+                    GlobalVariables.listSavedWordId.add((enWord.getId()));
 
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, "Lưu từ khong thành công", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+                    databaseAccess.saveOneWord(GlobalVariables.userId, enWord.getId());
+                    databaseAccess.close();
 
                     holder.btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
                     holder.unsave = !holder.unsave;
@@ -275,12 +247,12 @@ public class EnWordHistoryAdapter extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewWord;
-        private TextView textViewPronunciation;
-        private TextView textViewMeaning;
-        private ImageButton buttonSpeak;
-        private ImageButton buttonWordMenu;
-        private ImageButton btnSave_UnsaveWord;
+        TextView textViewWord;
+        TextView textViewPronunciation;
+        TextView textViewMeaning;
+        ImageButton buttonSpeak;
+        ImageButton buttonWordMenu;
+        ImageButton btnSave_UnsaveWord;
         ImageView ivCheckBox;
         private boolean unsave;
 

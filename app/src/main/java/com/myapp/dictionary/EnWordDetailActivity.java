@@ -1,16 +1,15 @@
 package com.myapp.dictionary;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.Main;
 import com.myapp.R;
@@ -42,7 +41,7 @@ public class EnWordDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_en_word_detail);
 
         enWordId = getIntent().getIntExtra("enWordId", -1);
-        DatabaseAccess databaseAccess= DatabaseAccess.getInstance(getApplicationContext());
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
         savedWord = databaseAccess.getOneEnWord(enWordId);
         databaseAccess.close();
@@ -78,13 +77,13 @@ public class EnWordDetailActivity extends AppCompatActivity {
         btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(unsave==true){
+                if (unsave == true) {
                     //---run unsave code
-                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
+//                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_bookmark_outline_32px);
                     unsave = !unsave;
-                }else{
+                } else {
                     //---run save code
-                    btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+                    //btnSave_UnsaveWord.setBackgroundResource(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
                     unsave = !unsave;
                 }
             }
