@@ -12,13 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myapp.R;
-import com.myapp.learnenglish.fragment.home.ArrangeWordsExercisesActivity;
-import com.myapp.learnenglish.fragment.home.EnglishMultichoiceTestActivity;
-import com.myapp.learnenglish.fragment.home.EnglishMultichoiceTestActivity1;
 import com.myapp.learnenglish.fragment.home.EnglishMultichoiceTestActivity2;
-import com.myapp.learnenglish.fragment.home.model.Topic;
 import com.myapp.learnenglish.fragment.home.model.multichoice.ExerciseML;
-import com.myapp.learnenglish.fragment.home.adapter.EnglishMLRecyclerViewAdapter;
 
 import java.util.ArrayList;
 

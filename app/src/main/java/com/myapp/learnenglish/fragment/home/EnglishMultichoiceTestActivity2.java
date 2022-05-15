@@ -1,31 +1,23 @@
 package com.myapp.learnenglish.fragment.home;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.myapp.R;
-import com.myapp.learnenglish.fragment.home.model.Question;
 import com.myapp.learnenglish.fragment.home.model.multichoice.QuestionML;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class EnglishMultichoiceTestActivity2 extends AppCompatActivity {
     private Button choice1, choice2, choice3, choice4, nextML;
