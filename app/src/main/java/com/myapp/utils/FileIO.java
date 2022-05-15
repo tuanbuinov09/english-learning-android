@@ -1,7 +1,6 @@
 package com.myapp.utils;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
 import com.myapp.GlobalVariables;
@@ -16,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 public class FileIO {
     public static void writeToFile(Settings settings, Context context) {
