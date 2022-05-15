@@ -2,27 +2,29 @@ package com.myapp.dictionary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.SetOptions;
 import com.myapp.GlobalVariables;
 import com.myapp.R;
 import com.myapp.dictionary.fragment.EnWordDetailFragment;
+import com.myapp.dictionary.fragment.ImageFragment;
 import com.myapp.dictionary.fragment.YourNoteFragment;
 import com.myapp.dtbassethelper.DatabaseAccess;
-import com.myapp.learnenglish.fragment.home.HomeFragment;
 import com.myapp.model.EnWord;
 
 import java.util.HashMap;
@@ -45,8 +47,13 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
         setControl();
         setEvent();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new EnWordDetailFragment(savedWord)).commit();
+        setTitle(savedWord.getWord().trim());
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setElevation(0);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new EnWordDetailFragment(savedWord)).commit();
     }
 
 
@@ -143,8 +150,21 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                     selectedFragment = new EnWordDetailFragment(savedWord);
                     selectedFragment.setArguments(bundle);
                     break;
+
+                case R.id.menuImage:
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putInt("enWordId", enWordId);
+
+                    bundle1.putSerializable("enWord", savedWord);
+
+                    selectedFragment = new ImageFragment();
+                    selectedFragment.setArguments(bundle1);
+                    break;
                 case R.id.pageYourNote:
+                    Bundle bundleYourNote = new Bundle();
+                    bundleYourNote.putInt("enWordId", enWordId);
                     selectedFragment = new YourNoteFragment();
+                    selectedFragment.setArguments(bundleYourNote);
                     break;
             }
 
@@ -167,5 +187,34 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
         btnSave_UnsaveWord = findViewById(R.id.btnSave_UnsaveWord);
         btnBackToSavedWord = findViewById(R.id.imgBtnBackToSavedWord);
         unsave = true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater findMenuItems = getMenuInflater();
+        findMenuItems.inflate(R.menu.enword_detail_2_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_search:
+
+                break;
+            case R.id.menu_note:
+
+                break;
+            case R.id.menu_save_unsave:
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

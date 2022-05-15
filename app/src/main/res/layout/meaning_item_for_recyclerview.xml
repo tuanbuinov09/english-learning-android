@@ -29,9 +29,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="cabaret"
-                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/design_default_color_primary"
+                android:textColor="@color/space_cadet"
                 android:background="@drawable/border_bottom"
                 />
             <LinearLayout
@@ -43,10 +44,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="top"
+                    android:paddingTop="4dp"
                     >
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="4dp"
                         android:src="@drawable/icons8_arrow_32px"/>
                 </LinearLayout>
 
@@ -55,8 +58,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="nghĩaaaaaaaaa"
-                    android:textColor="#555"
-                    android:textSize="18dp" />
+                    android:textColor="@color/steel_blue"
+                    android:textSize="16dp" />
             </LinearLayout>
 
         <include layout="@layout/recycler_view"/>

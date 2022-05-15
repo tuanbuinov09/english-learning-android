@@ -1,6 +1,7 @@
 package com.myapp;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,13 +28,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.myapp.dtbassethelper.DatabaseAccess;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class ThongTinTaikhoanActivity extends AppCompatActivity {
@@ -47,6 +56,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
     Button btnCapNhat,btnLogout;
     String iduser;
     User user;
+    ProgressDialog progressDialog;
+    StorageReference storageReference;
     private Main mMainActivity ;
     private  Uri mUri;
     private boolean changeimage=false;
@@ -72,7 +83,13 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
+//                        if (requestCode == 100 && data != null && data.getData() != null){
+//
+//                            imageUri = data.getData();
+//                            binding.firebaseimage.setImageURI(imageUri);
+//
+//
+//                        }
                     }
                 }
             });
@@ -81,6 +98,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_tin_taikhoan);
         DB = DatabaseAccess.getInstance(getApplicationContext());
+        //binding = ActivityMainBinding.inflate(getLayoutInflater());
+        //setContentView(binding.getRoot());
         AnhXa();
 
 //        iduser = DB.iduser;
@@ -195,8 +214,46 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity {
                         }
                     }
                 });
+        uploadImage();
     }
+    private void uploadImage() {
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading File....");
+        progressDialog.show();
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
+        Date now = new Date();
+        String fileName = formatter.format(now);
+        storageReference = FirebaseStorage.getInstance().getReference("userimage/"+fileName);
+
+
+        storageReference.putFile(mUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        //binding.firebaseimage.setImageURI(null);
+                        Toast.makeText(ThongTinTaikhoanActivity.this,"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+                        if (progressDialog.isShowing())
+                            progressDialog.dismiss();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+                Toast.makeText(ThongTinTaikhoanActivity.this,"Failed to Upload",Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
     public void setBitmapImageView(Bitmap bitmapImageView){
         imageView.setImageBitmap(bitmapImageView);
     }

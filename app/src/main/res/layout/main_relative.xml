@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Main">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/space_cadet"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="T11 Dictionary"
+            android:textColor="@color/azureish_white"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-10dp"
+                android:layout_weight="1"
+                android:background="@color/cultured"
+                android:maxLines="1"
+                android:queryHint="Tìm kiếm.."
+                android:textAlignment="textStart"
+                app:defaultQueryHint="@string/query_hint"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@null"
+                app:queryHint="@string/query_hint" />
+
+            <ImageButton
+                android:id="@+id/btnMic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/cultured"
+                android:paddingHorizontal="10dp"
+                android:src="@drawable/ic_baseline_mic_24" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonTranslateCamera"
+                style="@style/buttonWithTopIconInMainActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_baseline_camera_alt_24"
+                android:text="Translate camera" />
+
+            <Button
+                android:id="@+id/buttonTranslateImage"
+                style="@style/buttonWithTopIconInMainActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_baseline_image_24"
+                android:text="Translate image" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:background="@color/bright_gray"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp">
+
+        <Button
+            android:id="@+id/btnToAllWord"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_wordbook_32px"
+            android:drawableLeft="@drawable/icons8_wordbook_32px"
+            android:text="Từ điển Việt Anh" />
+
+        <Button
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_rounded_rectangle_stroked_32px"
+            android:drawableLeft="@drawable/icons8_rounded_rectangle_stroked_32px"
+            android:text="Cửa sổ tra nhanh" />
+
+        <Button
+            android:id="@+id/buttonLearnEnglish"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_learning_32px_1"
+            android:drawableLeft="@drawable/icons8_learning_32px_1"
+            android:text="Học tiếng anh" />
+
+        <Button
+            android:id="@+id/buttonTranslateText"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_learning_32px_1"
+            android:drawableLeft="@drawable/icons8_learning_32px_1"
+            android:text="Dịch văn bản" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonToYourWord"
+                style="@style/mainButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/icons8_filled_bookmark_ribbon_32px_1"
+                android:drawableLeft="@drawable/icons8_filled_bookmark_ribbon_32px_1"
+                android:text="Từ của bạn" />
+
+            <Button
+                android:id="@+id/buttonAccount"
+                style="@style/mainButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/icons8_male_user_32px"
+                android:drawableLeft="@drawable/icons8_male_user_32px"
+                android:text="Tài khoản" />
+        </LinearLayout>
+
+
+        <Button
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_time_machine_32px"
+            android:drawableLeft="@drawable/icons8_time_machine_32px"
+            android:text="Từ đã tra" />
+
+        <Button
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_view_details_32px"
+            android:drawableLeft="@drawable/icons8_view_details_32px"
+            android:text="Từ vựng quan trọng" />
+
+        <Button
+            android:id="@+id/buttonSettings"
+            style="@style/mainButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icons8_settings_32px"
+            android:drawableLeft="@drawable/icons8_settings_32px"
+            android:text="Cài đặt" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:contentDescription="TODO"
+                android:elevation="0dp"
+                android:src="@drawable/icons8_settings_32px"
+                app:backgroundTint="@color/space_cadet"
+                app:elevation="0dp" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/floatingLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="160dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <include
+            layout="@layout/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
+

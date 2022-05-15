@@ -40,6 +40,7 @@ public class YourNoteFragment extends Fragment {
     private EditText etYourNote;
     private Button btnSaveNote;
     private Button btnClearNote;
+    private int enWordId;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -73,6 +74,7 @@ public class YourNoteFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        enWordId = getArguments().getInt("enWordId");
     }
 
     @Override
@@ -104,7 +106,8 @@ public class YourNoteFragment extends Fragment {
     }
 
     public void getUserNote() {
-        GlobalVariables.db.collection("user_note").whereEqualTo("user_id", GlobalVariables.userId).get()
+        GlobalVariables.db.collection("user_note").whereEqualTo("user_id", GlobalVariables.userId)
+                .whereEqualTo("word_id", enWordId).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -122,9 +125,10 @@ public class YourNoteFragment extends Fragment {
     public void saveUserNote(String content) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("user_id", GlobalVariables.userId);
+        map.put("word_id", enWordId);
         map.put("note", content);
 
-        GlobalVariables.db.collection("user_note").document(GlobalVariables.userId).set(map, SetOptions.merge())
+        GlobalVariables.db.collection("user_note").document(GlobalVariables.userId+enWordId+"").set(map, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

@@ -22,15 +22,15 @@
         tools:ignore="ExtraText"
         tools:replace="android:icon,android:theme">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".learnenglish.fragment.home.TestResultActivity"
             android:exported="false" />
         <activity
             android:name=".dictionary.EnWordDetailActivity2"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".dictionary.YourNoteActivity"
-            android:exported="false" />
+            android:theme="@style/Theme.EnWordDetailActivity2" />
         <activity
             android:name=".NotificationActivity"
             android:exported="false" />
@@ -39,7 +39,8 @@
             android:exported="false" />
         <activity
             android:name=".dictionary.DictionaryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.EnWordDetailActivity2" />
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
@@ -108,6 +109,9 @@
             android:name=".SignInActivity"
             android:exported="false" />
         <activity
+            android:name=".learnenglish.fragment.ranking.RankingActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
@@ -136,6 +140,11 @@
         <activity
             android:name=".dictionary.YourWordActivity"
             android:exported="false" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

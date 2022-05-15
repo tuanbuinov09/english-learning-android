@@ -10,7 +10,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.myapp.dialog.NumberPickerDialog;
 import com.myapp.model.Settings;
 import com.myapp.model.VoiceSpeed;
 import com.myapp.utils.FileIO;
@@ -18,12 +21,15 @@ import com.myapp.utils.FileIO;
 import java.io.File;
 import java.util.Locale;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements NumberPickerDialog.Listener {
     RadioButton rbNormal, rbSlow, rbSlower, rbUS, rbUK;
     RadioGroup rgSoundSpeed, rgSoundDefault;
     LinearLayout btnDarkTheme, lyMail;
     CheckBox cbxDarkTheme;
     Settings settings;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     SettingsRemindWordsFragment settingsRemindWordsFragment;
 
@@ -51,6 +57,14 @@ public class SettingsActivity extends AppCompatActivity {
         settings = FileIO.readFromFile(getApplicationContext());
 
         initRadioGroupButtons();
+
+        settingsRemindWordsFragment = new SettingsRemindWordsFragment();
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment, settingsRemindWordsFragment);
+        fragmentTransaction.commit();
+
     }
 
     private void setEvent() {
@@ -165,5 +179,10 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    @Override
+    public void sendDialogResult(int selectNumber) {
+        settingsRemindWordsFragment.sendDialogResult(selectNumber);
     }
 }

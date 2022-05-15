@@ -5,9 +5,12 @@
         android:enabled="true"
         android:title="Word Detail" />
     <item
+        android:id="@+id/menuImage"
+        android:enabled="true"
+        android:title="Image" />
+    <item
         android:id="@+id/pageYourNote"
         android:enabled="true"
-        android:title="Your Note"
-        />
+        android:title="Your Note" />
 
 </menu>

@@ -35,13 +35,14 @@ public class EnWordRecyclerAdapter extends
         RecyclerView.Adapter<EnWordRecyclerAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<EnWord> enWordArrayList;
-    private ArrayList<EnWord> filteredEnWordArrayList;
 
     public EnWordRecyclerAdapter(Context mContext, ArrayList<EnWord> enWordArrayList) {
         this.mContext = mContext;
         this.enWordArrayList = enWordArrayList;
     }
-
+    public EnWordRecyclerAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -57,14 +58,16 @@ public class EnWordRecyclerAdapter extends
 
         viewHolder.textViewWord.setText(enWord.getWord().trim());
         viewHolder.textViewPronunciation.setText(enWord.getPronunciation().trim());
-        viewHolder.textViewMeaning.setText(enWord.getListMeaning().get(0).getMeaning().trim());
+        try{
+            viewHolder.textViewMeaning.setText(enWord.getListMeaning().get(0).getMeaning().trim());
+
+        }catch(Exception ex){}
 
 //        viewHolder.buttonWordMenu.setVisibility(View.GONE);
         viewHolder.buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Main.ttobj.speak(enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
-                Toast.makeText(mContext, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getWord(), Toast.LENGTH_SHORT).show();
             }
         });
         // neu trong danh sach da luu thi to mau vang
@@ -150,12 +153,13 @@ public class EnWordRecyclerAdapter extends
 
     public void filterList(ArrayList<EnWord> filterllist) {
         if(filterllist.isEmpty()){
-            System.out.println("ket qua tim kiem = 0");
+            System.out.println("ket qua tim kiem = 0" + filterllist.size());
             return;
         }
         if(enWordArrayList.isEmpty()){
             return;
         }
+
         enWordArrayList = filterllist;
         notifyDataSetChanged();
     }
