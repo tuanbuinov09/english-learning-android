@@ -143,6 +143,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                 databaseAccess.removeCurrentUserId__OFFLINE();
                 databaseAccess.close();
 
+                GlobalVariables.listSavedWordId.clear();
+                GlobalVariables.listAllSavedWords.clear();
             }
         });
 
