@@ -4,17 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
-    android:background="#FFFFFF"
-    android:descendantFocusability="blocksDescendants"
+    android:background="@color/white"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:orientation="horizontal"
         android:paddingVertical="8dp"
-        android:paddingLeft="8dp">
+        android:paddingStart="5dp">
 
         <Space
             android:layout_width="wrap_content"
@@ -32,7 +31,7 @@
 
         <LinearLayout
             android:id="@+id/layoutClickToSeeDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -42,26 +41,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_bottom"
+                android:fontFamily="@font/roboto_bold"
                 android:text="cabaret"
-                android:textColor="#333"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/space_cadet"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewPronunciation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/'phatam/"
-                android:textColor="#555"
-                android:textSize="15sp" />
+                android:textColor="@color/steel_blue"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textViewMeaning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="nghĩaaaaaaaaa"
-                android:textColor="#555"
-                android:textSize="15sp" />
+                android:textColor="@color/steel_blue"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -72,15 +71,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="4dp">
+        android:padding="5dp">
 
         <ImageButton
             android:id="@+id/buttonSpeak"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/icons8_sound_32px"
-            android:backgroundTint="#333"
+            android:backgroundTint="@color/space_cadet"
 
             />
 
@@ -90,10 +89,16 @@
 
         <ImageButton
             android:id="@+id/btnSave_UnsaveWord"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@drawable/icons8_bookmark_outline_32px" />
-    </LinearLayout>
 
+        <ImageView
+            android:id="@+id/ivCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_check_circle_24"
+            android:visibility="gone" />
+    </LinearLayout>
 
 </LinearLayout>
