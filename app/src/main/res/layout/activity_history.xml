@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bright_gray"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".HistoryActivity">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_corner_5"
+        android:backgroundTint="@color/white"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="-10dp"
+        android:textColor="@color/space_cadet"
+        android:textSize="14sp"
+        app:defaultQueryHint="@string/query_hint"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@null"
+        app:queryHint="@string/query_hint"
+        app:searchIcon="@drawable/ic_round_search_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@color/bright_gray" />
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Không có lịch sử"
+        android:textColor="@color/space_cadet"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</LinearLayout>
