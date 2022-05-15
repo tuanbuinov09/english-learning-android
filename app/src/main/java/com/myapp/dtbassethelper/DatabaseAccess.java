@@ -1,11 +1,13 @@
 package com.myapp.dtbassethelper;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -18,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.SetOptions;
 import com.myapp.GlobalVariables;
-import com.myapp.dictionary.EnWordDetailActivity2;
 import com.myapp.model.EnWord;
 import com.myapp.model.ExampleDetail;
 import com.myapp.model.Meaning;
@@ -331,7 +332,92 @@ public class DatabaseAccess {
             return false;
         }
     }
+    public void capnhatdiem0(String iduser, int Point, int PointPlus) {
 
+        //Cập Nhật User lên FireBase
+        rootNode = FirebaseDatabase.getInstance();
+        userref = rootNode.getReference("User").child(iduser).child("point");
+        userref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+// This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                long value = dataSnapshot.getValue(Long.class);
+                Log.d(TAG, "Value is: " + value);
+                db = openHelper.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("Point", value + 0);
+                Cursor cursor = db.rawQuery("Select * from User where ID_User = ?", new String[]{iduser});
+                if (cursor.getCount() > 0) {
+                    long result = db.update("User", contentValues, "ID_User = ?", new String[]{iduser});
+                    if (result == -1) {
+                        return;
+                    } else {
+                        return;
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+// Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+//        ValueEventListener changeListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String title = dataSnapshot.child("iduser").child("point").getValue(String.class);
+//                Log.d(TAG, title);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        };
+
+
+//        for (DataSnapshot child : userref.getChildren()) {
+//            Log.i(TAG, child.getKey());
+//            Log.i(TAG, child.getValue(String.class));
+//        }
+
+        //userref.child("point").setValue(Point + PointPlus);
+//        userref.child(iduser).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                User user = dataSnapshot.getValue(User.class);
+//
+//                //long point1 = (long) dataSnapshot.getValue(User.class);
+//                Log.d(TAG, "User name: " + user.getHoTen() + ", email " + user.getEmail());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//// Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+        //Cập nhật dữ liệu lên SQLite
+//        db = openHelper.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("Point", Point + PointPlus);
+//        Cursor cursor = db.rawQuery("Select * from User where ID_User = ?", new String[]{iduser});
+//        if (cursor.getCount() > 0) {
+//            long result = db.update("User", contentValues, "ID_User = ?", new String[]{iduser});
+//            if (result == -1) {
+//                return false;
+//            } else {
+//                return true;
+//            }
+//        } else {
+//            return false;
+//        }
+    }
     public Boolean capnhatdiem(String iduser, int Point, int PointPlus) {
 
         //Cập Nhật User lên FireBase

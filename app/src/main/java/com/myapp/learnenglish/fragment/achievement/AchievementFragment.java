@@ -1,14 +1,15 @@
 package com.myapp.learnenglish.fragment.achievement;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -94,33 +95,33 @@ public class AchievementFragment extends Fragment {
                         }
 
                         FirebaseDatabase.getInstance().getReference("Topics").orderByKey()
-                            .addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    // structure: each topic has a list of exercises, each exercise has a list of questions
-                                    int score = 0;
-                                    int learned = 0;
-                                    String currentUserId = FirebaseAuth.getInstance().getUid();
-                                    for (DataSnapshot topicsNode : snapshot.getChildren()) {
-                                        for (DataSnapshot exercisesNode : topicsNode.child("Exercises").getChildren()) {
-                                            if (exercisesNode.hasChild("Scores")) {
-                                                if (exercisesNode.child("Scores").hasChild(currentUserId)) {
-                                                    learned++;
-                                                    score += Integer.parseInt(exercisesNode.child("Scores").child(currentUserId).getValue().toString());
+                                .addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        // structure: each topic has a list of exercises, each exercise has a list of questions
+                                        int score = 0;
+                                        int learned = 0;
+                                        String currentUserId = FirebaseAuth.getInstance().getUid();
+                                        for (DataSnapshot topicsNode : snapshot.getChildren()) {
+                                            for (DataSnapshot exercisesNode : topicsNode.child("Exercises").getChildren()) {
+                                                if (exercisesNode.hasChild("Scores")) {
+                                                    if (exercisesNode.child("Scores").hasChild(currentUserId)) {
+                                                        learned++;
+                                                        score += Integer.parseInt(exercisesNode.child("Scores").child(currentUserId).getValue().toString());
+                                                    }
                                                 }
                                             }
                                         }
+                                        UserAchievement userAchievement = new UserAchievement(learned, score);
+                                        System.out.println(score + " " + learned);
+                                        initRecyclerView(view, achievements, userAchievement);
                                     }
-                                    UserAchievement userAchievement = new UserAchievement(learned, score);
-                                    System.out.println(score + " " + learned);
-                                    initRecyclerView(view, achievements, userAchievement);
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
+                                    }
+                                });
                     }
 
                     @Override
