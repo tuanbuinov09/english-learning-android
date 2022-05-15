@@ -42,19 +42,19 @@ public class LearnEnglishActivity extends AppCompatActivity {
                     selectedFragment = new AchievementFragment();
                     break;
                 case R.id.pageRanking:
-                    //selectedFragment = new RankingFragment();
+//                    selectedFragment = new RankingFragment();
                     Intent intentpageRanking = new Intent(this, RankingActivity.class);
                     startActivity(intentpageRanking);
-                    break;
+                    return true;
                 case R.id.pageProfile:
-                    //selectedFragment = new ProfileFragment();
+//                    selectedFragment = new ProfileFragment();
                     Intent intent = new Intent(this, ProfileActivity.class);
                     startActivity(intent);
-                    break;
+                    return true;
             }
 
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
-//                    selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                    selectedFragment).commit();
             return true;
         });
     }
