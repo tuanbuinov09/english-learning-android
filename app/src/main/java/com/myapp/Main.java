@@ -23,16 +23,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.myapp.adapter.EnWordRecyclerAdapter;
 import com.myapp.dictionary.DictionaryActivity;
 import com.myapp.dictionary.YourWordActivity;
@@ -41,6 +36,8 @@ import com.myapp.learnenglish.LearnEnglishActivity;
 import com.myapp.model.EnWord;
 import com.myapp.model.Settings;
 import com.myapp.utils.FileIO;
+import com.myapp.utils.FileIO2;
+import com.myapp.utils.FileIO3;
 import com.myapp.utils.SoftKeyboard;
 
 import java.io.File;
@@ -87,12 +84,29 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //CREATE SETTINGS FILE
         File path = getApplicationContext().getFilesDir();
         File file = new File(path, GlobalVariables.FILE_CONFIG_NAME);
 
-        //CREATE SETTINGS FILE
         if (!file.exists()) {
             FileIO.writeToFile(new Settings(), getApplicationContext());
+        }
+
+        //CREATE HISTORY FILE
+        File path2 = getApplicationContext().getFilesDir();
+        File file2 = new File(path2, GlobalVariables.FILE_HISTORY_NAME);
+
+        if (!file2.exists()) {
+            FileIO2.writeToFile(new ArrayList<>(), getApplicationContext());
+        }
+
+        //CREATE ALARM FILE
+        File path3 = getApplicationContext().getFilesDir();
+        File file3 = new File(path3, GlobalVariables.FILE_ALARM_SET);
+
+        //CREATE SETTINGS FILE
+        if (!file3.exists()) {
+            FileIO3.writeToFile(new ArrayList<>(), getApplicationContext());
         }
     }
 
@@ -462,20 +476,18 @@ public class Main extends AppCompatActivity {
     }
 
 
-
     public void getSavedWordOfUser() {
         boolean connected = false;
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-        }
-        else{
+        } else {
             connected = false;
         }
 
-        if(true){//if(connected==false)
+        if (true) {//if(connected==false)
             DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
             databaseAccess.open();
             GlobalVariables.listSavedWordId.clear();
