@@ -89,13 +89,6 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-//                        if (requestCode == 100 && data != null && data.getData() != null){
-//
-//                            imageUri = data.getData();
-//                            binding.firebaseimage.setImageURI(imageUri);
-//
-//
-//                        }
                     }
                 }
             });
@@ -115,6 +108,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
 //            return;
 //        }
         LayUser();
+        LayImage();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,9 +277,10 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
         progressDialog.show();
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
-        Date now = new Date();
-        String fileName = formatter.format(now);
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
+//        Date now = new Date();
+//        String fileName = formatter.format(now);
+        String fileName = user.getIduser();
         storageReference = FirebaseStorage.getInstance().getReference("userimage/"+fileName);
 
 
@@ -344,7 +339,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
             String SDT = cursor.getString(4);
             user = new User(Iduser,HoTen,Point,Email,SDT);
             Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
-            setUserInformation();
+            //setUserInformation();
 //        ThongTinTaikhoanActivity.context = getApplicationContext();
 
             //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
@@ -352,28 +347,35 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
         }else{
             Toast.makeText(this, "FAILLLL ", Toast.LENGTH_LONG).show();
         }
-//        cursor.moveToNext();
-//        String Iduser = cursor.getString(0);
-//        String HoTen = cursor.getString(1);
-//        int Point = cursor.getInt(2);
-//        String Email = cursor.getString(3);
-//        String SDT = cursor.getString(4);
-//        user = new User(Iduser,HoTen,Point,Email,SDT);
-//        setUserInformation();
-////        ThongTinTaikhoanActivity.context = getApplicationContext();
+
+
+    }
+    public void LayImage(){
+        StorageReference storageRef =
+                FirebaseStorage.getInstance().getReference();
+        storageRef.child("userimage/"+user.getIduser()).getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(ThongTinTaikhoanActivity.this).load(uri).error(R.drawable.ic_avatar_default).into(imageView);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(ThongTinTaikhoanActivity.this, "Load image fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+//    private void setUserInformation() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if(user == null){
+//            return;
+//        }
+//        Glide.with(this).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
 //
-//        //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
-//        TruyenThongTin();
-
-    }
-    private void setUserInformation() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null){
-            return;
-        }
-        Glide.with(this).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
-
-    }
+//    }
     public void openGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
