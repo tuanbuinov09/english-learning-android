@@ -246,7 +246,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
             return;
         }
         String strfullname= hoten;
-
+        uploadImage();
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(strfullname)
                 .build();
@@ -268,7 +268,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                         }
                     }
                 });
-        uploadImage();
+
     }
     private void uploadImage() {
 
