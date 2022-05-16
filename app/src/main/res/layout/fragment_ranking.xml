@@ -1,146 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".learnenglish.fragment.ranking.RankingFragment">
+    tools:context=".learnenglish.fragment.achievement.AchievementFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+    <ImageView
+        android:id="@+id/imagerank1"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imgVBackRank"-->
-<!--            android:layout_width="61dp"-->
-<!--            android:layout_height="55dp"-->
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/top1"
+        app:layout_constraintBottom_toTopOf="@+id/userranklist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:src="@drawable/ic_back"-->
-<!--            android:tint="@color/space_cadet"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <ImageView
 
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:ignore="UseAppTint" />-->
+        android:id="@+id/imagerank2"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
 
-        <ImageView
-            android:id="@+id/imagerank1"
-            android:layout_width="60dp"
-            android:layout_height="100dp"
-            android:layout_alignParentRight="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/top2"
+        app:layout_constraintBottom_toTopOf="@+id/userranklist"
+        app:layout_constraintEnd_toStartOf="@+id/imagerank1"
+        app:layout_constraintHorizontal_bias="0.418"
+        app:layout_constraintStart_toStartOf="parent" />
 
-            android:layout_marginBottom="92dp"
-            android:src="@drawable/top1"
-            app:layout_constraintBottom_toTopOf="@+id/userranklist"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tvpointrank3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
 
-        <ImageView
+        android:gravity="center"
+        android:text="100"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/userranklist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagerank3"
+        app:layout_constraintVertical_bias="0.175" />
 
-            android:id="@+id/imagerank2"
-            android:layout_width="60dp"
-            android:layout_height="100dp"
-            android:layout_alignParentRight="true"
+    <TextView
+        android:id="@+id/tvpointrank2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="-1dp"
 
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="92dp"
-            android:src="@drawable/top2"
-            app:layout_constraintBottom_toTopOf="@+id/userranklist"
-            app:layout_constraintEnd_toStartOf="@+id/imagerank1"
-            app:layout_constraintHorizontal_bias="0.418"
-            app:layout_constraintStart_toStartOf="parent" />
+        android:gravity="center"
+        android:text="100"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/userranklist"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagerank2"
+        app:layout_constraintVertical_bias="0.195" />
 
-        <TextView
-            android:id="@+id/tvpointrank3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
+    <TextView
+        android:id="@+id/tvpointrank1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-            android:gravity="center"
-            android:text="100"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/userranklist"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagerank3"
-            app:layout_constraintVertical_bias="0.175" />
+        android:text="100"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/userranklist"
+        app:layout_constraintEnd_toStartOf="@+id/tvpointrank3"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toEndOf="@+id/tvpointrank2"
+        app:layout_constraintTop_toBottomOf="@+id/imagerank1"
+        app:layout_constraintVertical_bias="0.175" />
 
-        <TextView
-            android:id="@+id/tvpointrank2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="-1dp"
+    <ImageView
+        android:id="@+id/imagerank3"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
 
-            android:gravity="center"
-            android:text="100"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/userranklist"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagerank2"
-            app:layout_constraintVertical_bias="0.195" />
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/top3"
+        app:layout_constraintBottom_toTopOf="@+id/userranklist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintStart_toEndOf="@+id/imagerank1" />
 
-        <TextView
-            android:id="@+id/tvpointrank1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userranklist"
+        android:layout_width="411dp"
+        android:layout_height="450dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-            android:text="100"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/userranklist"
-            app:layout_constraintEnd_toStartOf="@+id/tvpointrank3"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toEndOf="@+id/tvpointrank2"
-            app:layout_constraintTop_toBottomOf="@+id/imagerank1"
-            app:layout_constraintVertical_bias="0.175" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewRank"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="20dp"-->
 
-        <ImageView
-            android:id="@+id/imagerank3"
-            android:layout_width="60dp"
-            android:layout_height="100dp"
-            android:layout_alignParentRight="true"
+    <!--        android:text="Leader board"-->
 
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="92dp"
-            android:src="@drawable/top3"
-            app:layout_constraintBottom_toTopOf="@+id/userranklist"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.621"
-            app:layout_constraintStart_toEndOf="@+id/imagerank1" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/userranklist"
-            android:layout_width="411dp"
-            android:layout_height="482dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <!--    <TextView-->
-        <!--        android:id="@+id/textViewRank"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_marginTop="20dp"-->
-
-        <!--        android:text="Leader board"-->
-
-        <!--        android:textSize="40sp"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+    <!--        android:textSize="40sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+</androidx.constraintlayout.widget.ConstraintLayout>
