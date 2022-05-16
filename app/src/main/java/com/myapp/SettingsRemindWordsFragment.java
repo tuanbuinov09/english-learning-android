@@ -2,20 +2,16 @@ package com.myapp;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,22 +19,26 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.myapp.dialog.NumberPickerDialog;
+import com.myapp.dtbassethelper.DatabaseAccess;
+import com.myapp.model.EnWord;
 import com.myapp.model.Settings;
 import com.myapp.utils.FileIO;
+import com.myapp.utils.FileIO3;
 
+import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class SettingsRemindWordsFragment extends Fragment {
@@ -50,6 +50,7 @@ public class SettingsRemindWordsFragment extends Fragment {
     SettingsActivity settingsActivity;
     LinearLayout lyRemindFolders, lyNumberOfRemindADay, lyStartTime, lyEndTime, lyOption, lyMain;
     CheckBox cbxRemindWords;
+    Button btnTest;
 
     LocalTime startTime;
     LocalTime endTime;
@@ -59,9 +60,16 @@ public class SettingsRemindWordsFragment extends Fragment {
     List<ToggleButton> toggleButtonGroup = new ArrayList<>();
 
     List<Integer> dayList = new ArrayList<>();
+    List<Integer> alarmList = new ArrayList<>();
     Settings settings;
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
+    NotificationManagerCompat notificationManagerCompat;
+
+    private final static String TimePickerLabel1 = "Chọn thời gian bắt đầu";
+    private final static String TimePickerLabel2 = "Chọn thời gian kết thúc";
+    private final static String TimePickerTag1 = "start_time_tag";
+    private final static String TimePickerTag2 = "end_time_tag";
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -98,15 +106,37 @@ public class SettingsRemindWordsFragment extends Fragment {
         tvStartTime.setText(startTime.format(DateTimeFormatter.ofPattern("HH:mm")));
         tvEndTime.setText(endTime.format(DateTimeFormatter.ofPattern("HH:mm")));
 
+        notificationManagerCompat = NotificationManagerCompat.from(getContext());
+
+        File path = getContext().getApplicationContext().getFilesDir();
+        File file = new File(path, GlobalVariables.FILE_ALARM_SET);
+
+        //CREATE SETTINGS FILE
+        if (!file.exists()) {
+            FileIO3.writeToFile(new ArrayList<Integer>(), getContext().getApplicationContext());
+        }
+        alarmList = FileIO3.readFromFile(getContext());
+
         return view;
     }
 
     private void setEvent() {
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAlarm();
+            }
+        });
+
         cbxRemindWords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 expandLayout(cbxRemindWords.isChecked());
-                cancelAlarm();
+                if (cbxRemindWords.isChecked()) {
+                    setAlarm();
+                } else {
+                    cancelAlarm();
+                }
             }
         });
 
@@ -121,15 +151,15 @@ public class SettingsRemindWordsFragment extends Fragment {
         lyStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initTimePicker(settings.getStartTime(), "Select start time");
-                materialTimePicker.show(settingsActivity.getSupportFragmentManager(), "start_time_tag");
+                initTimePicker(settings.getStartTime(), TimePickerLabel1);
+                materialTimePicker.show(settingsActivity.getSupportFragmentManager(), TimePickerTag1);
             }
         });
         lyEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initTimePicker(settings.getEndTime(), "Select end time");
-                materialTimePicker.show(settingsActivity.getSupportFragmentManager(), "end_time_tag");
+                initTimePicker(settings.getEndTime(), TimePickerLabel2);
+                materialTimePicker.show(settingsActivity.getSupportFragmentManager(), TimePickerTag2);
             }
         });
         tb2.setOnClickListener(new View.OnClickListener() {
@@ -227,7 +257,7 @@ public class SettingsRemindWordsFragment extends Fragment {
         if (settings.getRemindDay().contains(7)) {
             tb7.setChecked(true);
         }
-        if (settings.getRemindDay().contains(8)) {
+        if (settings.getRemindDay().contains(1)) {
             tb1.setChecked(true);
         }
     }
@@ -241,18 +271,38 @@ public class SettingsRemindWordsFragment extends Fragment {
         builder.setInputMode(MaterialTimePicker.INPUT_MODE_KEYBOARD);
 
         materialTimePicker = builder.build();
+        //materialTimePicker.setStyle(DialogFragment.STYLE_NORMAL, R.style.timePicker);
         materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (materialTimePicker.getTag().equals("start_time_tag")) {
                     startTime = LocalTime.of(materialTimePicker.getHour(), materialTimePicker.getMinute());
-                    tvStartTime.setText(startTime.toString());
-                    settings.setStartTime(startTime);
+
+                    if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
+                        Toast.makeText(getContext(), "Thời gian bắt đầu phải sớm hơn thời gian kết thúc", Toast.LENGTH_SHORT).show();
+
+                        initTimePicker(settings.getStartTime(), TimePickerLabel1);
+                        materialTimePicker.show(settingsActivity.getSupportFragmentManager(), TimePickerTag1);
+                        return;
+                    } else {
+                        tvStartTime.setText(startTime.toString());
+                        settings.setStartTime(startTime);
+                    }
+
                 } else if (materialTimePicker.getTag().equals("end_time_tag")) {
                     endTime = LocalTime.of(materialTimePicker.getHour(), materialTimePicker.getMinute());
-                    tvEndTime.setText(endTime.toString());
-                    settings.setEndTime(endTime);
+                    if (endTime.isBefore(startTime) || startTime.equals(endTime)) {
+                        Toast.makeText(getContext(), "Thời gian kết thúc phải trễ hơn thời gian bắt đầu", Toast.LENGTH_SHORT).show();
+
+                        initTimePicker(settings.getStartTime(), TimePickerLabel2);
+                        materialTimePicker.show(settingsActivity.getSupportFragmentManager(), TimePickerTag2);
+                        return;
+                    } else {
+                        tvEndTime.setText(endTime.toString());
+                        settings.setEndTime(endTime);
+                    }
                 }
+
                 setAlarm();
                 FileIO.writeToFile(settings, getContext());
             }
@@ -272,134 +322,54 @@ public class SettingsRemindWordsFragment extends Fragment {
         FileIO.writeToFile(settings, getContext());
     }
 
-    private void initDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                chosenDate = LocalDate.of(year, month, day);
-                //etReceiptDate.setText(chosenDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            }
-        };
-
-        LocalDate now = LocalDate.now();
-        int year = now.getYear();
-        int month = now.getMonthValue() - 1;
-        int day = now.getDayOfMonth();
-
-        //etReceiptDate.setText(now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        datePickerDialog = new DatePickerDialog(requireActivity(), dateSetListener, year, month, day);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-    }
-
-    private void setControl() {
-        tvRemindFolders = view.findViewById(R.id.tvRemindFolders);
-        tvNumberOfRemindADay = view.findViewById(R.id.tvNumberOfRemindADay);
-        tvStartTime = view.findViewById(R.id.tvStartTime);
-        tvEndTime = view.findViewById(R.id.tvEndTime);
-
-        lyRemindFolders = view.findViewById(R.id.lyRemindFolders);
-        lyNumberOfRemindADay = view.findViewById(R.id.lyNumberOfRemindADay);
-        lyStartTime = view.findViewById(R.id.lyStartTime);
-        lyEndTime = view.findViewById(R.id.lyEndTime);
-
-        cbxRemindWords = view.findViewById(R.id.cbxRemindWords);
-
-        tb2 = (ToggleButton) view.findViewById(R.id.tb2);
-        tb3 = (ToggleButton) view.findViewById(R.id.tb3);
-        tb4 = (ToggleButton) view.findViewById(R.id.tb4);
-        tb5 = (ToggleButton) view.findViewById(R.id.tb5);
-        tb6 = (ToggleButton) view.findViewById(R.id.tb6);
-        tb7 = (ToggleButton) view.findViewById(R.id.tb7);
-        tb1 = (ToggleButton) view.findViewById(R.id.tb8);
-
-        lyOption = view.findViewById(R.id.lyOption);
-        lyMain = view.findViewById(R.id.lyMain);
-    }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Channel 1";
-            String description = "Đây là channel 1";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("CHANNEL ID 1", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    private void initNotification(String textTile) {
-        //createNotificationChannel();
-        String id = "my_channel_id_01";
-        NotificationManager manager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = manager.getNotificationChannel(id);
-            if (channel == null) {
-                channel = new NotificationChannel(id, "Channel Title", NotificationManager.IMPORTANCE_HIGH);
-                channel.setDescription("hi there");
-                channel.enableVibration(true);
-                channel.setVibrationPattern(new long[]{100, 1000, 200, 340});
-                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-                manager.createNotificationChannel(channel);
-            }
-        }
-
-        Intent notificationIntent = new Intent(getContext(), NotificationActivity.class);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent contentIntent = PendingIntent.getActivity(getContext(), 0, notificationIntent, 0);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), id)
-                .setStyle(new NotificationCompat.BigTextStyle())
-                .setContentTitle("Hello")
-                .setContentText("Hi there!")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setVibrate(new long[]{100, 1000, 200, 340})
-                .setSmallIcon(R.drawable.ic_baseline_arrow_right_24)
-                .setAutoCancel(false)
-                .setTicker("Notification");
-
-        builder.setContentIntent(contentIntent);
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(settingsActivity.getApplicationContext());
-        notificationManagerCompat.notify(1, builder.build());
-    }
-
-    private void cancelAlarm() {
-        Intent intent = new Intent(getContext(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-        if (alarmManager == null) {
-            alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        }
-
-        alarmManager.cancel(pendingIntent);
-        Toast.makeText(getContext(), "Alarm Cancelled", Toast.LENGTH_SHORT).show();
-    }
-
     private void setAlarm() {
         cancelAlarm();
-
         List<Integer> days = settings.getRemindDay();
-
-
         alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent(getContext(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        Calendar today = Calendar.getInstance();
 
         for (int day : days) {
             List<Calendar> calendarList = setCalendar();
             for (Calendar calendar : calendarList) {
-                calendar.set(Calendar.DAY_OF_WEEK, day);
+                if (today.get(Calendar.DAY_OF_WEEK) != day) {
+                    calendar.set(Calendar.DAY_OF_WEEK, day);
+                }
 
-                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                int alarmId = 0;
+                do {
+                    alarmId = random(1, 5000);
+                }
+                while (alarmList.contains(alarmId));
+
+                Intent intent = new Intent(getContext(), AlarmReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), alarmId, intent, 0);
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                         AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+
+                alarmList.add(alarmId);
             }
         }
 
-        Toast.makeText(getContext(), "Alarm set successfully", Toast.LENGTH_SHORT).show();
+        FileIO3.writeToFile(alarmList, getContext());
+        Toast.makeText(getContext(), "Notification set successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    private void cancelAlarm() {
+        for (int alarmId : alarmList
+        ) {
+            Intent intent = new Intent(getContext(), AlarmReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), alarmId, intent, 0);
+            if (alarmManager == null) {
+                alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+            }
+            alarmManager.cancel(pendingIntent);
+        }
+
+        alarmList.clear();
+        FileIO3.writeToFile(alarmList, getContext());
+        Toast.makeText(getContext(), "Alarm Cancelled", Toast.LENGTH_SHORT).show();
     }
 
     private List<Calendar> setCalendar() {
@@ -418,6 +388,7 @@ public class SettingsRemindWordsFragment extends Fragment {
 
         } else if (settings.getNumberOfRemindADay() == 2) {
             Calendar calendar = Calendar.getInstance();
+
             calendar.set(Calendar.HOUR_OF_DAY, startTime.getHour());
             calendar.set(Calendar.MINUTE, startTime.getMinute());
             calendar.set(Calendar.SECOND, 0);
@@ -433,8 +404,6 @@ public class SettingsRemindWordsFragment extends Fragment {
             calendarList.add(calendar);
 
         } else if (settings.getNumberOfRemindADay() > 2) {
-            Duration duration = Duration.between(startTime, endTime).dividedBy(settings.getNumberOfRemindADay());
-
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, startTime.getHour());
             calendar.set(Calendar.MINUTE, startTime.getMinute());
@@ -450,6 +419,7 @@ public class SettingsRemindWordsFragment extends Fragment {
 
             calendarList.add(calendar);
 
+            Duration duration = Duration.between(startTime, endTime).dividedBy(settings.getNumberOfRemindADay());
             LocalTime addedTime = startTime;
 
             for (int i = 0; i < settings.getNumberOfRemindADay() - 2; i++) {
@@ -489,5 +459,47 @@ public class SettingsRemindWordsFragment extends Fragment {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+    }
+
+    private void setControl() {
+        tvRemindFolders = view.findViewById(R.id.tvRemindFolders);
+        tvNumberOfRemindADay = view.findViewById(R.id.tvNumberOfRemindADay);
+        tvStartTime = view.findViewById(R.id.tvStartTime);
+        tvEndTime = view.findViewById(R.id.tvEndTime);
+
+        lyRemindFolders = view.findViewById(R.id.lyRemindFolders);
+        lyNumberOfRemindADay = view.findViewById(R.id.lyNumberOfRemindADay);
+        lyStartTime = view.findViewById(R.id.lyStartTime);
+        lyEndTime = view.findViewById(R.id.lyEndTime);
+
+        cbxRemindWords = view.findViewById(R.id.cbxRemindWords);
+        btnTest = view.findViewById(R.id.btnTest);
+
+        tb2 = (ToggleButton) view.findViewById(R.id.tb2);
+        tb3 = (ToggleButton) view.findViewById(R.id.tb3);
+        tb4 = (ToggleButton) view.findViewById(R.id.tb4);
+        tb5 = (ToggleButton) view.findViewById(R.id.tb5);
+        tb6 = (ToggleButton) view.findViewById(R.id.tb6);
+        tb7 = (ToggleButton) view.findViewById(R.id.tb7);
+        tb1 = (ToggleButton) view.findViewById(R.id.tb8);
+
+        lyOption = view.findViewById(R.id.lyOption);
+        lyMain = view.findViewById(R.id.lyMain);
+    }
+
+    private int getNotificationId() {
+        return (int) new Date().getTime();
+    }
+
+    private int random(int min, int max) {
+        return (int) Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    public EnWord getWord(Integer enWordId) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getContext().getApplicationContext());
+        databaseAccess.open();
+        EnWord enWord = databaseAccess.getOneEnWord(enWordId);
+        databaseAccess.close();
+        return enWord;
     }
 }

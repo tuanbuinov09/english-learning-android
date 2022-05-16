@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ứng Dụng Học Tiếng Anh</string>
+    <string name="app_name">T11 Dictionary</string>
     <string name="title_activity_settings">Settings</string>
     <string name="query_hint">Nhập từ khóa..</string>
     <!-- Preference Titles -->
