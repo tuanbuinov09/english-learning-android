@@ -79,9 +79,12 @@
         <item name="elevation">0dp</item>
         <item name="android:windowContentOverlay">@null</item>
 
-        <item name="android:textColorPrimary">@color/cultured</item>
+        <item name="android:textColorPrimary">@color/space_cadet</item>
         <item name="colorPrimary">@color/space_cadet</item>
         <item name="colorPrimaryDark">@color/space_cadet</item>
+
+        <item name="colorOnPrimary">@color/cultured</item>
+        <item name="colorOnSurface">@color/space_cadet</item>
     </style>
 
     <style name="Theme.TranslateTextActivity" parent="Theme.AppCompat.Light.DarkActionBar">
