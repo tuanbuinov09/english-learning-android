@@ -169,11 +169,11 @@
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textAllCaps="true"
-                    android:background="@color/steel_blue"
+                    android:background="@drawable/bg_green_radius_15"
                     android:id="@+id/btnSynchFromFirebase"
                     android:layout_weight="1"
                     android:layout_marginRight="10dp"
-                    android:text="Download"/>
+                    android:text="Phục hồi"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,10 +182,10 @@
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textAllCaps="true"
-                    android:background="#48AE4C"
+                    android:background="@drawable/bg_steelblue_radius_15"
                     android:id="@+id/btnSynchToFirebase"
                     android:layout_weight="1"
-                    android:text="Upload"/>
+                    android:text="Sao lưu"/>
             </LinearLayout>
             <Button
                 android:id="@+id/buttonLogout"
