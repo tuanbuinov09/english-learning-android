@@ -48,10 +48,11 @@ public class LearnEnglishActivity extends AppCompatActivity {
 //                    return true;
                     break;
                 case R.id.pageProfile:
-//                    selectedFragment = new ProfileFragment();
+                    selectedFragment = new ProfileFragment();
                     Intent intent = new Intent(this, ProfileActivity.class);
                     startActivity(intent);
                     return true;
+
             }
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,

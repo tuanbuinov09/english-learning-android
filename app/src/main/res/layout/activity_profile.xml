@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ProfileActivity">
 
     <LinearLayout
@@ -30,13 +31,16 @@
                 android:id="@+id/textViewTen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="27dp"
                 android:layout_toRightOf="@+id/img_avatar"
-
                 android:includeFontPadding="false"
-                android:text=""
-                android:textSize="20sp" />
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:text="TruongCoder"
+                android:textColor="@color/azureish_white"
+                android:textSize="20sp"
+
+                android:textStyle="bold" />
 
             <TextView
 
@@ -46,10 +50,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewTen"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+
+                android:layout_marginLeft="27dp"
+                android:layout_marginTop="9dp"
                 android:layout_toRightOf="@+id/img_avatar"
                 android:includeFontPadding="false"
-                android:text=""
+                android:maxLines="3"
+                android:scrollHorizontally="true"
+                android:text="nguyenquangtruonghktcute@gmail.com"
+                android:textColor="@color/azureish_white"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -58,14 +67,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-100dp"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@color/space_cadet">
+                app:cardBackgroundColor="@color/space_cadet"
+                app:cardElevation="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -79,15 +90,15 @@
                         android:src="@drawable/point" />
 
                 </RelativeLayout>
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@color/space_cadet"
-                >
+                app:cardBackgroundColor="@color/space_cadet"
+                app:cardElevation="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -102,11 +113,12 @@
 
                         android:layout_centerInParent="true"
                         android:text="0"
+                        android:textColor="@color/azureish_white"
                         android:textSize="40sp" />
 
 
                 </RelativeLayout>
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
         <!--        <LinearLayout-->
