@@ -42,10 +42,11 @@ public class LearnEnglishActivity extends AppCompatActivity {
                     selectedFragment = new AchievementFragment();
                     break;
                 case R.id.pageRanking:
-//                    selectedFragment = new RankingFragment();
-                    Intent intentpageRanking = new Intent(this, RankingActivity.class);
-                    startActivity(intentpageRanking);
-                    return true;
+                    selectedFragment = new RankingFragment();
+//                    Intent intentpageRanking = new Intent(this, RankingActivity.class);
+//                    startActivity(intentpageRanking);
+//                    return true;
+                    break;
                 case R.id.pageProfile:
 //                    selectedFragment = new ProfileFragment();
                     Intent intent = new Intent(this, ProfileActivity.class);

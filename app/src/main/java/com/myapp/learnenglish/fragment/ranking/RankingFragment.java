@@ -1,14 +1,30 @@
 package com.myapp.learnenglish.fragment.ranking;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
+import com.myapp.Main;
 import com.myapp.R;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +41,13 @@ public class RankingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //RecyclerView recyclerView;
+    AdapterRank adapterRank;
+    TextView tvRank, tvTest;
+    TextView tvPointrank1,tvPointrank2,tvPointrank3;
+    ImageView imgback;
+    Query database;
+    ArrayList<UserRanking> list;
     public RankingFragment() {
         // Required empty public constructor
     }
@@ -61,6 +83,63 @@ public class RankingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ranking, container, false);
+        View view = inflater.inflate(R.layout.fragment_ranking, container, false);
+        // = (RecyclerView) view.findViewById(R.id.userranklist);
+        RecyclerView recyclerView = view.findViewById(R.id.userranklist);
+        AnhXa(view);
+        database = FirebaseDatabase.getInstance().getReference("User").orderByChild("point");
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        list= new ArrayList<>();
+        adapterRank = new AdapterRank(getActivity(),list);
+        recyclerView.setAdapter(adapterRank);
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot:snapshot.getChildren())
+                {
+                    UserRanking userRanking = dataSnapshot.getValue(UserRanking.class);
+                    list.add(userRanking);
+                }
+                //dao nguoc list
+                Collections.reverse(list);
+                Top3point();
+                adapterRank.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        //Back
+//        imgback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent
+//                        = new Intent(RankingFragment.this.getActivity(),
+//                        Main.class);
+//                startActivity(intent);
+//            }
+//        });
+        return view;
+    }
+    private void AnhXa(View view)
+    {
+        //recyclerView = view.findViewById(R.id.userranklist);
+        tvPointrank1 = (TextView) view.findViewById(R.id.tvpointrank1);
+        tvPointrank2 = (TextView) view.findViewById(R.id.tvpointrank2);
+        tvPointrank3 = (TextView) view.findViewById(R.id.tvpointrank3);
+        //imgback = (ImageView) view.findViewById(R.id.imgVBackRank);
+
+    }
+    private void Top3point()
+    {
+        tvPointrank1.setText(String.valueOf(list.get(0).getPoint()));
+        tvPointrank2.setText(String.valueOf(list.get(1).getPoint()));
+        tvPointrank3.setText(String.valueOf(list.get(2).getPoint()));
+
+
     }
 }
