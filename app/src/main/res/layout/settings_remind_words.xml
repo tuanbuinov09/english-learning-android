@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Remind words" />
+            android:text="Thông báo" />
 
         <Space
             android:layout_width="0dp"
@@ -89,7 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Number of Remind a day" />
+                android:text="Số lần thông báo trong ngày" />
 
             <Space
                 android:layout_width="0dp"
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start time" />
+                android:text="Thời gian bắt đầu" />
 
             <Space
                 android:layout_width="0dp"
@@ -143,7 +143,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="End time" />
+                android:text="Thời gian kết thúc" />
 
             <Space
                 android:layout_width="0dp"
@@ -168,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:text="Remind day" />
+                android:text="Ngày thông báo" />
 
             <include
                 layout="@layout/day_picker"
@@ -179,4 +179,11 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:visibility="gone" />
 </LinearLayout>

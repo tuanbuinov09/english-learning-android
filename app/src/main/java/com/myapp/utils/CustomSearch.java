@@ -31,7 +31,7 @@ public class CustomSearch {
     private String keyword;
     private Context context;
 
-    public static final String key = "AIzaSyCRfETOftgCDHVkETpY_d9fIS_1QMRggh8";
+    public static final String key = "AIzaSyDPtHbhFsmKlWhR-gUVoWXSS6diaVf6NPk";
     public static final String cx = "85d1fa9cad0444d68";
 
     public CustomSearch(Context context, String keyword) {
