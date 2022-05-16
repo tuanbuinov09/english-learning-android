@@ -59,7 +59,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
     SQLiteDatabase database;
     EditText tvHoten,tvEmail,tvSdt,tvUID;
     TextView tvtaikhoan, tvTen;
-    Button btnCapNhat,btnLogout, btnSynchFromFirebase, btnSynchToFirebase;
+    Button btnCapNhat,btnLogout, btnSynchFromFirebase, btnSynchToFirebase,btnChangePassword;
     String iduser;
     User user;
     ProgressDialog progressDialog;
@@ -185,6 +185,13 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                 openDialog("upload");
             }
         });
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ThongTinTaikhoanActivity.this,ChangePassword.class);
+                startActivity(intent);
+            }
+        });
 
     }
     private void onClickRequestPermission() {
@@ -219,6 +226,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
 //        tvPoint = findViewById(R.id.textviewPoint);
         btnCapNhat = findViewById(R.id.buttonCapNhat);
         btnLogout = findViewById(R.id.buttonLogout);
+        btnChangePassword = findViewById(R.id.buttonChangePassword);
         tvUID.setEnabled(false);
         tvEmail.setEnabled(false);
         imageView = findViewById(R.id.img_avatar);
@@ -246,7 +254,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
             return;
         }
         String strfullname= hoten;
-        uploadImage();
+
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(strfullname)
                 .build();
@@ -254,6 +262,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
             profileUpdates = new UserProfileChangeRequest.Builder()
                     .setPhotoUri(mUri)
                     .build();
+            uploadImage();
         }
 
         user.updateProfile(profileUpdates)

@@ -156,6 +156,15 @@
             android:name=".dictionary.YourWordActivity"
             android:exported="false" />
         <activity
+            android:name=".OtpVerifyActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".OtpSendActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ChangePassword"
+            android:exported="false" />
+        <activity
             android:name=".HistoryActivity"
             android:exported="false"
             android:theme="@style/Theme.TranslationHistoryActivity" />
