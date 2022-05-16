@@ -119,6 +119,7 @@ public class Main extends AppCompatActivity {
         GlobalVariables.userId = databaseAccess.getCurrentUserId__OFFLINE();
         databaseAccess.close();
 
+        getSavedWordOfUser();
 //        try{
 //            DB = DatabaseAccess.getInstance(getApplicationContext());
 //            mAuth = FirebaseAuth.getInstance();

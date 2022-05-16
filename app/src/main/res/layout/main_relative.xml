@@ -100,13 +100,13 @@
             android:drawableLeft="@drawable/icons8_wordbook_32px"
             android:text="Từ điển Việt Anh" />
 
-        <Button
-            style="@style/mainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/icons8_rounded_rectangle_stroked_32px"
-            android:drawableLeft="@drawable/icons8_rounded_rectangle_stroked_32px"
-            android:text="Cửa sổ tra nhanh" />
+<!--        <Button-->
+<!--            style="@style/mainButtonStyle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:drawableStart="@drawable/icons8_rounded_rectangle_stroked_32px"-->
+<!--            android:drawableLeft="@drawable/icons8_rounded_rectangle_stroked_32px"-->
+<!--            android:text="Cửa sổ tra nhanh" />-->
 
         <Button
             android:id="@+id/buttonLearnEnglish"
@@ -122,8 +122,8 @@
             style="@style/mainButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/icons8_learning_32px_1"
-            android:drawableLeft="@drawable/icons8_learning_32px_1"
+            android:drawableStart="@drawable/icons8_text_32px"
+            android:drawableLeft="@drawable/icons8_text_32px"
             android:text="Dịch văn bản" />
 
         <LinearLayout
@@ -163,13 +163,13 @@
             android:drawableLeft="@drawable/icons8_time_machine_32px"
             android:text="Từ đã tra" />
 
-        <Button
-            style="@style/mainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/icons8_view_details_32px"
-            android:drawableLeft="@drawable/icons8_view_details_32px"
-            android:text="Từ vựng quan trọng" />
+<!--        <Button-->
+<!--            style="@style/mainButtonStyle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:drawableStart="@drawable/icons8_view_details_32px"-->
+<!--            android:drawableLeft="@drawable/icons8_view_details_32px"-->
+<!--            android:text="Từ vựng quan trọng" />-->
 
         <Button
             android:id="@+id/buttonSettings"
