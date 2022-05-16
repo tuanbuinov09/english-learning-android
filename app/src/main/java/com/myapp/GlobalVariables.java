@@ -24,6 +24,7 @@ public class GlobalVariables {
 
     public static String FILE_CONFIG_NAME = "config.dat";
     public static String FILE_HISTORY_NAME = "history.dat";
+    public static String FILE_ALARM_SET = "alarm.dat";
     public static String userNote="";
 //    public static Settings SETTINGS;
 }
