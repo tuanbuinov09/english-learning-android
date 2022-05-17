@@ -6,7 +6,15 @@ public class UserRanking {
     private String email;
     private String sdt;
     private long point;
+    private String iduser;
 
+    public String getIduser() {
+        return iduser;
+    }
+
+    public void setIduser(String iduser) {
+        this.iduser = iduser;
+    }
 
     public String getHoTen() {
         return hoTen;
