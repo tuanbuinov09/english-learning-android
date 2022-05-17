@@ -1,7 +1,9 @@
 package com.myapp;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,6 +66,8 @@ public class Main extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private final int REQUEST_MIC_CODE = 111;
+    private final int REQUEST_WRITE = 105;
+    private final int REQUEST_CAMERA = 109;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +114,7 @@ public class Main extends AppCompatActivity {
 
         checkFAB();
         ChangeSearchView.change(searchInput, this);
+        askPermission();
     }
 
     @Override
@@ -522,5 +528,72 @@ public class Main extends AppCompatActivity {
         Settings settings = FileIO.readFromFile(this);
         if (settings.isSwitchFAB()) fab.setVisibility(View.VISIBLE);
         else fab.setVisibility(View.GONE);
+    }
+
+    public void askPermission() {
+        String[] PERMISSIONS = {
+                Manifest.permission.INTERNET,
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.RECEIVE_BOOT_COMPLETED,
+
+        };
+
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
+        }
+        ;
+    }
+
+    private boolean hasPermissions(Context context, String... PERMISSIONS) {
+        if (context != null && PERMISSIONS != null) {
+            for (String p : PERMISSIONS) {
+                if (ActivityCompat.checkSelfPermission(context, p) == PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Toast.makeText(this, "INTERNET", Toast.LENGTH_SHORT).show();
+            } else {
+                //Toast.makeText(this, "Please provide the required permission", Toast.LENGTH_SHORT).show();
+            }
+
+            if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                //Toast.makeText(this, "CAMERA", Toast.LENGTH_SHORT).show();
+            } else {
+                //Toast.makeText(this, "Please provide the required permission", Toast.LENGTH_SHORT).show();
+            }
+            if (grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                //Toast.makeText(this, "Please provide the required permission", Toast.LENGTH_SHORT).show();
+            }
+            if (grantResults[3] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                //Toast.makeText(this, "Please provide the required permission", Toast.LENGTH_SHORT).show();
+            }
+            if (grantResults[4] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                //Toast.makeText(this, "Please provide the required permission", Toast.LENGTH_SHORT).show();
+            }
+            if (grantResults[5] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                //Toast.makeText(this, "Please provide the required permission", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
