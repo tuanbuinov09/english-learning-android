@@ -150,14 +150,6 @@ public class EnWordRecyclerAdapter extends
                 Intent intent = new Intent(view.getContext(), EnWordDetailActivity2.class);
                 Integer enWordId = enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getId();
                 intent.putExtra("enWordId", enWordId);
-
-                List<Integer> wordList = FileIO2.readFromFile(mContext);
-                if (wordList.contains(enWordId)) {
-                    wordList.remove(wordList.indexOf(enWordId));
-                }
-                wordList.add(0, enWordArrayList.get(viewHolder.getAbsoluteAdapterPosition()).getId());
-                FileIO2.writeToFile(wordList, mContext);
-
                 view.getContext().startActivity(intent);
 //                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }

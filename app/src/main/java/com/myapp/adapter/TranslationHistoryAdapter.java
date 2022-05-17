@@ -1,6 +1,7 @@
 package com.myapp.adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -186,10 +187,10 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
 
         if (isSelectedAll) {
             holder.ivCheckBox.setVisibility(View.VISIBLE);
-            holder.itemView.setBackgroundColor((Color.LTGRAY));
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
         } else {
             holder.ivCheckBox.setVisibility(View.GONE);
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
         }
     }
 
@@ -197,15 +198,15 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
         TranslationHistory translationHistory = list.get(holder.getAbsoluteAdapterPosition());
         if (holder.ivCheckBox.getVisibility() == View.GONE) {
             holder.ivCheckBox.setVisibility(View.VISIBLE);
-            holder.itemView.setBackgroundColor(Color.LTGRAY);
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
             holder.btnSpeak.setVisibility(View.GONE);
             holder.btnFavorite.setVisibility(View.GONE);
             selectedList.add(translationHistory);
         } else {
             holder.ivCheckBox.setVisibility(View.GONE);
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
             holder.btnSpeak.setVisibility(View.VISIBLE);
-            holder.btnFavorite.setVisibility(View.VISIBLE);
+            holder.btnFavorite.setVisibility(View.GONE);
             selectedList.remove(translationHistory);
         }
         mainViewModel.setText(String.valueOf(selectedList.size()));

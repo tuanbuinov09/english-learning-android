@@ -20,9 +20,9 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_bold"
-            android:text="T11 Dictionary"
+            android:text="@string/app_name"
             android:textColor="@color/azureish_white"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icons8_wordbook_32px"
             android:drawableLeft="@drawable/icons8_wordbook_32px"
-            android:text="Từ điển Việt Anh" />
+            android:text="Từ điển Anh-Việt" />
 
 <!--        <Button-->
 <!--            style="@style/mainButtonStyle"-->

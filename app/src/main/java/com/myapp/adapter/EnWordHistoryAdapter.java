@@ -2,6 +2,7 @@ package com.myapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -55,7 +56,7 @@ public class EnWordHistoryAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View heroView = inflater.inflate(R.layout.en_word_item_for_recyclerview, parent, false);
+        View heroView = inflater.inflate(R.layout.en_word_item_for_recyclerview_2, parent, false);
         mainViewModel = ViewModelProviders.of((AppCompatActivity) context).get(MainViewModel.class);
         return new ViewHolder(heroView);
     }
@@ -216,10 +217,10 @@ public class EnWordHistoryAdapter extends
 
         if (isSelectedAll) {
             holder.ivCheckBox.setVisibility(View.VISIBLE);
-            holder.itemView.setBackgroundColor((Color.LTGRAY));
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
         } else {
             holder.ivCheckBox.setVisibility(View.GONE);
-            holder.itemView.setBackgroundColor(context.getColor(R.color.white));
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
         }
     }
 
@@ -227,13 +228,13 @@ public class EnWordHistoryAdapter extends
         Integer enWordId = wordList.get(holder.getAbsoluteAdapterPosition());
         if (holder.ivCheckBox.getVisibility() == View.GONE) {
             holder.ivCheckBox.setVisibility(View.VISIBLE);
-            holder.itemView.setBackgroundColor(Color.LTGRAY);
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
             holder.buttonSpeak.setVisibility(View.GONE);
             holder.btnSave_UnsaveWord.setVisibility(View.GONE);
             selectedList.add(enWordId);
         } else {
             holder.ivCheckBox.setVisibility(View.GONE);
-            holder.itemView.setBackgroundColor(context.getColor(R.color.white));
+            holder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
             holder.buttonSpeak.setVisibility(View.VISIBLE);
             holder.btnSave_UnsaveWord.setVisibility(View.VISIBLE);
             selectedList.remove(enWordId);

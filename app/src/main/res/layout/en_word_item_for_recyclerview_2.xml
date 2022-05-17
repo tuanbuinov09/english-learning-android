@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lyTranslationItem"
+    android:id="@+id/enWordItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
     android:background="@drawable/bg_round_corner_5"
     android:backgroundTint="@color/white"
-    android:orientation="horizontal"
-    android:padding="10dp"
-    app:backgroundTint="@color/white">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:paddingStart="5dp">
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp" />
+        <!--        tạm thời k dùng, để gone-->
         <CheckBox
             android:id="@+id/checkBoxWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"
-            android:visibility="gone"
+            android:layout_marginRight="8dp"
 
-            />
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/layoutClickToSeeDetail"
@@ -35,20 +38,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvText"
+                android:id="@+id/textViewWord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
+                android:background="@drawable/border_bottom"
+                android:fontFamily="@font/roboto_bold"
                 android:text="cabaret"
                 android:textColor="@color/space_cadet"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvTranslatedText"
+                android:id="@+id/textViewPronunciation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/'phatam/"
-                android:textColor="@color/space_cadet"
+                android:textColor="@color/steel_blue"
                 android:textSize="14sp" />
 
             <TextView
@@ -56,32 +60,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="nghĩaaaaaaaaa"
-                android:textColor="#555"
-                android:textSize="18sp"
-                android:visibility="gone" />
+                android:textColor="@color/steel_blue"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageButton
-            android:id="@+id/btnSpeak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_baseline_volume_up_24" />
+            android:id="@+id/buttonSpeak"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/icons8_sound_32px"
+            android:backgroundTint="@color/space_cadet"
+
+            />
+
+
+        <!--        //nếu đã lưu dùng cái này-->
+        <!--            android:background="@drawable/icons8_filled_bookmark_ribbon_32px_1"-->
 
         <ImageButton
-            android:id="@+id/btnFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_round_star_outline_24"
-            android:visibility="gone" />
+            android:id="@+id/btnSave_UnsaveWord"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icons8_bookmark_outline_32px" />
 
         <ImageView
             android:id="@+id/ivCheckBox"
@@ -90,4 +102,5 @@
             android:src="@drawable/ic_baseline_check_circle_24"
             android:visibility="gone" />
     </LinearLayout>
+
 </LinearLayout>
