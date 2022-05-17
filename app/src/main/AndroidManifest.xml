@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
@@ -49,11 +49,11 @@
             android:exported="false" />
         <activity
             android:name=".dictionary.EnWordDetailActivity2"
+            android:excludeFromRecents="true"
             android:exported="false"
-            android:theme="@style/Theme.EnWordDetailActivity2"
             android:launchMode="singleTask"
             android:taskAffinity=""
-            android:excludeFromRecents="true"/>
+            android:theme="@style/Theme.EnWordDetailActivity2" />
         <activity
             android:name=".NotificationActivity"
             android:exported="false" />
@@ -104,27 +104,31 @@
             android:exported="false" />
         <activity
             android:name=".learnenglish.LearnEnglishActivity"
+            android:excludeFromRecents="true"
             android:exported="false"
-            android:parentActivityName=".Main"
-            android:theme="@style/Theme.TkActionBar"
             android:launchMode="singleTask"
+            android:parentActivityName=".Main"
             android:taskAffinity=""
-            android:excludeFromRecents="true"/>
+            android:theme="@style/Theme.TkActionBar" />
         <activity
             android:name=".CropActivity"
             android:exported="false"
+            android:label="Dịch hình ảnh"
             android:theme="@style/Theme.CropActivity" />
         <activity
             android:name=".TranslateTextActivity"
             android:exported="false"
+            android:label="Dịch văn bản"
             android:theme="@style/Theme.TranslateTextActivity" />
         <activity
             android:name=".TranslationHistoryActivity"
             android:exported="false"
+            android:label="Các bản dịch trước đó"
             android:theme="@style/Theme.TranslationHistoryActivity" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
+            android:label="Cài đặt"
             android:theme="@style/Theme.SettingsActivity" />
         <activity
             android:name=".SignUp"
@@ -163,7 +167,9 @@
             android:exported="false" />
         <activity
             android:name=".dictionary.YourWordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Từ của bạn"
+            android:theme="@style/Theme.EnWordDetailActivity2" />
         <activity
             android:name=".OtpVerifyActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -176,6 +182,7 @@
         <activity
             android:name=".HistoryActivity"
             android:exported="false"
+            android:label="Từ đã tra"
             android:theme="@style/Theme.TranslationHistoryActivity" />
 
         <receiver
