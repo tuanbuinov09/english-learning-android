@@ -15,18 +15,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.firestore.SetOptions;
 import com.myapp.GlobalVariables;
 import com.myapp.R;
+import com.myapp.adapter.ViewPagerAdapter;
 import com.myapp.dictionary.fragment.EnWordDetailFragment;
-import com.myapp.dictionary.fragment.ImageFragment;
-import com.myapp.dictionary.fragment.YourNoteFragment;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
 
@@ -45,6 +46,9 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 
     private final int REQUEST_WRITE = 888;
 
+    MenuItem menuSave_unSaveWord;
+    Menu optionsMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,26 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
                 .replace(R.id.fragmentContainer, new EnWordDetailFragment(savedWord)).commit();
 
         askPermission();
+
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        ViewPager2 viewPager2 = findViewById(R.id.pager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, enWordId, savedWord);
+        viewPager2.setAdapter(viewPagerAdapter);
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("ENG-VIET");
+                    break;
+                case 1:
+                    tab.setText("HÌNH ẢNH");
+                    break;
+                case 2:
+                    tab.setText("GHI CHÚ");
+                    break;
+
+            }
+        }).attach();
     }
 
 
@@ -155,43 +179,44 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 //                  }
 //              }
 //          });
-        topNavigation.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
-            switch (item.getItemId()) {
-                case R.id.pageEnWordDetail:
-
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("enWordId", enWordId);
-
-                    bundle.putSerializable("enWord", savedWord);
-                    selectedFragment = new EnWordDetailFragment(savedWord);
-                    selectedFragment.setArguments(bundle);
-                    break;
-
-                case R.id.menuImage:
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putInt("enWordId", enWordId);
-
-                    bundle1.putSerializable("enWord", savedWord);
-
-                    selectedFragment = new ImageFragment();
-                    selectedFragment.setArguments(bundle1);
-                    break;
-                case R.id.pageYourNote:
-                    Bundle bundleYourNote = new Bundle();
-                    bundleYourNote.putInt("enWordId", enWordId);
-                    selectedFragment = new YourNoteFragment();
-                    selectedFragment.setArguments(bundleYourNote);
-                    break;
-            }
-
-            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,
-                    selectedFragment, null).addToBackStack(null).commit();
-            return true;
-        });
+//        topNavigation.setOnItemSelectedListener(item -> {
+//            Fragment selectedFragment = null;
+//            switch (item.getItemId()) {
+//                case R.id.pageEnWordDetail:
+//
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("enWordId", enWordId);
+//
+//                    bundle.putSerializable("enWord", savedWord);
+//                    selectedFragment = new EnWordDetailFragment(savedWord);
+//                    selectedFragment.setArguments(bundle);
+//                    break;
+//
+//                case R.id.menuImage:
+//                    Bundle bundle1 = new Bundle();
+//                    bundle1.putInt("enWordId", enWordId);
+//
+//                    bundle1.putSerializable("enWord", savedWord);
+//
+//                    selectedFragment = new ImageFragment();
+//                    selectedFragment.setArguments(bundle1);
+//                    break;
+//                case R.id.pageYourNote:
+//                    Bundle bundleYourNote = new Bundle();
+//                    bundleYourNote.putInt("enWordId", enWordId);
+//                    selectedFragment = new YourNoteFragment();
+//                    selectedFragment.setArguments(bundleYourNote);
+//                    break;
+//            }
+//
+//            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,
+//                    selectedFragment, null).addToBackStack(null).commit();
+//            return true;
+//        });
     }
 
     private void setControl() {
+
         topNavigation = findViewById(R.id.topNavigation);
         fragmentManager = getSupportFragmentManager();
         enWordId = getIntent().getIntExtra("enWordId", -1);
@@ -210,6 +235,20 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater findMenuItems = getMenuInflater();
         findMenuItems.inflate(R.menu.enword_detail_2_menu, menu);
+        optionsMenu = menu;
+        menuSave_unSaveWord = (MenuItem) optionsMenu.findItem(R.id.menu_save_unsave);
+        if (GlobalVariables.listSavedWordId.contains(savedWord.getId())) {
+            unsave = true;
+            menuSave_unSaveWord.setIcon(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+        } else {
+            unsave = false;
+            menuSave_unSaveWord.setIcon(R.drawable.icons8_bookmark_outline_32px);
+        }
+        if (GlobalVariables.userId.equalsIgnoreCase("") || GlobalVariables.userId == null) {
+            menuSave_unSaveWord.setVisible(false);
+        } else {
+            menuSave_unSaveWord.setVisible(true);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -223,7 +262,29 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 
                 break;
             case R.id.menu_save_unsave:
+                if (unsave == true) {
+                    GlobalVariables.listSavedWordId.remove(GlobalVariables.listSavedWordId.indexOf(savedWord.getId()));
 
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+                    databaseAccess.open();
+                    databaseAccess.unSaveOneWord(GlobalVariables.userId, savedWord.getId());
+                    databaseAccess.close();
+
+                    item.setIcon(R.drawable.icons8_bookmark_outline_32px);
+                    unsave = !unsave;
+
+                } else {
+                    //them ca vao trong nay cho de dung
+                    GlobalVariables.listSavedWordId.add((savedWord.getId()));
+
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+                    databaseAccess.open();
+                    databaseAccess.saveOneWord(GlobalVariables.userId, savedWord.getId());
+                    databaseAccess.close();
+
+                    item.setIcon(R.drawable.icons8_filled_bookmark_ribbon_32px_1);
+                    unsave = !unsave;
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);

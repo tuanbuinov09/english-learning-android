@@ -70,7 +70,7 @@ public class EnWordDetailActivity extends AppCompatActivity {
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
+                //Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
                 Toast.makeText(EnWordDetailActivity.this, savedWord.getWord(), Toast.LENGTH_SHORT).show();
             }
         });
