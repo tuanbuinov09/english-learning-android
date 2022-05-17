@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,6 +121,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getActivity().setTheme(R.style.Theme_MyApp);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -130,11 +132,22 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_profile, container, false);
+        //final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(),R.style.AppTheme);
+        //LayoutInflater localInflate = inflater.cloneInContext(contextThemeWrapper);
+        //mTheme = ;
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme);
 
+// clone the inflater using the ContextThemeWrapper
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        Context ctx = new ContextThemeWrapper(getActivity(), R.style.AppTheme);
+        LayoutInflater li = inflater.cloneInContext(ctx);
+        li.getContext().setTheme(R.style.AppTheme);
+        View view= li.inflate(R.layout.fragment_profile, container, false);
+
+        //this.getActivity().setTheme(R.style.AppTheme);
         DB = DatabaseAccess.getInstance(getActivity().getApplicationContext());
         AnhXa(view);
-
+        //view = inflater.getContext().setTheme(R.style.Theme_MyApp);
 //        iduser = DB.iduser;
         // mMainActivity = new MainActivity() ;
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -324,5 +337,6 @@ public class ProfileFragment extends Fragment {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         mActivityResultLauncher.launch(Intent.createChooser(intent,"select picture"));
     }
+
 
 }

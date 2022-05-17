@@ -137,6 +137,9 @@
             android:name=".SignInActivity"
             android:exported="false" />
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".learnenglish.fragment.ranking.RankingActivity"
             android:exported="false" />
         <activity

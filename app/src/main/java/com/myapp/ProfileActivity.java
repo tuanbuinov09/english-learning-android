@@ -258,7 +258,7 @@ public class ProfileActivity extends AppCompatActivity{
         //Truyền thông tin
         tvHoten.setText(user.getHoTen());
         tvTen.setText(user.getHoTen());
-        tvtaikhoan.setText(user.getEmail());
+        //tvtaikhoan.setText(user.getEmail());
         tvPoint.setText(String.valueOf(user.getPoint()));
         tvEmail.setText(user.getEmail());
         tvSdt.setText(user.getSDT());
@@ -280,7 +280,7 @@ public class ProfileActivity extends AppCompatActivity{
             String Email = cursor.getString(3);
             String SDT = cursor.getString(4);
             user = new User(Iduser,HoTen,Point,Email,SDT);
-            Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
             //setUserInformation();
 //        ThongTinTaikhoanActivity.context = getApplicationContext();
 

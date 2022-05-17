@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/roboto_bold"
-            android:text="OTP Verification"
+            android:text="Xác minh OTP"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="We will send otp to your mobile number." />
+            android:text="Mã xác nhận được gửi về thuê bao" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
             android:layout_marginTop="45dp"
             android:layout_marginBottom="45dp"
             android:background="@drawable/bg_space_cadet_radius_15"
-            android:text="Send"
+            android:text="Gửi"
             android:textColor="@color/cultured"
             app:backgroundTint="@color/space_cadet" />
 
