@@ -121,8 +121,40 @@
         <item name="android:background">@drawable/bg_round_corner_5</item>
         <item name="android:backgroundTint">@color/space_cadet</item>
     </style>
+    <style name="buttonInAccountActivity" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/cultured</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/bg_space_cadet_radius_15</item>
+        <item name="android:backgroundTint">@color/space_cadet</item>
+    </style>
+
 
     <style name="progressBarColor" parent="Widget.AppCompat.ProgressBar">
         <item name="colorControlActivated">@color/steel_blue</item>
+    </style>
+
+    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+        <!--        <item name="tabTextAppearance">@style/TextAppearance.App.Button</item>-->
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/cultured</item>
+        <item name="colorSurface">@color/steel_blue</item>
+        <item name="colorOnSurface">@color/azureish_white</item>
+    </style>
+
+    <style name="EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/bg_azureich_white_radius_15</item>
+        <item name="android:textColor">@color/space_cadet</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textColorHint">@color/steel_blue</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+        <item name="android:paddingHorizontal">20dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 </resources>
