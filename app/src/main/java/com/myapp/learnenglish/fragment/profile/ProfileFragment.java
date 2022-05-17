@@ -121,7 +121,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        getActivity().setTheme(R.style.Theme_MyApp);
+        //getActivity().setTheme(R.style.Theme_MyApp);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
