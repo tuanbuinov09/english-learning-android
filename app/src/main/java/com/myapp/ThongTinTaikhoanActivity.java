@@ -347,7 +347,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
             String Email = cursor.getString(3);
             String SDT = cursor.getString(4);
             user = new User(Iduser, HoTen, Point, Email, SDT);
-            Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
             //setUserInformation();
 //        ThongTinTaikhoanActivity.context = getApplicationContext();
 
