@@ -66,13 +66,13 @@ public class ChangePassword extends AppCompatActivity {
 //        }
 
         String finalStrEmail = strEmail;
-        //reAuthentiate(finalStrEmail,strOldPassword);
+        //reAuthentiate(finalStrEmail,strOldPassword);+strEmail+"  "+strOldPassword+"  "+strNewPassword
         user.updatePassword(strNewPassword)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ChangePassword.this,"Change password successfully: "+strEmail+"  "+strOldPassword+"  "+strNewPassword,Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChangePassword.this,"Change password successfully",Toast.LENGTH_LONG).show();
 //                            progressDialog.dismiss();
 
                         }else{
@@ -190,7 +190,7 @@ public class ChangePassword extends AppCompatActivity {
                 // Sử dụng kết quả result bằng cách hiện Toast
                 //Toast.makeText(this, "Result:111111111 " + result, Toast.LENGTH_LONG).show();
                 Toast.makeText(this, "Đổi mật khẩu thành công " + result, Toast.LENGTH_LONG).show();
-                //finish();
+                finish();
             } else {
 
                 Toast.makeText(this, "Đổi mật khẩu thất bại", Toast.LENGTH_LONG).show();
