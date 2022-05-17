@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "564098385138",
+    "firebase_url": "https://hoc-tieng-anh-android-default-rtdb.firebaseio.com",
     "project_id": "hoc-tieng-anh-android",
     "storage_bucket": "hoc-tieng-anh-android.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.myapp",
             "certificate_hash": "bfede16e734dec80094a8f559f77a83134a8de23"
+          }
+        },
+        {
+          "client_id": "564098385138-hgm4q0i5g7l7pac84tlubqcrbp0aqlie.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myapp",
+            "certificate_hash": "e0bc66bbdc99620279e8fa8b21479662a7b540ca"
           }
         },
         {
