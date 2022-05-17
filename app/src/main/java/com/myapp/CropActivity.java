@@ -70,7 +70,6 @@ public class CropActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop);
 
-        setTitle("Translate");
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setElevation(0);
@@ -131,7 +130,7 @@ public class CropActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Bitmap croppedImage = cropImageView.getCroppedImage();
                 if (croppedImage == null) {
-                    Toast.makeText(CropActivity.this, "Please choose an image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CropActivity.this, "Xin hãy chọn lại hình", Toast.LENGTH_SHORT).show();
                 } else {
                     String text = getTextFromImage(croppedImage);
                     translateEnglishToVietnamese(text);
@@ -198,9 +197,9 @@ public class CropActivity extends AppCompatActivity {
 
     private void copyToClipBoard(String text) {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Copied data", text);
+        ClipData clip = ClipData.newPlainText("Đã sao chép văn bản", text);
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(CropActivity.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+        Toast.makeText(CropActivity.this, "Đã sao chép văn bản vào bộ nhớ", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -227,13 +226,13 @@ public class CropActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(CropActivity.this, "Vietnamese English model translator is downloaded", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CropActivity.this, "Vietnamese English model translator is downloaded", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CropActivity.this, "Failed to download Vietnamese English model translator", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CropActivity.this, "Failed to download Vietnamese English model translator", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -250,7 +249,7 @@ public class CropActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CropActivity.this, "Cannot translate", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CropActivity.this, "Không thể dịch được", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -275,7 +274,7 @@ public class CropActivity extends AppCompatActivity {
         String result = "";
         TextRecognizer textRecognizer = new TextRecognizer.Builder(this).build();
         if (!textRecognizer.isOperational()) {
-            Toast.makeText(this, "Error Occurred!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Có lỗi xảy ra trong quá trình chuyển từ hình sang văn bản", Toast.LENGTH_LONG).show();
         } else {
             Frame frame = new Frame.Builder().setBitmap(bitmap).build();
             SparseArray<TextBlock> textBlockSparseArray = textRecognizer.detect(frame);

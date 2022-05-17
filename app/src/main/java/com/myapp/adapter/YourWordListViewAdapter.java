@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.myapp.Main;
 import com.myapp.R;
 import com.myapp.model.EnWord;
+import com.myapp.utils.TTS;
 
 import java.util.ArrayList;
 
@@ -22,14 +21,17 @@ public class YourWordListViewAdapter extends ArrayAdapter {
     ArrayList<EnWord> enWordList;
     int layoutID;
     TextToSpeech ttobj;
+    private TTS tts;
 
     public YourWordListViewAdapter(Context context, ArrayList<EnWord> enWordList, int layoutID/*, TextToSpeech ttobj*/) {
-        super(context,layoutID);
+        super(context, layoutID);
         this.context = context;
         this.enWordList = enWordList;
         this.layoutID = layoutID;
+        this.tts = new TTS(context);
 //        this.ttobj = ttobj;
     }
+
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
@@ -53,8 +55,9 @@ public class YourWordListViewAdapter extends ArrayAdapter {
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Main.ttobj.speak(enWordList.get(position).getWord(), TextToSpeech.QUEUE_FLUSH, null);
-                Toast.makeText(context, enWordList.get(position).getWord(),Toast.LENGTH_SHORT).show();
+                //Main.ttobj.speak(enWordList.get(position).getWord(), TextToSpeech.QUEUE_FLUSH, null);
+                tts.speak(enWordList.get(position).getWord());
+                //Toast.makeText(context, enWordList.get(position).getWord(), Toast.LENGTH_SHORT).show();
             }
         });
 

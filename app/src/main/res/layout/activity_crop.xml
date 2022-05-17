@@ -27,7 +27,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_round_corner_5"
         android:paddingHorizontal="30dp"
-        android:text="Translate"
+        android:text="Dịch"
         android:textAllCaps="false"
         android:textColor="@color/space_cadet"
         app:backgroundTint="@color/azureish_white" />

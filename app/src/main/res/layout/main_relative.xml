@@ -42,7 +42,8 @@
                 app:defaultQueryHint="@string/query_hint"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@null"
-                app:queryHint="@string/query_hint" />
+                app:queryHint="@string/query_hint"
+                app:searchIcon="@drawable/ic_round_search_24" />
 
             <ImageButton
                 android:id="@+id/btnMic"
@@ -57,6 +58,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
@@ -68,7 +70,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_baseline_camera_alt_24"
-                android:text="Translate camera" />
+                android:text="Dịch từ máy ảnh" />
 
             <Button
                 android:id="@+id/buttonTranslateImage"
@@ -77,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_baseline_image_24"
-                android:text="Translate image" />
+                android:text="Dịch từ hình ảnh" />
 
         </LinearLayout>
     </LinearLayout>
@@ -180,24 +182,7 @@
             android:drawableLeft="@drawable/icons8_settings_32px"
             android:text="Cài đặt" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:contentDescription="TODO"
-                android:elevation="0dp"
-                android:src="@drawable/icons8_settings_32px"
-                app:backgroundTint="@color/space_cadet"
-                app:elevation="0dp" />
-
-        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -220,5 +205,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <com.myapp.utils.MovableFloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="TODO"
+        android:elevation="0dp"
+        android:src="@drawable/ic_baseline_search_24"
+        app:backgroundTint="@color/space_cadet"
+        app:elevation="0dp" />
 </RelativeLayout>
 

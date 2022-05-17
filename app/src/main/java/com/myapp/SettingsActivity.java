@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.myapp.dialog.NumberPickerDialog;
 import com.myapp.model.Settings;
 import com.myapp.model.VoiceSpeed;
@@ -27,6 +29,7 @@ public class SettingsActivity extends AppCompatActivity implements NumberPickerD
     LinearLayout btnDarkTheme, lyMail;
     CheckBox cbxDarkTheme;
     Settings settings;
+    SwitchMaterial switchFAB;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -38,7 +41,6 @@ public class SettingsActivity extends AppCompatActivity implements NumberPickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_linearlayout);
 
-        setTitle("Cài đặt");
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setElevation(0);
@@ -57,6 +59,9 @@ public class SettingsActivity extends AppCompatActivity implements NumberPickerD
         settings = FileIO.readFromFile(getApplicationContext());
 
         initRadioGroupButtons();
+        if (settings.isSwitchFAB())
+            switchFAB.setChecked(true);
+        else switchFAB.setChecked(false);
 
         settingsRemindWordsFragment = new SettingsRemindWordsFragment();
 
@@ -68,6 +73,13 @@ public class SettingsActivity extends AppCompatActivity implements NumberPickerD
     }
 
     private void setEvent() {
+        switchFAB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                settings.setSwitchFAB(isChecked);
+                FileIO.writeToFile(settings, SettingsActivity.this);
+            }
+        });
         btnDarkTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,6 +180,7 @@ public class SettingsActivity extends AppCompatActivity implements NumberPickerD
         btnDarkTheme = findViewById(R.id.btnDarkTheme);
         cbxDarkTheme = findViewById(R.id.cbxDarkTheme);
         lyMail = findViewById(R.id.lyMail);
+        switchFAB = findViewById(R.id.switchFAB);
     }
 
 

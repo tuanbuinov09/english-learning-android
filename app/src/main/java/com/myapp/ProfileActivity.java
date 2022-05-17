@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,9 +58,10 @@ public class ProfileActivity extends AppCompatActivity{
     final  String DATABASE_NAME = "tudien.db";
     DatabaseAccess DB;
     SQLiteDatabase database;
-    EditText tvHoten,tvEmail,tvSdt,tvUID;
-    TextView tvtaikhoan, tvTen,tvPoint;
-    Button btnCapNhat,btnLogout, btnSynchFromFirebase, btnSynchToFirebase;
+    EditText tvHoten, tvEmail, tvSdt, tvUID;
+    TextView tvtaikhoan, tvTen, tvPoint;
+    Button btnCapNhat, btnLogout;
+    LinearLayout btnSynchFromFirebase, btnSynchToFirebase;
     String iduser;
     User user;
     ProgressDialog progressDialog;
@@ -186,7 +188,7 @@ public class ProfileActivity extends AppCompatActivity{
             return;
         }
         String strfullname= hoten;
-
+        uploadImage();
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(strfullname)
                 .build();
@@ -194,7 +196,6 @@ public class ProfileActivity extends AppCompatActivity{
             profileUpdates = new UserProfileChangeRequest.Builder()
                     .setPhotoUri(mUri)
                     .build();
-            uploadImage();
         }
 
         user.updateProfile(profileUpdates)
