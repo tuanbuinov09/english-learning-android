@@ -47,23 +47,31 @@
             android:textColor="@color/textDescription"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/editTextUser"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@drawable/bg_azureich_white_radius_15"
-            android:drawableStart="@drawable/ic_baseline_email_24"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/space_cadet"
-            android:hint="Email"
-            android:inputType="text"
-            android:padding="16dp"
-            android:text="2@gmail.com"
-            android:textColor="@color/space_cadet"
-            android:textColorHint="@color/steel_blue"
-            android:textCursorDrawable="@drawable/custom_cursor"
-            android:textSize="14sp" />
+            android:layout_marginBottom="10dp"
+            app:hintTextColor="@color/space_cadet"
+            tools:ignore="MissingContraints">
+
+            <EditText
+                android:id="@+id/editTextUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_azureich_white_radius_15"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/space_cadet"
+                android:hint="Email"
+                android:inputType="text"
+                android:padding="16dp"
+                android:text="2@gmail.com"
+                android:textColor="@color/space_cadet"
+                android:textColorHint="@color/steel_blue"
+                android:textCursorDrawable="@drawable/custom_cursor"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
