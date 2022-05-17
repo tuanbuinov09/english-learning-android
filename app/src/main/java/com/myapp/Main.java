@@ -7,7 +7,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
@@ -24,7 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +33,7 @@ import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.learnenglish.LearnEnglishActivity;
 import com.myapp.model.EnWord;
 import com.myapp.model.Settings;
+import com.myapp.utils.ChangeSearchView;
 import com.myapp.utils.FileIO;
 import com.myapp.utils.FileIO2;
 import com.myapp.utils.FileIO3;
@@ -42,7 +41,6 @@ import com.myapp.utils.SoftKeyboard;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class Main extends AppCompatActivity {
 
@@ -60,7 +58,7 @@ public class Main extends AppCompatActivity {
     int currentItems, totalItems, scrollOutItems;
     ProgressBar progressBar;
 
-    public static TextToSpeech ttobj;
+    //public static TextToSpeech ttobj;
     DatabaseAccess DB;
     private FirebaseAuth mAuth;
 
@@ -75,14 +73,14 @@ public class Main extends AppCompatActivity {
         setControl();
         setEvent();
 
-        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    ttobj.setLanguage(Locale.ENGLISH);
-                }
-            }
-        });
+//        ttobj = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                if (status == TextToSpeech.SUCCESS) {
+//                    ttobj.setLanguage(Locale.ENGLISH);
+//                }
+//            }
+//        });
 
         //CREATE SETTINGS FILE
         File path = getApplicationContext().getFilesDir();
@@ -108,6 +106,9 @@ public class Main extends AppCompatActivity {
         if (!file3.exists()) {
             FileIO3.writeToFile(new ArrayList<>(), getApplicationContext());
         }
+
+        checkFAB();
+        ChangeSearchView.change(searchInput, this);
     }
 
     @Override
@@ -120,6 +121,8 @@ public class Main extends AppCompatActivity {
         databaseAccess.close();
 
         getSavedWordOfUser();
+        checkFAB();
+
 //        try{
 //            DB = DatabaseAccess.getInstance(getApplicationContext());
 //            mAuth = FirebaseAuth.getInstance();
@@ -201,8 +204,9 @@ public class Main extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                SoftKeyboard.showKeyboard(searchInput, getApplicationContext());
+                searchInput.performClick();
+                searchInput.requestFocus();
             }
         });
 
@@ -227,7 +231,7 @@ public class Main extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 filter(newText);
-                return false;
+                return true;
             }
         });
 
@@ -476,7 +480,6 @@ public class Main extends AppCompatActivity {
         super.onBackPressed();
     }
 
-
     public void getSavedWordOfUser() {
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -513,5 +516,11 @@ public class Main extends AppCompatActivity {
                 }
             });
         }*/
+    }
+
+    private void checkFAB() {
+        Settings settings = FileIO.readFromFile(this);
+        if (settings.isSwitchFAB()) fab.setVisibility(View.VISIBLE);
+        else fab.setVisibility(View.GONE);
     }
 }
