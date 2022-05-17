@@ -85,6 +85,7 @@ public class RankingActivity extends AppCompatActivity {
         tvPointrank1 = (TextView) findViewById(R.id.tvpointrank1);
         tvPointrank2 = (TextView) findViewById(R.id.tvpointrank2);
         tvPointrank3 = (TextView) findViewById(R.id.tvpointrank3);
+        tvRank =(TextView) findViewById(R.id.tvRank);
         imgback = (ImageView) findViewById(R.id.imgVBackRank);
 
     }

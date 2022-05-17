@@ -18,7 +18,7 @@ public class Settings implements Serializable {
     private Locale voiceLanguage;
     private float voiceSpeed;
 
-    private boolean isRemindWords, isDarkTheme;
+    private boolean isRemindWords, isDarkTheme, isSwitchFAB;
     private int numberOfRemindADay;
     private LocalTime startTime, endTime;
     private List<Integer> remindDay;
@@ -32,6 +32,7 @@ public class Settings implements Serializable {
         startTime = LocalTime.of(9, 00);
         endTime = LocalTime.of(17, 00);
         remindDay = new ArrayList<>();
+        isSwitchFAB = true;
     }
 
     public synchronized static Settings getInstance(Context context) {
@@ -108,5 +109,21 @@ public class Settings implements Serializable {
 
     public void setRemindDay(List<Integer> remindDay) {
         this.remindDay = remindDay;
+    }
+
+    public static Settings getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(Settings instance) {
+        Settings.instance = instance;
+    }
+
+    public boolean isSwitchFAB() {
+        return isSwitchFAB;
+    }
+
+    public void setSwitchFAB(boolean switchFAB) {
+        isSwitchFAB = switchFAB;
     }
 }

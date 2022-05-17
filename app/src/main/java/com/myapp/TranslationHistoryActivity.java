@@ -33,7 +33,6 @@ public class TranslationHistoryActivity extends AppCompatActivity implements Tra
         setContentView(R.layout.activity_translation_history);
         setControl();
 
-        setTitle("Translation History");
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setElevation(0);

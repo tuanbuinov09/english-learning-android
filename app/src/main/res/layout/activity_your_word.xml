@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bright_gray"
     android:orientation="vertical"
+    android:padding="5dp"
     tools:context=".dictionary.YourWordActivity">
 
     <RelativeLayout
@@ -13,7 +15,8 @@
         android:background="@color/steel_blue"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
-        android:paddingVertical="12dp">
+        android:paddingVertical="12dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,12 +27,12 @@
             android:textSize="24dp"
             android:textStyle="bold" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnSynchronize"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:background="@drawable/icons8_synchronize_32px_1" />-->
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/btnSynchronize"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_alignParentRight="true"-->
+        <!--            android:background="@drawable/icons8_synchronize_32px_1" />-->
 
         <ImageButton
             android:layout_width="40dp"
@@ -41,139 +44,43 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:background="#E3E0E1"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/bright_gray"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_round_corner"
-            android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="8dp">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-12dp"
-                android:backgroundTint="@color/white"
-                android:contextClickable="true"
-                android:inputType="text"
-                android:layoutDirection="rtl"
-                android:maxLines="1"
-                android:textColor="#333"
-                android:textSize="20dp"
-                app:defaultQueryHint="@string/query_hint"
-                app:iconifiedByDefault="false"
-                app:queryHint="@string/query_hint" />
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/searchButton"-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:background="?android:attr/actionModeWebSearchDrawable"-->
-<!--                android:onClick="search" />-->
-        </RelativeLayout>
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/white"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="-10dp"
+            android:textColor="@color/space_cadet"
+            android:textSize="14sp"
+            app:defaultQueryHint="@string/query_hint"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="@string/query_hint"
+            app:searchIcon="@drawable/ic_round_search_24" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_white_round_corner"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_round_corner_5"
+            android:backgroundTint="@color/bright_gray"
             android:orientation="vertical">
 
-
-            <!--            <ListView-->
-            <!--                android:id="@+id/listViewYourWord"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:divider="#777"-->
-            <!--                android:dividerHeight="1dp"-->
-            <!--                android:footerDividersEnabled="false"/>-->
             <include
                 layout="@layout/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <include layout="@layout/progress_bar" />
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:orientation="horizontal">-->
-
-            <!--                <LinearLayout-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:orientation="horizontal"-->
-            <!--                    android:paddingVertical="8dp"-->
-            <!--                    android:paddingLeft="8dp"-->
-            <!--                    android:layout_weight="10">-->
-
-            <!--                    <CheckBox-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_gravity="center_vertical"-->
-            <!--                        android:layout_marginRight="8dp" />-->
-
-            <!--                    <LinearLayout-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:orientation="vertical"-->
-            <!--                        >-->
-
-            <!--                        <TextView-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:text="cabaret"-->
-            <!--                            android:textSize="18dp"-->
-            <!--                            android:textStyle="bold" />-->
-
-            <!--                        <TextView-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:text="/'phatam/"-->
-            <!--                            android:textColor="#555"-->
-            <!--                            android:textSize="18dp" />-->
-
-            <!--                        <TextView-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:text="nghĩaaaaaaaaa"-->
-            <!--                            android:textColor="#555"-->
-            <!--                            android:textSize="18dp" />-->
-
-            <!--                    </LinearLayout>-->
-
-            <!--                </LinearLayout>-->
-            <!--                <LinearLayout-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:orientation="horizontal"-->
-            <!--                    android:padding="10dp"-->
-            <!--                    android:layout_gravity="center_vertical">-->
-            <!--                    <ImageButton-->
-            <!--                        android:layout_width="36dp"-->
-            <!--                        android:layout_height="36dp"-->
-            <!--                        android:background="@drawable/icons8_sound_32px"-->
-            <!--                        android:backgroundTint="#333"-->
-            <!--                        android:layout_marginRight="10dp"-->
-
-            <!--                        />-->
-            <!--                    <ImageButton-->
-            <!--                        android:layout_width="36dp"-->
-            <!--                        android:layout_height="36dp"-->
-            <!--                        android:background="@drawable/icons8_menu_vertical_32px"-->
-            <!--                        android:backgroundTint="#333"-->
-            <!--                        />-->
-            <!--                </LinearLayout>-->
-            <!--            </LinearLayout>-->
 
         </LinearLayout>
     </LinearLayout>

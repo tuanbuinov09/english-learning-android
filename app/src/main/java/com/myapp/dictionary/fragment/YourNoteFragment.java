@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.myapp.GlobalVariables;
-import com.myapp.Main;
 import com.myapp.R;
 
 import java.util.HashMap;
@@ -116,23 +114,25 @@ public class YourNoteFragment extends Fragment {
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
-            }}
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getActivity(), "Oops ... something went wrong", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
         );
     }
+
     public void saveUserNote(String content) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("user_id", GlobalVariables.userId);
         map.put("word_id", enWordId);
         map.put("note", content);
 
-        GlobalVariables.db.collection("user_note").document(GlobalVariables.userId+enWordId+"").set(map, SetOptions.merge())
+        GlobalVariables.db.collection("user_note").document(GlobalVariables.userId + enWordId + "").set(map, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        if(content.equalsIgnoreCase("")){
+                        if (content.equalsIgnoreCase("")) {
                             Toast.makeText(getActivity(), "Clear ghi chú thành công", Toast.LENGTH_LONG).show();
                             return;
                         }
@@ -142,7 +142,7 @@ public class YourNoteFragment extends Fragment {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                if(content.equalsIgnoreCase("")){
+                if (content.equalsIgnoreCase("")) {
                     Toast.makeText(getActivity(), "Clear ghi chú thất bại", Toast.LENGTH_LONG).show();
                     return;
                 }

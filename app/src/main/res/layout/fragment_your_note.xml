@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,52 +8,52 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
+        android:layout_height="match_parent"
+        android:background="@color/bright_gray"
         android:orientation="vertical"
-        android:paddingVertical="20dp">
+        android:padding="5dp">
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lines="10"
-            android:textSize="18dp"
-            android:padding="20dp"
-            android:hint="Nhập ghi chú"
             android:id="@+id/etYourNote"
-            android:background="#eEe"/>
+            style="@style/editTextInTranslateTextActivity"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_weight="0"
+            android:background="@color/cultured"
+            android:backgroundTint="@color/cultured"
+            android:hint="Nhập ghi chú" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingHorizontal="50dp"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:textAllCaps="true"
-                android:background="@color/steel_blue"
                 android:id="@+id/btnSaveNote"
-                android:layout_weight="1"
-                android:text="Lưu"/>
-            <Button
+                style="@style/borderlessButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingHorizontal="50dp"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:textAllCaps="true"
-                android:background="#F44336"
-                android:id="@+id/btnClearNote"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:text="Clear"/>
+                android:background="@drawable/bg_round_corner_5"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Lưu"
+                android:textColor="@color/cultured"
+                app:backgroundTint="@color/space_cadet" />
+
+            <Button
+                android:id="@+id/btnClearNote"
+                style="@style/borderlessButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round_corner_5"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Xóa"
+                android:textColor="@color/space_cadet"
+                app:backgroundTint="@color/azureish_white" />
         </LinearLayout>
 
     </LinearLayout>
-
 </FrameLayout>

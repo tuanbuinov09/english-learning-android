@@ -1,16 +1,11 @@
 package com.myapp;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.util.SparseArray;
 import android.view.View;
@@ -23,10 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.Frame;
@@ -43,10 +35,7 @@ import com.myapp.sqlite.DatabaseHelper;
 import com.myapp.sqlite.dao.TranslationHistoryDao;
 import com.myapp.utils.SoftKeyboard;
 import com.myapp.utils.TTS;
-import com.yalantis.ucrop.UCrop;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class TranslateTextActivity extends AppCompatActivity implements CustomDialog.Listener {
@@ -56,9 +45,7 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
     ImageView imageView;
 
 
-    private static final int REQUEST_CAMERA_CODE = 100;
-    private static final int CODE_IMG_GALLERY = 500;
-    private static final int REQUEST_IMAGE_CODE = 200;
+    private static final int REQUEST_RECOGNITION = 11;
 
     TranslatorOptions englishVietnameseTranslatorOptions = new TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.ENGLISH)
@@ -92,7 +79,6 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
         databaseHelper = DatabaseHelper.getInstance(this);
         translationHistoryDao = new TranslationHistoryDao(databaseHelper);
 
-        setTitle("Translate Text");
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setElevation(0);
@@ -102,124 +88,29 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 111 && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_RECOGNITION && resultCode == RESULT_OK) {
             String speechText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
             etText.setText(speechText);
         }
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//
-//            cropImageActivityResultLauncher.launch(options);
-//        }
-
-//        if(requestCode == CODE_IMG_GALLERY && resultCode == RESULT_OK) {
-//
-//        }
-
-        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            final Uri resultUri = UCrop.getOutput(data);
-
-            Uri imageUri = data.getData();
-            if (imageUri != null) {
-                startCrop(imageUri);
-            }
-        } else if (resultCode == UCrop.RESULT_ERROR) {
-            final Throwable cropError = UCrop.getError(data);
-        }
-
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CODE) {
-            //Image Uri will not be null for RESULT_OK
-            Uri uri = data.getData();
-
-            imageView.setImageURI(uri);
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                String result = getTextFromImage(bitmap);
-                etText.setText(result);
-                translateEnglishToVietnamese(result);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void startCrop(@NonNull Uri uri) {
-        String destinationFileName = "hello.jpg";
-        UCrop ucrop = UCrop.of(uri, Uri.fromFile(new File(getCacheDir(), destinationFileName)));
-        ucrop.withAspectRatio(16, 9);
-        ucrop.withMaxResultSize(450, 450);
-        ucrop.withOptions(getCropOptions());
-        ucrop.start(TranslateTextActivity.this);
-    }
-
-    private UCrop.Options getCropOptions() {
-        UCrop.Options options = new UCrop.Options();
-        options.setCompressionQuality(70);
-        options.setHideBottomControls(false);
-        options.setFreeStyleCropEnabled(true);
-        options.setStatusBarColor(getColor(R.color.space_cadet));
-        options.setToolbarColor(getColor(R.color.steel_blue));
-        options.setToolbarTitle("hello");
-        return options;
     }
 
     private void handleBtnCameraClicked(View view) {
-//        ImageCapture imageCapture =
-//                new ImageCapture.Builder()
-//                        .setTargetRotation(view.getDisplay().getRotation())
-//                        .build();
-//
-//        cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, imageCapture, imageAnalysis, preview);
-//
-//        ImageCapture.OutputFileOptions outputFileOptions =
-//                new ImageCapture.OutputFileOptions.Builder(new File("/")).build();
-//        imageCapture.takePicture(outputFileOptions, cameraExecutor,
-//                new ImageCapture.OnImageSavedCallback() {
-//                    @Override
-//                    public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
-//                        // insert your code here.
-//                    }
-//                    @Override
-//                    public void onError(ImageCaptureException error) {
-//                        // insert your code here.
-//                    }
-//                }
-//        );
-
-//        UCrop.of(sourceUri, destinationUri)
-//                .withAspectRatio(16, 9)
-//                .withMaxResultSize(maxWidth, maxHeight)
-//                .start(context);
-
-        ImagePicker.with(this)
-                .cameraOnly()
-                .crop()
-                .start(REQUEST_IMAGE_CODE);
+        Intent intent = new Intent(this, CropActivity.class);
+        intent.putExtra("request", CropActivity.OPEN_CAMERA_CODE);
+        startActivity(intent);
     }
 
     private void handleBtnMicClicked(View view) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speaking...");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Bắt đầu nói");
         startActivityForResult(intent, 111);
     }
 
     private void handleBtnImageClicked(View view) {
-        if (ContextCompat.checkSelfPermission(TranslateTextActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(TranslateTextActivity.this, new String[]{
-                    Manifest.permission.CAMERA
-            }, REQUEST_CAMERA_CODE);
-        }
-
-//        Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
-//        startActivityForResult(intent, PHOTO_PICKER_REQUEST_CODE);
-
-        ImagePicker.with(this)
-                .galleryOnly()
-                .start(REQUEST_IMAGE_CODE);
+        Intent intent = new Intent(this, CropActivity.class);
+        intent.putExtra("request", CropActivity.OPEN_GALLERY_CODE);
+        startActivity(intent);
     }
 
     private String getTextFromImage(Bitmap bitmap) {
@@ -311,26 +202,6 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
                         Toast.makeText(TranslateTextActivity.this, "Cannot translate", Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    private void requestPermission() {
-
-    }
-
-    Bitmap selectedImage = null;
-
-    private void openImagePicker() {
-//        TedBottomSheetDialogFragment.OnImageSelectedListener listener = new TedBottomSheetDialogFragment.OnImageSelectedListener() {
-//            @Override
-//            public void onImageSelected(Uri uri) {
-//                try {
-//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//                    selectedImage = bitmap;
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        };
     }
 
     private void copyToClipBoard(String text) {

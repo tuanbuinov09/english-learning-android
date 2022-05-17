@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_azureich_white_radius_15"
         android:fontFamily="@font/roboto_medium"
-        android:text="Cancel"
+        android:text="Hủy"
         android:textAllCaps="false"
         android:textColor="@color/space_cadet"
         android:textSize="16sp" />

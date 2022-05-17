@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +60,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
     SQLiteDatabase database;
     EditText tvHoten,tvEmail,tvSdt,tvUID;
     TextView tvtaikhoan, tvTen;
-    Button btnCapNhat,btnLogout, btnSynchFromFirebase, btnSynchToFirebase;
+    Button btnCapNhat, btnLogout, btnChangePassword;
+    LinearLayout btnSynchFromFirebase, btnSynchToFirebase;
     String iduser;
     User user;
     ProgressDialog progressDialog;
@@ -185,6 +187,13 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                 openDialog("upload");
             }
         });
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ThongTinTaikhoanActivity.this,ChangePassword.class);
+                startActivity(intent);
+            }
+        });
 
     }
     private void onClickRequestPermission() {
@@ -219,41 +228,39 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
 //        tvPoint = findViewById(R.id.textviewPoint);
         btnCapNhat = findViewById(R.id.buttonCapNhat);
         btnLogout = findViewById(R.id.buttonLogout);
+        btnChangePassword = findViewById(R.id.buttonChangePassword);
         tvUID.setEnabled(false);
         tvEmail.setEnabled(false);
         imageView = findViewById(R.id.img_avatar);
     }
-    private void CapNhatThongTin()
-    {
+
+    private void CapNhatThongTin() {
         String hoten = tvHoten.getText().toString();
         String sdt = tvSdt.getText().toString();
-        if(hoten =="" || sdt=="")
-        {
+        if (hoten == "" || sdt == "") {
             Toast.makeText(this, "Không hợp lệ", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Boolean checkupdate = DB.capnhatthongtin(DB.iduser,hoten,sdt);
-            if(checkupdate == true)
-            {
+        } else {
+            Boolean checkupdate = DB.capnhatthongtin(DB.iduser, hoten, sdt);
+            if (checkupdate == true) {
                 Toast.makeText(this, "Câp nhật thành công", Toast.LENGTH_SHORT).show();
-            }
-            else{
+            } else {
                 Toast.makeText(this, "Thất bại", Toast.LENGTH_SHORT).show();
             }
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null){
+        if (user == null) {
             return;
         }
         String strfullname= hoten;
-        uploadImage();
+
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(strfullname)
                 .build();
-        if(changeimage == true){
+        if (changeimage == true) {
             profileUpdates = new UserProfileChangeRequest.Builder()
                     .setPhotoUri(mUri)
                     .build();
+            uploadImage();
         }
 
         user.updateProfile(profileUpdates)
@@ -261,7 +268,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ThongTinTaikhoanActivity.this,"Update Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ThongTinTaikhoanActivity.this, "Update Success", Toast.LENGTH_SHORT).show();
                             //mMainActivity.showUserInformation();
 
 
@@ -270,6 +277,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                 });
 
     }
+
     private void uploadImage() {
 
         progressDialog = new ProgressDialog(this);
@@ -281,7 +289,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
 //        Date now = new Date();
 //        String fileName = formatter.format(now);
         String fileName = user.getIduser();
-        storageReference = FirebaseStorage.getInstance().getReference("userimage/"+fileName);
+        storageReference = FirebaseStorage.getInstance().getReference("userimage/" + fileName);
 
 
         storageReference.putFile(mUri)
@@ -290,7 +298,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         //binding.firebaseimage.setImageURI(null);
-                        Toast.makeText(ThongTinTaikhoanActivity.this,"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ThongTinTaikhoanActivity.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
                         if (progressDialog.isShowing())
                             progressDialog.dismiss();
 
@@ -302,17 +310,19 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
 
                 if (progressDialog.isShowing())
                     progressDialog.dismiss();
-                Toast.makeText(ThongTinTaikhoanActivity.this,"Failed to Upload",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ThongTinTaikhoanActivity.this, "Failed to Upload", Toast.LENGTH_SHORT).show();
 
 
             }
         });
 
     }
-    public void setBitmapImageView(Bitmap bitmapImageView){
+
+    public void setBitmapImageView(Bitmap bitmapImageView) {
         imageView.setImageBitmap(bitmapImageView);
     }
-    private void TruyenThongTin(){
+
+    private void TruyenThongTin() {
         //Truyền thông tin
         tvHoten.setText(user.getHoTen());
 //        tvTen.setText(user.getHoTen());
@@ -324,36 +334,36 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
         imageView = findViewById(R.id.img_avatar);
     }
 
-    public void LayUser()
-    {
+    public void LayUser() {
         database = Database.initDatabase(ThongTinTaikhoanActivity.this, DATABASE_NAME);
-        Cursor cursor = database.rawQuery("SELECT * FROM User WHERE ID_User = ?",new String[]{String.valueOf(DB.iduser)});
+        Cursor cursor = database.rawQuery("SELECT * FROM User WHERE ID_User = ?", new String[]{String.valueOf(DB.iduser)});
 //        Cursor cursor = database.rawQuery("SELECT * FROM User WHERE ID_User = ?",new String[]{String.valueOf("UaceqeYAkxY2sGqZfWsUGeSxcRA2")});
 
-        if( cursor != null && cursor.moveToNext()  ){
+        if (cursor != null && cursor.moveToNext()) {
 //            cursor.moveToNext();
             String Iduser = cursor.getString(0);
             String HoTen = cursor.getString(1);
             int Point = cursor.getInt(2);
             String Email = cursor.getString(3);
             String SDT = cursor.getString(4);
-            user = new User(Iduser,HoTen,Point,Email,SDT);
+            user = new User(Iduser, HoTen, Point, Email, SDT);
             Toast.makeText(this, Iduser, Toast.LENGTH_LONG).show();
             //setUserInformation();
 //        ThongTinTaikhoanActivity.context = getApplicationContext();
 
             //Glide.with(context).load(user.getPhotoUrl()).error(R.drawable.ic_avatar_default).into(imageView);
             TruyenThongTin();
-        }else{
+        } else {
             Toast.makeText(this, "FAILLLL ", Toast.LENGTH_LONG).show();
         }
 
 
     }
-    public void LayImage(){
+
+    public void LayImage() {
         StorageReference storageRef =
                 FirebaseStorage.getInstance().getReference();
-        storageRef.child("userimage/"+user.getIduser()).getDownloadUrl()
+        storageRef.child("userimage/" + user.getIduser()).getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
@@ -368,7 +378,8 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
         });
 
     }
-//    private void setUserInformation() {
+
+    //    private void setUserInformation() {
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        if(user == null){
 //            return;
@@ -380,8 +391,9 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        mActivityResultLauncher.launch(Intent.createChooser(intent,"select picture"));
+        mActivityResultLauncher.launch(Intent.createChooser(intent, "select picture"));
     }
+
     @Override
     public void onBackPressed() {
         // your code.
@@ -396,7 +408,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
         databaseAccess.open();
 
         GlobalVariables.db = FirebaseFirestore.getInstance();
-        if (request.equalsIgnoreCase("download")&&result == CustomDialog.Result.OK) {
+        if (request.equalsIgnoreCase("download") && result == CustomDialog.Result.OK) {
             GlobalVariables.db.collection("saved_word").whereEqualTo("user_id", GlobalVariables.userId).get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -409,7 +421,7 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
                             }
 
                             databaseAccess.synchSavedWordToSQLite(GlobalVariables.userId, GlobalVariables.listSavedWordId);
-                            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+                            Toast.makeText(getApplicationContext(), "Thành công", Toast.LENGTH_LONG);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -420,10 +432,10 @@ public class ThongTinTaikhoanActivity extends AppCompatActivity implements Custo
 
 
         }
-        if (request.equalsIgnoreCase("upload")&&result == CustomDialog.Result.OK) {
+        if (request.equalsIgnoreCase("upload") && result == CustomDialog.Result.OK) {
             databaseAccess.synchSavedWordToFirebase(GlobalVariables.userId);
 
-            Toast.makeText(getApplicationContext(),"Thành công", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Thành công", Toast.LENGTH_LONG);
         }
         databaseAccess.close();
 

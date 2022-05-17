@@ -2,25 +2,21 @@ package com.myapp.dictionary.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.speech.tts.TextToSpeech;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.myapp.Main;
 import com.myapp.R;
 import com.myapp.adapter.MeaningRecyclerAdapter;
-
 import com.myapp.model.EnWord;
+import com.myapp.utils.TTS;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,10 +29,11 @@ public class EnWordDetailFragment extends Fragment {
     public ImageButton buttonSpeak;
     public TextView textViewTitle;
     public TextView textViewWord;
-//    public ImageButton btnSave_UnsaveWord;
+    //    public ImageButton btnSave_UnsaveWord;
     public TextView textViewPronunciation;
     LinearLayoutManager manager;
     public RecyclerView meaningRecyclerView;
+    private TTS tts;
 
     public boolean unsave = true;
     // TODO: Rename parameter arguments, choose names that match
@@ -83,7 +80,6 @@ public class EnWordDetailFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
 //        enWordId = getArguments().getInt("enWordId");
 //        savedWord = (EnWord) getArguments().getSerializable("enWord");
 
@@ -113,10 +109,13 @@ public class EnWordDetailFragment extends Fragment {
         meaningRecyclerView.setAdapter(meaningRecyclerAdapter);
         manager = new LinearLayoutManager(c);
         meaningRecyclerView.setLayoutManager(manager);
+
+        tts = new TTS(getContext());
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
+                tts.speak(savedWord.getWord());
+                //Main.ttobj.speak(savedWord.getWord(), TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 //        btnSave_UnsaveWord.setOnClickListener(new View.OnClickListener() {
