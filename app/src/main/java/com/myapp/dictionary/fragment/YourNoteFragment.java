@@ -85,7 +85,7 @@ public class YourNoteFragment extends Fragment {
         btnSaveNote = view.findViewById(R.id.btnSaveNote);
         btnClearNote = view.findViewById(R.id.btnClearNote);
         getUserNote();
-        etYourNote.setText(GlobalVariables.userNote);
+//        etYourNote.setText(GlobalVariables.userNote);
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,13 +104,14 @@ public class YourNoteFragment extends Fragment {
     }
 
     public void getUserNote() {
+        GlobalVariables.userNote="";
         GlobalVariables.db.collection("user_note").whereEqualTo("user_id", GlobalVariables.userId)
-                .whereEqualTo("word_id", enWordId).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .whereEqualTo("word_id", enWordId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         for (DocumentSnapshot snapshot : task.getResult()) {
                             GlobalVariables.userNote = snapshot.getString("note");
+                            etYourNote.setText(GlobalVariables.userNote);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -132,6 +133,8 @@ public class YourNoteFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        GlobalVariables.userNote = content;
+
                         if (content.equalsIgnoreCase("")) {
                             Toast.makeText(getActivity(), "Clear ghi chú thành công", Toast.LENGTH_LONG).show();
                             return;
