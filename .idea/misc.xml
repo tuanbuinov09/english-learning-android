@@ -71,6 +71,8 @@
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_arrange_words_exercises.xml" value="0.10989583333333333" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/activity_arrange_words_topics.xml" value="0.11302083333333333" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/dialog_confirm.xml" value="0.136" />
+        <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/en_word_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/en_word_item_for_recyclerview.xml" value="0.25416666666666665" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/english_multichocie_test_bar.xml" value="0.25416666666666665" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/english_multichoice_test.xml" value="0.11302083333333333" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/english_multichoice_test_1.xml" value="0.11302083333333333" />
@@ -78,7 +80,10 @@
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/english_multichoice_test_item.xml" value="0.2" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/english_multichoice_test_item_1.xml" value="0.2" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/fragment_your_note.xml" value="0.10989583333333333" />
+        <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/sign_up_linearlayout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/tk_achievement_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_app_bar.xml" value="0.10989583333333333" />
+        <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_exercise_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/tk_arrange_words_topic_item.xml" value="0.11302083333333333" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/tk_bottom_sheet_dialog_arrange_words_1.xml" value="0.10989583333333333" />
         <entry key="..\:/Tieng Anh/hoc-tieng-anh-android/app/src/main/res/layout/tk_bottom_sheet_dialog_arrange_words_2.xml" value="0.10989583333333333" />

@@ -64,40 +64,40 @@ public class EnglishMultichoiceTestActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 yourAnswer = "A";
-                choice2.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice3.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice4.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice1.setBackgroundColor(Color.YELLOW);
+                choice2.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice3.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice4.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice1.setBackgroundResource(R.drawable.bg_steelblue_radius_15);
             }
         });
         choice2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 yourAnswer = "B";
-                choice1.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice3.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice4.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice2.setBackgroundColor(Color.YELLOW);
+                choice1.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice3.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice4.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice2.setBackgroundResource(R.drawable.bg_steelblue_radius_15);
             }
         });
         choice3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 yourAnswer = "C";
-                choice2.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice1.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice4.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice3.setBackgroundColor(Color.YELLOW);
+                choice2.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice1.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice4.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice3.setBackgroundResource(R.drawable.bg_steelblue_radius_15);
             }
         });
         choice4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 yourAnswer = "D";
-                choice2.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice3.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice1.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice4.setBackgroundColor(Color.YELLOW);
+                choice2.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice3.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice1.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice4.setBackgroundResource(R.drawable.bg_steelblue_radius_15);
             }
         });
 
@@ -105,10 +105,10 @@ public class EnglishMultichoiceTestActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // reset
-                choice2.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice3.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice1.setBackgroundColor(Color.parseColor("#0091EA"));
-                choice4.setBackgroundColor(Color.parseColor("#0091EA"));
+                choice1.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice2.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice3.setBackgroundResource(R.drawable.bg_green_radius_15);
+                choice4.setBackgroundResource(R.drawable.bg_green_radius_15);
 
                 System.out.println(questions.get(currentIndex).getAnswer());
                 openBottomSheetDialog(yourAnswer.equals(questions.get(currentIndex).getAnswer()));
