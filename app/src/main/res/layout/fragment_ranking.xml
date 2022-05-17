@@ -12,11 +12,11 @@
     <ImageView
         android:id="@+id/imagerank1"
         android:layout_width="60dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentRight="true"
 
-        android:layout_marginBottom="40dp"
-        android:src="@drawable/top1"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/top11"
         app:layout_constraintBottom_toTopOf="@+id/userranklist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -26,12 +26,12 @@
 
         android:id="@+id/imagerank2"
         android:layout_width="60dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentRight="true"
 
         android:layout_marginStart="5dp"
-        android:layout_marginBottom="40dp"
-        android:src="@drawable/top2"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/top22"
         app:layout_constraintBottom_toTopOf="@+id/userranklist"
         app:layout_constraintEnd_toStartOf="@+id/imagerank1"
         app:layout_constraintHorizontal_bias="0.418"
@@ -84,12 +84,12 @@
     <ImageView
         android:id="@+id/imagerank3"
         android:layout_width="60dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentRight="true"
 
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="40dp"
-        android:src="@drawable/top3"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/top33"
         app:layout_constraintBottom_toTopOf="@+id/userranklist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.621"

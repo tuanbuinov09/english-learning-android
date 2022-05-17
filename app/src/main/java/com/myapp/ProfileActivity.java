@@ -186,7 +186,7 @@ public class ProfileActivity extends AppCompatActivity{
             return;
         }
         String strfullname= hoten;
-        uploadImage();
+
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(strfullname)
                 .build();
@@ -194,6 +194,7 @@ public class ProfileActivity extends AppCompatActivity{
             profileUpdates = new UserProfileChangeRequest.Builder()
                     .setPhotoUri(mUri)
                     .build();
+            uploadImage();
         }
 
         user.updateProfile(profileUpdates)
