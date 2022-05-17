@@ -24,7 +24,6 @@ import com.myapp.model.EnWord;
 import com.myapp.model.ExampleDetail;
 import com.myapp.model.Meaning;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -140,6 +139,21 @@ public class DatabaseAccess {
             enWord.setWord(cursor.getString(1));
             enWord.setPronunciation(cursor.getString(2));
             enWord.setListMeaning(getAllMeaningOfEnWord(id));
+        }
+//        System.out.println("-----------"+enWord.toString());
+        cursor.close();
+        return enWord;
+    }
+
+    public EnWord getOneEnWord(String keyword) {
+        EnWord enWord = null;
+        Cursor cursor;
+        cursor = db.rawQuery("select * from en_word where word = '" + keyword + "'", null);
+        while (cursor.moveToNext()) {
+            enWord = new EnWord();
+            enWord.setId(cursor.getInt(0));
+            enWord.setWord(cursor.getString(1));
+            enWord.setPronunciation(cursor.getString(2));
         }
 //        System.out.println("-----------"+enWord.toString());
         cursor.close();
@@ -568,7 +582,7 @@ public class DatabaseAccess {
             Log.d(TAG, "We Are Trying to Delete Item From DataBase!!");
             Log.d(TAG, "this is an item: " + userId + ", " + wordId);
             Log.d(TAG, "this is an item: " + "delete from saved_word where user_id = '" + userId + "' and en_word_id = " + wordId);
-            db.execSQL("DELETE FROM saved_word WHERE user_id ='" + userId + "' and en_word_id = "+wordId);
+            db.execSQL("DELETE FROM saved_word WHERE user_id ='" + userId + "' and en_word_id = " + wordId);
             db.setTransactionSuccessful();
             db.endTransaction();
         } catch (Exception e) {
