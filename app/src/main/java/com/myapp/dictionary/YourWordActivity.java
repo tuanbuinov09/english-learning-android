@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -15,14 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.myapp.GlobalVariables;
 import com.myapp.Main;
 import com.myapp.R;
 import com.myapp.adapter.EnWordRecyclerAdapter;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
+import com.myapp.utils.ChangeSearchView;
 
 import java.util.ArrayList;
 
@@ -62,6 +60,11 @@ public class YourWordActivity extends AppCompatActivity {
         setControl();
         setEvent();
 
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setElevation(0);
+
+        ChangeSearchView.change(searchInput, this);
     }
 
     protected void onResume() {
@@ -234,6 +237,12 @@ public class YourWordActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(this, Main.class);
         startActivity(mainIntent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 //
 //    @Override

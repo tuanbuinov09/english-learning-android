@@ -8,6 +8,7 @@
         app:iconTint="@color/cultured"
         app:showAsAction="always" />
     <item
+
         android:id="@+id/menu_note"
         android:icon="@drawable/icons8_pencil_24px"
         android:title="Note"
