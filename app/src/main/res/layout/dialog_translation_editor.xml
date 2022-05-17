@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
-        android:text="Update Translation"
+        android:text="Cập nhật bản dịch"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Original Text" />
+            android:text="Bản gốc" />
 
         <EditText
             android:id="@+id/tvOriginalText"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Translation Text" />
+            android:text="Bản dịch" />
 
         <EditText
             android:id="@+id/tvTranslatedText"
