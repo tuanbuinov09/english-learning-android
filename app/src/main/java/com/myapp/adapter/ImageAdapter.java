@@ -18,10 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.myapp.R;
 import com.myapp.model.Image;
 
@@ -30,7 +33,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
     private List<Image> list;
@@ -61,35 +63,21 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         holder.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Runnable runnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Bitmap bitmap = Glide.with(context.getApplicationContext())
-                                        .asBitmap()
-                                        .load(list.get(holder.getAbsoluteAdapterPosition()).getLink())
-                                        .submit()
-                                        .get();
-
-                                saveImage(bitmap, Long.toString(System.currentTimeMillis()));
-                            } catch (ExecutionException | InterruptedException | IOException e) {
-                                e.printStackTrace();
+                Glide.with(context.getApplicationContext())
+                        .asBitmap()
+                        .load(list.get(holder.getAbsoluteAdapterPosition()).getLink())
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                try {
+                                    saveImage(resource, Long.toString(System.currentTimeMillis()));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    };
-                    Thread t = new Thread(runnable);
-                    t.start();
-                    t.join();
-                    Toast.makeText(context, "Downloaded image", Toast.LENGTH_SHORT).show();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+                        });
             }
         });
-
 
         holder.btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +88,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             }
         });
     }
-
 
     private void saveImage(Bitmap bitmap, @NonNull String name) throws IOException {
         boolean saved;
@@ -124,13 +111,26 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 file.mkdir();
             }
 
+            // Add the image to the system gallery
+            galleryAddPic(imagesDir);
             File image = new File(imagesDir, name + ".png");
             fos = new FileOutputStream(image);
-        }
+            saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            //fos.flush();
+            fos.close();
 
-        saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        fos.flush();
-        fos.close();
+            // Add the image to the system gallery
+            galleryAddPic(image.getAbsolutePath());
+            Toast.makeText(context, "Downloaded image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void galleryAddPic(String imagePath) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(imagePath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        context.sendBroadcast(mediaScanIntent);
     }
 
     @Override

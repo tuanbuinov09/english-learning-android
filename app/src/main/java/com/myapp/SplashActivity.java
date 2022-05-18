@@ -40,10 +40,10 @@ public class SplashActivity extends AppCompatActivity {
             DB.iduser = FirebaseAuth.getInstance().getCurrentUser().getUid();
             Intent intent = new Intent(this, Main.class);
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),
-                    DB.iduser,
-                    Toast.LENGTH_LONG)
-                    .show();
+//            Toast.makeText(getApplicationContext(),
+//                    DB.iduser,
+//                    Toast.LENGTH_LONG)
+//                    .show();
         }
         finish();
     }

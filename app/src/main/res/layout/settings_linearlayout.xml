@@ -92,6 +92,7 @@
                         style="@style/radioButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:checked="true"
                         android:text="Rất chậm" />
 
@@ -100,6 +101,7 @@
                         style="@style/radioButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:text="Chậm" />
 
                     <RadioButton
@@ -127,6 +129,7 @@
                         style="@style/radioButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:text="Anh" />
 
                     <RadioButton

@@ -1,13 +1,8 @@
 package com.myapp;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,28 +10,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.text.TextBlock;
-import com.google.android.gms.vision.text.TextRecognizer;
-import com.google.mlkit.common.model.DownloadConditions;
-import com.google.mlkit.nl.translate.TranslateLanguage;
-import com.google.mlkit.nl.translate.Translation;
-import com.google.mlkit.nl.translate.Translator;
-import com.google.mlkit.nl.translate.TranslatorOptions;
 import com.myapp.dialog.CustomDialog;
-import com.myapp.model.TranslationHistory;
+import com.myapp.dictionary.EnWordDetailActivity2;
+import com.myapp.dtbassethelper.DatabaseAccess;
+import com.myapp.model.EnWord;
 import com.myapp.sqlite.DatabaseHelper;
 import com.myapp.sqlite.dao.TranslationHistoryDao;
+import com.myapp.utils.CopyToClipBoard;
+import com.myapp.utils.MyTranslator;
 import com.myapp.utils.SoftKeyboard;
 import com.myapp.utils.TTS;
-
-import java.time.LocalDate;
 
 public class TranslateTextActivity extends AppCompatActivity implements CustomDialog.Listener {
     ImageButton btnMic, btnCamera, btnImage, btnDelete, btnDownload, btnDeleteText, btnSpeak, btnSpeak2, btnCopy;
@@ -47,20 +33,7 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
 
     private static final int REQUEST_RECOGNITION = 11;
 
-    TranslatorOptions englishVietnameseTranslatorOptions = new TranslatorOptions.Builder()
-            .setSourceLanguage(TranslateLanguage.ENGLISH)
-            .setTargetLanguage(TranslateLanguage.VIETNAMESE)
-            .build();
-    final Translator englishVietnameseTranslator =
-            Translation.getClient(englishVietnameseTranslatorOptions);
-
-    TranslatorOptions vietnameseEnglishTranslatorOptions = new TranslatorOptions.Builder()
-            .setSourceLanguage(TranslateLanguage.VIETNAMESE)
-            .setTargetLanguage(TranslateLanguage.ENGLISH)
-            .build();
-    final Translator vietnameseEnglishTranslator =
-            Translation.getClient(vietnameseEnglishTranslatorOptions);
-
+    MyTranslator myTranslator;
     TTS tts;
 
     DatabaseHelper databaseHelper;
@@ -73,8 +46,6 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
         setControl();
         setEvent();
 
-        downloadModelTranslator();
-
         tts = new TTS(this);
         databaseHelper = DatabaseHelper.getInstance(this);
         translationHistoryDao = new TranslationHistoryDao(databaseHelper);
@@ -82,6 +53,8 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setElevation(0);
+
+        myTranslator = new MyTranslator(this);
     }
 
     @Override
@@ -111,104 +84,6 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
         Intent intent = new Intent(this, CropActivity.class);
         intent.putExtra("request", CropActivity.OPEN_GALLERY_CODE);
         startActivity(intent);
-    }
-
-    private String getTextFromImage(Bitmap bitmap) {
-        String result = "";
-        TextRecognizer textRecognizer = new TextRecognizer.Builder(TranslateTextActivity.this).build();
-        if (!textRecognizer.isOperational()) {
-            Toast.makeText(TranslateTextActivity.this, "Error Occurred!", Toast.LENGTH_LONG).show();
-        } else {
-            Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-            SparseArray<TextBlock> textBlockSparseArray = textRecognizer.detect(frame);
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < textBlockSparseArray.size(); i++) {
-                TextBlock textBlock = textBlockSparseArray.valueAt(i);
-                stringBuilder.append(textBlock.getValue());
-                stringBuilder.append("\n");
-            }
-
-            result = stringBuilder.toString();
-
-            etText.setText(result);
-        }
-        return result;
-    }
-
-    private void downloadModelTranslator() {
-        DownloadConditions conditions = new DownloadConditions.Builder()
-                .requireWifi()
-                .build();
-
-        englishVietnameseTranslator.downloadModelIfNeeded(conditions)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(TranslateTextActivity.this, "English Vietnamese model translator is downloaded", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(TranslateTextActivity.this, "Failed to download English Vietnamese model translator", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        vietnameseEnglishTranslator.downloadModelIfNeeded(conditions)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(TranslateTextActivity.this, "Vietnamese English model translator is downloaded", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(TranslateTextActivity.this, "Failed to download Vietnamese English model translator", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void translateEnglishToVietnamese(String text) {
-        englishVietnameseTranslator.translate(text)
-                .addOnSuccessListener(new OnSuccessListener<String>() {
-                    @Override
-                    public void onSuccess(@NonNull String translatedText) {
-                        etTranslatedText.setText(translatedText);
-
-                        TranslationHistory history = new TranslationHistory(text, translatedText, LocalDate.now());
-                        boolean result = translationHistoryDao.insertOne(history);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(TranslateTextActivity.this, "Cannot translate", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void translateVietnameseToEnglish(String text) {
-        vietnameseEnglishTranslator.translate(text)
-                .addOnSuccessListener(new OnSuccessListener<String>() {
-                    @Override
-                    public void onSuccess(@NonNull String translatedText) {
-                        etTranslatedText.setText(translatedText);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(TranslateTextActivity.this, "Cannot translate", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void copyToClipBoard(String text) {
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Copied data", text);
-        clipboard.setPrimaryClip(clip);
-        Toast.makeText(TranslateTextActivity.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
     }
 
     private void handleBtnDeleteClicked(View view) {
@@ -263,7 +138,7 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
             @Override
             public void onClick(View view) {
                 String text = etTranslatedText.getText().toString().trim();
-                copyToClipBoard(text);
+                CopyToClipBoard.doCopy(TranslateTextActivity.this, text);
             }
         });
         btnTranslateVietnameseToEnglish.setOnClickListener(new View.OnClickListener() {
@@ -271,10 +146,10 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
             public void onClick(View view) {
                 String text = etText.getText().toString();
                 if (text.isEmpty()) {
-                    Toast.makeText(TranslateTextActivity.this, "Please input text to translate", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TranslateTextActivity.this, "Hãy nhập văn bản", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                translateVietnameseToEnglish(text);
+                myTranslator.translateVietnameseToEnglish(text.trim(), etTranslatedText, translationHistoryDao);
             }
         });
         btnTranslateEnglishToVietnamese.setOnClickListener(new View.OnClickListener() {
@@ -282,10 +157,21 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
             public void onClick(View view) {
                 String text = etText.getText().toString();
                 if (text.isEmpty()) {
-                    Toast.makeText(TranslateTextActivity.this, "Please input text to translate", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TranslateTextActivity.this, "Hãy nhập văn bản", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                translateEnglishToVietnamese(text);
+                String[] wordList = text.trim().split(" ");
+                if (wordList.length == 1) {
+                    EnWord enWord = getEnWord(text);
+                    if (enWord != null) {
+                        Intent intent = new Intent(TranslateTextActivity.this, EnWordDetailActivity2.class);
+                        Integer enWordId = enWord.getId();
+                        intent.putExtra("enWordId", enWordId);
+                        startActivity(intent);
+                        return;
+                    }
+                }
+                myTranslator.translateEnglishToVietnamese(text, etTranslatedText, translationHistoryDao);
             }
         });
         btnTranslationHistory.setOnClickListener(new View.OnClickListener() {
@@ -325,16 +211,21 @@ public class TranslateTextActivity extends AppCompatActivity implements CustomDi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getLifecycle().addObserver(englishVietnameseTranslator);
-        englishVietnameseTranslator.close();
-        getLifecycle().addObserver(vietnameseEnglishTranslator);
-        vietnameseEnglishTranslator.close();
+        myTranslator.finish();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    private EnWord getEnWord(String keyword) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        EnWord enWord = databaseAccess.getOneEnWord(keyword);
+        databaseAccess.close();
+        return enWord;
     }
 }
 

@@ -46,7 +46,7 @@
     <style name="radioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="buttonTint">@color/radio_button_color</item>
         <item name="fontFamily">@font/roboto_regular</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">5dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/space_cadet</item>
     </style>

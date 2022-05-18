@@ -30,8 +30,10 @@ import com.myapp.adapter.ViewPagerAdapter;
 import com.myapp.dictionary.fragment.EnWordDetailFragment;
 import com.myapp.dtbassethelper.DatabaseAccess;
 import com.myapp.model.EnWord;
+import com.myapp.utils.FileIO2;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class EnWordDetailActivity2 extends AppCompatActivity {
     public int enWordId;
@@ -85,6 +87,14 @@ public class EnWordDetailActivity2 extends AppCompatActivity {
 
             }
         }).attach();
+
+        //GHI LẠI LỊCH SỬ TRA TỪ
+        List<Integer> wordList = FileIO2.readFromFile(this);
+        if (wordList.contains(enWordId)) {
+            wordList.remove(wordList.indexOf(enWordId));
+        }
+        wordList.add(0, enWordId);
+        FileIO2.writeToFile(wordList, this);
     }
 
 
