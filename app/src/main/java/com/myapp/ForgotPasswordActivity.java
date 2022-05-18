@@ -40,16 +40,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
     }
 
-    private void resetPassword(){
+    private void resetPassword() {
         String email = EmailF.getText().toString().trim();
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             EmailF.setError("Hãy nhập Email của bạn!");
             EmailF.requestFocus();
             return;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             EmailF.setError("Hãy nhập đúng Email!");
             EmailF.requestFocus();
         }
@@ -57,13 +57,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(ForgotPasswordActivity.this,"Hãy kiểm tra (Hộp thư đến) của bạn để tiến hành thiết lập lại mật khẩu!", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(),SignInActivity.class);
+                if (task.isSuccessful()) {
+                    Toast.makeText(ForgotPasswordActivity.this, "Hãy kiểm tra (Hộp thư đến) của bạn để tiến hành thiết lập lại mật khẩu!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     startActivity(intent);
-             }
-                else {
-                    Toast.makeText(ForgotPasswordActivity.this,"KHÔNG THÀNH CÔNG!Hãy kiểm tra lại Email của bạn và thử lại!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(ForgotPasswordActivity.this, "KHÔNG THÀNH CÔNG!Hãy kiểm tra lại Email của bạn và thử lại!", Toast.LENGTH_SHORT).show();
                 }
 
             }
