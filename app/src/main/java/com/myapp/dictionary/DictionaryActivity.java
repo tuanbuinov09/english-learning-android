@@ -90,6 +90,11 @@ public class DictionaryActivity extends AppCompatActivity {
             Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
             return;
         } else {
+//            enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
+            enWordRecyclerAdapter = new EnWordRecyclerAdapter(this, GlobalVariables.listFilteredWords);
+            recyclerView.setAdapter(enWordRecyclerAdapter);
+            manager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(manager);
             enWordRecyclerAdapter.filterList(GlobalVariables.listFilteredWords);
         }
     }
