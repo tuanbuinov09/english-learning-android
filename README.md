@@ -1,4 +1,4 @@
-# hoc-tieng-anh-android
+# english-learning-android
 
 # Sử dụng:
  - SQLite, Firebase, Android Studio
